@@ -1,0 +1,1202 @@
+fileFormatVersion: 2
+guid: 2f92d5542a106d2489680b3c4ac6b3e2
+timeCreated: 1492731018
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Rig:AR_AnkleNormal_L
+    100004: Rig:AR_ArmNormal_Helpers
+    100006: Rig:AR_Chest
+    100008: Rig:AR_ChestPointer
+    100010: Rig:AR_Clavicle_L
+    100012: Rig:AR_Clavicle_R
+    100014: Rig:AR_CoG
+    100016: Rig:AR_CoGPointer
+    100018: Rig:AR_Elbow_L
+    100020: Rig:AR_Elbow_R
+    100022: Rig:AR_ElbowNormal_L
+    100024: Rig:AR_FingerA0_L
+    100026: Rig:AR_FingerA0_R
+    100028: Rig:AR_FingerA1_L
+    100030: Rig:AR_FingerA1_R
+    100032: Rig:AR_FingerB0_L
+    100034: Rig:AR_FingerB0_R
+    100036: Rig:AR_FingerB1_L
+    100038: Rig:AR_FingerB1_R
+    100040: Rig:AR_Foot_L
+    100042: Rig:AR_Foot_R
+    100044: Rig:AR_FootOrientation_L
+    100046: Rig:AR_FootOrientation_R
+    100048: Rig:AR_ForeArm_L
+    100050: Rig:AR_ForeArm_R
+    100052: Rig:AR_Hand_L
+    100054: Rig:AR_Hand_R
+    100056: Rig:AR_Head
+    100058: Rig:AR_Hip_L
+    100060: Rig:AR_Hip_R
+    100062: Rig:AR_HipNormal_L
+    100064: Rig:AR_Knee_L
+    100066: Rig:AR_Knee_R
+    100068: Rig:AR_KneeNormal_L
+    100070: Rig:AR_LegHelper_L
+    100072: Rig:AR_LegHelper_R
+    100074: Rig:AR_LegNormal_Helpers
+    100076: Rig:AR_Neck
+    100078: Rig:AR_Shin_L
+    100080: Rig:AR_Shin_R
+    100082: Rig:AR_Shoulder_L
+    100084: Rig:AR_Shoulder_R
+    100086: Rig:AR_ShoulderNormal_L
+    100088: Rig:AR_Spine
+    100090: Rig:AR_SpinePointer
+    100092: Rig:AR_Sternum_L
+    100094: Rig:AR_Sternum_R
+    100096: Rig:AR_Thigh_L
+    100098: Rig:AR_Thigh_R
+    100100: Rig:AR_Thumb0_L
+    100102: Rig:AR_Thumb0_R
+    100104: Rig:AR_Thumb1_L
+    100106: Rig:AR_Thumb1_R
+    100108: Rig:AR_Toe_L
+    100110: Rig:AR_Toe_R
+    100112: Rig:AR_ToeEnd_L
+    100114: Rig:AR_ToeEnd_R
+    100116: Rig:AR_UpperArm_L
+    100118: Rig:AR_UpperArm_R
+    100120: Rig:AR_Wrist_L
+    100122: Rig:AR_Wrist_R
+    100124: Rig:AR_WristNormal_L
+    100126: Rig:archerHelmet
+    100128: Rig:ArmNormal
+    100130: Rig:ArmNormalP1
+    100132: Rig:ArmNormalP2
+    100134: Rig:ArmNormalP3
+    100136: Rig:AutoRig_Placement_Nodes
+    100138: Rig:BlendArm0_L
+    100140: Rig:BlendArm0_R
+    100142: Rig:BlendArm0_R_Null
+    100144: Rig:BlendArm1_L
+    100146: Rig:BlendArm1_R
+    100148: Rig:BlendArm1_R_Null
+    100150: Rig:BlendArm2_L
+    100152: Rig:BlendArm2_R
+    100154: Rig:BlendHand_R_Null
+    100156: Rig:BlendWrist_L
+    100158: Rig:BlendWrist_R
+    100160: Rig:BlendWrist_R_Null
+    100162: Rig:BlendWristEnd_L
+    100164: Rig:BlendWristEnd_R
+    100166: Rig:bomb
+    100168: Rig:BoneSnapPoints
+    100170: Rig:bow
+    100172: Rig:BS_Chest
+    100174: Rig:BS_Clavicle_L
+    100176: Rig:BS_Clavicle_R
+    100178: Rig:BS_Head
+    100180: Rig:BS_Hips
+    100182: Rig:BS_LAnkle
+    100184: Rig:BS_LFingerA0
+    100186: Rig:BS_LFingerA1
+    100188: Rig:BS_LFingerB0
+    100190: Rig:BS_LFingerB1
+    100192: Rig:BS_LFoot
+    100194: Rig:BS_LHand
+    100196: Rig:BS_LHip
+    100198: Rig:BS_LKnee
+    100200: Rig:BS_LLowerArm
+    100202: Rig:BS_LThumb0
+    100204: Rig:BS_LThumb1
+    100206: Rig:BS_LUpperArm
+    100208: Rig:BS_LWrist
+    100210: Rig:BS_Neck
+    100212: Rig:BS_RAnkle
+    100214: Rig:BS_RFingerA0
+    100216: Rig:BS_RFingerA1
+    100218: Rig:BS_RFingerB0
+    100220: Rig:BS_RFingerB1
+    100222: Rig:BS_RFoot
+    100224: Rig:BS_RHand
+    100226: Rig:BS_RHip
+    100228: Rig:BS_RKnee
+    100230: Rig:BS_RLowerArm
+    100232: Rig:BS_Root
+    100234: Rig:BS_RThumb0
+    100236: Rig:BS_RThumb1
+    100238: Rig:BS_RUpperArm
+    100240: Rig:BS_RWrist
+    100242: Rig:BS_Spine
+    100244: Rig:Character
+    100246: Rig:Clavicle_L
+    100248: Rig:Clavicle_R
+    100250: Rig:ClavicleCtrl_L
+    100252: Rig:ClavicleCtrl_L1
+    100254: Rig:ClavicleCtrl_R
+    100256: Rig:COGCtrl0
+    100258: Rig:COGCtrl1
+    100260: Rig:ControlCurves
+    100262: Rig:deathKnight_mdl
+    100264: Rig:deathKnightShield_mdl
+    100266: Rig:deathKnightSword_mdl
+    100268: Rig:evilTadpole_mdl
+    100270: Rig:ExportJoints
+    100272: Rig:FArm_L
+    100274: Rig:FArm_R
+    100276: Rig:FKHand_L
+    100278: Rig:FKHand_R
+    100280: Rig:ForeArm_L
+    100282: Rig:ForeArm_R
+    100284: Rig:gClavicleCtrl_L
+    100286: Rig:gClavicleCtrl_R
+    100288: Rig:gFarm_L
+    100290: Rig:gFarm_R
+    100292: Rig:golfHat
+    100294: Rig:group1
+    100296: Rig:GrpAR_Hand_L
+    100298: Rig:GrpAR_Hand_R
+    100300: Rig:GrpAR_Thumb_L
+    100302: Rig:GrpAR_Thumb_R
+    100304: Rig:GrpAR_Wrist_R
+    100306: Rig:GrpAutoRootHelper
+    100308: Rig:GrpAutoRootHipsHelper
+    100310: Rig:GrpChestCtrl
+    100312: Rig:GrpCOGCtrl
+    100314: Rig:GrpFKHand_L
+    100316: Rig:GrpFKHand_R
+    100318: Rig:GrpFootCtrl_L
+    100320: Rig:GrpFootCtrl_R
+    100322: Rig:GrpHipDipNull
+    100324: Rig:GrpHips
+    100326: Rig:GrpHips1
+    100328: Rig:GrpIKArmVector_L
+    100330: Rig:GrpIKHand_L
+    100332: Rig:GrpLookAtCtrl
+    100334: Rig:GrpRootCtrl
+    100336: Rig:GrpScale
+    100338: Rig:GrpSpineCtrl
+    100340: Rig:GrpWeaponCtrl_L
+    100342: Rig:GrpWeaponCtrl_R
+    100344: Rig:Hand_L
+    100346: Rig:Hand_R
+    100348: Rig:HeadAimBlendHelper
+    100350: Rig:HelperJoints
+    100352: Rig:HelperJoints 1
+    100354: Rig:Hidden
+    100356: Rig:Hidden_R
+    100358: Rig:HipHelper_L
+    100360: Rig:HipHelper_R
+    100362: Rig:Hips
+    100364: Rig:HipsCtrl
+    100366: Rig:IK_Helper0_L
+    100368: Rig:IK_Helper0_R
+    100370: Rig:IK_Helper1_L
+    100372: Rig:IK_Helper1_R
+    100374: Rig:IK_Leg_R_Null
+    100376: Rig:IK_Leg_R_Null1
+    100378: Rig:IK_Leg_R_Null2
+    100380: Rig:IKArm0_L
+    100382: Rig:IKArm0_R
+    100384: Rig:IKArm1_L
+    100386: Rig:IKArm1_R
+    100388: Rig:IKArm2_L
+    100390: Rig:IKArm2_R
+    100392: Rig:ikHandle10
+    100394: Rig:ikHandle9
+    100396: Rig:ikHandleArm_L
+    100398: Rig:ikHandleArm_R
+    100400: Rig:IKLeg0_L
+    100402: Rig:IKLeg0_R
+    100404: Rig:IKLeg1_L
+    100406: Rig:IKLeg1_R
+    100408: Rig:IKLeg2_L
+    100410: Rig:IKLeg2_R
+    100412: Rig:IKLeg3_L
+    100414: Rig:IKLeg3_R
+    100416: Rig:IKLeg_L
+    100418: Rig:IKLeg_R
+    100420: Rig:Jaw
+    100422: Rig:joint36
+    100424: Rig:joint37
+    100426: Rig:joint38
+    100428: Rig:joint39
+    100430: Rig:KneeVector_L
+    100432: Rig:KneeVector_R
+    100434: Rig:KneeVector_SideNull_L
+    100436: Rig:KneeVector_SideNull_R
+    100438: Rig:KneeVector_SideNullHelper_L
+    100440: Rig:KneeVector_SideNullHelper_R
+    100442: Rig:KneeVectorHelper_L
+    100444: Rig:KneeVectorHelper_R
+    100446: Rig:knife
+    100448: Rig:Left
+    100450: Rig:Left 1
+    100452: Rig:LeftArm
+    100454: Rig:LeftFoot
+    100456: Rig:LeftSide
+    100458: Rig:LegikHandle1_L
+    100460: Rig:LegikHandle1_R
+    100462: Rig:LegikHandle2_L
+    100464: Rig:LegikHandle2_R
+    100466: Rig:LegNormal
+    100468: Rig:LegNormalP1
+    100470: Rig:LegNormalP2
+    100472: Rig:LegNormalP3
+    100474: Rig:LookAtCtrl
+    100476: Rig:LookAtUp
+    100478: Rig:LookAtUpHelper
+    100480: Rig:LowerBody
+    100482: Rig:LUArmFK
+    100484: Rig:MainCtrl1
+    100486: Rig:MainCtrl2
+    100488: Rig:mediumBody_mdl
+    100490: Rig:RIG
+    100492: Rig:Right
+    100494: Rig:Right 1
+    100496: Rig:RightArm
+    100498: Rig:RightFoot
+    100500: Rig:RightSide
+    100502: Rig:Root
+    100504: Rig:RootCtrl
+    100506: Rig:RUArmFK
+    100508: Rig:sapperHelmet
+    100510: Rig:ShoulderHelper_L
+    100512: Rig:ShoulderHelper_L 1
+    100514: Rig:ShoulderHelper_R
+    100516: Rig:staff
+    100518: Rig:Tail
+    100520: Rig:ToeikHandle_L
+    100522: Rig:ToeikHandle_L 1
+    100524: Rig:transform1
+    100526: Rig:UpperArm_L
+    100528: Rig:UpperArm_R
+    100530: Rig:UpperBody
+    100532: Rig:UrArm_L
+    100534: Rig:UrArm_R
+    100536: Rig:WizardHat
+    100538: Rig:wraith_mdl
+    100540: Rig:Wrist_L
+    100542: Rig:Wrist_R
+    400000: //RootNode
+    400002: Rig:AR_AnkleNormal_L
+    400004: Rig:AR_ArmNormal_Helpers
+    400006: Rig:AR_Chest
+    400008: Rig:AR_ChestPointer
+    400010: Rig:AR_Clavicle_L
+    400012: Rig:AR_Clavicle_R
+    400014: Rig:AR_CoG
+    400016: Rig:AR_CoGPointer
+    400018: Rig:AR_Elbow_L
+    400020: Rig:AR_Elbow_R
+    400022: Rig:AR_ElbowNormal_L
+    400024: Rig:AR_FingerA0_L
+    400026: Rig:AR_FingerA0_R
+    400028: Rig:AR_FingerA1_L
+    400030: Rig:AR_FingerA1_R
+    400032: Rig:AR_FingerB0_L
+    400034: Rig:AR_FingerB0_R
+    400036: Rig:AR_FingerB1_L
+    400038: Rig:AR_FingerB1_R
+    400040: Rig:AR_Foot_L
+    400042: Rig:AR_Foot_R
+    400044: Rig:AR_FootOrientation_L
+    400046: Rig:AR_FootOrientation_R
+    400048: Rig:AR_ForeArm_L
+    400050: Rig:AR_ForeArm_R
+    400052: Rig:AR_Hand_L
+    400054: Rig:AR_Hand_R
+    400056: Rig:AR_Head
+    400058: Rig:AR_Hip_L
+    400060: Rig:AR_Hip_R
+    400062: Rig:AR_HipNormal_L
+    400064: Rig:AR_Knee_L
+    400066: Rig:AR_Knee_R
+    400068: Rig:AR_KneeNormal_L
+    400070: Rig:AR_LegHelper_L
+    400072: Rig:AR_LegHelper_R
+    400074: Rig:AR_LegNormal_Helpers
+    400076: Rig:AR_Neck
+    400078: Rig:AR_Shin_L
+    400080: Rig:AR_Shin_R
+    400082: Rig:AR_Shoulder_L
+    400084: Rig:AR_Shoulder_R
+    400086: Rig:AR_ShoulderNormal_L
+    400088: Rig:AR_Spine
+    400090: Rig:AR_SpinePointer
+    400092: Rig:AR_Sternum_L
+    400094: Rig:AR_Sternum_R
+    400096: Rig:AR_Thigh_L
+    400098: Rig:AR_Thigh_R
+    400100: Rig:AR_Thumb0_L
+    400102: Rig:AR_Thumb0_R
+    400104: Rig:AR_Thumb1_L
+    400106: Rig:AR_Thumb1_R
+    400108: Rig:AR_Toe_L
+    400110: Rig:AR_Toe_R
+    400112: Rig:AR_ToeEnd_L
+    400114: Rig:AR_ToeEnd_R
+    400116: Rig:AR_UpperArm_L
+    400118: Rig:AR_UpperArm_R
+    400120: Rig:AR_Wrist_L
+    400122: Rig:AR_Wrist_R
+    400124: Rig:AR_WristNormal_L
+    400126: Rig:archerHelmet
+    400128: Rig:ArmNormal
+    400130: Rig:ArmNormalP1
+    400132: Rig:ArmNormalP2
+    400134: Rig:ArmNormalP3
+    400136: Rig:AutoRig_Placement_Nodes
+    400138: Rig:BlendArm0_L
+    400140: Rig:BlendArm0_R
+    400142: Rig:BlendArm0_R_Null
+    400144: Rig:BlendArm1_L
+    400146: Rig:BlendArm1_R
+    400148: Rig:BlendArm1_R_Null
+    400150: Rig:BlendArm2_L
+    400152: Rig:BlendArm2_R
+    400154: Rig:BlendHand_R_Null
+    400156: Rig:BlendWrist_L
+    400158: Rig:BlendWrist_R
+    400160: Rig:BlendWrist_R_Null
+    400162: Rig:BlendWristEnd_L
+    400164: Rig:BlendWristEnd_R
+    400166: Rig:bomb
+    400168: Rig:BoneSnapPoints
+    400170: Rig:bow
+    400172: Rig:BS_Chest
+    400174: Rig:BS_Clavicle_L
+    400176: Rig:BS_Clavicle_R
+    400178: Rig:BS_Head
+    400180: Rig:BS_Hips
+    400182: Rig:BS_LAnkle
+    400184: Rig:BS_LFingerA0
+    400186: Rig:BS_LFingerA1
+    400188: Rig:BS_LFingerB0
+    400190: Rig:BS_LFingerB1
+    400192: Rig:BS_LFoot
+    400194: Rig:BS_LHand
+    400196: Rig:BS_LHip
+    400198: Rig:BS_LKnee
+    400200: Rig:BS_LLowerArm
+    400202: Rig:BS_LThumb0
+    400204: Rig:BS_LThumb1
+    400206: Rig:BS_LUpperArm
+    400208: Rig:BS_LWrist
+    400210: Rig:BS_Neck
+    400212: Rig:BS_RAnkle
+    400214: Rig:BS_RFingerA0
+    400216: Rig:BS_RFingerA1
+    400218: Rig:BS_RFingerB0
+    400220: Rig:BS_RFingerB1
+    400222: Rig:BS_RFoot
+    400224: Rig:BS_RHand
+    400226: Rig:BS_RHip
+    400228: Rig:BS_RKnee
+    400230: Rig:BS_RLowerArm
+    400232: Rig:BS_Root
+    400234: Rig:BS_RThumb0
+    400236: Rig:BS_RThumb1
+    400238: Rig:BS_RUpperArm
+    400240: Rig:BS_RWrist
+    400242: Rig:BS_Spine
+    400244: Rig:Character
+    400246: Rig:Clavicle_L
+    400248: Rig:Clavicle_R
+    400250: Rig:ClavicleCtrl_L
+    400252: Rig:ClavicleCtrl_L1
+    400254: Rig:ClavicleCtrl_R
+    400256: Rig:COGCtrl0
+    400258: Rig:COGCtrl1
+    400260: Rig:ControlCurves
+    400262: Rig:deathKnight_mdl
+    400264: Rig:deathKnightShield_mdl
+    400266: Rig:deathKnightSword_mdl
+    400268: Rig:evilTadpole_mdl
+    400270: Rig:ExportJoints
+    400272: Rig:FArm_L
+    400274: Rig:FArm_R
+    400276: Rig:FKHand_L
+    400278: Rig:FKHand_R
+    400280: Rig:ForeArm_L
+    400282: Rig:ForeArm_R
+    400284: Rig:gClavicleCtrl_L
+    400286: Rig:gClavicleCtrl_R
+    400288: Rig:gFarm_L
+    400290: Rig:gFarm_R
+    400292: Rig:golfHat
+    400294: Rig:group1
+    400296: Rig:GrpAR_Hand_L
+    400298: Rig:GrpAR_Hand_R
+    400300: Rig:GrpAR_Thumb_L
+    400302: Rig:GrpAR_Thumb_R
+    400304: Rig:GrpAR_Wrist_R
+    400306: Rig:GrpAutoRootHelper
+    400308: Rig:GrpAutoRootHipsHelper
+    400310: Rig:GrpChestCtrl
+    400312: Rig:GrpCOGCtrl
+    400314: Rig:GrpFKHand_L
+    400316: Rig:GrpFKHand_R
+    400318: Rig:GrpFootCtrl_L
+    400320: Rig:GrpFootCtrl_R
+    400322: Rig:GrpHipDipNull
+    400324: Rig:GrpHips
+    400326: Rig:GrpHips1
+    400328: Rig:GrpIKArmVector_L
+    400330: Rig:GrpIKHand_L
+    400332: Rig:GrpLookAtCtrl
+    400334: Rig:GrpRootCtrl
+    400336: Rig:GrpScale
+    400338: Rig:GrpSpineCtrl
+    400340: Rig:GrpWeaponCtrl_L
+    400342: Rig:GrpWeaponCtrl_R
+    400344: Rig:Hand_L
+    400346: Rig:Hand_R
+    400348: Rig:HeadAimBlendHelper
+    400350: Rig:HelperJoints
+    400352: Rig:HelperJoints 1
+    400354: Rig:Hidden
+    400356: Rig:Hidden_R
+    400358: Rig:HipHelper_L
+    400360: Rig:HipHelper_R
+    400362: Rig:Hips
+    400364: Rig:HipsCtrl
+    400366: Rig:IK_Helper0_L
+    400368: Rig:IK_Helper0_R
+    400370: Rig:IK_Helper1_L
+    400372: Rig:IK_Helper1_R
+    400374: Rig:IK_Leg_R_Null
+    400376: Rig:IK_Leg_R_Null1
+    400378: Rig:IK_Leg_R_Null2
+    400380: Rig:IKArm0_L
+    400382: Rig:IKArm0_R
+    400384: Rig:IKArm1_L
+    400386: Rig:IKArm1_R
+    400388: Rig:IKArm2_L
+    400390: Rig:IKArm2_R
+    400392: Rig:ikHandle10
+    400394: Rig:ikHandle9
+    400396: Rig:ikHandleArm_L
+    400398: Rig:ikHandleArm_R
+    400400: Rig:IKLeg0_L
+    400402: Rig:IKLeg0_R
+    400404: Rig:IKLeg1_L
+    400406: Rig:IKLeg1_R
+    400408: Rig:IKLeg2_L
+    400410: Rig:IKLeg2_R
+    400412: Rig:IKLeg3_L
+    400414: Rig:IKLeg3_R
+    400416: Rig:IKLeg_L
+    400418: Rig:IKLeg_R
+    400420: Rig:Jaw
+    400422: Rig:joint36
+    400424: Rig:joint37
+    400426: Rig:joint38
+    400428: Rig:joint39
+    400430: Rig:KneeVector_L
+    400432: Rig:KneeVector_R
+    400434: Rig:KneeVector_SideNull_L
+    400436: Rig:KneeVector_SideNull_R
+    400438: Rig:KneeVector_SideNullHelper_L
+    400440: Rig:KneeVector_SideNullHelper_R
+    400442: Rig:KneeVectorHelper_L
+    400444: Rig:KneeVectorHelper_R
+    400446: Rig:knife
+    400448: Rig:Left
+    400450: Rig:Left 1
+    400452: Rig:LeftArm
+    400454: Rig:LeftFoot
+    400456: Rig:LeftSide
+    400458: Rig:LegikHandle1_L
+    400460: Rig:LegikHandle1_R
+    400462: Rig:LegikHandle2_L
+    400464: Rig:LegikHandle2_R
+    400466: Rig:LegNormal
+    400468: Rig:LegNormalP1
+    400470: Rig:LegNormalP2
+    400472: Rig:LegNormalP3
+    400474: Rig:LookAtCtrl
+    400476: Rig:LookAtUp
+    400478: Rig:LookAtUpHelper
+    400480: Rig:LowerBody
+    400482: Rig:LUArmFK
+    400484: Rig:MainCtrl1
+    400486: Rig:MainCtrl2
+    400488: Rig:mediumBody_mdl
+    400490: Rig:RIG
+    400492: Rig:Right
+    400494: Rig:Right 1
+    400496: Rig:RightArm
+    400498: Rig:RightFoot
+    400500: Rig:RightSide
+    400502: Rig:Root
+    400504: Rig:RootCtrl
+    400506: Rig:RUArmFK
+    400508: Rig:sapperHelmet
+    400510: Rig:ShoulderHelper_L
+    400512: Rig:ShoulderHelper_L 1
+    400514: Rig:ShoulderHelper_R
+    400516: Rig:staff
+    400518: Rig:Tail
+    400520: Rig:ToeikHandle_L
+    400522: Rig:ToeikHandle_L 1
+    400524: Rig:transform1
+    400526: Rig:UpperArm_L
+    400528: Rig:UpperArm_R
+    400530: Rig:UpperBody
+    400532: Rig:UrArm_L
+    400534: Rig:UrArm_R
+    400536: Rig:WizardHat
+    400538: Rig:wraith_mdl
+    400540: Rig:Wrist_L
+    400542: Rig:Wrist_R
+    7400000: FlyingMonster_Idle
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: FlyingMonster_Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Rig:archerHelmet
+        weight: 1
+      - path: Rig:bomb
+        weight: 1
+      - path: Rig:bow
+        weight: 1
+      - path: Rig:Character
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Foot_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Foot_L/Rig:AR_FootOrientation_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Foot_L/Rig:AR_Toe_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Foot_L/Rig:AR_ToeEnd_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Hip_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Hip_L/Rig:AR_LegHelper_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Hip_L/Rig:AR_LegHelper_L/Rig:KneeVector_SideNullHelper_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Hip_L/Rig:AR_LegHelper_L/Rig:KneeVectorHelper_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Hip_L/Rig:AR_Thigh_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Knee_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_Knee_L/Rig:AR_Shin_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_LegNormal_Helpers
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_LegNormal_Helpers/Rig:AR_AnkleNormal_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_LegNormal_Helpers/Rig:AR_HipNormal_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_LegNormal_Helpers/Rig:AR_KneeNormal_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_LegNormal_Helpers/Rig:LegNormal
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_LegNormal_Helpers/Rig:LegNormalP1
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_LegNormal_Helpers/Rig:LegNormalP2
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Left/Rig:AR_LegNormal_Helpers/Rig:LegNormalP3
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Foot_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Foot_R/Rig:AR_FootOrientation_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Foot_R/Rig:AR_Toe_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Foot_R/Rig:AR_ToeEnd_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Hip_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Hip_R/Rig:AR_LegHelper_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Hip_R/Rig:AR_LegHelper_R/Rig:KneeVector_SideNullHelper_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Hip_R/Rig:AR_LegHelper_R/Rig:KneeVectorHelper_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Hip_R/Rig:AR_Thigh_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Knee_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:LowerBody/Rig:Right/Rig:AR_Knee_R/Rig:AR_Shin_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:AR_CoG
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:AR_CoG/Rig:AR_Chest
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:AR_CoG/Rig:AR_Chest/Rig:AR_ChestPointer
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:AR_CoG/Rig:AR_CoGPointer
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:AR_CoG/Rig:AR_Neck
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:AR_CoG/Rig:AR_Neck/Rig:AR_Head
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:AR_CoG/Rig:AR_Spine
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:AR_CoG/Rig:AR_Spine/Rig:AR_SpinePointer
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_ArmNormal_Helpers
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_ArmNormal_Helpers/Rig:AR_ElbowNormal_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_ArmNormal_Helpers/Rig:AR_ShoulderNormal_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_ArmNormal_Helpers/Rig:AR_WristNormal_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_ArmNormal_Helpers/Rig:ArmNormal
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_ArmNormal_Helpers/Rig:ArmNormalP1
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_ArmNormal_Helpers/Rig:ArmNormalP2
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_ArmNormal_Helpers/Rig:ArmNormalP3
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_Elbow_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_Elbow_L/Rig:AR_ForeArm_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_Elbow_L/Rig:AR_Wrist_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_Shoulder_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_Shoulder_L/Rig:AR_UpperArm_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_Sternum_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:AR_Sternum_L/Rig:AR_Clavicle_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L/Rig:AR_FingerA0_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L/Rig:AR_FingerA0_L/Rig:AR_FingerA1_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L/Rig:AR_FingerB0_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L/Rig:AR_FingerB0_L/Rig:AR_FingerB1_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L/Rig:GrpAR_Thumb_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L/Rig:GrpAR_Thumb_L/Rig:AR_Thumb0_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L/Rig:GrpAR_Thumb_L/Rig:AR_Thumb0_L/Rig:group1
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:GrpAR_Hand_L/Rig:AR_Hand_L/Rig:GrpAR_Thumb_L/Rig:AR_Thumb0_L/Rig:group1/Rig:AR_Thumb1_L
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:HelperJoints
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:HelperJoints/Rig:ikHandle9
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:HelperJoints/Rig:joint36
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Left 1/Rig:HelperJoints/Rig:joint36/Rig:joint37
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:AR_Elbow_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:AR_Elbow_R/Rig:AR_ForeArm_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:AR_Elbow_R/Rig:GrpAR_Wrist_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:AR_Elbow_R/Rig:GrpAR_Wrist_R/Rig:AR_Wrist_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:AR_Shoulder_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:AR_Shoulder_R/Rig:AR_UpperArm_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:AR_Sternum_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:AR_Sternum_R/Rig:AR_Clavicle_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R/Rig:AR_Hand_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R/Rig:AR_Hand_R/Rig:AR_FingerA0_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R/Rig:AR_Hand_R/Rig:AR_FingerA0_R/Rig:AR_FingerA1_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R/Rig:AR_Hand_R/Rig:AR_FingerB0_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R/Rig:AR_Hand_R/Rig:AR_FingerB0_R/Rig:AR_FingerB1_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R/Rig:AR_Hand_R/Rig:GrpAR_Thumb_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R/Rig:AR_Hand_R/Rig:GrpAR_Thumb_R/Rig:AR_Thumb0_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:GrpAR_Hand_R/Rig:AR_Hand_R/Rig:GrpAR_Thumb_R/Rig:AR_Thumb0_R/Rig:AR_Thumb1_R
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:HelperJoints
+          1
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:HelperJoints
+          1/Rig:ikHandle10
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:HelperJoints
+          1/Rig:transform1
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:HelperJoints
+          1/Rig:transform1/Rig:joint38
+        weight: 1
+      - path: Rig:Character/Rig:AutoRig_Placement_Nodes/Rig:UpperBody/Rig:Right 1/Rig:HelperJoints
+          1/Rig:transform1/Rig:joint38/Rig:joint39
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_L
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_L/Rig:UpperArm_L
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_L/Rig:UpperArm_L/Rig:ForeArm_L
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_L/Rig:UpperArm_L/Rig:ForeArm_L/Rig:Wrist_L
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_L/Rig:UpperArm_L/Rig:ForeArm_L/Rig:Wrist_L/Rig:Hand_L
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_R
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_R/Rig:UpperArm_R
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_R/Rig:UpperArm_R/Rig:ForeArm_R
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_R/Rig:UpperArm_R/Rig:ForeArm_R/Rig:Wrist_R
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Clavicle_R/Rig:UpperArm_R/Rig:ForeArm_R/Rig:Wrist_R/Rig:Hand_R
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Jaw
+        weight: 1
+      - path: Rig:Character/Rig:ExportJoints/Rig:Root/Rig:Hips/Rig:Tail
+        weight: 1
+      - path: Rig:Character/Rig:RIG
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:GrpRootCtrl
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:GrpRootCtrl/Rig:RootCtrl
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpAutoRootHelper
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpAutoRootHelper/Rig:GrpAutoRootHipsHelper
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:ClavicleCtrl_L1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:ClavicleCtrl_L1/Rig:ShoulderHelper_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:gClavicleCtrl_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:gClavicleCtrl_L/Rig:ClavicleCtrl_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:gClavicleCtrl_L/Rig:ClavicleCtrl_L/Rig:ShoulderHelper_L
+          1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:gClavicleCtrl_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:gClavicleCtrl_R/Rig:ClavicleCtrl_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:gClavicleCtrl_R/Rig:ClavicleCtrl_R/Rig:ShoulderHelper_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:GrpChestCtrl
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:GrpHips
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:GrpHips1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:GrpHips1/Rig:HipsCtrl
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpCOGCtrl/Rig:GrpHipDipNull/Rig:COGCtrl0/Rig:COGCtrl1/Rig:GrpSpineCtrl
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpLookAtCtrl
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpLookAtCtrl/Rig:LookAtCtrl
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpWeaponCtrl_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:GrpWeaponCtrl_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_Chest
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_Chest/Rig:BS_Clavicle_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_Chest/Rig:BS_Clavicle_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_Head
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_Hips
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LAnkle
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LFingerA0
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LFingerA1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LFingerB0
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LFingerB1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LFoot
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LHand
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LHip
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LKnee
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LLowerArm
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LThumb0
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LThumb1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LUpperArm
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_LWrist
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_Neck
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RAnkle
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RFingerA0
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RFingerA1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RFingerB0
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RFingerB1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RFoot
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RHand
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RHip
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RKnee
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RLowerArm
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_Root
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RThumb0
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RThumb1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RUpperArm
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_RWrist
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:BoneSnapPoints/Rig:BS_Spine
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_L/Rig:BlendArm1_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_L/Rig:BlendArm1_L/Rig:BlendArm2_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_L/Rig:BlendArm1_L/Rig:BlendWrist_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_L/Rig:BlendArm1_L/Rig:BlendWrist_L/Rig:BlendWristEnd_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_R_Null
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_R_Null/Rig:BlendArm1_R_Null
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_R_Null/Rig:BlendArm1_R_Null/Rig:BlendWrist_R_Null
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:BlendArm0_R_Null/Rig:BlendArm1_R_Null/Rig:BlendWrist_R_Null/Rig:BlendHand_R_Null
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:HeadAimBlendHelper
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:HipHelper_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IK_Leg_R_Null
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IK_Leg_R_Null/Rig:IK_Leg_R_Null1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IK_Leg_R_Null/Rig:IK_Leg_R_Null1/Rig:IK_Leg_R_Null2
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKArm0_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKArm0_L/Rig:IKArm1_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKArm0_L/Rig:IKArm1_L/Rig:IKArm2_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:ikHandleArm_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:IK_Helper0_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:IK_Helper0_L/Rig:IK_Helper1_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:IK_Helper0_L/Rig:IK_Helper1_L/Rig:KneeVector_SideNull_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:IK_Helper0_L/Rig:IK_Helper1_L/Rig:KneeVector_SideNull_L/Rig:KneeVector_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:IKLeg0_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:IKLeg0_L/Rig:IKLeg1_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:IKLeg0_L/Rig:IKLeg1_L/Rig:IKLeg2_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:IKLeg0_L/Rig:IKLeg1_L/Rig:IKLeg2_L/Rig:IKLeg3_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:LegikHandle1_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:LegikHandle2_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:IKLeg_L/Rig:ToeikHandle_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:LookAtUpHelper
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:LeftSide/Rig:LookAtUpHelper/Rig:LookAtUp
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:BlendArm0_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:BlendArm0_R/Rig:BlendArm1_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:BlendArm0_R/Rig:BlendArm1_R/Rig:BlendArm2_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:BlendArm0_R/Rig:BlendArm1_R/Rig:BlendWrist_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:BlendArm0_R/Rig:BlendArm1_R/Rig:BlendWrist_R/Rig:BlendWristEnd_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:HipHelper_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKArm0_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKArm0_R/Rig:IKArm1_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKArm0_R/Rig:IKArm1_R/Rig:IKArm2_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:ikHandleArm_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:IK_Helper0_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:IK_Helper0_R/Rig:IK_Helper1_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:IK_Helper0_R/Rig:IK_Helper1_R/Rig:KneeVector_SideNull_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:IK_Helper0_R/Rig:IK_Helper1_R/Rig:KneeVector_SideNull_R/Rig:KneeVector_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:IKLeg0_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:IKLeg0_R/Rig:IKLeg1_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:IKLeg0_R/Rig:IKLeg1_R/Rig:IKLeg2_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:IKLeg0_R/Rig:IKLeg1_R/Rig:IKLeg2_R/Rig:IKLeg3_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:LegikHandle1_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:LegikHandle2_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:Hidden/Rig:RightSide/Rig:Hidden_R/Rig:IKLeg_R/Rig:ToeikHandle_L
+          1
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm/Rig:GrpIKArmVector_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm/Rig:GrpIKHand_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm/Rig:LUArmFK
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm/Rig:LUArmFK/Rig:UrArm_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm/Rig:LUArmFK/Rig:UrArm_L/Rig:gFarm_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm/Rig:LUArmFK/Rig:UrArm_L/Rig:gFarm_L/Rig:FArm_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm/Rig:LUArmFK/Rig:UrArm_L/Rig:gFarm_L/Rig:FArm_L/Rig:GrpFKHand_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftArm/Rig:LUArmFK/Rig:UrArm_L/Rig:gFarm_L/Rig:FArm_L/Rig:GrpFKHand_L/Rig:FKHand_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftFoot
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:LeftFoot/Rig:GrpFootCtrl_L
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightArm
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightArm/Rig:RUArmFK
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightArm/Rig:RUArmFK/Rig:UrArm_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightArm/Rig:RUArmFK/Rig:UrArm_R/Rig:gFarm_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightArm/Rig:RUArmFK/Rig:UrArm_R/Rig:gFarm_R/Rig:FArm_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightArm/Rig:RUArmFK/Rig:UrArm_R/Rig:gFarm_R/Rig:FArm_R/Rig:GrpFKHand_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightArm/Rig:RUArmFK/Rig:UrArm_R/Rig:gFarm_R/Rig:FArm_R/Rig:GrpFKHand_R/Rig:FKHand_R
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightFoot
+        weight: 1
+      - path: Rig:Character/Rig:RIG/Rig:ControlCurves/Rig:MainCtrl1/Rig:MainCtrl2/Rig:GrpScale/Rig:RightFoot/Rig:GrpFootCtrl_R
+        weight: 1
+      - path: Rig:deathKnight_mdl
+        weight: 1
+      - path: Rig:deathKnightShield_mdl
+        weight: 1
+      - path: Rig:deathKnightSword_mdl
+        weight: 1
+      - path: Rig:evilTadpole_mdl
+        weight: 1
+      - path: Rig:golfHat
+        weight: 1
+      - path: Rig:knife
+        weight: 1
+      - path: Rig:mediumBody_mdl
+        weight: 1
+      - path: Rig:sapperHelmet
+        weight: 1
+      - path: Rig:staff
+        weight: 1
+      - path: Rig:WizardHat
+        weight: 1
+      - path: Rig:wraith_mdl
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

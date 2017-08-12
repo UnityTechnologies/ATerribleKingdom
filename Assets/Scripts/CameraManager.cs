@@ -1,0 +1,28 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Cinemachine;
+
+public class CameraManager : Singleton<CameraManager>
+{
+	public Transform gameplayDummy;
+	public CinemachineVirtualCamera gameplayVCam;
+
+	private CinemachineBrain CMBrain;
+
+	private void Awake()
+	{
+		CMBrain = GetComponent<CinemachineBrain>();
+	}
+
+	public void MoveGameplayCamera(Vector2 amount)
+	{
+		gameplayDummy.Translate(amount.x, 0f, amount.y, Space.World);
+	}
+
+	public Vector2 GetVCamDeadZone()
+	{
+		CinemachineComposer composer = gameplayVCam.GetCinemachineComponent<CinemachineComposer>();
+		return new Vector2(composer.m_SoftZoneWidth, composer.m_SoftZoneHeight);
+	}
+}

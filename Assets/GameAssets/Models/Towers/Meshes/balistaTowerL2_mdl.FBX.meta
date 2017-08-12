@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: b3324dec22afd6a4b8f5013b816f00c1
+timeCreated: 1491854107
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: BallistaL2BaseBone
+    100004: BallistaL2BoltBone
+    100006: BallistaL2Bone
+    100008: BallistaL2TorchFXBone
+    100010: spear_mdl002
+    100012: spear_mdl003
+    100014: tower_ballistaBaseL2_mdl
+    100016: BallistaBolt1_mdl
+    100018: BallistaBolt2_mdl
+    100020: Bone001
+    100022: towerBaseBone
+    100024: towerBone
+    100026: BallistL2_mdl
+    400000: //RootNode
+    400002: BallistaL2BaseBone
+    400004: BallistaL2BoltBone
+    400006: BallistaL2Bone
+    400008: BallistaL2TorchFXBone
+    400010: spear_mdl002
+    400012: spear_mdl003
+    400014: tower_ballistaBaseL2_mdl
+    400016: BallistaBolt1_mdl
+    400018: BallistaBolt2_mdl
+    400020: Bone001
+    400022: towerBaseBone
+    400024: towerBone
+    400026: BallistL2_mdl
+    2300000: spear_mdl002
+    2300002: spear_mdl003
+    2300004: BallistaBolt1_mdl
+    2300006: BallistaBolt2_mdl
+    2300008: BallistL2_mdl
+    2300010: tower_ballistaBaseL2_mdl
+    3300000: spear_mdl002
+    3300002: spear_mdl003
+    3300004: BallistaBolt1_mdl
+    3300006: BallistaBolt2_mdl
+    3300008: BallistL2_mdl
+    3300010: tower_ballistaBaseL2_mdl
+    4300000: tower_ballistaBaseL2_mdl
+    4300002: spear_mdl003
+    4300004: spear_mdl002
+    4300006: BallistaBolt1_mdl
+    4300008: BallistaBolt2_mdl
+    4300010: BallistL2_mdl
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: tower_ballistaBaseL2_mdl
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 1
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

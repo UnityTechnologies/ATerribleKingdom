@@ -1,0 +1,406 @@
+fileFormatVersion: 2
+guid: 7917d1d3645343740ab60afe1f56ee14
+timeCreated: 1493330447
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: bailey_mdl
+    100002: BallistaBolt1_mdl
+    100004: BallistaBolt1_mdl 1
+    100006: BallistaBolt2_mdl
+    100008: ballistaBolt_mdl
+    100010: BallistaL2BoltBone
+    100012: BallistaL2TorchFXBone
+    100014: battle_mdl
+    100016: begin_mdl
+    100018: blueTowerFlag_mdl
+    100020: blueWaypointlFlag_mdl
+    100022: brickPile
+    100024: buildTower_mdl
+    100026: castle_mdl
+    100028: dragon
+    100030: enemyGate_mdl
+    100032: enemyGate_mdl001
+    100034: enemyGate_mdl002
+    100036: enemyGate_mdl003
+    100038: flame_mdl
+    100040: gateScreen_mdl
+    100042: gateScreen_mdl001
+    100044: gateScreen_mdl002
+    100046: gateScreen_mdl003
+    100048: gateSpike_mdl
+    100050: greenTowerFlag_mdl
+    100052: greenWaypointlFlag_mdl
+    100054: ground_mdl
+    100056: hammerHandle_mdl
+    100058: hammerHandle_mdl001
+    100060: HammerHead_mdl
+    100062: HammerHead_mdl001
+    100064: LeftDoorBone
+    100066: leftDoorBone
+    100068: leftDoorBone 1
+    100070: lightBalista_mdl
+    100072: lowPolySphere_mdl
+    100074: mediumTowerBase
+    100076: mediumTowerLeftDoor
+    100078: mediumTowerRightDoor
+    100080: montainRange_mdl
+    100082: Object001
+    100084: pallisade_mdl
+    100086: Plane001
+    100088: pllisadeChunk1
+    100090: pllisadeChunk2
+    100092: pllisadeChunk3
+    100094: pllisadeChunk4
+    100096: pllisadeChunk5
+    100098: rightDoorBone
+    100100: rightDoorBone 1
+    100102: rightDoorBone 2
+    100104: scaffold
+    100106: scaffold 1
+    100108: scaffold 2
+    100110: scaffold 3
+    100112: sconce_mdl
+    100114: shockWave_mdl
+    100116: Sky001
+    100118: skybox_mdl
+    100120: //RootNode
+    100122: thunderHammer_mdl
+    100124: torch_mdl
+    100126: tower_ballistaBaseL1_mdl
+    100128: tower_ballistaBaseL2_mdl
+    100130: tower_bunkerL1_mdl
+    100132: tower_bunkerL2_mdl
+    100134: tower_mageL1_mdl
+    100136: tower_mageL1Crystal_mdl
+    100138: tower_mageL2_mdl
+    100140: tower_mageL2Crystal_mdl
+    100142: tower_mediumDefenderL1_mdl
+    100144: tower_mediumDefenderL2_mdl
+    100146: towerBaseBone
+    100148: walkableGround_mdl
+    400000: bailey_mdl
+    400002: BallistaBolt1_mdl
+    400004: BallistaBolt1_mdl 1
+    400006: BallistaBolt2_mdl
+    400008: ballistaBolt_mdl
+    400010: BallistaL2BoltBone
+    400012: BallistaL2TorchFXBone
+    400014: battle_mdl
+    400016: begin_mdl
+    400018: blueTowerFlag_mdl
+    400020: blueWaypointlFlag_mdl
+    400022: brickPile
+    400024: buildTower_mdl
+    400026: castle_mdl
+    400028: dragon
+    400030: enemyGate_mdl
+    400032: enemyGate_mdl001
+    400034: enemyGate_mdl002
+    400036: enemyGate_mdl003
+    400038: flame_mdl
+    400040: gateScreen_mdl
+    400042: gateScreen_mdl001
+    400044: gateScreen_mdl002
+    400046: gateScreen_mdl003
+    400048: gateSpike_mdl
+    400050: greenTowerFlag_mdl
+    400052: greenWaypointlFlag_mdl
+    400054: ground_mdl
+    400056: hammerHandle_mdl
+    400058: hammerHandle_mdl001
+    400060: HammerHead_mdl
+    400062: HammerHead_mdl001
+    400064: LeftDoorBone
+    400066: leftDoorBone
+    400068: leftDoorBone 1
+    400070: lightBalista_mdl
+    400072: lowPolySphere_mdl
+    400074: mediumTowerBase
+    400076: mediumTowerLeftDoor
+    400078: mediumTowerRightDoor
+    400080: montainRange_mdl
+    400082: Object001
+    400084: pallisade_mdl
+    400086: Plane001
+    400088: pllisadeChunk1
+    400090: pllisadeChunk2
+    400092: pllisadeChunk3
+    400094: pllisadeChunk4
+    400096: pllisadeChunk5
+    400098: rightDoorBone
+    400100: rightDoorBone 1
+    400102: rightDoorBone 2
+    400104: scaffold
+    400106: scaffold 1
+    400108: scaffold 2
+    400110: scaffold 3
+    400112: sconce_mdl
+    400114: shockWave_mdl
+    400116: Sky001
+    400118: skybox_mdl
+    400120: //RootNode
+    400122: thunderHammer_mdl
+    400124: torch_mdl
+    400126: tower_ballistaBaseL1_mdl
+    400128: tower_ballistaBaseL2_mdl
+    400130: tower_bunkerL1_mdl
+    400132: tower_bunkerL2_mdl
+    400134: tower_mageL1_mdl
+    400136: tower_mageL1Crystal_mdl
+    400138: tower_mageL2_mdl
+    400140: tower_mageL2Crystal_mdl
+    400142: tower_mediumDefenderL1_mdl
+    400144: tower_mediumDefenderL2_mdl
+    400146: towerBaseBone
+    400148: walkableGround_mdl
+    2300000: bailey_mdl
+    2300002: BallistaBolt1_mdl
+    2300004: BallistaBolt1_mdl 1
+    2300006: BallistaBolt2_mdl
+    2300008: ballistaBolt_mdl
+    2300010: battle_mdl
+    2300012: begin_mdl
+    2300014: blueTowerFlag_mdl
+    2300016: blueWaypointlFlag_mdl
+    2300018: brickPile
+    2300020: buildTower_mdl
+    2300022: castle_mdl
+    2300024: dragon
+    2300026: enemyGate_mdl
+    2300028: enemyGate_mdl001
+    2300030: enemyGate_mdl002
+    2300032: enemyGate_mdl003
+    2300034: flame_mdl
+    2300036: gateScreen_mdl
+    2300038: gateScreen_mdl001
+    2300040: gateScreen_mdl002
+    2300042: gateScreen_mdl003
+    2300044: gateSpike_mdl
+    2300046: greenTowerFlag_mdl
+    2300048: greenWaypointlFlag_mdl
+    2300050: ground_mdl
+    2300052: hammerHandle_mdl
+    2300054: hammerHandle_mdl001
+    2300056: HammerHead_mdl
+    2300058: HammerHead_mdl001
+    2300060: lightBalista_mdl
+    2300062: lowPolySphere_mdl
+    2300064: montainRange_mdl
+    2300066: Object001
+    2300068: pallisade_mdl
+    2300070: Plane001
+    2300072: pllisadeChunk1
+    2300074: pllisadeChunk2
+    2300076: pllisadeChunk3
+    2300078: pllisadeChunk4
+    2300080: pllisadeChunk5
+    2300082: scaffold
+    2300084: scaffold 1
+    2300086: scaffold 2
+    2300088: scaffold 3
+    2300090: sconce_mdl
+    2300092: shockWave_mdl
+    2300094: skybox_mdl
+    2300096: thunderHammer_mdl
+    2300098: torch_mdl
+    2300100: tower_ballistaBaseL1_mdl
+    2300102: tower_mageL1_mdl
+    2300104: tower_mageL1Crystal_mdl
+    2300106: tower_mageL2_mdl
+    2300108: tower_mageL2Crystal_mdl
+    2300110: walkableGround_mdl
+    3300000: bailey_mdl
+    3300002: BallistaBolt1_mdl
+    3300004: BallistaBolt1_mdl 1
+    3300006: BallistaBolt2_mdl
+    3300008: ballistaBolt_mdl
+    3300010: battle_mdl
+    3300012: begin_mdl
+    3300014: blueTowerFlag_mdl
+    3300016: blueWaypointlFlag_mdl
+    3300018: brickPile
+    3300020: buildTower_mdl
+    3300022: castle_mdl
+    3300024: dragon
+    3300026: enemyGate_mdl
+    3300028: enemyGate_mdl001
+    3300030: enemyGate_mdl002
+    3300032: enemyGate_mdl003
+    3300034: flame_mdl
+    3300036: gateScreen_mdl
+    3300038: gateScreen_mdl001
+    3300040: gateScreen_mdl002
+    3300042: gateScreen_mdl003
+    3300044: gateSpike_mdl
+    3300046: greenTowerFlag_mdl
+    3300048: greenWaypointlFlag_mdl
+    3300050: ground_mdl
+    3300052: hammerHandle_mdl
+    3300054: hammerHandle_mdl001
+    3300056: HammerHead_mdl
+    3300058: HammerHead_mdl001
+    3300060: lightBalista_mdl
+    3300062: lowPolySphere_mdl
+    3300064: montainRange_mdl
+    3300066: Object001
+    3300068: pallisade_mdl
+    3300070: Plane001
+    3300072: pllisadeChunk1
+    3300074: pllisadeChunk2
+    3300076: pllisadeChunk3
+    3300078: pllisadeChunk4
+    3300080: pllisadeChunk5
+    3300082: scaffold
+    3300084: scaffold 1
+    3300086: scaffold 2
+    3300088: scaffold 3
+    3300090: sconce_mdl
+    3300092: shockWave_mdl
+    3300094: skybox_mdl
+    3300096: thunderHammer_mdl
+    3300098: torch_mdl
+    3300100: tower_ballistaBaseL1_mdl
+    3300102: tower_mageL1_mdl
+    3300104: tower_mageL1Crystal_mdl
+    3300106: tower_mageL2_mdl
+    3300108: tower_mageL2Crystal_mdl
+    3300110: walkableGround_mdl
+    4300000: tower_bunkerL1_mdl
+    4300002: tower_bunkerL2_mdl
+    4300004: scaffold
+    4300006: scaffold
+    4300008: scaffold
+    4300010: scaffold
+    4300012: brickPile
+    4300014: tower_mageL1_mdl
+    4300016: tower_mageL2_mdl
+    4300018: tower_mageL2Crystal_mdl
+    4300020: tower_mageL1Crystal_mdl
+    4300022: tower_ballistaBaseL1_mdl
+    4300024: tower_ballistaBaseL2_mdl
+    4300026: ballistaBolt_mdl
+    4300028: tower_mediumDefenderL2_mdl
+    4300030: Plane001
+    4300032: tower_mediumDefenderL1_mdl
+    4300034: ground_mdl
+    4300036: bailey_mdl
+    4300038: pallisade_mdl
+    4300040: castle_mdl
+    4300042: enemyGate_mdl
+    4300044: gateScreen_mdl
+    4300046: enemyGate_mdl001
+    4300048: gateScreen_mdl001
+    4300050: gateScreen_mdl002
+    4300052: enemyGate_mdl002
+    4300054: gateScreen_mdl003
+    4300056: enemyGate_mdl003
+    4300058: skybox_mdl
+    4300060: montainRange_mdl
+    4300062: Object001
+    4300064: walkableGround_mdl
+    4300066: blueTowerFlag_mdl
+    4300068: blueWaypointlFlag_mdl
+    4300070: greenWaypointlFlag_mdl
+    4300072: greenTowerFlag_mdl
+    4300074: flame_mdl
+    4300076: sconce_mdl
+    4300078: torch_mdl
+    4300080: BallistaBolt1_mdl
+    4300082: BallistaBolt2_mdl
+    4300084: lightBalista_mdl
+    4300086: BallistaBolt1_mdl
+    4300088: gateSpike_mdl
+    4300090: shockWave_mdl
+    4300092: HammerHead_mdl
+    4300094: hammerHandle_mdl
+    4300096: buildTower_mdl
+    4300098: battle_mdl
+    4300100: begin_mdl
+    4300102: HammerHead_mdl001
+    4300104: hammerHandle_mdl001
+    4300106: thunderHammer_mdl
+    4300108: dragon
+    4300110: lowPolySphere_mdl
+    4300112: pllisadeChunk4
+    4300114: pllisadeChunk3
+    4300116: pllisadeChunk5
+    4300118: pllisadeChunk1
+    4300120: pllisadeChunk2
+    9500000: //RootNode
+    13700000: tower_ballistaBaseL2_mdl
+    13700002: tower_bunkerL1_mdl
+    13700004: tower_bunkerL2_mdl
+    13700006: tower_mediumDefenderL1_mdl
+    13700008: tower_mediumDefenderL2_mdl
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

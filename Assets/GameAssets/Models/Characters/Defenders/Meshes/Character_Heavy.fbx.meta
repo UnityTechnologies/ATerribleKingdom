@@ -1,0 +1,230 @@
+fileFormatVersion: 2
+guid: 4f6d53693aff46746a87f0e339e2005f
+timeCreated: 1492031792
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Rig:Ankle_L
+    100004: Rig:Ankle_R
+    100006: Rig:battleAxe_mdl
+    100008: Rig:battleAxe_mdl1
+    100010: Rig:Character
+    100012: Rig:Chest
+    100014: Rig:Clavicle_L
+    100016: Rig:Clavicle_R
+    100018: Rig:ControlCurves
+    100020: Rig:ExportJoints
+    100022: Rig:FArm_L
+    100024: Rig:FArm_R
+    100026: Rig:FingerA0_L
+    100028: Rig:FingerA0_R
+    100030: Rig:FingerA1_L
+    100032: Rig:FingerA1_R
+    100034: Rig:FingerB0_L
+    100036: Rig:FingerB0_R
+    100038: Rig:FingerB1_L
+    100040: Rig:FingerB1_R
+    100042: Rig:FKHand_L
+    100044: Rig:FKHand_R
+    100046: Rig:ForeArm_L
+    100048: Rig:ForeArm_R
+    100050: Rig:gFarm_L
+    100052: Rig:gFarm_R
+    100054: Rig:GrpFKHand_L
+    100056: Rig:GrpFKHand_R
+    100058: Rig:GrpScale
+    100060: Rig:GrpWeaponCtrl_L
+    100062: Rig:GrpWeaponCtrl_R
+    100064: Rig:Hand_L
+    100066: Rig:Hand_R
+    100068: Rig:Head
+    100070: Rig:HeavyDefenderFemale_mdl
+    100072: Rig:heavyDefenderMale_mdl
+    100074: Rig:heavySword_mdl
+    100076: Rig:heavySword_mdl1
+    100078: Rig:Hips
+    100080: Rig:Knee_L
+    100082: Rig:Knee_R
+    100084: Rig:LeftArm
+    100086: Rig:LUArmFK
+    100088: Rig:MainCtrl1
+    100090: Rig:MainCtrl2
+    100092: Rig:Neck
+    100094: Rig:RIG
+    100096: Rig:RightArm
+    100098: Rig:Root
+    100100: Rig:RUArmFK
+    100102: Rig:Spine
+    100104: Rig:Thigh_L
+    100106: Rig:Thigh_R
+    100108: Rig:Thumb0_L
+    100110: Rig:Thumb0_R
+    100112: Rig:Thumb1_L
+    100114: Rig:Thumb1_R
+    100116: Rig:Toe_L
+    100118: Rig:Toe_R
+    100120: Rig:UpperArm_L
+    100122: Rig:UpperArm_R
+    100124: Rig:UrArm_L
+    100126: Rig:UrArm_R
+    100128: Rig:Weapon_L
+    100130: Rig:Weapon_R
+    100132: Rig:WeaponCtrl_L
+    100134: Rig:WeaponCtrl_R
+    100136: Rig:Wrist_L
+    100138: Rig:Wrist_R
+    400000: //RootNode
+    400002: Rig:Ankle_L
+    400004: Rig:Ankle_R
+    400006: Rig:battleAxe_mdl
+    400008: Rig:battleAxe_mdl1
+    400010: Rig:Character
+    400012: Rig:Chest
+    400014: Rig:Clavicle_L
+    400016: Rig:Clavicle_R
+    400018: Rig:ControlCurves
+    400020: Rig:ExportJoints
+    400022: Rig:FArm_L
+    400024: Rig:FArm_R
+    400026: Rig:FingerA0_L
+    400028: Rig:FingerA0_R
+    400030: Rig:FingerA1_L
+    400032: Rig:FingerA1_R
+    400034: Rig:FingerB0_L
+    400036: Rig:FingerB0_R
+    400038: Rig:FingerB1_L
+    400040: Rig:FingerB1_R
+    400042: Rig:FKHand_L
+    400044: Rig:FKHand_R
+    400046: Rig:ForeArm_L
+    400048: Rig:ForeArm_R
+    400050: Rig:gFarm_L
+    400052: Rig:gFarm_R
+    400054: Rig:GrpFKHand_L
+    400056: Rig:GrpFKHand_R
+    400058: Rig:GrpScale
+    400060: Rig:GrpWeaponCtrl_L
+    400062: Rig:GrpWeaponCtrl_R
+    400064: Rig:Hand_L
+    400066: Rig:Hand_R
+    400068: Rig:Head
+    400070: Rig:HeavyDefenderFemale_mdl
+    400072: Rig:heavyDefenderMale_mdl
+    400074: Rig:heavySword_mdl
+    400076: Rig:heavySword_mdl1
+    400078: Rig:Hips
+    400080: Rig:Knee_L
+    400082: Rig:Knee_R
+    400084: Rig:LeftArm
+    400086: Rig:LUArmFK
+    400088: Rig:MainCtrl1
+    400090: Rig:MainCtrl2
+    400092: Rig:Neck
+    400094: Rig:RIG
+    400096: Rig:RightArm
+    400098: Rig:Root
+    400100: Rig:RUArmFK
+    400102: Rig:Spine
+    400104: Rig:Thigh_L
+    400106: Rig:Thigh_R
+    400108: Rig:Thumb0_L
+    400110: Rig:Thumb0_R
+    400112: Rig:Thumb1_L
+    400114: Rig:Thumb1_R
+    400116: Rig:Toe_L
+    400118: Rig:Toe_R
+    400120: Rig:UpperArm_L
+    400122: Rig:UpperArm_R
+    400124: Rig:UrArm_L
+    400126: Rig:UrArm_R
+    400128: Rig:Weapon_L
+    400130: Rig:Weapon_R
+    400132: Rig:WeaponCtrl_L
+    400134: Rig:WeaponCtrl_R
+    400136: Rig:Wrist_L
+    400138: Rig:Wrist_R
+    4300000: Rig:heavyDefenderMale_mdl
+    4300002: Rig:heavySword_mdl
+    4300004: Rig:heavySword_mdl1
+    4300006: Rig:HeavyDefenderFemale_mdl
+    4300008: Rig:battleAxe_mdl
+    4300010: Rig:battleAxe_mdl1
+    9500000: //RootNode
+    13700000: Rig:battleAxe_mdl
+    13700002: Rig:battleAxe_mdl1
+    13700004: Rig:HeavyDefenderFemale_mdl
+    13700006: Rig:heavyDefenderMale_mdl
+    13700008: Rig:heavySword_mdl
+    13700010: Rig:heavySword_mdl1
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

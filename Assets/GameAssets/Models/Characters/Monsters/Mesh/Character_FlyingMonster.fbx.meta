@@ -1,0 +1,236 @@
+fileFormatVersion: 2
+guid: 1468279ffe2232f4ab9a696507d345ab
+timeCreated: 1492730959
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Rig:BlendArm0_L
+    100004: Rig:BlendArm0_R
+    100006: Rig:BlendArm1_L
+    100008: Rig:BlendArm1_R
+    100010: Rig:BlendArm2_L
+    100012: Rig:BlendArm2_R
+    100014: Rig:BlendWrist_L
+    100016: Rig:BlendWrist_R
+    100018: Rig:BoneSnapPoints
+    100020: Rig:BS_Chest
+    100022: Rig:BS_Clavicle_L
+    100024: Rig:BS_Clavicle_R
+    100026: Rig:BS_LHand
+    100028: Rig:BS_LLowerArm
+    100030: Rig:BS_LUpperArm
+    100032: Rig:BS_LWrist
+    100034: Rig:BS_RHand
+    100036: Rig:BS_RLowerArm
+    100038: Rig:BS_RUpperArm
+    100040: Rig:BS_RWrist
+    100042: Rig:Character
+    100044: Rig:Clavicle_L
+    100046: Rig:Clavicle_R
+    100048: Rig:ClavicleCtrl_L
+    100050: Rig:ClavicleCtrl_L1
+    100052: Rig:ClavicleCtrl_R
+    100054: Rig:COGCtrl0
+    100056: Rig:COGCtrl1
+    100058: Rig:ControlCurves
+    100060: Rig:evilTadpole_mdl
+    100062: Rig:ExportJoints
+    100064: Rig:FArm_L
+    100066: Rig:FArm_R
+    100068: Rig:FKHand_L
+    100070: Rig:FKHand_R
+    100072: Rig:ForeArm_L
+    100074: Rig:ForeArm_R
+    100076: Rig:gClavicleCtrl_L
+    100078: Rig:gClavicleCtrl_R
+    100080: Rig:gFarm_L
+    100082: Rig:gFarm_R
+    100084: Rig:GrpCOGCtrl
+    100086: Rig:GrpFKHand_L
+    100088: Rig:GrpFKHand_R
+    100090: Rig:GrpHipDipNull
+    100092: Rig:GrpHips1
+    100094: Rig:GrpScale
+    100096: Rig:Hand_L
+    100098: Rig:Hand_R
+    100100: Rig:Hidden
+    100102: Rig:Hidden_R
+    100104: Rig:Hips
+    100106: Rig:HipsCtrl
+    100108: Rig:IKArm0_L
+    100110: Rig:IKArm0_R
+    100112: Rig:IKArm1_L
+    100114: Rig:IKArm1_R
+    100116: Rig:Jaw
+    100118: Rig:LeftArm
+    100120: Rig:LeftSide
+    100122: Rig:LUArmFK
+    100124: Rig:MainCtrl1
+    100126: Rig:MainCtrl2
+    100128: Rig:RIG
+    100130: Rig:RightArm
+    100132: Rig:RightSide
+    100134: Rig:Root
+    100136: Rig:RUArmFK
+    100138: Rig:ShoulderHelper_L
+    100140: Rig:ShoulderHelper_R
+    100142: Rig:Tail
+    100144: Rig:UpperArm_L
+    100146: Rig:UpperArm_R
+    100148: Rig:UrArm_L
+    100150: Rig:UrArm_R
+    100152: Rig:Wrist_L
+    100154: Rig:Wrist_R
+    400000: //RootNode
+    400002: Rig:BlendArm0_L
+    400004: Rig:BlendArm0_R
+    400006: Rig:BlendArm1_L
+    400008: Rig:BlendArm1_R
+    400010: Rig:BlendArm2_L
+    400012: Rig:BlendArm2_R
+    400014: Rig:BlendWrist_L
+    400016: Rig:BlendWrist_R
+    400018: Rig:BoneSnapPoints
+    400020: Rig:BS_Chest
+    400022: Rig:BS_Clavicle_L
+    400024: Rig:BS_Clavicle_R
+    400026: Rig:BS_LHand
+    400028: Rig:BS_LLowerArm
+    400030: Rig:BS_LUpperArm
+    400032: Rig:BS_LWrist
+    400034: Rig:BS_RHand
+    400036: Rig:BS_RLowerArm
+    400038: Rig:BS_RUpperArm
+    400040: Rig:BS_RWrist
+    400042: Rig:Character
+    400044: Rig:Clavicle_L
+    400046: Rig:Clavicle_R
+    400048: Rig:ClavicleCtrl_L
+    400050: Rig:ClavicleCtrl_L1
+    400052: Rig:ClavicleCtrl_R
+    400054: Rig:COGCtrl0
+    400056: Rig:COGCtrl1
+    400058: Rig:ControlCurves
+    400060: Rig:evilTadpole_mdl
+    400062: Rig:ExportJoints
+    400064: Rig:FArm_L
+    400066: Rig:FArm_R
+    400068: Rig:FKHand_L
+    400070: Rig:FKHand_R
+    400072: Rig:ForeArm_L
+    400074: Rig:ForeArm_R
+    400076: Rig:gClavicleCtrl_L
+    400078: Rig:gClavicleCtrl_R
+    400080: Rig:gFarm_L
+    400082: Rig:gFarm_R
+    400084: Rig:GrpCOGCtrl
+    400086: Rig:GrpFKHand_L
+    400088: Rig:GrpFKHand_R
+    400090: Rig:GrpHipDipNull
+    400092: Rig:GrpHips1
+    400094: Rig:GrpScale
+    400096: Rig:Hand_L
+    400098: Rig:Hand_R
+    400100: Rig:Hidden
+    400102: Rig:Hidden_R
+    400104: Rig:Hips
+    400106: Rig:HipsCtrl
+    400108: Rig:IKArm0_L
+    400110: Rig:IKArm0_R
+    400112: Rig:IKArm1_L
+    400114: Rig:IKArm1_R
+    400116: Rig:Jaw
+    400118: Rig:LeftArm
+    400120: Rig:LeftSide
+    400122: Rig:LUArmFK
+    400124: Rig:MainCtrl1
+    400126: Rig:MainCtrl2
+    400128: Rig:RIG
+    400130: Rig:RightArm
+    400132: Rig:RightSide
+    400134: Rig:Root
+    400136: Rig:RUArmFK
+    400138: Rig:ShoulderHelper_L
+    400140: Rig:ShoulderHelper_R
+    400142: Rig:Tail
+    400144: Rig:UpperArm_L
+    400146: Rig:UpperArm_R
+    400148: Rig:UrArm_L
+    400150: Rig:UrArm_R
+    400152: Rig:Wrist_L
+    400154: Rig:Wrist_R
+    4300000: Rig:evilTadpole_mdl
+    9500000: //RootNode
+    13700000: Rig:evilTadpole_mdl
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

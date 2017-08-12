@@ -1,0 +1,120 @@
+fileFormatVersion: 2
+guid: 70140baefb21c814aa5c2e8d549722e5
+timeCreated: 1491594093
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Axe
+    100002: BowArrow
+    100004: Hat2
+    100006: Hat3
+    100008: Quiver
+    100010: Shield
+    100012: Staff
+    100014: Sword
+    100016: //RootNode
+    400000: Axe
+    400002: BowArrow
+    400004: Hat2
+    400006: Hat3
+    400008: Quiver
+    400010: Shield
+    400012: Staff
+    400014: Sword
+    400016: //RootNode
+    2300000: Axe
+    2300002: BowArrow
+    2300004: Hat2
+    2300006: Hat3
+    2300008: Quiver
+    2300010: Shield
+    2300012: Staff
+    2300014: Sword
+    3300000: Axe
+    3300002: BowArrow
+    3300004: Hat2
+    3300006: Hat3
+    3300008: Quiver
+    3300010: Shield
+    3300012: Staff
+    3300014: Sword
+    4300000: Sword
+    4300002: Staff
+    4300004: Shield
+    4300006: Quiver
+    4300008: BowArrow
+    4300010: Axe
+    4300012: Hat3
+    4300014: Hat2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
