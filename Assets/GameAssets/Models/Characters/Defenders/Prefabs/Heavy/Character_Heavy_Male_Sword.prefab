@@ -925,7 +925,7 @@ GameObject:
   - component: {fileID: 4710110168267300}
   - component: {fileID: 95534655379018448}
   - component: {fileID: 114642814027851428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character_Heavy_Male_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}

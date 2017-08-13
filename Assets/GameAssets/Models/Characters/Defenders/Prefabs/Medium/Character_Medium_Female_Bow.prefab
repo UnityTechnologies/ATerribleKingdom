@@ -1918,7 +1918,7 @@ GameObject:
   - component: {fileID: 4059053543245240}
   - component: {fileID: 95889047141598190}
   - component: {fileID: 114280841832869164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character_Medium_Female_Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5365,7 +5365,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1568983317960884}
-  m_LocalRotation: {x: -0.53466535, y: 0.28766933, z: 0.29095715, w: 0.7394075}
+  m_LocalRotation: {x: -0.5346653, y: 0.2876693, z: 0.29095712, w: 0.7394074}
   m_LocalPosition: {x: -0.07361756, y: 0.008609598, z: 0.049430538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5879,7 +5879,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229943776967632}
-  m_LocalRotation: {x: -0.53466535, y: 0.28766933, z: 0.29095715, w: 0.7394075}
+  m_LocalRotation: {x: -0.5346653, y: 0.2876693, z: 0.29095712, w: 0.7394074}
   m_LocalPosition: {x: -0.033462532, y: 0.0039134533, z: 0.022468425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

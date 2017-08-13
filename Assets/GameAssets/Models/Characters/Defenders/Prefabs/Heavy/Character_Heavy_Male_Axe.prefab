@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4051472950355268}
   - component: {fileID: 95083915732012492}
   - component: {fileID: 114997933191893102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character_Heavy_Male_Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

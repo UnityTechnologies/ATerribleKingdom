@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 4622342989291242}
   - component: {fileID: 95267407038388542}
   - component: {fileID: 114808061495325738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character_Heavy_Female_Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

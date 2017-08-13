@@ -6,6 +6,12 @@ public class GameManager : Singleton<GameManager>
 {
 	private List<Unit> selectedUnits;
 
+	private void Awake()
+	{
+		selectedUnits = new List<Unit>();
+		Cursor.lockState = CursorLockMode.Confined;
+	}
+
 	public int GetSelectionLength()
 	{
 		return selectedUnits.Count;

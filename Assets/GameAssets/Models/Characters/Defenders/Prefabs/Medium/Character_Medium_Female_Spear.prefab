@@ -788,7 +788,7 @@ GameObject:
   - component: {fileID: 4427121701250928}
   - component: {fileID: 95247075952059912}
   - component: {fileID: 114251058767686510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character_Medium_Female_Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,6 +21,10 @@ public class InputManager : Singleton<InputManager>
 				Unit newSelectedUnit = hit.collider.GetComponent<Unit>();
 				GameManager.Instance.AddToSelection(newSelectedUnit);
 			}
+			else
+			{
+				GameManager.Instance.ClearSelection();
+			}
 		}
 
 		//order move

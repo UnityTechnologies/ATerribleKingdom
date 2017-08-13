@@ -2200,7 +2200,7 @@ GameObject:
   - component: {fileID: 4216032068815894}
   - component: {fileID: 95042383696672412}
   - component: {fileID: 114156020938961848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character_Medium_Male_Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
