@@ -44,6 +44,12 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			ScriptPlayable<AICommandBehaviour> inputPlayable = (ScriptPlayable<AICommandBehaviour>)playable.GetInput(i);
 			AICommandBehaviour input = inputPlayable.GetBehaviour();
 
+			//force the finalPosition to the attack target in case of an Attack action
+			if(input.actionType == AICommand.CommandType.AttackTarget)
+			{
+				input.targetPosition = input.targetUnit.transform.position;
+			}
+
 			if(inputWeight > 0f)
 			{
 				double progress = inputPlayable.GetTime()/inputPlayable.GetDuration();

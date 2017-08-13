@@ -12,7 +12,7 @@ public class CameraManager : Singleton<CameraManager>
 
 	private void Awake()
 	{
-		CMBrain = GetComponent<CinemachineBrain>();
+		CMBrain = GetComponentInChildren<CinemachineBrain>();
 	}
 
 	public void MoveGameplayCamera(Vector2 amount)

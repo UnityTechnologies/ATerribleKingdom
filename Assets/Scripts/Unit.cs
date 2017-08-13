@@ -6,18 +6,17 @@ using System;
 
 public class Unit : MonoBehaviour
 {
+	public int health = 10;
+	public int attackPower = 2;
+	public float attackSpeed = 1f; //1 second/attackSpeed = time for a single attack
+	public float engageDistance = 1f;
+	public UnitState state = UnitState.Idle;
+
+	//references
 	private NavMeshAgent navMeshAgent;
 	private Animator animator;
 
-	public enum UnitState
-	{
-		Idle,
-		Guarding,
-		Attacking,
-		Moving,
-		Dead,
-	}
-	public UnitState state = UnitState.Idle;
+	private Unit targetOfAttack;
 
 	void Awake ()
 	{
@@ -27,13 +26,30 @@ public class Unit : MonoBehaviour
 	
 	void Update ()
 	{
-		float navMeshAgentSpeed = navMeshAgent.velocity.magnitude;
-		if(navMeshAgent.remainingDistance < .1f)
+		switch(state)
 		{
-			navMeshAgent.velocity = Vector3.zero;
-		}
-		animator.SetFloat("Speed", navMeshAgentSpeed * .05f);
+			case UnitState.MovingToSpot:
+				if(navMeshAgent.remainingDistance < .1f)
+				{
+					navMeshAgent.velocity = Vector3.zero;
+				}
+				break;
 
+			case UnitState.MovingToTarget:
+				if(navMeshAgent.remainingDistance < engageDistance)
+				{
+					navMeshAgent.velocity = Vector3.zero;
+					StartAttacking();
+				}
+				else
+				{
+					navMeshAgent.SetDestination(targetOfAttack.transform.position); //update target position in case it's moving
+				}
+				break;
+		}
+
+		float navMeshAgentSpeed = navMeshAgent.velocity.magnitude;
+		animator.SetFloat("Speed", navMeshAgentSpeed * .05f);
 	}
 
 	public void ExecuteCommand(AICommand c)
@@ -48,20 +64,96 @@ public class Unit : MonoBehaviour
 			case AICommand.CommandType.Stop:
 				Stop();
 				break;
+
+			case AICommand.CommandType.AttackTarget:
+				MoveToAttack(c.target);
+				break;
+			
+			case AICommand.CommandType.Die:
+				Die();
+				break;
 		}
 	}
-
-	private void GoTo(Vector3 location)
+		
+	private void GoTo(Vector3 location, bool andStop = false)
 	{
-		Debug.Log("Moving to " + location);
+		state = UnitState.MovingToSpot;
+		targetOfAttack = null;
+		navMeshAgent.isStopped = false;
 		navMeshAgent.SetDestination(location);
 	}
 
 	private void Stop()
 	{
+		state = UnitState.Idle;
+		targetOfAttack = null;
 		navMeshAgent.isStopped = true;
+		navMeshAgent.velocity = Vector3.zero;
+	}
+
+	private void MoveToAttack(Unit target)
+	{
+		state = UnitState.MovingToTarget;
+		targetOfAttack = target;
+		navMeshAgent.isStopped = false;
+		navMeshAgent.SetDestination(target.transform.position);
+	}
+
+	private void StartAttacking()
+	{
+		state = UnitState.Attacking;
+		navMeshAgent.isStopped = true;
+		StartCoroutine(DealAttack());
+	}
+
+	private IEnumerator DealAttack()
+	{
+		while(targetOfAttack != null) //TODO: check for other exit conditions, such as this unit is dead
+		{
+			animator.SetTrigger("DoAttack");
+			bool isDead = targetOfAttack.SufferAttack(attackPower);
+			Debug.Log("DealAttack | isDead: " + isDead);
+			
+			if(isDead)
+			{
+				Debug.Log("Stop Coroutine");
+				break;
+			}
+			
+			yield return new WaitForSeconds(1f / attackSpeed);
+		}
+	}
+
+	private bool SufferAttack(int damage)
+	{
+		health -= damage;
+		if(health <= 0)
+		{
+			Die();
+		}
+
+		return health <= 0;
+	}
+
+	private void Die()
+	{
+		state = UnitState.Dead;
+		animator.SetTrigger("DoDeath");
+	}
+
+	public enum UnitState
+	{
+		Idle,
+		Guarding,
+		Attacking,
+		MovingToTarget,
+		MovingToSpot,
+		Dead,
 	}
 }
+
+
+
 
 [Serializable]
 public class SelectionGroup
@@ -77,16 +169,12 @@ public class SelectionGroup
 	}
 }
 
+
+
+
 [Serializable]
 public class AICommand
 {
-	public enum CommandType
-	{
-		GoToAndIdle,
-		GoToAndGuard,
-		AttackTarget, //attacks a specific target, then becomes Guarding
-		Stop,
-	}
 	public CommandType commandType;
 
 	public Vector3 destination;
@@ -114,5 +202,15 @@ public class AICommand
 	public AICommand(CommandType ty)
 	{
 		commandType = ty;
+	}
+
+	public enum CommandType
+	{
+		GoToAndIdle,
+		GoToAndGuard,
+		AttackTarget, //attacks a specific target, then becomes Guarding
+		Stop,
+		//Flee,
+		Die,
 	}
 }

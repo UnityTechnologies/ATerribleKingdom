@@ -18,7 +18,58 @@ MonoBehaviour:
   m_EditorSettings:
     fps: 60
   m_DurationMode: 0
---- !u!74 &74409514000130270
+--- !u!74 &74470493562180254
+AnimationClip:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Parameters
+  serializedVersion: 6
+  m_Legacy: 1
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves: []
+  m_SampleRate: 60
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings: []
+    pptrCurveMapping: []
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 1
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_GenerateMotionCurves: 0
+  m_Events: []
+--- !u!74 &74490277587138158
 AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -69,9 +120,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events: []
---- !u!74 &74470493562180254
+--- !u!74 &74704663193666986
 AnimationClip:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Parameters
@@ -189,11 +240,11 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0.6
+  - m_Start: 0.43333333333333335
     m_ClipIn: 0
     m_Asset: {fileID: 114337424487518646}
     m_UnderlyingAsset: {fileID: 114337424487518646}
-    m_Duration: 2.9166666666666665
+    m_Duration: 1.8166666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114017433262671498}
     m_EaseInDuration: 0
@@ -246,12 +297,12 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: AICommandClip
-  - m_Start: 4.1
+    m_DisplayName: GoToIdle
+  - m_Start: 2.25
     m_ClipIn: 0
     m_Asset: {fileID: 114247775297439024}
     m_UnderlyingAsset: {fileID: 114337424487518646}
-    m_Duration: 3.316666666666667
+    m_Duration: 2.816666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114017433262671498}
     m_EaseInDuration: 0
@@ -304,12 +355,12 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: AICommandClip
-  - m_Start: 8.133333333333333
+    m_DisplayName: Attack
+  - m_Start: 6.283333333333333
     m_ClipIn: 0
-    m_Asset: {fileID: 114377509841170928}
+    m_Asset: {fileID: 114964216561350636}
     m_UnderlyingAsset: {fileID: 114337424487518646}
-    m_Duration: 3.316666666666667
+    m_Duration: 1.8166666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114017433262671498}
     m_EaseInDuration: 0
@@ -355,14 +406,72 @@ MonoBehaviour:
     m_BlendInCurveMode: 0
     m_BlendOutCurveMode: 0
     m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 74409514000130270}
-    m_ID: -1254965205
+    m_AnimationCurves: {fileID: 74490277587138158}
+    m_ID: 715978396
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: AICommandClip
+    m_DisplayName: GoToIdle
+  - m_Start: 8.1
+    m_ClipIn: 0
+    m_Asset: {fileID: 114983375368886080}
+    m_UnderlyingAsset: {fileID: 114337424487518646}
+    m_Duration: 2.816666666666667
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 114017433262671498}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 74704663193666986}
+    m_ID: 597851498
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Attack
 --- !u!114 &114247775297439024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -374,9 +483,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d636eaf13e86d4248b9a5d378173699c, type: 3}
   m_Name: AICommandClip
   m_EditorClassIdentifier: 
-  actionType: 0
+  actionType: 2
   targetPosition: {x: 0, y: 0, z: 3}
-  targetUnit: {fileID: 0}
+  targetUnit:
+    exposedName: be896d31f34ee4101b6ce9ae19448d06
+    defaultValue: {fileID: 0}
   template:
     targetUnit: {fileID: 0}
     targetPosition: {x: 0, y: 0, z: 3}
@@ -393,31 +504,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d636eaf13e86d4248b9a5d378173699c, type: 3}
   m_Name: AICommandClip
   m_EditorClassIdentifier: 
-  actionType: 1
-  targetPosition: {x: 3, y: 0, z: 4}
-  targetUnit: {fileID: 0}
+  actionType: 0
+  targetPosition: {x: 2, y: 0, z: 2}
+  targetUnit:
+    exposedName: 
+    defaultValue: {fileID: 0}
   template:
     targetUnit: {fileID: 0}
     targetPosition: {x: 2, y: 0, z: 2}
-    actionType: 0
-    commandExecuted: 0
---- !u!114 &114377509841170928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d636eaf13e86d4248b9a5d378173699c, type: 3}
-  m_Name: AICommandClip
-  m_EditorClassIdentifier: 
-  actionType: 0
-  targetPosition: {x: 2, y: 0, z: 6}
-  targetUnit: {fileID: 0}
-  template:
-    targetUnit: {fileID: 0}
-    targetPosition: {x: 0, y: 0, z: 3}
     actionType: 0
     commandExecuted: 0
 --- !u!114 &114786449368373818
@@ -433,10 +527,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionType: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  targetUnit: {fileID: 0}
+  targetUnit:
+    exposedName: 
+    defaultValue: {fileID: 0}
   template:
     targetUnit: {fileID: 0}
     targetPosition: {x: 0, y: 0, z: 0}
+    actionType: 0
+    commandExecuted: 0
+--- !u!114 &114964216561350636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d636eaf13e86d4248b9a5d378173699c, type: 3}
+  m_Name: AICommandClip
+  m_EditorClassIdentifier: 
+  actionType: 0
+  targetPosition: {x: -1, y: 0, z: 2}
+  targetUnit:
+    exposedName: 
+    defaultValue: {fileID: 0}
+  template:
+    targetUnit: {fileID: 0}
+    targetPosition: {x: 2, y: 0, z: 2}
+    actionType: 0
+    commandExecuted: 0
+--- !u!114 &114983375368886080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d636eaf13e86d4248b9a5d378173699c, type: 3}
+  m_Name: AICommandClip
+  m_EditorClassIdentifier: 
+  actionType: 2
+  targetPosition: {x: 0, y: 0, z: 3}
+  targetUnit:
+    exposedName: 0041fa7872e7c4e178ab8015eeeba37b
+    defaultValue: {fileID: 0}
+  template:
+    targetUnit: {fileID: 0}
+    targetPosition: {x: 0, y: 0, z: 3}
     actionType: 0
     commandExecuted: 0
 --- !u!114 &114999860612476602
