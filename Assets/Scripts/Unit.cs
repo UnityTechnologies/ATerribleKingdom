@@ -7,9 +7,15 @@ using System;
 public class Unit : MonoBehaviour
 {
 	public int health = 10;
+	[Tooltip("Damage dealt each attack")]
 	public int attackPower = 2;
-	public float attackSpeed = 1f; //1 second/attackSpeed = time for a single attack
+	[Tooltip("The attack rate. The higher, the faster the Unit is in attacking. 1 second/attackSpeed = time it takes for a single attack")]
+	public float attackSpeed = 1f;
+	[Tooltip("When it has reached this distance from its target, the Unit stops and attacks it")]
 	public float engageDistance = 1f;
+	[Tooltip("When guarding, if any enemy enters this range it will be attacked")]
+	public float guardDistance = 5f;
+
 	public UnitState state = UnitState.Idle;
 
 	//references
@@ -28,10 +34,17 @@ public class Unit : MonoBehaviour
 	{
 		switch(state)
 		{
-			case UnitState.MovingToSpot:
+			case UnitState.MovingToSpotIdle:
 				if(navMeshAgent.remainingDistance < .1f)
 				{
-					navMeshAgent.velocity = Vector3.zero;
+					Stop();
+				}
+				break;
+
+			case UnitState.MovingToSpotGuard:
+				if(navMeshAgent.remainingDistance < .1f)
+				{
+					Guard();
 				}
 				break;
 
@@ -46,6 +59,11 @@ public class Unit : MonoBehaviour
 					navMeshAgent.SetDestination(targetOfAttack.transform.position); //update target position in case it's moving
 				}
 				break;
+
+			case UnitState.Guarding:
+				//TODO: look for enemies in range
+				//use guardDistance
+				break;
 		}
 
 		float navMeshAgentSpeed = navMeshAgent.velocity.magnitude;
@@ -58,7 +76,7 @@ public class Unit : MonoBehaviour
 		{
 			case AICommand.CommandType.GoToAndIdle:
 			case AICommand.CommandType.GoToAndGuard:
-				GoTo(c.destination);
+				GoToAndIdle(c.destination);
 				break;
 
 			case AICommand.CommandType.Stop:
@@ -75,14 +93,25 @@ public class Unit : MonoBehaviour
 		}
 	}
 		
-	private void GoTo(Vector3 location, bool andStop = false)
+	//move to a position and be idle
+	private void GoToAndIdle(Vector3 location)
 	{
-		state = UnitState.MovingToSpot;
+		state = UnitState.MovingToSpotIdle;
 		targetOfAttack = null;
 		navMeshAgent.isStopped = false;
 		navMeshAgent.SetDestination(location);
 	}
 
+	//move to a position and be guarding
+	private void GoToAndGuard(Vector3 location)
+	{
+		state = UnitState.MovingToSpotGuard;
+		targetOfAttack = null;
+		navMeshAgent.isStopped = false;
+		navMeshAgent.SetDestination(location);
+	}
+
+	//stop and stay Idle
 	private void Stop()
 	{
 		state = UnitState.Idle;
@@ -91,50 +120,89 @@ public class Unit : MonoBehaviour
 		navMeshAgent.velocity = Vector3.zero;
 	}
 
+	//stop but watch for enemies nearby
+	public void Guard()
+	{
+		state = UnitState.Guarding;
+		targetOfAttack = null;
+		navMeshAgent.isStopped = true;
+		navMeshAgent.velocity = Vector3.zero;
+	}
+
+	//move towards a target to attack it
 	private void MoveToAttack(Unit target)
 	{
-		state = UnitState.MovingToTarget;
-		targetOfAttack = target;
-		navMeshAgent.isStopped = false;
-		navMeshAgent.SetDestination(target.transform.position);
+		if(target.state != UnitState.Dead)
+		{
+			state = UnitState.MovingToTarget;
+			targetOfAttack = target;
+			navMeshAgent.isStopped = false;
+			navMeshAgent.SetDestination(target.transform.position);
+		}
+		else
+		{
+			//if the command is dealt by a Timeline, the target might be already dead
+			Guard();
+		}
 	}
 
+	//reached the target (within engageDistance), time to attack
 	private void StartAttacking()
 	{
-		state = UnitState.Attacking;
-		navMeshAgent.isStopped = true;
-		StartCoroutine(DealAttack());
+		//somebody might have killed the target while this Unit was approaching it
+		if(targetOfAttack.state != UnitState.Dead)
+		{
+			state = UnitState.Attacking;
+			navMeshAgent.isStopped = true;
+			StartCoroutine(DealAttack());
+		}
+		else
+		{
+			Guard();
+		}
 	}
 
+	//the single blows
 	private IEnumerator DealAttack()
 	{
 		while(targetOfAttack != null) //TODO: check for other exit conditions, such as this unit is dead
 		{
 			animator.SetTrigger("DoAttack");
 			bool isDead = targetOfAttack.SufferAttack(attackPower);
-			Debug.Log("DealAttack | isDead: " + isDead);
-			
+
+			yield return new WaitForSeconds(1f / attackSpeed);
+
+			//check is performed after the wait, because somebody might have killed the target in the meantime
 			if(isDead)
 			{
-				Debug.Log("Stop Coroutine");
 				break;
 			}
-			
-			yield return new WaitForSeconds(1f / attackSpeed);
 		}
+
+		Guard();
 	}
 
+	//called by an attacker
 	private bool SufferAttack(int damage)
 	{
+		if(state == UnitState.Dead)
+		{
+			//already dead
+			return true;
+		}
+
 		health -= damage;
+
 		if(health <= 0)
 		{
+			health = 0;
 			Die();
 		}
 
-		return health <= 0;
+		return health == 0;
 	}
 
+	//called in SufferAttack, but can also be from a Timeline clip
 	private void Die()
 	{
 		state = UnitState.Dead;
@@ -147,7 +215,8 @@ public class Unit : MonoBehaviour
 		Guarding,
 		Attacking,
 		MovingToTarget,
-		MovingToSpot,
+		MovingToSpotIdle,
+		MovingToSpotGuard,
 		Dead,
 	}
 }
