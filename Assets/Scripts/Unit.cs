@@ -225,23 +225,6 @@ public class Unit : MonoBehaviour
 
 
 [Serializable]
-public class SelectionGroup
-{
-	public List<Unit> units;
-
-	public void ExecuteCommand(AICommand command)
-	{
-		for(int i=0; i<units.Count; i++)
-		{
-			units[i].ExecuteCommand(command);
-		}
-	}
-}
-
-
-
-
-[Serializable]
 public class AICommand
 {
 	public CommandType commandType;

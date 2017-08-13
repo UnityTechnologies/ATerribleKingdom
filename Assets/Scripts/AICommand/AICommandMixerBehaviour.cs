@@ -5,22 +5,22 @@ using UnityEngine.Timeline;
 
 public class AICommandMixerBehaviour : PlayableBehaviour
 {
-	private Unit m_TrackBinding;
-	private bool m_FirstFrameHappened = false;
-	private Vector3 m_DefaultPosition, previousInputFinalPosition;
-	private int m_lastInputPlayed = -1;
+	private Platoon trackBinding;
+	private bool firstFrameHappened = false;
+	private Vector3[] defaultPositions, newPositions, finalPositions, previousInputFinalPositions;
+	private int lastInputPlayed = -1;
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData)
     {
-		m_TrackBinding = playerData as Unit;
+		trackBinding = playerData as Platoon;
 
-        if (!m_TrackBinding)
+        if (trackBinding == null)
 			return;
 
-		if (!m_FirstFrameHappened)
+		if (!firstFrameHappened)
 		{
-			m_DefaultPosition = m_TrackBinding.transform.position;
-			m_FirstFrameHappened = true;
+			defaultPositions = trackBinding.GetPositions();
+			firstFrameHappened = true;
 		}
 
 		if(Application.isPlaying)
@@ -35,7 +35,7 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 
 	private void ProcessEditModeFrame(Playable playable)
 	{
-		previousInputFinalPosition = m_DefaultPosition;
+		previousInputFinalPositions = defaultPositions;
 		int inputCount = playable.GetInputCount();
 
 		for (int i = 0; i < inputCount; i++)
@@ -43,6 +43,7 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			float inputWeight = playable.GetInputWeight(i);
 			ScriptPlayable<AICommandBehaviour> inputPlayable = (ScriptPlayable<AICommandBehaviour>)playable.GetInput(i);
 			AICommandBehaviour input = inputPlayable.GetBehaviour();
+			int unitCount = trackBinding.units.Count;
 
 			//force the finalPosition to the attack target in case of an Attack action
 			if(input.actionType == AICommand.CommandType.AttackTarget)
@@ -50,16 +51,28 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 				input.targetPosition = input.targetUnit.transform.position;
 			}
 
+			//create an array of final positions for the entire Platoon
+			finalPositions = new Vector3[unitCount];
+			for(int k=0; k<unitCount; k++)
+			{
+				finalPositions[k] = input.targetPosition; //TODO: can't be target position for all of the Units
+			}
+
 			if(inputWeight > 0f)
 			{
 				double progress = inputPlayable.GetTime()/inputPlayable.GetDuration();
-				m_TrackBinding.transform.position = Vector3.Lerp(previousInputFinalPosition, input.targetPosition, (float)progress);
+				newPositions = new Vector3[unitCount];
+				for(int j=0; j<unitCount; j++)
+				{
+					newPositions[j] = Vector3.Lerp(previousInputFinalPositions[j], newPositions[j], (float)progress);
+				}
+				trackBinding.SetPositions(newPositions);
 
 				continue;
 			}
 			else
 			{
-				previousInputFinalPosition = input.targetPosition; //cached to act as initial position for the next input
+				previousInputFinalPositions = finalPositions; //cached to act as initial position for the next input
 			}
 		}
 	}
@@ -78,11 +91,11 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			//Make the Unit script execute the command
 			if(inputWeight > 0f)
 			{
-				if(m_lastInputPlayed != i
+				if(lastInputPlayed != i
 				   && !input.commandExecuted)
 				{
 					AICommand c = new AICommand(input.actionType, input.targetPosition, input.targetUnit);
-					m_TrackBinding.ExecuteCommand(c);
+					trackBinding.ExecuteCommand(c);
 					input.commandExecuted = true;
 				}
 			}
@@ -93,12 +106,12 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 	{
 		if(!Application.isPlaying)
 		{
-			m_FirstFrameHappened = false;
+			firstFrameHappened = false;
 			
-			if (m_TrackBinding == null)
+			if (trackBinding == null)
 				return;
 			
-			m_TrackBinding.transform.position = m_DefaultPosition;
+			trackBinding.SetPositions(defaultPositions);
 		}
 	}
 }

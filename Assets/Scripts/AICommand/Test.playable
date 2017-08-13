@@ -496,11 +496,11 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0.43333333333333335
+  - m_Start: 0.8666666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 114337424487518646}
     m_UnderlyingAsset: {fileID: 114337424487518646}
-    m_Duration: 1.8166666666666667
+    m_Duration: 3.7666666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114017433262671498}
     m_EaseInDuration: 0
@@ -554,7 +554,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: GoToIdle
-  - m_Start: 2.25
+  - m_Start: 7.116666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114247775297439024}
     m_UnderlyingAsset: {fileID: 114337424487518646}
@@ -612,7 +612,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Attack
-  - m_Start: 8.633333333333333
+  - m_Start: 9.933333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114964216561350636}
     m_UnderlyingAsset: {fileID: 114337424487518646}
@@ -670,7 +670,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: GoToIdle
-  - m_Start: 10.45
+  - m_Start: 16.766666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114983375368886080}
     m_UnderlyingAsset: {fileID: 114337424487518646}
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_Name: AICommandClip
   m_EditorClassIdentifier: 
   actionType: 0
-  targetPosition: {x: -1, y: 0, z: 2}
+  targetPosition: {x: -6, y: 0, z: 0}
   targetUnit:
     exposedName: 
     defaultValue: {fileID: 0}

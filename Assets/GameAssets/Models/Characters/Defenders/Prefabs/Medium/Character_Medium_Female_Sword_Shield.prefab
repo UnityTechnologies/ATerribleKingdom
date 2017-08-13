@@ -6027,6 +6027,7 @@ MonoBehaviour:
   attackPower: 2
   attackSpeed: 1
   engageDistance: 1
+  guardDistance: 5
   state: 0
 --- !u!136 &136473690637067318
 CapsuleCollider:
