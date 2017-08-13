@@ -49,7 +49,7 @@ public class InputManager : Singleton<InputManager>
 		if(absoluteXValue > horizontalDeadZone)
 		{
 			//camera needs to move horizontally
-			amountToMove.x = (absoluteXValue - horizontalDeadZone) * Mathf.Sign(mousePosition.x);
+			amountToMove.x = (absoluteXValue - horizontalDeadZone) * Mathf.Sign(mousePosition.x) * .01f;
 			needToMove = true;
 		}
 
@@ -59,13 +59,20 @@ public class InputManager : Singleton<InputManager>
 		if(absoluteYValue > verticalDeadZone)
 		{
 			//camera needs to move horizontally
-			amountToMove.y = (absoluteYValue - verticalDeadZone) * Mathf.Sign(mousePosition.y);
+			amountToMove.y = (absoluteYValue - verticalDeadZone) * Mathf.Sign(mousePosition.y) * .01f;
+			needToMove = true;
+		}
+
+		//Keyboard movements only happen if mouse is not causing the camera to move already
+		if(!needToMove)
+		{
+			amountToMove = new Vector2(Input.GetAxis("CameraHorizontal"), Input.GetAxis("CameraVertical"));
 			needToMove = true;
 		}
 
 		if(needToMove)
 		{
-			CameraManager.Instance.MoveGameplayCamera(amountToMove * .005f);
+			CameraManager.Instance.MoveGameplayCamera(amountToMove * .5f);
 		}
 	}
 }

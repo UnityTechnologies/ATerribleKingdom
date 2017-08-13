@@ -6,7 +6,10 @@ using UnityEngine.Timeline;
 [Serializable]
 public class AICommandClip : PlayableAsset, ITimelineClipAsset
 {
-	public Vector3 targetPosition;
+	public AICommand.CommandType actionType;
+	public Vector3 targetPosition; //for movement
+	public Unit targetUnit; //for attacks
+
 	[HideInInspector]
     public AICommandBehaviour template = new AICommandBehaviour ();
 
@@ -19,7 +22,9 @@ public class AICommandClip : PlayableAsset, ITimelineClipAsset
     {
         var playable = ScriptPlayable<AICommandBehaviour>.Create(graph, template);
 		AICommandBehaviour clone = playable.GetBehaviour();
+		clone.actionType = actionType;
 		clone.targetPosition = targetPosition;
+		clone.targetUnit = targetUnit;
         return playable;
     }
 }
