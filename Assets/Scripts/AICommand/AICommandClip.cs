@@ -24,8 +24,8 @@ public class AICommandClip : PlayableAsset, ITimelineClipAsset
 		AICommandBehaviour clone = playable.GetBehaviour();
 		clone.actionType = actionType;
 		clone.targetPosition = targetPosition;
-		//clone.targetUnit = targetUnit;
 		clone.targetUnit = targetUnit.Resolve(graph.GetResolver());
         return playable;
+
     }
 }

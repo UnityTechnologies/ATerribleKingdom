@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System;
+using System.Linq;
 
 public class Unit : MonoBehaviour
 {
@@ -17,17 +18,25 @@ public class Unit : MonoBehaviour
 	public float guardDistance = 5f;
 
 	public UnitState state = UnitState.Idle;
+	public string enemyTag = "";
 
 	//references
 	private NavMeshAgent navMeshAgent;
 	private Animator animator;
 
 	private Unit targetOfAttack;
+	private Unit[] hostiles;
+	private float lastGuardCheckTime, guardCheckInterval = 1f;
 
 	void Awake ()
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
+	}
+
+	private void Start()
+	{
+		Guard();
 	}
 	
 	void Update ()
@@ -61,8 +70,15 @@ public class Unit : MonoBehaviour
 				break;
 
 			case UnitState.Guarding:
-				//TODO: look for enemies in range
-				//use guardDistance
+				if(Time.time > lastGuardCheckTime + guardCheckInterval)
+				{
+					lastGuardCheckTime = Time.time;
+					Unit t = GetNearestHostileUnit();
+					if(t != null)
+					{
+						MoveToAttack(t);
+					}
+				}
 				break;
 		}
 
@@ -75,8 +91,11 @@ public class Unit : MonoBehaviour
 		switch(c.commandType)
 		{
 			case AICommand.CommandType.GoToAndIdle:
-			case AICommand.CommandType.GoToAndGuard:
 				GoToAndIdle(c.destination);
+				break;
+
+			case AICommand.CommandType.GoToAndGuard:
+				GoToAndGuard(c.destination);
 				break;
 
 			case AICommand.CommandType.Stop:
@@ -123,6 +142,12 @@ public class Unit : MonoBehaviour
 	//stop but watch for enemies nearby
 	public void Guard()
 	{
+		if(enemyTag == "")
+		{
+			Stop();
+			return;
+		}
+
 		state = UnitState.Guarding;
 		targetOfAttack = null;
 		navMeshAgent.isStopped = true;
@@ -211,6 +236,33 @@ public class Unit : MonoBehaviour
 	{
 		state = UnitState.Dead;
 		animator.SetTrigger("DoDeath");
+	}
+
+	private Unit GetNearestHostileUnit()
+	{
+		hostiles = GameObject.FindGameObjectsWithTag(enemyTag).Select(x => x.GetComponent<Unit>()).ToArray();
+
+		Unit nearestEnemy = null;
+		float nearestEnemyDistance = 1000f;
+		for(int i=0; i<hostiles.Count(); i++)
+		{
+			if(hostiles[i].state == UnitState.Dead)
+			{
+				continue;
+			}
+
+			float distanceFromHostile = Vector3.Distance(hostiles[i].transform.position, transform.position);
+			if(distanceFromHostile <= guardDistance)
+			{
+				if(distanceFromHostile < nearestEnemyDistance)
+				{
+					nearestEnemy = hostiles[i];
+					nearestEnemyDistance = distanceFromHostile;
+				}
+			}
+		}
+
+		return nearestEnemy;
 	}
 
 	public enum UnitState

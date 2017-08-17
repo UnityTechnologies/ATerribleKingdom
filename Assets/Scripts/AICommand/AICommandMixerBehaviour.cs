@@ -19,7 +19,7 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 
 		if (!firstFrameHappened)
 		{
-			defaultPositions = trackBinding.GetPositions();
+			defaultPositions = trackBinding.GetCurrentPositions();
 			firstFrameHappened = true;
 		}
 

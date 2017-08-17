@@ -2998,11 +2998,11 @@ GameObject:
   - component: {fileID: 4015755416174842}
   - component: {fileID: 95177530302766524}
   - component: {fileID: 136473690637067318}
-  - component: {fileID: 114403040128035342}
   - component: {fileID: 195460779016042854}
+  - component: {fileID: 114403040128035342}
   m_Layer: 8
   m_Name: Character_Medium_Female_Sword_Shield
-  m_TagString: Untagged
+  m_TagString: Friendly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3132,7 +3132,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1738713536024418}
-  m_LocalRotation: {x: -0.53466535, y: 0.28766933, z: 0.29095715, w: 0.7394075}
+  m_LocalRotation: {x: -0.5346653, y: 0.2876693, z: 0.29095712, w: 0.7394074}
   m_LocalPosition: {x: -0.033462532, y: 0.0039134533, z: 0.022468425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5902,7 +5902,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1791612576870156}
-  m_LocalRotation: {x: -0.53466535, y: 0.28766933, z: 0.29095715, w: 0.7394075}
+  m_LocalRotation: {x: -0.5346653, y: 0.2876693, z: 0.29095712, w: 0.7394074}
   m_LocalPosition: {x: -0.07361756, y: 0.008609598, z: 0.049430538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6027,8 +6027,9 @@ MonoBehaviour:
   attackPower: 2
   attackSpeed: 1
   engageDistance: 1
-  guardDistance: 5
+  guardDistance: 10
   state: 0
+  enemyTag: Hostile
 --- !u!136 &136473690637067318
 CapsuleCollider:
   m_ObjectHideFlags: 1
