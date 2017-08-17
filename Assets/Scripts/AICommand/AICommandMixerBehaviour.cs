@@ -37,13 +37,13 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 	{
 		previousInputFinalPositions = defaultPositions;
 		int inputCount = playable.GetInputCount();
+		int unitCount = trackBinding.units.Count;
 
 		for (int i = 0; i < inputCount; i++)
 		{
 			float inputWeight = playable.GetInputWeight(i);
 			ScriptPlayable<AICommandBehaviour> inputPlayable = (ScriptPlayable<AICommandBehaviour>)playable.GetInput(i);
 			AICommandBehaviour input = inputPlayable.GetBehaviour();
-			int unitCount = trackBinding.units.Count;
 
 			//force the finalPosition to the attack target in case of an Attack action
 			if(input.actionType == AICommand.CommandType.AttackTarget)
@@ -52,11 +52,7 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			}
 
 			//create an array of final positions for the entire Platoon
-			finalPositions = new Vector3[unitCount];
-			for(int k=0; k<unitCount; k++)
-			{
-				finalPositions[k] = input.targetPosition; //TODO: can't be target position for all of the Units
-			}
+			finalPositions = trackBinding.GetFormationPositions(input.targetPosition);
 
 			if(inputWeight > 0f)
 			{
@@ -64,7 +60,7 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 				newPositions = new Vector3[unitCount];
 				for(int j=0; j<unitCount; j++)
 				{
-					newPositions[j] = Vector3.Lerp(previousInputFinalPositions[j], newPositions[j], (float)progress);
+					newPositions[j] = Vector3.Lerp(previousInputFinalPositions[j], finalPositions[j], (float)progress);
 				}
 				trackBinding.SetPositions(newPositions);
 
@@ -86,7 +82,6 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			float inputWeight = playable.GetInputWeight(i);
 			ScriptPlayable<AICommandBehaviour> inputPlayable = (ScriptPlayable<AICommandBehaviour>)playable.GetInput(i);
 			AICommandBehaviour input = inputPlayable.GetBehaviour();
-
 
 			//Make the Unit script execute the command
 			if(inputWeight > 0f)

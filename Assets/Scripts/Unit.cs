@@ -35,14 +35,14 @@ public class Unit : MonoBehaviour
 		switch(state)
 		{
 			case UnitState.MovingToSpotIdle:
-				if(navMeshAgent.remainingDistance < .1f)
+				if(navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance + .1f)
 				{
 					Stop();
 				}
 				break;
 
 			case UnitState.MovingToSpotGuard:
-				if(navMeshAgent.remainingDistance < .1f)
+				if(navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance + .1f)
 				{
 					Guard();
 				}
@@ -179,7 +179,11 @@ public class Unit : MonoBehaviour
 			}
 		}
 
-		Guard();
+		//only move into Guard if the attack was interrupted (dead target, etc.)
+		if(state == UnitState.Attacking)
+		{
+			Guard();
+		}
 	}
 
 	//called by an attacker
@@ -219,50 +223,14 @@ public class Unit : MonoBehaviour
 		MovingToSpotGuard,
 		Dead,
 	}
-}
 
-
-
-
-[Serializable]
-public class AICommand
-{
-	public CommandType commandType;
-
-	public Vector3 destination;
-	public Unit target;
-
-	public AICommand(CommandType ty, Vector3 v, Unit ta)
+	private void OnDrawGizmos()
 	{
-		commandType = ty;
-		destination = v;
-		target = ta;
-	}
-
-	public AICommand(CommandType ty, Vector3 v)
-	{
-		commandType = ty;
-		destination = v;
-	}
-
-	public AICommand(CommandType ty, Unit ta)
-	{
-		commandType = ty;
-		target = ta;
-	}
-
-	public AICommand(CommandType ty)
-	{
-		commandType = ty;
-	}
-
-	public enum CommandType
-	{
-		GoToAndIdle,
-		GoToAndGuard,
-		AttackTarget, //attacks a specific target, then becomes Guarding
-		Stop,
-		//Flee,
-		Die,
+		if(navMeshAgent != null
+			&& navMeshAgent.isOnNavMesh
+			&& navMeshAgent.hasPath)
+		{
+			Gizmos.DrawLine(transform.position, navMeshAgent.destination);
+		}
 	}
 }
