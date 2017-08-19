@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 198476355493503554}
   - component: {fileID: 199647894939592900}
   m_Layer: 0
-  m_Name: Flash
+  m_Name: InitialFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,6 +78,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1755973903441936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4910329436641024}
+  m_Layer: 0
+  m_Name: CollisionPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1988155429286750
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +162,19 @@ Transform:
   m_Father: {fileID: 4939160031252196}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4910329436641024
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1755973903441936}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -3.6379788e-11, y: 0.000009536743, z: 17.376488}
+  m_LocalScale: {x: 1.0000005, y: 1.0000002, z: 1.0000002}
+  m_Children: []
+  m_Father: {fileID: 4939160031252196}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4939160031252196
 Transform:
   m_ObjectHideFlags: 1
@@ -154,13 +182,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1988155429286750}
   m_LocalRotation: {x: -0.0000018551946, y: 0.7071068, z: -0.7071068, w: 0.0000018551946}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4558171737286028}
   - {fileID: 4412789067783796}
   - {fileID: 4150414465594312}
   - {fileID: 4156898746560984}
+  - {fileID: 4910329436641024}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -270, y: 0, z: 179.99998}
@@ -210,7 +239,7 @@ ParticleSystem:
   lengthInSec: 2
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -3541,7 +3570,7 @@ ParticleSystem:
   lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -6077,7 +6106,7 @@ ParticleSystem:
       type: 0
       properties: 0
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 1
     light: {fileID: 108149096072403078}
     randomDistribution: 1
@@ -6866,7 +6895,7 @@ ParticleSystem:
   lengthInSec: 2.5
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -6916,7 +6945,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1170190289
+  randomSeed: -653153548
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10189,7 +10218,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1988155429286750}
   serializedVersion: 5
   lengthInSec: 2
-  simulationSpeed: 2
+  simulationSpeed: 1
   stopAction: 0
   looping: 0
   prewarm: 0
@@ -10241,7 +10270,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 0
+  randomSeed: 5669
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -12613,7 +12642,7 @@ ParticleSystem:
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
     multiplyColliderForceByCollisionAngle: 1
-    plane0: {fileID: 0}
+    plane0: {fileID: 4910329436641024}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
     plane3: {fileID: 0}

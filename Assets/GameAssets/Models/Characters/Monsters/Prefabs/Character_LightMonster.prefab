@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 114109772301663698}
   m_Layer: 0
   m_Name: Character_LightMonster
-  m_TagString: Untagged
+  m_TagString: Foreigners
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4566,6 +4566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  template: {fileID: 11400000, guid: c32d56443a9dc44038830a2dfd494848, type: 2}
 --- !u!137 &137005510618445816
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -4575,6 +4576,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4590,6 +4592,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

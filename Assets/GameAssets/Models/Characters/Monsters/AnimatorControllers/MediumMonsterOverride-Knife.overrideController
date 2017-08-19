@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: MediumMonsterOverride-Knife
+  m_Controller: {fileID: 9100000, guid: 33f0e8692ee3c4b82b9c9d05accd8579, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7e5d05aabf649974b8a3545ee8dc7b58, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 9fe12a42e4fa7114ca60ff427d370b08, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 9ff059f812d3fc84f9c6d3699ec18647, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: d97af9d03f07bb64ab4ec2e8f68b03a7, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 05dd1f4c8203cfc4a95604949869d05f, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 732a16a9f8d297041abd1bf7784f888d, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: ce3cafe1f65dfaf46bfa21dfc74e5eca, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 06d1afc52ca0e2547869fba58e19edbe, type: 3}

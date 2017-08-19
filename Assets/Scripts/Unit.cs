@@ -7,18 +7,8 @@ using System.Linq;
 
 public class Unit : MonoBehaviour
 {
-	public int health = 10;
-	[Tooltip("Damage dealt each attack")]
-	public int attackPower = 2;
-	[Tooltip("The attack rate. The higher, the faster the Unit is in attacking. 1 second/attackSpeed = time it takes for a single attack")]
-	public float attackSpeed = 1f;
-	[Tooltip("When it has reached this distance from its target, the Unit stops and attacks it")]
-	public float engageDistance = 1f;
-	[Tooltip("When guarding, if any enemy enters this range it will be attacked")]
-	public float guardDistance = 5f;
-
 	public UnitState state = UnitState.Idle;
-	public string enemyTag = "";
+	public UnitTemplate template;
 
 	//references
 	private NavMeshAgent navMeshAgent;
@@ -36,6 +26,7 @@ public class Unit : MonoBehaviour
 
 	private void Start()
 	{
+		template = Instantiate<UnitTemplate>(template);
 		Guard();
 	}
 	
@@ -58,7 +49,7 @@ public class Unit : MonoBehaviour
 				break;
 
 			case UnitState.MovingToTarget:
-				if(navMeshAgent.remainingDistance < engageDistance)
+				if(navMeshAgent.remainingDistance < template.engageDistance)
 				{
 					navMeshAgent.velocity = Vector3.zero;
 					StartAttacking();
@@ -142,12 +133,6 @@ public class Unit : MonoBehaviour
 	//stop but watch for enemies nearby
 	public void Guard()
 	{
-		if(enemyTag == "")
-		{
-			Stop();
-			return;
-		}
-
 		state = UnitState.Guarding;
 		targetOfAttack = null;
 		navMeshAgent.isStopped = true;
@@ -190,19 +175,27 @@ public class Unit : MonoBehaviour
 	//the single blows
 	private IEnumerator DealAttack()
 	{
-		while(targetOfAttack != null) //TODO: check for other exit conditions, such as this unit is dead
+		while(targetOfAttack != null)
 		{
 			animator.SetTrigger("DoAttack");
-			bool isDead = targetOfAttack.SufferAttack(attackPower);
+			bool targetIsDead = targetOfAttack.SufferAttack(template.attackPower);
 
-			yield return new WaitForSeconds(1f / attackSpeed);
+			yield return new WaitForSeconds(1f / template.attackSpeed);
 
 			//check is performed after the wait, because somebody might have killed the target in the meantime
-			if(isDead)
+			if(targetIsDead)
 			{
+				animator.SetTrigger("InterruptAttack");
 				break;
+
+			}
+
+			if(state == UnitState.Dead)
+			{
+				yield break;
 			}
 		}
+
 
 		//only move into Guard if the attack was interrupted (dead target, etc.)
 		if(state == UnitState.Attacking)
@@ -220,15 +213,15 @@ public class Unit : MonoBehaviour
 			return true;
 		}
 
-		health -= damage;
+		template.health -= damage;
 
-		if(health <= 0)
+		if(template.health <= 0)
 		{
-			health = 0;
+			template.health = 0;
 			Die();
 		}
 
-		return health == 0;
+		return (template.health == 0);
 	}
 
 	//called in SufferAttack, but can also be from a Timeline clip
@@ -240,7 +233,7 @@ public class Unit : MonoBehaviour
 
 	private Unit GetNearestHostileUnit()
 	{
-		hostiles = GameObject.FindGameObjectsWithTag(enemyTag).Select(x => x.GetComponent<Unit>()).ToArray();
+		hostiles = GameObject.FindGameObjectsWithTag(template.GetOtherFaction().ToString()).Select(x => x.GetComponent<Unit>()).ToArray();
 
 		Unit nearestEnemy = null;
 		float nearestEnemyDistance = 1000f;
@@ -252,7 +245,7 @@ public class Unit : MonoBehaviour
 			}
 
 			float distanceFromHostile = Vector3.Distance(hostiles[i].transform.position, transform.position);
-			if(distanceFromHostile <= guardDistance)
+			if(distanceFromHostile <= template.guardDistance)
 			{
 				if(distanceFromHostile < nearestEnemyDistance)
 				{

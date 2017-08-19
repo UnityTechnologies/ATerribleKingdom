@@ -3002,7 +3002,7 @@ GameObject:
   - component: {fileID: 114403040128035342}
   m_Layer: 8
   m_Name: Character_Medium_Female_Sword_Shield
-  m_TagString: Friendly
+  m_TagString: Locals
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3159,8 +3159,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1962178140701020}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0500001, y: 0, z: -2.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4172509496965120}
@@ -6004,7 +6004,7 @@ Animator:
   m_GameObject: {fileID: 1962178140701020}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1ddb48f28079bde44a4a454ba2ad2f88, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0601a23fa9b6151498fa3c440d7c9159, type: 2}
+  m_Controller: {fileID: 9100000, guid: 33f0e8692ee3c4b82b9c9d05accd8579, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6023,13 +6023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca1b5b18d7404d44b6229d2efb9f8ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  attackPower: 2
-  attackSpeed: 1
-  engageDistance: 1
-  guardDistance: 10
   state: 0
-  enemyTag: Hostile
+  template: {fileID: 11400000, guid: c856e5f374a8f453580286138e3f44e9, type: 2}
 --- !u!136 &136473690637067318
 CapsuleCollider:
   m_ObjectHideFlags: 1

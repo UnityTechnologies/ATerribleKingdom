@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hostile
-  - Friendly
   - Plane
+  - Foreigners
+  - Locals
   layers:
   - Default
   - TransparentFX

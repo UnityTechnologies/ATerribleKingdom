@@ -65,4 +65,21 @@ public class Platoon : MonoBehaviour
 			Gizmos.DrawCube(units[i].transform.position, new Vector3(1f, .1f, 1f));
 		}
 	}
+
+	//returns true if all the Units in a Platoon are dead
+	public bool CheckIfAllDead()
+	{
+		bool allDead = true;
+
+		for(int i=0; i<units.Count; i++)
+		{
+			if(units[i].state != Unit.UnitState.Dead)
+			{
+				allDead = false;
+				break;
+			}
+		}
+
+		return allDead;
+	}
 }
