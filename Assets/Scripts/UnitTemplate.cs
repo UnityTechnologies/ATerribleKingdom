@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SpecificUnit", menuName = "A Terrible Kingdom/Unit Template", order = 1)]
 public class UnitTemplate : ScriptableObject
 {
-	public string name = "Name";
 	public Faction faction = Faction.Locals;
 
 	[Tooltip("Determines the damage the Unit can take before it dies")]
@@ -19,7 +18,7 @@ public class UnitTemplate : ScriptableObject
 	[Tooltip("When guarding, if any enemy enters this range it will be attacked")]
 	public float guardDistance = 5f;
 
-	public enum Faction 
+	public enum Faction
 	{
 		Locals,
 		Foreigners,

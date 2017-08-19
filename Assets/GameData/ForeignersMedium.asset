@@ -11,10 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4890ab43ef94c50838df33a3a29f7f, type: 3}
   m_Name: ForeignersMedium
   m_EditorClassIdentifier: 
-  name: Normal Foreigner
   faction: 1
   health: 14
   attackPower: 1
   attackSpeed: 1
   engageDistance: 1
-  guardDistance: 10
+  guardDistance: 30

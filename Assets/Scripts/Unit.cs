@@ -49,15 +49,25 @@ public class Unit : MonoBehaviour
 				break;
 
 			case UnitState.MovingToTarget:
-				if(navMeshAgent.remainingDistance < template.engageDistance)
+				//check if target has been killed by somebody else
+				if(targetOfAttack.state == UnitState.Dead)
 				{
-					navMeshAgent.velocity = Vector3.zero;
-					StartAttacking();
+					Guard();
 				}
 				else
 				{
-					navMeshAgent.SetDestination(targetOfAttack.transform.position); //update target position in case it's moving
+					//Check for distance from target
+					if(navMeshAgent.remainingDistance < template.engageDistance)
+					{
+						navMeshAgent.velocity = Vector3.zero;
+						StartAttacking();
+					}
+					else
+					{
+						navMeshAgent.SetDestination(targetOfAttack.transform.position); //update target position in case it's moving
+					}
 				}
+
 				break;
 
 			case UnitState.Guarding:
@@ -70,6 +80,11 @@ public class Unit : MonoBehaviour
 						MoveToAttack(t);
 					}
 				}
+				break;
+			case UnitState.Attacking:
+				//look towards the target
+				Vector3 desiredForward = (targetOfAttack.transform.position - transform.position).normalized;
+				transform.forward = Vector3.Lerp(transform.forward, desiredForward, Time.deltaTime * 10f);
 				break;
 		}
 
@@ -178,12 +193,13 @@ public class Unit : MonoBehaviour
 		while(targetOfAttack != null)
 		{
 			animator.SetTrigger("DoAttack");
-			bool targetIsDead = targetOfAttack.SufferAttack(template.attackPower);
+			targetOfAttack.SufferAttack(template.attackPower);
 
 			yield return new WaitForSeconds(1f / template.attackSpeed);
 
 			//check is performed after the wait, because somebody might have killed the target in the meantime
-			if(targetIsDead)
+			if(targetOfAttack == null
+				|| targetOfAttack.state == UnitState.Dead)
 			{
 				animator.SetTrigger("InterruptAttack");
 				break;
@@ -193,6 +209,12 @@ public class Unit : MonoBehaviour
 			if(state == UnitState.Dead)
 			{
 				yield break;
+			}
+
+			//Check if the target moved away for some reason
+			if(Vector3.Distance(targetOfAttack.transform.position, transform.position) > template.engageDistance)
+			{
+				MoveToAttack(targetOfAttack);
 			}
 		}
 
@@ -205,12 +227,12 @@ public class Unit : MonoBehaviour
 	}
 
 	//called by an attacker
-	private bool SufferAttack(int damage)
+	private void SufferAttack(int damage)
 	{
 		if(state == UnitState.Dead)
 		{
 			//already dead
-			return true;
+			return;
 		}
 
 		template.health -= damage;
@@ -220,8 +242,6 @@ public class Unit : MonoBehaviour
 			template.health = 0;
 			Die();
 		}
-
-		return (template.health == 0);
 	}
 
 	//called in SufferAttack, but can also be from a Timeline clip
@@ -229,6 +249,7 @@ public class Unit : MonoBehaviour
 	{
 		state = UnitState.Dead;
 		animator.SetTrigger("DoDeath");
+		navMeshAgent.enabled = false;
 	}
 
 	private Unit GetNearestHostileUnit()
