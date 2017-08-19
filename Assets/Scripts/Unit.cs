@@ -94,6 +94,11 @@ public class Unit : MonoBehaviour
 
 	public void ExecuteCommand(AICommand c)
 	{
+		if(state == UnitState.Dead)
+		{
+			return;
+		}
+
 		switch(c.commandType)
 		{
 			case AICommand.CommandType.GoToAndIdle:
@@ -157,7 +162,8 @@ public class Unit : MonoBehaviour
 	//move towards a target to attack it
 	private void MoveToAttack(Unit target)
 	{
-		if(target.state != UnitState.Dead)
+		if(target != null
+			&& target.state != UnitState.Dead)
 		{
 			state = UnitState.MovingToTarget;
 			targetOfAttack = target;

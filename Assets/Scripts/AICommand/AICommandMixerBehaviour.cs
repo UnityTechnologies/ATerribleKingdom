@@ -46,7 +46,8 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			AICommandBehaviour input = inputPlayable.GetBehaviour();
 
 			//force the finalPosition to the attack target in case of an Attack action
-			if(input.actionType == AICommand.CommandType.AttackTarget)
+			if(input.actionType == AICommand.CommandType.AttackTarget
+				&& input.targetUnit != null)
 			{
 				input.targetPosition = input.targetUnit.transform.position;
 			}

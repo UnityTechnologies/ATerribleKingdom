@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Name: AICommandClip
   m_EditorClassIdentifier: 
   actionType: 1
-  targetPosition: {x: 8.2979965, y: 0, z: 6.3186235}
+  targetPosition: {x: 20.921463, y: 0, z: 3.8070402}
   targetUnit:
     exposedName: 56a69e02f369b4d2c89951b23c44a58a
     defaultValue: {fileID: 0}
