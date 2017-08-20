@@ -6,8 +6,12 @@ using UnityEngine.Timeline;
 [Serializable]
 public class TimeMachineClip : PlayableAsset, ITimelineClipAsset
 {
+	//[HideInInspector]
     public TimeMachineBehaviour template = new TimeMachineBehaviour ();
-    public ExposedReference<Platoon> platoon;
+
+	public TimeMachineBehaviour.TimeMachineClipType clipType;
+	public string labelToJumpTo;
+	public ExposedReference<Platoon> platoon;
 
     public ClipCaps clipCaps
     {
@@ -19,6 +23,8 @@ public class TimeMachineClip : PlayableAsset, ITimelineClipAsset
         var playable = ScriptPlayable<TimeMachineBehaviour>.Create (graph, template);
         TimeMachineBehaviour clone = playable.GetBehaviour ();
         clone.platoon = platoon.Resolve (graph.GetResolver ());
+		clone.labelToJumpTo = labelToJumpTo;
+		clone.clipType = clipType;
         return playable;
     }
 }

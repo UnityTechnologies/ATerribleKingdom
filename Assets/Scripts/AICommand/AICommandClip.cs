@@ -6,12 +6,12 @@ using UnityEngine.Timeline;
 [Serializable]
 public class AICommandClip : PlayableAsset, ITimelineClipAsset
 {
+	[HideInInspector]
+	public AICommandBehaviour template = new AICommandBehaviour ();
+	
 	public AICommand.CommandType actionType;
 	public Vector3 targetPosition; //for movement
 	public ExposedReference<Unit> targetUnit; //for attacks
-
-	[HideInInspector]
-    public AICommandBehaviour template = new AICommandBehaviour ();
 
     public ClipCaps clipCaps
     {

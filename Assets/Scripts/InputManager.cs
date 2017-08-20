@@ -12,6 +12,14 @@ public class InputManager : Singleton<InputManager>
 	private void Update()
 	{
 		//select
+		if(Input.GetMouseButtonDown(0))
+		{
+			/*Vector3 screenMouse = Input.mousePosition;
+			screenMouse.z = 30f;
+			Vector3 worldMouse = Camera.main.ScreenToWorldPoint(screenMouse);
+			Debug.Log(worldMouse);*/
+		}
+
 		if(Input.GetMouseButtonUp(0))
 		{
 			RaycastHit hit;
