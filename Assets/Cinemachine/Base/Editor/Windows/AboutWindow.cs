@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System.IO;
 
 namespace Cinemachine.Editor
 {
@@ -20,7 +21,25 @@ namespace Cinemachine.Editor
         private GUIStyle mButtonStyle;
         private GUIStyle mLabelStyle;
         private GUIStyle mHeaderStyle;
+        private GUIStyle mNotesStyle;
         private Vector2 mReleaseNoteScrollPos = Vector2.zero;
+
+        string mReleaseNotes;
+
+        private void OnEnable()
+        {
+            string path = "Assets/Cinemachine/ReleaseNotes.txt";
+            try
+            {
+                StreamReader reader = new StreamReader(path); 
+                mReleaseNotes = reader.ReadToEnd();
+                reader.Close();
+            }
+            catch (System.Exception)
+            {
+                mReleaseNotes = path + " not found";
+            }
+        }
 
         private void OnGUI()
         {
@@ -48,6 +67,13 @@ namespace Cinemachine.Editor
                 mHeaderStyle.wordWrap = true;
             }
 
+            if (mNotesStyle == null)
+            {
+                mNotesStyle = new GUIStyle(EditorStyles.textArea);
+                mNotesStyle.richText = true;
+                mNotesStyle.wordWrap = true;
+            }
+
             using (var vertScope = new EditorGUILayout.VerticalScope())
             {
                 if (CinemachineSettings.CinemachineHeader != null)
@@ -72,12 +98,17 @@ namespace Cinemachine.Editor
 
                 if (GUILayout.Button("<b>Forum</b>\n<i>Discuss</i>", mButtonStyle))
                 {
-                    Application.OpenURL("https://forum.unity3d.com/forums/timeline-cinemachine.127/");
+                    Application.OpenURL("https://forum.unity3d.com/forums/cinemachine.136/");
                 }
 
                 if (GUILayout.Button("<b>Rate it!</b>\nUnity Asset Store", mButtonStyle))
                 {
                     Application.OpenURL("https://www.assetstore.unity3d.com/en/#!/content/79898");
+                }
+
+                if (GUILayout.Button("<b>Documentation</b>\nRead it", mButtonStyle))
+                {
+                    Application.OpenURL("file://" + Application.dataPath + "/Cinemachine/CINEMACHINE_install.pdf");
                 }
             }
 
@@ -85,7 +116,7 @@ namespace Cinemachine.Editor
             using (var scrollScope = new EditorGUILayout.ScrollViewScope(mReleaseNoteScrollPos, GUI.skin.box))
             {
                 mReleaseNoteScrollPos = scrollScope.scrollPosition;
-                EditorGUILayout.LabelField("Version " + CinemachineCore.kVersionString, mHeaderStyle);
+                EditorGUILayout.LabelField(mReleaseNotes, mNotesStyle);
             }
         }
 
@@ -103,7 +134,8 @@ namespace Cinemachine.Editor
 
             AboutWindow window = EditorWindow.GetWindow<AboutWindow>();
 
-            window.titleContent = new UnityEngine.GUIContent("About", CinemachineSettings.CinemachineLogoTexture);
+            window.titleContent = new UnityEngine.GUIContent(
+                "About", CinemachineSettings.CinemachineLogoTexture);
             window.minSize = kMinWindowSize;
             window.Show(true);
 

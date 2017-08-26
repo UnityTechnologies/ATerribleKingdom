@@ -61,6 +61,9 @@ namespace Cinemachine.Editor
             if (mChildList == null)
                 SetupChildList();
 
+            if (Target.m_AnimatedTarget == null)
+                EditorGUILayout.HelpBox("An Animated Target is required", MessageType.Error);
+
             // Ordinary properties
             base.OnInspectorGUI();
 

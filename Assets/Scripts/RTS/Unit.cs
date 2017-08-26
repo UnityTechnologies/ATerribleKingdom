@@ -13,7 +13,9 @@ public class Unit : MonoBehaviour
 	//references
 	private NavMeshAgent navMeshAgent;
 	private Animator animator;
+	private SpriteRenderer selectionCircle;
 
+	private bool isSelected; //is the Unit currently selected by the Player
 	private Unit targetOfAttack;
 	private Unit[] hostiles;
 	private float lastGuardCheckTime, guardCheckInterval = 1f;
@@ -22,15 +24,18 @@ public class Unit : MonoBehaviour
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
+		selectionCircle = transform.Find("SelectionCircle").GetComponent<SpriteRenderer>();
 	}
 
 	private void Start()
 	{
 		template = Instantiate<UnitTemplate>(template);
-		Guard();
+
+		SetSelected(false);
+		Stop();
 	}
 	
-	void Update ()
+	void Update()
 	{
 		switch(state)
 		{
@@ -283,6 +288,16 @@ public class Unit : MonoBehaviour
 		}
 
 		return nearestEnemy;
+	}
+
+	public void SetSelected(bool selected)
+	{
+		isSelected = selected;
+
+		//Set transparency dependent on selection
+		Color newColor = selectionCircle.color;
+		newColor.a = (selected) ? 1f : .3f;
+		selectionCircle.color = newColor;
 	}
 
 	public enum UnitState

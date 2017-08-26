@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEditor;
 
 using Cinemachine.Editor;
 
-namespace Cinemachine.GameRig
+namespace Cinemachine
 {
     [InitializeOnLoad]
     internal static class CinemachineColliderPrefs
@@ -21,43 +20,11 @@ namespace Cinemachine.GameRig
             }
         }
 
-        public static Color FeelerActiveColor
-        {
-            get
-            {
-                return CinemachineSettings.UnpackColour(EditorPrefs.GetString(kFeelerActiveColourKey, CinemachineSettings.PackColor(Color.white)));
-            }
-
-            set
-            {
-                if (value != FeelerActiveColor)
-                {
-                    EditorPrefs.SetString(kFeelerActiveColourKey, CinemachineSettings.PackColor(value));
-                }
-            }
-        }
-
-        public static Color FeelerInactiveColor
-        {
-            get
-            {
-                return CinemachineSettings.UnpackColour(EditorPrefs.GetString(kFeelerInactiveColourKey, CinemachineSettings.PackColor(Color.gray)));
-            }
-
-            set
-            {
-                if (value != FeelerInactiveColor)
-                {
-                    EditorPrefs.SetString(kFeelerInactiveColourKey, CinemachineSettings.PackColor(value));
-                }
-            }
-        }
-
         public static Color FeelerHitColor
         {
             get
             {
-                return CinemachineSettings.UnpackColour(EditorPrefs.GetString(kFeelerHitColourKey, CinemachineSettings.PackColor(Color.red)));
+                return CinemachineSettings.UnpackColour(EditorPrefs.GetString(kFeelerHitColourKey, CinemachineSettings.PackColor(Color.yellow)));
             }
 
             set
@@ -69,10 +36,25 @@ namespace Cinemachine.GameRig
             }
         }
 
-        private const string kColliderSettingsFoldoutKey = "CNMCN_Collider_Foldout";
-        private const string kFeelerActiveColourKey     = "CNMCN_Collider_Feeler_Active_Colour";
-        private const string kFeelerInactiveColourKey   = "CNMCN_Collider_Feeler_Inactive_Colour";
-        private const string kFeelerHitColourKey        = "CNMCN_Collider_Feeler_Hit_Colour";
+        public static Color FeelerColor
+        {
+            get
+            {
+                return CinemachineSettings.UnpackColour(EditorPrefs.GetString(kFeelerColourKey, CinemachineSettings.PackColor(Color.gray)));
+            }
+
+            set
+            {
+                if (value != FeelerColor)
+                {
+                    EditorPrefs.SetString(kFeelerColourKey, CinemachineSettings.PackColor(value));
+                }
+            }
+        }
+
+        private const string kColliderSettingsFoldoutKey  = "CNMCN_Collider_Foldout";
+        private const string kFeelerHitColourKey          = "CNMCN_Collider_FeelerHit_Colour";
+        private const string kFeelerColourKey             = "CNMCN_Collider_Feeler_Colour";
 
         static CinemachineColliderPrefs()
         {
@@ -88,9 +70,8 @@ namespace Cinemachine.GameRig
 
                 EditorGUI.BeginChangeCheck();
 
-                FeelerActiveColor   = EditorGUILayout.ColorField("Feeler Active", FeelerActiveColor);
-                FeelerInactiveColor = EditorGUILayout.ColorField("Feeler Inactive", FeelerInactiveColor);
-                FeelerHitColor      = EditorGUILayout.ColorField("Feeler Hit", FeelerHitColor);
+                FeelerHitColor   = EditorGUILayout.ColorField("Feeler Hit", FeelerHitColor);
+                FeelerColor = EditorGUILayout.ColorField("Feeler", FeelerColor);
 
                 if (EditorGUI.EndChangeCheck())
                 {

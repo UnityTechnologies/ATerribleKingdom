@@ -39,7 +39,7 @@ namespace Cinemachine.Editor
             Undo.AddComponent<CinemachineFreeLook>(go);
         }
 
-        [MenuItem("Cinemachine/Create State-driven Camera", false, 1)]
+        [MenuItem("Cinemachine/Create State-Driven Camera", false, 1)]
         private static void CreateStateDivenCamera()
         {
             CreateCameraBrainIfAbsent();
@@ -53,7 +53,7 @@ namespace Cinemachine.Editor
                 go.transform, "create state driven camera");
         }
 
-        [MenuItem("Cinemachine/Create ClearShot Virtual Camera", false, 1)]
+        [MenuItem("Cinemachine/Create ClearShot Camera", false, 1)]
         private static void CreateClearShotVirtualCamera()
         {
             CreateCameraBrainIfAbsent();
@@ -61,6 +61,9 @@ namespace Cinemachine.Editor
                     GenerateUniqueObjectName(typeof(CinemachineClearShot), "CM ClearShot"));
             Undo.RegisterCreatedObjectUndo(go, "create ClearShot camera");
             Undo.AddComponent<CinemachineClearShot>(go);
+            var collider = Undo.AddComponent<CinemachineCollider>(go);
+            collider.m_PreserveLineOfSight = false;
+            Undo.RecordObject(collider, "create ClearShot camera");
             // Give it a child
             Undo.SetTransformParent(CreateVirtualCamera(
                     "CM vcam", typeof(CinemachineComposer), typeof(CinemachineTransposer)).transform,
@@ -76,11 +79,13 @@ namespace Cinemachine.Editor
                     GenerateUniqueObjectName(typeof(CinemachinePath), "DollyTrack"));
             Undo.RegisterCreatedObjectUndo(go, "create track");
             CinemachinePath path = Undo.AddComponent<CinemachinePath>(go);
-            vcam.GetCinemachineComponent<CinemachineTrackedDolly>().m_Path = path;
+            var dolly = vcam.GetCinemachineComponent<CinemachineTrackedDolly>();
+            Undo.RecordObject(dolly, "create track");
+            dolly.m_Path = path;
         }
 
-        [MenuItem("Cinemachine/Create Group Target Camera", false, 1)]
-        private static void CreateGroupTargetCamera()
+        [MenuItem("Cinemachine/Create Target Group Camera", false, 1)]
+        private static void CreateTargetGroupCamera()
         {
             CinemachineVirtualCamera vcam = CreateVirtualCamera(
                     "CM vcam", typeof(CinemachineGroupComposer), typeof(CinemachineTransposer));
@@ -90,6 +95,44 @@ namespace Cinemachine.Editor
             Undo.RegisterCreatedObjectUndo(go, "create target group");
             vcam.LookAt = go.transform;
             vcam.Follow = go.transform;
+        }
+
+        [MenuItem("Cinemachine/Create Mixing Camera", false, 1)]
+        private static void CreateMixingCamera()
+        {
+            CreateCameraBrainIfAbsent();
+            GameObject go = new GameObject(
+                    GenerateUniqueObjectName(typeof(CinemachineMixingCamera), "CM MixingCamera"));
+            Undo.RegisterCreatedObjectUndo(go, "create MixingCamera camera");
+            Undo.AddComponent<CinemachineMixingCamera>(go);
+            // Give it a couple of children
+            Undo.SetTransformParent(CreateVirtualCamera(
+                    "CM vcam", typeof(CinemachineComposer), typeof(CinemachineTransposer)).transform,
+                go.transform, "create MixedCamera child");
+            Undo.SetTransformParent(CreateVirtualCamera(
+                    "CM vcam", typeof(CinemachineComposer), typeof(CinemachineTransposer)).transform,
+                go.transform, "create MixingCamera child");
+        }
+
+        [MenuItem("Cinemachine/Create 2D Camera", false, 1)]
+        private static void Create2DCamera()
+        {
+            CreateVirtualCamera("CM vcam", typeof(CinemachineFramingTransposer));
+        }
+
+        [MenuItem("Cinemachine/Create Dolly Track with Cart", false, 1)]
+        private static void CreateDollyTrackWithCart()
+        {
+            GameObject go = new GameObject(
+                    GenerateUniqueObjectName(typeof(CinemachinePath), "DollyTrack"));
+            Undo.RegisterCreatedObjectUndo(go, "create track");
+            CinemachinePath path = Undo.AddComponent<CinemachinePath>(go);
+
+            go = new GameObject(GenerateUniqueObjectName(typeof(CinemachineDollyCart), "DollyCart"));
+            Undo.RegisterCreatedObjectUndo(go, "create cart");
+            CinemachineDollyCart cart = Undo.AddComponent<CinemachineDollyCart>(go);
+            Undo.RecordObject(cart, "create track");
+            cart.m_Path = path;
         }
 
         /// <summary>

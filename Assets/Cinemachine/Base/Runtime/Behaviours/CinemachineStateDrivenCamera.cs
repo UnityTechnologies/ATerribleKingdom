@@ -24,10 +24,12 @@ namespace Cinemachine
     {
         /// <summary>Default object for the camera children to look at (the aim target), if not specified in a child rig.  May be empty</summary>
         [Tooltip("Default object for the camera children to look at (the aim target), if not specified in a child camera.  May be empty if all of the children define targets of their own.")]
+        [NoSaveDuringPlay]
         public Transform m_LookAt = null;
 
         /// <summary>Default object for the camera children wants to move with (the body target), if not specified in a child rig.  May be empty</summary>
         [Tooltip("Default object for the camera children wants to move with (the body target), if not specified in a child camera.  May be empty if all of the children define targets of their own.")]
+        [NoSaveDuringPlay]
         public Transform m_Follow = null;
 
         /// <summary>When enabled, the current camera and blend will be indicated in the game window, for debugging</summary>
@@ -103,6 +105,15 @@ namespace Cinemachine
         /// <summary>Return the live child.</summary>
         public override ICinemachineCamera LiveChildOrSelf { get { return LiveChild; } }
 
+        /// <summary>Check whether the vcam a live child of this camera.</summary>
+        /// <param name="vcam">The Virtual Camera to check</param>
+        /// <returns>True if the vcam is currently actively influencing the state of this vcam</returns>
+        public override bool IsLiveChild(ICinemachineCamera vcam) 
+        { 
+            return vcam == LiveChild 
+                || (mActiveBlend != null && (vcam == mActiveBlend.CamA || vcam == mActiveBlend.CamB));
+        }
+
         /// <summary>The State of the current live child</summary>
         public override CameraState State { get { return m_State; } }
 
@@ -114,7 +125,7 @@ namespace Cinemachine
             set
             {
                 if (m_LookAt != value)
-                    PreviousStateInvalid = true;
+                    PreviousStateIsValid = false;
                 m_LookAt = value;
             }
         }
@@ -127,7 +138,7 @@ namespace Cinemachine
             set
             {
                 if (m_Follow != value)
-                    PreviousStateInvalid = true;
+                    PreviousStateIsValid = false;
                 m_Follow = value;
             }
         }
@@ -150,9 +161,9 @@ namespace Cinemachine
         /// <param name="deltaTime">Delta time for time-based effects (ignore if less than or equal to 0)</param>
         public override void UpdateCameraState(Vector3 worldUp, float deltaTime)
         {
-            if (PreviousStateInvalid)
+            if (!PreviousStateIsValid)
                 deltaTime = -1;
-            PreviousStateInvalid = false;
+            PreviousStateIsValid = true;
 
             UpdateListOfChildren();
             CinemachineVirtualCameraBase best = ChooseCurrentCamera(deltaTime);
@@ -211,8 +222,6 @@ namespace Cinemachine
             }
             else if (LiveChild != null)
                 m_State =  LiveChild.State;
-            else
-                m_State =  CameraState.Default;
 
             // Push the raw position back to the game object's transform, so it
             // moves along with the camera.  Leave the orientation alone, because it
@@ -261,11 +270,14 @@ namespace Cinemachine
         /// <summary>The list of child cameras.  These are just the immediate children in the hierarchy.</summary>
         public CinemachineVirtualCameraBase[] ChildCameras { get { UpdateListOfChildren(); return m_ChildCameras; }}
 
+        /// <summary>Is there a blend in progress?</summary>
+        public bool IsBlending { get { return mActiveBlend != null; } }
+
         /// <summary>API for the inspector editor.  Animation module does not have hashes
         /// for state parents, so we have to invent them in order to implement nested state
         /// handling</summary>
         public static string CreateFakeHashName(int parentHash, string stateName)
-        { return parentHash.ToString() + "_" + stateName; }
+            { return parentHash.ToString() + "_" + stateName; }
 
         float mActivationTime = 0;
         Instruction mActiveInstruction;

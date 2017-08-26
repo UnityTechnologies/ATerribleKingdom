@@ -24,12 +24,6 @@ namespace Cinemachine
         [NoSaveDuringPlay, HideInInspector]
         public Action OnGUICallback = null;
 
-        /// <summary>This displays the Composer overlay in the Game window.
-        /// You can adjust colours and opacity in Edit/Preferences/Cinemachine</summary>
-        [Tooltip("This displays the Composer overlay in the Game window.  You can adjust colours and opacity in Edit/Preferences/Cinemachine.")]
-        [NoSaveDuringPlay]
-        public bool m_ShowGuides = true;
-
         /// <summary>Target offset from the object's center in LOCAL space which
         /// the Composer tracks. Use this to fine-tune the tracking target position
         /// when the desired area is not in the tracked object's center</summary>
@@ -41,7 +35,7 @@ namespace Cinemachine
         /// the dead zone. Larger numbers give a more heavy slowly responding camera.
         /// Using different vertical and horizontal settings can yield a wide range of camera behaviors.</summary>
         [Space]
-        [Range(0f, 100f)]
+        [Range(0f, 20)]
         [Tooltip("How aggressively the camera tries to follow the target in the screen-horizontal direction. Small numbers are more responsive, rapidly orienting the camera to keep the target in the dead zone. Larger numbers give a more heavy slowly responding camera. Using different vertical and horizontal settings can yield a wide range of camera behaviors.")]
         public float m_HorizontalDamping = 0.5f;
 
@@ -49,7 +43,7 @@ namespace Cinemachine
         /// Small numbers are more responsive, rapidly orienting the camera to keep the target in 
         /// the dead zone. Larger numbers give a more heavy slowly responding camera. Using different vertical 
         /// and horizontal settings can yield a wide range of camera behaviors.</summary>
-        [Range(0f, 100f)]
+        [Range(0f, 20)]
         [Tooltip("How aggressively the camera tries to follow the target in the screen-vertical direction. Small numbers are more responsive, rapidly orienting the camera to keep the target in the dead zone. Larger numbers give a more heavy slowly responding camera. Using different vertical and horizontal settings can yield a wide range of camera behaviors.")]
         public float m_VerticalDamping = 0.5f;
 
@@ -107,74 +101,86 @@ namespace Cinemachine
         /// Always returns the Aim stage</summary>
         public CinemachineCore.Stage Stage { get { return CinemachineCore.Stage.Aim; } }
 
+        /// <summary>Scale for damping, to make a nice UI</summary>
+        protected const float kDampingScale = 0.1f;
+
+        /// <summary>Apply the target offsets to the target location.</summary>
+        /// <param name="lookAt">The unoffset LookAt point</param>
+        /// <returns>The LookAt point with the offset applied</returns>
+        protected virtual Vector3 GetTrackedPoint(Vector3 lookAt)
+        {
+            Vector3 offset = Vector3.zero;
+            if (VirtualCamera.LookAt != null)
+                offset = VirtualCamera.LookAt.transform.rotation * m_TrackedObjectOffset;
+            return lookAt + offset;
+        }
+        
+#if UNITY_EDITOR
+        private void OnGUI() { if (OnGUICallback != null) OnGUICallback(); }
+#endif
+
+        /// <summary>State information for damping</summary>
+        Quaternion m_CameraOrientationPrevFrame = Quaternion.identity;
+
         /// <summary>Applies the composer rules and orients the camera accordingly</summary>
         /// <param name="curState">The current camera state</param>
-        /// <param name="statePrevFrame">The camera state on the previous frame (unused)</param>
         /// <param name="deltaTime">Used for calculating damping.  If less than
         /// or equal to zero, then target will snap to the center of the dead zone.</param>
-        /// <returns>curState with RawOrientation applied</returns>
-        public virtual CameraState MutateCameraState(
-            CameraState curState, CameraState statePrevFrame, float deltaTime)
+        public virtual void MutateCameraState(ref CameraState curState, float deltaTime)
         {
+            // Initialize the state for previous frame if appropriate
+            if (deltaTime <= 0)
+                m_CameraOrientationPrevFrame = curState.RawOrientation;
+                
             if (!IsValid || !curState.HasLookAt)
-                return curState;
+                return;
 
-            CameraState newState = curState;
-            newState.ReferenceLookAt = GetTrackedPoint(newState.ReferenceLookAt);
-            float targetDistance = (newState.ReferenceLookAt - newState.CorrectedPosition).magnitude;
+            curState.ReferenceLookAt = GetTrackedPoint(curState.ReferenceLookAt);
+            float targetDistance = (curState.ReferenceLookAt - curState.CorrectedPosition).magnitude;
             if (targetDistance < UnityVectorExtensions.Epsilon)
-                return newState;  // navel-gazing, get outa here
+                return;  // navel-gazing, get outa here
 
-            // Calculate effective fov - fake it for ortho based on target distance
             float fov, fovH;
-            if (newState.Lens.Orthographic)
+            if (curState.Lens.Orthographic)
             {
-                fov = Mathf.Rad2Deg * 2 * Mathf.Atan(newState.Lens.OrthographicSize / targetDistance);
-                fovH = Mathf.Rad2Deg * 2 * Mathf.Atan(newState.Lens.Aspect * newState.Lens.OrthographicSize / targetDistance);
+                // Calculate effective fov - fake it for ortho based on target distance
+                fov = Mathf.Rad2Deg * 2 * Mathf.Atan(curState.Lens.OrthographicSize / targetDistance);
+                fovH = Mathf.Rad2Deg * 2 * Mathf.Atan(
+                    curState.Lens.Aspect * curState.Lens.OrthographicSize / targetDistance);
             }
-            else
+            else 
             {
-                fov = newState.Lens.FieldOfView;
-                double radHFOV = 2 * Math.Atan(Math.Tan(fov * Mathf.Deg2Rad / 2) * newState.Lens.Aspect);
+                fov = curState.Lens.FieldOfView;
+                double radHFOV = 2 * Math.Atan(Math.Tan(fov * Mathf.Deg2Rad / 2) * curState.Lens.Aspect);
                 fovH = (float)(Mathf.Rad2Deg * radHFOV);
             }
 
-            Rect softGuideFOV = ScreenToFOV(SoftGuideRect, fov, fovH, newState.Lens.Aspect);
+            Rect softGuideFOV = ScreenToFOV(SoftGuideRect, fov, fovH, curState.Lens.Aspect);
             if (deltaTime <= 0)
             {
                 // No damping, just snap to central bounds, skipping the soft zone
                 Rect rect = new Rect(softGuideFOV.center, Vector2.zero); // Force to center
-                newState.RawOrientation = PlaceWithinScreenBounds(
-                        ref newState, rect, newState.RawOrientation, fov, fovH, 0);
+                curState.RawOrientation = RotateToScreenBounds(
+                        ref curState, rect, curState.RawOrientation, fov, fovH, 0);
             }
             else
             {
                 // Start with previous frame's orientation (but with current up)
                 Quaternion rigOrientation = Quaternion.LookRotation(
-                        statePrevFrame.RawOrientation * Vector3.forward, newState.ReferenceUp);
+                        m_CameraOrientationPrevFrame * Vector3.forward, curState.ReferenceUp);
 
                 // First force the previous rotation into the hard bounds, no damping
-                Rect hardGuideFOV = ScreenToFOV(HardGuideRect, fov, fovH, newState.Lens.Aspect);
-                newState.RawOrientation = PlaceWithinScreenBounds(
-                        ref newState, hardGuideFOV, rigOrientation, fov, fovH, 0);
+                Rect hardGuideFOV = ScreenToFOV(HardGuideRect, fov, fovH, curState.Lens.Aspect);
+                curState.RawOrientation = RotateToScreenBounds(
+                        ref curState, hardGuideFOV, rigOrientation, fov, fovH, 0);
 
                 // Now move it through the soft zone, with damping
-                newState.RawOrientation = PlaceWithinScreenBounds(
-                        ref newState, softGuideFOV, newState.RawOrientation, fov, fovH, deltaTime);
+                curState.RawOrientation = RotateToScreenBounds(
+                        ref curState, softGuideFOV, curState.RawOrientation, fov, fovH, deltaTime);
             }
-            newState.RawOrientation = UnityQuaternionExtensions.Normalized(newState.RawOrientation);
-            return newState;
+            curState.RawOrientation = m_CameraOrientationPrevFrame 
+                = UnityQuaternionExtensions.Normalized(curState.RawOrientation);
         }
-
-        protected const float kHumanReadableDampingScale = 0.1f;
-
-#if UNITY_EDITOR
-        private void OnGUI() { if (OnGUICallback != null) OnGUICallback(); }
-#endif
-        private float HorizontalSoftTrackingSpeed
-            { get { return m_HorizontalDamping * kHumanReadableDampingScale; } }
-        private float VerticalSoftTrackingSpeed
-            { get { return m_VerticalDamping * kHumanReadableDampingScale; } }
 
         /// <summary>Internal API for the inspector editor</summary>
         public Rect SoftGuideRect
@@ -249,17 +255,6 @@ namespace Cinemachine
             return r;
         }
 
-        /// <summary>Apply the target offsets to the target location.</summary>
-        /// <param name="lookAt">The unoffset LookAt point</param>
-        /// <returns>The LookAt point with the offset applied</returns>
-        protected virtual Vector3 GetTrackedPoint(Vector3 lookAt)
-        {
-            Vector3 offset = Vector3.zero;
-            if (VirtualCamera.LookAt != null)
-                offset = VirtualCamera.LookAt.transform.rotation * m_TrackedObjectOffset;
-            return lookAt + offset;
-        }
-
         /// <summary>
         /// Adjust the rigOrientation to put the camera within the screen bounds.
         /// If deltaTime >= 0 then damping will be applied.
@@ -268,7 +263,7 @@ namespace Cinemachine
         /// state.ReferenceUp.  If this condition is violated
         /// then you will see crazy spinning.  That's the symptom.
         /// </summary>
-        private Quaternion PlaceWithinScreenBounds(
+        private Quaternion RotateToScreenBounds(
             ref CameraState state, Rect screenRect,
             Quaternion rigOrientation, float fov, float fovH, float deltaTime)
         {
@@ -298,8 +293,10 @@ namespace Cinemachine
             // Apply damping
             if (deltaTime > 0)
             {
-                rotToRect.x *= deltaTime / Mathf.Max(VerticalSoftTrackingSpeed, deltaTime);
-                rotToRect.y *= deltaTime / Mathf.Max(HorizontalSoftTrackingSpeed, deltaTime);
+                if (Mathf.Abs(rotToRect.x) > UnityVectorExtensions.Epsilon)
+                    rotToRect.x *= deltaTime / Mathf.Max(m_VerticalDamping * kDampingScale, deltaTime);
+                if (Mathf.Abs(rotToRect.y) > UnityVectorExtensions.Epsilon)
+                    rotToRect.y *= deltaTime / Mathf.Max(m_HorizontalDamping * kDampingScale, deltaTime);
             }
 
             // Rotate

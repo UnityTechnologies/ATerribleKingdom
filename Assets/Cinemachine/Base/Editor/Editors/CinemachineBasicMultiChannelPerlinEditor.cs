@@ -28,6 +28,10 @@ namespace Cinemachine.Editor
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+
+            if (Target.m_Definition == null)
+                EditorGUILayout.HelpBox("A Noise Definition is required", MessageType.Error);
+
             DrawPropertiesExcluding(serializedObject, m_excludeFields);
             serializedObject.ApplyModifiedProperties();
 

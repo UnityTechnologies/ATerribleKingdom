@@ -48,6 +48,11 @@ namespace Cinemachine
         /// </summary>
         ICinemachineCamera ParentCamera { get; }
 
+        /// <summary>Check whether the vcam a live child of this camera.</summary>
+        /// <param name="vcam">The Virtual Camera to check</param>
+        /// <returns>True if the vcam is currently actively influencing the state of this vcam</returns>
+        bool IsLiveChild(ICinemachineCamera vcam);
+
         /// <summary>
         /// Updates this Cinemachine Camera. For an active camera this should be
         /// called once and only once each frame.  To guarantee this, you should never

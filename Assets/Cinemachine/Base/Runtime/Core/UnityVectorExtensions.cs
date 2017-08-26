@@ -54,8 +54,13 @@ namespace Cinemachine.Utility
         /// <returns>The signed angle between the vectors</returns>
         public static float SignedAngle(Vector3 from, Vector3 to, Vector3 refNormal)
         {
+            from.Normalize();
+            to.Normalize();
+            float dot = Vector3.Dot(Vector3.Cross(from, to), refNormal);
+            if (Mathf.Abs(dot) < Epsilon)
+                return 0;
             float angle = Vector3.Angle(from, to);
-            if (Vector3.Dot(Vector3.Cross(from, to), refNormal) < 0)
+            if (dot < 0)
                 return -angle;
             return angle;
         }

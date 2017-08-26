@@ -34,6 +34,8 @@ namespace Cinemachine.Utility
             mCurrentPos = 0;
         }
 
+        public void Reset() { mData = null; }
+
         public T Filter(T v)
         {
             if (KernelSize < 3)

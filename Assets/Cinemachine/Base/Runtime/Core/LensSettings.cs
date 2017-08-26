@@ -53,7 +53,7 @@ namespace Cinemachine
         /// This is set every frame by the virtual camera, based on the value found in the 
         /// currently associated Unity camera
         /// </summary>
-        internal bool Orthographic {get; set; }
+        internal bool Orthographic { get; set; }
 
         /// <summary>
         /// This is set every frame by the virtual camera, based on the value 
@@ -67,7 +67,7 @@ namespace Cinemachine
         /// </summary>
         /// <param name="fromCamera">The Camera from which the FoV, near 
         /// and far clip planes will be copied.</param>
-        public LensSettings(Camera fromCamera)
+	    public LensSettings(Camera fromCamera) : this()
         {
             FieldOfView = fromCamera.fieldOfView;
             OrthographicSize = fromCamera.orthographicSize;
@@ -87,9 +87,9 @@ namespace Cinemachine
         /// <param name="dutch">Camera roll, in degrees.  This is applied at the end 
         /// after shot composition.</param>
         public LensSettings(
-            float fov, float orthographicSize, 
+            float fov, float orthographicSize,
             float nearClip, float farClip, float dutch,
-            bool ortho, float aspect)
+            bool ortho, float aspect) : this()
         {
             FieldOfView = fov;
             OrthographicSize = orthographicSize;

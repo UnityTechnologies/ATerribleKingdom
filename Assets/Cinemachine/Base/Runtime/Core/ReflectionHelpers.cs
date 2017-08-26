@@ -29,6 +29,7 @@ namespace Cinemachine.Utility
             }
         }
 
+#if UNITY_EDITOR
         /// <summary>Search the assembly for all types that match a predicate</summary>
         /// <param name="assembly">The assembly to search</param>
         /// <param name="predicate">The type to look for</param>
@@ -99,6 +100,7 @@ namespace Cinemachine.Utility
 
             return foundTypes;
         }
+#endif
 
         /// <summary>Cheater extension to access internal field of an object</summary>
         /// <param name="type">The type of the field</param>

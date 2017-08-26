@@ -7,8 +7,8 @@ namespace Cinemachine
     /// <summary>Defines a group of target objects, each with a radius and a weight.
     /// The weight is used when calculating the average position of the target group.
     /// Higher-weighted members of the group will count more.
-    /// The bounding box is calculated by taking the member positions and radii into account, 
-    /// but not weight.
+    /// The bounding box is calculated by taking the member positions, weight, 
+    /// and radii into account.
     /// </summary>
     [DocumentationSorting(19, DocumentationSortingAttribute.Level.UserRef)]
     [AddComponentMenu("Cinemachine/CinemachineTargetGroup")]
@@ -55,10 +55,29 @@ namespace Cinemachine
         [Tooltip("How the group's rotation is calculated.  Select Manual to use the value in the group's transform, and GroupAverage for a weighted average of the orientations of the members.")]
         public RotationMode m_RotationMode = RotationMode.Manual;
 
+        /// <summary>This enum defines the options available for the update method.</summary>
+        public enum UpdateMethod
+        {
+            /// <summary>Updated in normal MonoBehaviour Update.</summary>
+            Update,
+            /// <summary>Updated in sync with the Physics module, in FixedUpdate</summary>
+            FixedUpdate,
+            /// <summary>Updated in MonoBehaviour LateUpdate.</summary>
+            LateUpdate
+        };
+
+        /// <summary>When to update the group's transform based on the position of the group members</summary>
+        [Tooltip("When to update the group's transform based on the position of the group members")]
+        public UpdateMethod m_UpdateMethod = UpdateMethod.LateUpdate;
+
         /// <summary>The target objects, together with their weights and radii, that will
         /// contribute to the group's average position, orientation, and size</summary>
+        [NoSaveDuringPlay]
         [Tooltip("The target objects, together with their weights and radii, that will contribute to the group's average position, orientation, and size.")]
         public Target[] m_Targets = new Target[0];
+
+        /// Cache of the last valid radius
+        private float m_lastRadius = 0;
 
         /// <summary>The axis-aligned bounding box of the group, computed using the
         /// targets positions and radii</summary>
@@ -66,22 +85,47 @@ namespace Cinemachine
         {
             get
             {
+                float averageWeight;
+                Vector3 center = CalculateAveragePosition(out averageWeight);
                 bool gotOne = false;
-                Bounds b = new Bounds();
-                for (int i = 0; i < m_Targets.Length; ++i)
+                Bounds b = new Bounds(center, new Vector3(m_lastRadius*2, m_lastRadius*2, m_lastRadius*2));
+                if (averageWeight > UnityVectorExtensions.Epsilon)
                 {
-                    if (m_Targets[i].target != null)
+                    for (int i = 0; i < m_Targets.Length; ++i)
                     {
-                        float d = m_Targets[i].radius * 2;
-                        Bounds b2 = new Bounds(m_Targets[i].target.position, new Vector3(d, d, d));
-                        if (!gotOne)
-                            b = b2;
-                        else
-                            b.Encapsulate(b2);
-                        gotOne = true;
+                        if (m_Targets[i].target != null)
+                        {
+                            float w = m_Targets[i].weight;
+                            if (w < averageWeight - UnityVectorExtensions.Epsilon)
+                                w = w / averageWeight;
+                            else
+                                w = 1;
+                            float d = m_Targets[i].radius * 2 * w;
+                            Vector3 p = Vector3.Lerp(center, m_Targets[i].target.position, w);
+                            Bounds b2 = new Bounds(p, new Vector3(d, d, d));
+                            if (!gotOne)
+                                b = b2;
+                            else
+                                b.Encapsulate(b2);
+                            gotOne = true;
+                        }
                     }
                 }
+                Vector3 r = b.extents;
+                m_lastRadius = Mathf.Max(r.x, Mathf.Max(r.y, r.z));
                 return b;
+            }
+        }
+
+        /// <summary>Return true if there are no members with weight > 0</summary>
+        public bool IsEmpty 
+        {
+            get 
+            {
+                for (int i = 0; i < m_Targets.Length; ++i)
+                    if (m_Targets[i].target != null && m_Targets[i].weight > UnityVectorExtensions.Epsilon)
+                        return false;
+                return true;
             }
         }
 
@@ -91,39 +135,60 @@ namespace Cinemachine
         public Bounds GetViewSpaceBoundingBox(Matrix4x4 mView)
         {
             Matrix4x4 inverseView = mView.inverse;
+            float averageWeight;
+            Vector3 center = inverseView.MultiplyPoint3x4(CalculateAveragePosition(out averageWeight));
             bool gotOne = false;
-            Bounds b = new Bounds();
-            for (int i = 0; i < m_Targets.Length; ++i)
+            Bounds b = new Bounds(center, new Vector3(m_lastRadius*2, m_lastRadius*2, m_lastRadius*2));
+            if (averageWeight > UnityVectorExtensions.Epsilon)
             {
-                if (m_Targets[i].target != null)
+                for (int i = 0; i < m_Targets.Length; ++i)
                 {
-                    float d = m_Targets[i].radius * 2;
-                    Vector4 p = inverseView.MultiplyPoint3x4(m_Targets[i].target.position);
-                    Bounds b2 = new Bounds(p, new Vector3(d, d, d));
-                    if (!gotOne)
-                        b = b2;
-                    else
-                        b.Encapsulate(b2);
-                    gotOne = true;
+                    if (m_Targets[i].target != null)
+                    {
+                        float w = m_Targets[i].weight;
+                        if (w < averageWeight - UnityVectorExtensions.Epsilon)
+                            w = w / averageWeight;
+                        else
+                            w = 1;
+                        float d = m_Targets[i].radius * 2;
+                        Vector4 p = inverseView.MultiplyPoint3x4(m_Targets[i].target.position);
+                        p = Vector3.Lerp(center, p, w);
+                        Bounds b2 = new Bounds(p, new Vector3(d, d, d));
+                        if (!gotOne)
+                            b = b2;
+                        else
+                            b.Encapsulate(b2);
+                        gotOne = true;
+                    }
                 }
             }
+            Vector3 r = b.extents;
+            m_lastRadius = Mathf.Max(r.x, Mathf.Max(r.y, r.z));
             return b;
         }
 
-        Vector3 CalculateAveragePosition()
+        Vector3 CalculateAveragePosition(out float averageWeight)
         {
             Vector3 pos = Vector3.zero;
             float weight = 0;
+            int numTargets = 0;
             for (int i = 0; i < m_Targets.Length; ++i)
             {
-                if (m_Targets[i].target != null)
+                if (m_Targets[i].target != null && m_Targets[i].weight > UnityVectorExtensions.Epsilon)
                 {
+                    ++numTargets;
                     weight += m_Targets[i].weight;
                     pos += m_Targets[i].target.position * m_Targets[i].weight;
                 }
             }
             if (weight > UnityVectorExtensions.Epsilon)
                 pos /= weight;
+            if (numTargets == 0)
+            {
+                averageWeight = 0;
+                return transform.position;
+            }
+            averageWeight = weight / numTargets;
             return pos;
         }
 
@@ -154,17 +219,36 @@ namespace Cinemachine
             }
         }
 
-        /// <summary>Update the group's transform to reflect the positions
-        /// of its members</summary>
-        public virtual void Update()
+        void FixedUpdate()
         {
+            if (m_UpdateMethod == UpdateMethod.FixedUpdate)
+                UpdateTransform();
+        }
+
+        void Update()
+        {
+            if (!Application.isPlaying || m_UpdateMethod == UpdateMethod.Update)
+                UpdateTransform();
+        }
+
+        void LateUpdate()
+        {
+            if (m_UpdateMethod == UpdateMethod.LateUpdate)
+                UpdateTransform();
+        }
+
+        void UpdateTransform()
+        {
+            if (IsEmpty)
+                return;
             switch (m_PositionMode)
             {
                 case PositionMode.GroupCenter:
                     transform.position = BoundingBox.center;
                     break;
                 case PositionMode.GroupAverage:
-                    transform.position = CalculateAveragePosition();
+                    float averageWeight;
+                    transform.position = CalculateAveragePosition(out averageWeight);
                     break;
             }
             switch (m_RotationMode)

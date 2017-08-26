@@ -313,6 +313,7 @@ namespace Cinemachine.Editor
                 Undo.RecordObject(target, "Change Waypoint Tangent");
                 wp.tangent = newPos - wp.position;
                 Target.m_Waypoints[i] = wp;
+                Target.InvalidateDistanceCache();
             }
         }
 
@@ -331,6 +332,7 @@ namespace Cinemachine.Editor
                 Undo.RecordObject(target, "Move Waypoint");
                 wp.position = pos;
                 Target.m_Waypoints[i] = wp;
+                Target.InvalidateDistanceCache();
             }
         }
 
@@ -342,7 +344,7 @@ namespace Cinemachine.Editor
             Color colorOld = Gizmos.color;
             Gizmos.color = (Selection.activeGameObject == path.gameObject)
                 ? path.m_Appearance.pathColor : path.m_Appearance.inactivePathColor;
-            float step = 1f / path.m_Appearance.steps;
+            float step = 1f / path.m_Resolution;
             Vector3 lastPos = path.EvaluatePosition(path.MinPos);
             Vector3 lastW = (path.EvaluateOrientation(path.MinPos)
                              * Vector3.right) * path.m_Appearance.width / 2;

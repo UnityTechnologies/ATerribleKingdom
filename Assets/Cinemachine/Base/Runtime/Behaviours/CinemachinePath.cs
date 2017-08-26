@@ -12,6 +12,11 @@ namespace Cinemachine
     [SaveDuringPlay]
     public class CinemachinePath : CinemachinePathBase
     {
+        /// <summary>Path samples per waypoint</summary>
+        [Tooltip("Path samples per waypoint.  This is used for calculating path distances.")]
+        [Range(1, 100)]
+        public int m_Resolution = 20;
+
         /// <summary>This class holds the settings that control how the path
         /// will appear in the editor scene view.  The path is not visible in the game view</summary>
         [DocumentationSorting(18.1f, DocumentationSortingAttribute.Level.UserRef)]
@@ -26,9 +31,6 @@ namespace Cinemachine
             [Tooltip("The width of the railroad-tracks that are drawn to represent the path")]
             [Range(0f, 10f)]
             public float width = 0.2f;
-            [Tooltip("How many steps are taken between the waypoints when the path is drawn in the editor.  Each step is marked by a perpendicular line, like a railway tie")]
-            [Range(1, 100)]
-            public int steps = 20;
         }
         /// <summary>The settings that control how the path
         /// will appear in the editor scene view.</summary>
@@ -72,6 +74,10 @@ namespace Cinemachine
         }
         /// <summary>True if the path ends are joined to form a continuous loop</summary>
         public override bool Looped { get { return m_Looped; } }
+
+        /// <summary>When calculating the distance cache, sample the path this many 
+        /// times between points</summary>
+        public override int DistanceCacheSampleStepsPerSegment { get { return m_Resolution; } }
 
         /// <summary>Returns normalized position</summary>
         float GetBoundingIndices(float pos, out int indexA, out int indexB)
@@ -191,5 +197,7 @@ namespace Cinemachine
             }
             return result;
         }
+
+        private void OnValidate() { InvalidateDistanceCache(); }
     }
 }

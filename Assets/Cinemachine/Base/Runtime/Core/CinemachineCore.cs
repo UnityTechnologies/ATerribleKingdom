@@ -9,7 +9,7 @@ namespace Cinemachine
     /// been updated each frame.</summary>
     public sealed class CinemachineCore
     {
-        public static readonly string kVersionString = "2.0";
+        public static readonly string kVersionString = "2.1";
 
         /// <summary>
         /// Stages in the Cinemachine Component pipeline, used for
@@ -17,9 +17,6 @@ namespace Cinemachine
         /// </summary>
         public enum Stage
         {
-            /// <summary>First stage of the pipeline: adjust lens settings</summary>
-            Lens,
-
             /// <summary>Second stage: position the camera in space</summary>
             Body,
 
@@ -243,7 +240,7 @@ namespace Cinemachine
             {
                 foreach (CinemachineBrain b in AllBrains)
                     if (b != null && b.IsLive(vcam))
-                        b.m_CameraActivatedEvent.Invoke();
+                        b.m_CameraActivatedEvent.Invoke(vcam);
             }
         }
 
@@ -257,7 +254,7 @@ namespace Cinemachine
             {
                 foreach (CinemachineBrain b in AllBrains)
                     if (b != null && b.IsLive(vcam))
-                        b.m_CameraCutEvent.Invoke();
+                        b.m_CameraCutEvent.Invoke(b);
             }
         }
 

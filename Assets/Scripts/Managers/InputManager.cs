@@ -10,38 +10,57 @@ public class InputManager : Singleton<InputManager>
 
 	private const float MOUSE_DEAD_ZONE = .4f;
 	private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-	private Vector3 selectionInitialPos, currentSelectionPos, selectionFinalPos;
+	private Vector3 initialSelectionWorldPos, currentSelectionWorldPos;
+	private Vector2 initialSelectionMousePos, currentSelectionMousePos;
 	private bool selectionInitiated = false;
+	private float timeOfClick;
+	private const float CLICK_TOLERANCE = .2f;
 
 	private void Update()
 	{
 		//select
 		if(Input.GetMouseButtonDown(0))
 		{
-			selectionInitiated = GetMouseOnGroundPlane(out selectionInitialPos);
+			selectionInitiated = GetMouseOnGroundPlane(out initialSelectionWorldPos);
+			initialSelectionMousePos = Input.mousePosition;
+			timeOfClick = Time.unscaledTime;
 		}
 
 
 		if(selectionInitiated)
 		{
-			GetMouseOnGroundPlane(out currentSelectionPos);
+			GetMouseOnGroundPlane(out currentSelectionWorldPos);
+			currentSelectionMousePos = Input.mousePosition;
+			//UIManager.Instance.SetSelectionRectangle(initialSelectionMousePos, currentSelectionMousePos);
 		}
 
 
 		if(Input.GetMouseButtonUp(0))
 		{
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-			if(Physics.Raycast(ray, out hit, Mathf.Infinity, unitsLayerMask))
+			if(Time.unscaledTime < timeOfClick + CLICK_TOLERANCE)
 			{
-				Unit newSelectedUnit = hit.collider.GetComponent<Unit>();
-				GameManager.Instance.AddToSelection(newSelectedUnit);
+				//consider the mouse release as a click
+				RaycastHit hit;
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				
+				if(Physics.Raycast(ray, out hit, Mathf.Infinity, unitsLayerMask))
+				{
+					Unit newSelectedUnit = hit.collider.GetComponent<Unit>();
+					GameManager.Instance.AddToSelection(newSelectedUnit);
+					newSelectedUnit.SetSelected(true);
+				}
+				else
+				{
+					GameManager.Instance.ClearSelection();
+				}
 			}
 			else
 			{
-				GameManager.Instance.ClearSelection();
+				//consider the mouse release as the end of a box selection
 			}
+
+			selectionInitiated = false;
+
 		}
 
 		//order move

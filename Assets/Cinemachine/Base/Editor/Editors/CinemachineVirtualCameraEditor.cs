@@ -38,6 +38,13 @@ namespace Cinemachine.Editor
         {
             if (!Target.m_HideHeaderInInspector)
             {
+                // Is the camera navel-gazing?
+                CameraState state = Target.State;
+                if (state.HasLookAt && (state.ReferenceLookAt - state.CorrectedPosition).AlmostZero())
+                    EditorGUILayout.HelpBox(
+                        "The camera is positioned on the same point at which it is trying to look.", 
+                        MessageType.Warning);
+
                 // Active status and Solo button
                 Rect rect = EditorGUILayout.GetControlRect(true);
                 Rect rectLabel = new Rect(rect.x, rect.y, EditorGUIUtility.labelWidth, rect.height);
@@ -63,7 +70,15 @@ namespace Cinemachine.Editor
                 GUI.color = color;
                 if (isSolo)
                     UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
+                
+                CinemachineSettings.CinemachineCoreSettings.ShowInGameGuides 
+                    = EditorGUILayout.Toggle(
+                        new GUIContent(
+                            "Game Window Guides", 
+                            "Enable the display of overlays in the Game window.  You can adjust colours and opacity in Edit/Preferences/Cinemachine."), 
+                        CinemachineSettings.CinemachineCoreSettings.ShowInGameGuides);
             }
+
             List<string> excluded = GetExcludedPropertiesInInspector();
             serializedObject.Update();
             DrawPropertiesExcluding(serializedObject, excluded.ToArray());
@@ -75,6 +90,9 @@ namespace Cinemachine.Editor
         {
             // Don't draw gizmos on hidden stuff
             if ((vcam.VirtualCameraGameObject.hideFlags & (HideFlags.HideInHierarchy | HideFlags.HideInInspector)) != 0)
+                return;
+
+            if (vcam.ParentCamera != null && (selectionType & GizmoType.Active) == 0)
                 return;
 
             CameraState state = vcam.State;
@@ -101,14 +119,21 @@ namespace Cinemachine.Editor
         // Static state and caches - Call UpdateStaticData() to refresh this
         struct StageData
         {
-            public bool isExpanded;
+            string ExpandedKey { get { return "CNMCN_Core_Vcam_Expanded_" + Name; } }
+            public bool IsExpanded 
+            {
+                get { return EditorPrefs.GetBool(ExpandedKey, false); }
+                set { EditorPrefs.SetBool(ExpandedKey, value); }
+            }
+            public string Name;
             public Type[] types;   // first entry is null
-            public string[] PopupOptions;
+            public GUIContent[] PopupOptions;
         }
         static StageData[] sStageData = null;
 
         // Instance data - call UpdateInstanceData() to refresh this
         int[] m_stageState = null;
+        bool[] m_stageError = null;
         ICinemachineComponent[] m_components;
         UnityEditor.Editor[] m_componentEditors;
 
@@ -153,17 +178,8 @@ namespace Cinemachine.Editor
             // Pipeline - call this first
             UpdateInstanceData();
 
-            // Here are the pipeline stages
-            CinemachineCore.Stage[] sections = new CinemachineCore.Stage[]
+            foreach (CinemachineCore.Stage stage in Enum.GetValues(typeof(CinemachineCore.Stage)))
             {
-                CinemachineCore.Stage.Lens,
-                CinemachineCore.Stage.Aim,
-                CinemachineCore.Stage.Body,
-                CinemachineCore.Stage.Noise
-            };
-            for (int i = 0; i < sections.Length; ++i)
-            {
-                CinemachineCore.Stage stage = sections[i];
                 int index = (int)stage;
 
                 // Skip pipeline stages that have no implementations
@@ -178,16 +194,18 @@ namespace Cinemachine.Editor
                 rect.height = EditorGUIUtility.singleLineHeight;
 
                 GUI.enabled = !StageIsLocked(stage);
-                int newSelection = EditorGUI.Popup(rect,
-                        NicifyName(stage.ToString()), m_stageState[index],
-                        sStageData[index].PopupOptions);
+                GUIContent label = new GUIContent(NicifyName(stage.ToString()));
+                if (m_stageError[index])
+                    label.image = EditorGUIUtility.IconContent("console.erroricon.sml").image;
+                int newSelection = EditorGUI.Popup(
+                    rect, label, m_stageState[index], sStageData[index].PopupOptions);
                 GUI.enabled = true;
                 Type type = sStageData[index].types[newSelection];
                 if (newSelection != m_stageState[index])
                 {
                     SetPipelineStage(stage, type);
                     if (newSelection != 0)
-                        sStageData[index].isExpanded = true;
+                        sStageData[index].IsExpanded = true;
                     UpdateInstanceData(); // because we changed it
                     return;
                 }
@@ -196,9 +214,9 @@ namespace Cinemachine.Editor
                     int indentOffset = 6;
                     Rect stageRect = new Rect(
                         rect.x - indentOffset, rect.y, rect.width + indentOffset, rect.height);
-                    sStageData[index].isExpanded = EditorGUI.Foldout(
-                            stageRect, sStageData[index].isExpanded, GUIContent.none);
-                    if (sStageData[index].isExpanded)
+                    sStageData[index].IsExpanded = EditorGUI.Foldout(
+                            stageRect, sStageData[index].IsExpanded, GUIContent.none);
+                    if (sStageData[index].IsExpanded)
                     {
                         // Make the editor for that stage
                         UnityEditor.Editor e = GetEditorForPipelineStage(stage);
@@ -251,14 +269,6 @@ namespace Cinemachine.Editor
                 CinemachineVirtualCamera.CreatePipelineOverride =
                     (CinemachineVirtualCamera vcam, string name, ICinemachineComponent[] copyFrom) =>
                     {
-                        // Delete all existing pipeline childen
-                        List<Transform> list = new List<Transform>();
-                        foreach (Transform child in vcam.transform)
-                            if (child.GetComponent<CinemachinePipeline>() != null || child.gameObject.name == name)
-                                list.Add(child);
-                        foreach (Transform child in list)
-                            Undo.DestroyObjectImmediate(child.gameObject);
-
                         // Create a new pipeline
                         GameObject go =  new GameObject(name);
                         Undo.RegisterCreatedObjectUndo(go, "created pipeline");
@@ -334,8 +344,10 @@ namespace Cinemachine.Editor
 
             var stageTypes = new List<Type>[System.Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
             for (int i = 0; i < stageTypes.Length; ++i)
+            {
+                sStageData[i].Name = ((CinemachineCore.Stage)i).ToString();
                 stageTypes[i] = new List<Type>();
-
+            }
             // Get all ICinemachineComponents
             var allTypes
                 = Cinemachine.Utility.ReflectionHelpers.GetTypesInAllLoadedAssemblies(
@@ -362,7 +374,7 @@ namespace Cinemachine.Editor
             {
                 stageTypes[i].Insert(0, null);  // first item is "none"
                 sStageData[i].types = stageTypes[i].ToArray();
-                string[] names = new string[sStageData[i].types.Length];
+                GUIContent[] names = new GUIContent[sStageData[i].types.Length];
                 for (int n = 0; n < names.Length; ++n)
                 {
                     if (n == 0)
@@ -370,10 +382,10 @@ namespace Cinemachine.Editor
                         bool useSimple
                             = (i == (int)CinemachineCore.Stage.Aim)
                                 || (i == (int)CinemachineCore.Stage.Body);
-                        names[n] = (useSimple) ? "Hard constraint" : "none";
+                        names[n] = new GUIContent((useSimple) ? "Hard constraint" : "none");
                     }
                     else
-                        names[n] = NicifyName(sStageData[i].types[n].Name);
+                        names[n] = new GUIContent(NicifyName(sStageData[i].types[n].Name));
                 }
                 sStageData[i].PopupOptions = names;
             }
@@ -432,10 +444,8 @@ namespace Cinemachine.Editor
 
         void UpdateStageState(ICinemachineComponent[] components)
         {
-            if (m_stageState == null)
-                m_stageState = new int[System.Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
-            for (int i = 0; i < m_stageState.Length; ++i)
-                m_stageState[i] = 0;
+            m_stageState = new int[System.Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
+            m_stageError = new bool[System.Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
             foreach (var c in components)
             {
                 CinemachineCore.Stage stage = c.Stage;
@@ -444,6 +454,7 @@ namespace Cinemachine.Editor
                     if (sStageData[(int)stage].types[index] == c.GetType())
                         break;
                 m_stageState[(int)stage] = index;
+                m_stageError[(int)stage] = !c.IsValid;
             }
         }
 

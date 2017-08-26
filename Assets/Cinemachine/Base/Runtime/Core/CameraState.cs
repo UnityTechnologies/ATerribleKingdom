@@ -166,10 +166,16 @@ namespace Cinemachine
                     adjustedT = Mathf.Abs((lens.FieldOfView - fovA) / (fovB - fovA));
                 }
 
+                #if false
                 // Spherical linear interpolation about CorrectedPosition
                 state.ReferenceLookAt = state.CorrectedPosition + Vector3.Slerp(
                         stateA.ReferenceLookAt - state.CorrectedPosition,
                         stateB.ReferenceLookAt - state.CorrectedPosition, adjustedT);
+                #else
+                // Ordinary linear interpolation of lookAt target point
+                state.ReferenceLookAt = Vector3.Lerp(
+                        stateA.ReferenceLookAt, stateB.ReferenceLookAt, adjustedT);
+                #endif
                 dirTarget = state.ReferenceLookAt - state.CorrectedPosition;
             }
 

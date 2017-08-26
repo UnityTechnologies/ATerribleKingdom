@@ -1,0 +1,41 @@
+<size=20><b>Version 2.1</b></size>
+
+<size=12><b>New Features</b></size>
+
+- New <b>Collider</b> implementation.  Curb feelers are gone, replaced by a clever camera-repositioning algorithm that will try to preserve camera height or distance from target (strategy is user-selectable).
+- New <b>CinemachineConfiner</b>: confine a virtual camera to a simple bounding volume.
+- New <b>Framing Transposer</b>.  This is a special transposer that will respect composition and framing rules by moving the camera without rotating it.  Takes only a Follow Target (no LookAt - this is important).  Designed for Orthographic cameras, but will also work for Perspective cameras.  If Follow target is a CinemachineTargetGroup, then will also provide Group Framing options.
+- New <b>CinemachineMixingCamera</b>.  Drive a continuous blend of up to 8 virtual cameras from timeline or game logic.  Create complex rigs with custom blends and expose them as ordinary vcams.
+- New <b>CinemachineDollyCart</b> behaviour, for moving anything along a path.  No need to create dummy vcams just for that.
+- Path now supports <b>Distance Units</b> in addition to Path units, making it easy to create steady motion.
+- TrackedDolly: added ability to use Distance or Path units for path position.
+- Transposer and TrackedDolly: added <b>target angular damping</b> on 3 axes.
+- OrbitalTransposer and FreeLook: added <b>angular damping and binding mode</b>, same as Transposer.
+- OrbitalTransopser and freelook: added checkbox to <b>invert input axis</b>.
+- Added <b>IgnoreTimeScale</b> option to Brain.  Useful for snappy cameras even in slo-mo.
+
+
+<size=12><b>Improvements</b></size>
+
+- Added off-button for SaveDuringPlay (on Cinemachine preferences panel).
+- No SaveDuringPlay for vcam priority, LookAt and Follow targets, GroupTarget members.
+- Added IsBlending API method to StateDrivenCamera and ClearShot.
+- TargetGroup now has a user-selectable update method.
+- TargetGroup now respects the weight when computing bounding box, so it's possible to gradually add or remove members by manipulating the weight.
+ Clearshot: if randomize, then re-randomize whenever it becomes active.
+- ClearShot: default blend is cut.
+- ClearShot create menu: add a Collider by default.
+- FollowZoom: min/max FOV defaults changed to 3/60.
+- Composer damping range is now 0-20 instead of 0-100.
+- TrackedDolly: added path position offset to Auto-Dolly.  Stays on the path (unlike path offset, which is based on the path tangent and so can go off the path)
+
+
+<size=12><b>Bugfixes</b></size>
+
+- SaveDuringPlay obsolete API fix for 2017.2.
+- Fixed build errors when building for UWP.
+- Clearshot and SDC: don't reset state if deactivated.
+- FreeLook destroy - no more orphan rigs.
+- Fixed strange build error that only showed up in MonoDevelop.
+- FreeLook was not respecting X-axis accel and decel.  Heading speed had to be crazy high.  Now same as Orbital (warning: may have to re-tune settings on existing FreeLooks).
+- Several jitter and judder issues resolved.

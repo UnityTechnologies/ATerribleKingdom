@@ -382,24 +382,57 @@ namespace SaveDuringPlay
     [InitializeOnLoad]
     public class SaveDuringPlay
     {
+        public static string kEnabledKey = "SaveDuringPlay_Enabled";
+        public static bool Enabled
+        {
+            get { return EditorPrefs.GetBool(kEnabledKey, true); }
+            set
+            {
+                if (value != Enabled)
+                {
+                    EditorPrefs.SetBool(kEnabledKey, value);
+                }
+            }
+        }
+
         static SaveDuringPlay()
         {
             // Install our callbacks
+#if UNITY_2017_2_OR_NEWER
+            EditorApplication.playModeStateChanged += OnPlayStateChanged;
+#else
             EditorApplication.update += OnEditorUpdate;
             EditorApplication.playmodeStateChanged += OnPlayStateChanged;
+#endif
         }
 
+#if UNITY_2017_2_OR_NEWER
+        static void OnPlayStateChanged(PlayModeStateChange pmsc)
+        {
+            if (Enabled)
+            {
+                // If exiting playmode, collect the state of all interesting objects
+                if (pmsc == PlayModeStateChange.ExitingPlayMode)
+                    SaveAllInterestingStates();
+                else if (pmsc == PlayModeStateChange.EnteredEditMode && sSavedStates != null)
+                    RestoreAllInterestingStates();
+            }
+        }
+#else
         static void OnPlayStateChanged()
         {
             // If exiting playmode, collect the state of all interesting objects
-            if (!EditorApplication.isPlayingOrWillChangePlaymode && EditorApplication.isPlaying)
-                SaveAllInterestingStates();
+            if (Enabled)
+            {
+                if (!EditorApplication.isPlayingOrWillChangePlaymode && EditorApplication.isPlaying)
+                    SaveAllInterestingStates();
+            }
         }
 
         static float sWaitStartTime = 0;
         static void OnEditorUpdate()
         {
-            if (sSavedStates != null && !Application.isPlaying)
+            if (Enabled && sSavedStates != null && !Application.isPlaying)
             {
                 // Wait a bit for things to settle before applying the saved state
                 const float WaitTime = 1f; // GML todo: is there a better way to do this?
@@ -413,6 +446,7 @@ namespace SaveDuringPlay
                 }
             }
         }
+#endif
 
         /// <summary>
         /// If you need to get notified before state is collected for hotsave, this is the place

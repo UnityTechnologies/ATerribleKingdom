@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 namespace Cinemachine.Editor
 {
@@ -12,12 +13,30 @@ namespace Cinemachine.Editor
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            EditorGUI.BeginChangeCheck();
-            DrawPropertiesExcluding(serializedObject, m_excludeFields);
-            if (EditorGUI.EndChangeCheck())
+            string[] excluded = m_excludeFields;
+            if (!Target.m_PreserveLineOfSight)
             {
-                serializedObject.ApplyModifiedProperties();
+                excluded = new string[] 
+                {
+                    "m_Script",
+                    SerializedPropertyHelper.PropertyName(() => Target.m_DistanceLimit),
+                    SerializedPropertyHelper.PropertyName(() => Target.m_Strategy),
+                    SerializedPropertyHelper.PropertyName(() => Target.m_MaximumEffort),
+                    SerializedPropertyHelper.PropertyName(() => Target.m_Damping)
+                };
             }
+            else if (Target.m_Strategy == CinemachineCollider.ResolutionStrategy.PullCameraForward)
+            {
+                excluded = new string[] 
+                {
+                    "m_Script",
+                    SerializedPropertyHelper.PropertyName(() => Target.m_MaximumEffort),
+                };
+            }
+            EditorGUI.BeginChangeCheck();
+            DrawPropertiesExcluding(serializedObject, excluded);
+            if (EditorGUI.EndChangeCheck())
+                serializedObject.ApplyModifiedProperties();
         }
 
         [DrawGizmo(GizmoType.Active | GizmoType.Selected, typeof(CinemachineCollider))]
@@ -27,30 +46,25 @@ namespace Cinemachine.Editor
             if (vcam != null && collider.enabled)
             {
                 Color oldColor = Gizmos.color;
-                bool isLive = CinemachineCore.Instance.IsLive(vcam);
-                Color feelerColor = isLive
-                    ? CinemachineSettings.CinemachineCoreSettings.ActiveGizmoColour
-                    : CinemachineSettings.CinemachineCoreSettings.InactiveGizmoColour;
-                Color hitColour = isLive ? Color.white : Color.grey;
-
                 Vector3 pos = vcam.State.FinalPosition;
                 if (collider.m_PreserveLineOfSight && vcam.State.HasLookAt)
                 {
                     Vector3 forwardFeelerVector = (vcam.State.ReferenceLookAt - pos).normalized;
-                    float distance = collider.m_LineOfSightFeelerDistance;
-                    Gizmos.color = collider.IsTargetObscured(vcam.LiveChildOrSelf) ? hitColour : feelerColor;
+                    float distance = collider.m_DistanceLimit;
+                    Gizmos.color = CinemachineColliderPrefs.FeelerColor;
                     Gizmos.DrawLine(pos, pos + forwardFeelerVector * distance);
-                }
 
-                if (collider.m_UseCurbFeelers)
-                {
-                    Quaternion orientation = vcam.State.FinalOrientation;
-                    var feelers = collider.GetFeelers(vcam.LiveChildOrSelf);
-                    foreach (CinemachineCollider.CompiledCurbFeeler feeler in feelers)
+                    // Show the avoidance path, for debugging
+                    List<List<Vector3>> debugPaths = collider.DebugPaths;
+                    foreach (var path in debugPaths)
                     {
-                        Vector3 worldDirection = orientation * feeler.LocalVector;
-                        Gizmos.color = feeler.IsHit ? hitColour : feelerColor;
-                        Gizmos.DrawLine(pos, pos + worldDirection * feeler.RayDistance);
+                        Gizmos.color = CinemachineColliderPrefs.FeelerHitColor;
+                        Vector3 p0 = vcam.State.ReferenceLookAt;
+                        foreach (var p in path)
+                        {
+                            Gizmos.DrawLine(p0, p);
+                            p0 = p;
+                        }
                     }
                 }
                 Gizmos.color = oldColor;

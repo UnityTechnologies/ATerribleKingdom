@@ -52,28 +52,23 @@ namespace Cinemachine
         /// <summary>Applies noise to the Correction channel of the CameraState if the
         /// delta time is greater than 0.  Otherwise, does nothing.</summary>
         /// <param name="curState">The current camera state</param>
-        /// <param name="statePrevFrame">The camera state on the previous frame (unused)</param>
         /// <param name="deltaTime">How much to advance the perlin noise generator.
         /// Noise is only applied if this value is greater than 0</param>
-        /// <returns>curState with noise applied, or curState if deltaTime not greater than 0</returns>
-        public CameraState MutateCameraState(
-            CameraState curState, CameraState statePrevFrame, float deltaTime)
+        public void MutateCameraState(ref CameraState curState, float deltaTime)
         {
             if (!IsValid || deltaTime <= 0)
-                return curState;
+                return;
 
-            CameraState newState = curState;
             if (!mInitialized)
                 Initialize();
 
             ++mNoiseTime;
             float time = mNoiseTime * deltaTime * m_FrequencyGain;
-            newState.PositionCorrection += newState.CorrectedOrientation * GetCombinedFilterResults(
+            curState.PositionCorrection += curState.CorrectedOrientation * GetCombinedFilterResults(
                     m_Definition.PositionNoise, time, mNoiseOffsets) * m_AmplitudeGain;
             Quaternion rotNoise = Quaternion.Euler(GetCombinedFilterResults(
                         m_Definition.OrientationNoise, time, mNoiseOffsets) * m_AmplitudeGain);
-            newState.OrientationCorrection = newState.OrientationCorrection * rotNoise;
-            return newState;
+            curState.OrientationCorrection = curState.OrientationCorrection * rotNoise;
         }
 
         private bool mInitialized = false;

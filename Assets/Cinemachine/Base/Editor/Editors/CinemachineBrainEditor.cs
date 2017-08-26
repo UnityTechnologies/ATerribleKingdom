@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 namespace Cinemachine.Editor
 {
@@ -7,7 +8,6 @@ namespace Cinemachine.Editor
     internal sealed class CinemachineBrainEditor : UnityEditor.Editor
     {
         private CinemachineBrain Target { get { return target as CinemachineBrain; } }
-        private static string[] m_excludeFields;
         EmbeddeAssetEditor<CinemachineBlenderSettings> m_SettingsEditor;
 
         bool mEventsExpanded = false;
@@ -44,14 +44,13 @@ namespace Cinemachine.Editor
             GUI.enabled = true;
 
             // Normal properties
-            if (m_excludeFields == null)
-                m_excludeFields = new string[]
-                {
-                    "m_Script",
-                    SerializedPropertyHelper.PropertyName(() => Target.m_CameraCutEvent),
-                    SerializedPropertyHelper.PropertyName(() => Target.m_CameraActivatedEvent)
-                };
-            DrawPropertiesExcluding(serializedObject, m_excludeFields);
+            List<string> excludeFields = new List<string>
+            {
+                "m_Script",
+                SerializedPropertyHelper.PropertyName(() => Target.m_CameraCutEvent),
+                SerializedPropertyHelper.PropertyName(() => Target.m_CameraActivatedEvent)
+            };
+            DrawPropertiesExcluding(serializedObject, excludeFields.ToArray());
 
             m_SettingsEditor.DrawEditorCombo(
                 "Create New Blender Asset",

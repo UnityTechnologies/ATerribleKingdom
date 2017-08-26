@@ -68,7 +68,7 @@ namespace Cinemachine
 
         private void PostPipelineStageCallback(
             CinemachineVirtualCameraBase vcam,
-            CinemachineCore.Stage stage, ref CameraState state, CameraState previousState, float deltaTime)
+            CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
         {
             if (enabled)
             {

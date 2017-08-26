@@ -29,12 +29,12 @@ namespace Cinemachine
         /// <summary>Will not generate an FOV smaller than this.</summary>
         [Range(1f, 179f)]
         [Tooltip("Lower limit for the FOV that this behaviour will generate.")]
-        public float m_MinFOV = 1f;
+        public float m_MinFOV = 3f;
 
         /// <summary>Will not generate an FOV larget than this.</summary>
         [Range(1f, 179f)]
         [Tooltip("Upper limit for the FOV that this behaviour will generate.")]
-        public float m_MaxFOV = 179f;
+        public float m_MaxFOV = 60f;
 
         private void OnValidate()
         {
@@ -73,11 +73,14 @@ namespace Cinemachine
         public CinemachineVirtualCameraBase VirtualCamera { get; private set; }
 
         private const float kHumanReadableDampingScalar = 0.1f;
+        private float m_previousFrameZoom = 0;
 
         private void PostPipelineStageCallback(
             CinemachineVirtualCameraBase vcam,
-            CinemachineCore.Stage stage, ref CameraState state, CameraState previousState, float deltaTime)
+            CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
         {
+            if (!enabled || deltaTime == 0)
+                m_previousFrameZoom = state.Lens.FieldOfView;
             if (enabled)
             {
                 // Set the zoom after the body has been positioned, but before the aim,
@@ -98,7 +101,7 @@ namespace Cinemachine
                             float maxW = d * 2f * Mathf.Tan(m_MaxFOV * Mathf.Deg2Rad / 2f);
                             targetWidth = Mathf.Clamp(targetWidth, minW, maxW);
 
-                            float currentWidth = d * 2f * Mathf.Tan(previousState.Lens.FieldOfView * Mathf.Deg2Rad / 2f);
+                            float currentWidth = d * 2f * Mathf.Tan(m_previousFrameZoom * Mathf.Deg2Rad / 2f);
                             float delta = targetWidth - currentWidth;
                             delta *= deltaTime / Mathf.Max(m_Damping * kHumanReadableDampingScalar, deltaTime);
                             targetWidth = currentWidth + delta;
@@ -106,7 +109,7 @@ namespace Cinemachine
                         fov = 2f * Mathf.Atan(targetWidth / (2 * d)) * Mathf.Rad2Deg;
                     }
                     LensSettings lens = state.Lens;
-                    lens.FieldOfView = Mathf.Clamp(fov, m_MinFOV, m_MaxFOV);
+                    lens.FieldOfView = m_previousFrameZoom = Mathf.Clamp(fov, m_MinFOV, m_MaxFOV);
                     state.Lens = lens;
                 }
             }
