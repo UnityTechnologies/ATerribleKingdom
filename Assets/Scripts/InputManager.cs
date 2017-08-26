@@ -6,19 +6,27 @@ public class InputManager : Singleton<InputManager>
 {
 	public LayerMask unitsLayerMask;
 	public bool mouseMovesCamera = true;
+	public Transform markerObject;
 
 	private const float MOUSE_DEAD_ZONE = .4f;
+	private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+	private Vector3 selectionInitialPos, currentSelectionPos, selectionFinalPos;
+	private bool selectionInitiated = false;
 
 	private void Update()
 	{
 		//select
 		if(Input.GetMouseButtonDown(0))
 		{
-			/*Vector3 screenMouse = Input.mousePosition;
-			screenMouse.z = 30f;
-			Vector3 worldMouse = Camera.main.ScreenToWorldPoint(screenMouse);
-			Debug.Log(worldMouse);*/
+			selectionInitiated = GetMouseOnGroundPlane(out selectionInitialPos);
 		}
+
+
+		if(selectionInitiated)
+		{
+			GetMouseOnGroundPlane(out currentSelectionPos);
+		}
+
 
 		if(Input.GetMouseButtonUp(0))
 		{
@@ -86,6 +94,23 @@ public class InputManager : Singleton<InputManager>
 		if(needToMove)
 		{
 			CameraManager.Instance.MoveGameplayCamera(amountToMove * .5f);
+		}
+	}
+
+	private bool GetMouseOnGroundPlane(out Vector3 thePoint)
+	{
+		thePoint = Vector3.zero;
+
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		float rayDistance;
+		if (groundPlane.Raycast(ray, out rayDistance))
+		{
+			thePoint = ray.GetPoint(rayDistance);
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 }

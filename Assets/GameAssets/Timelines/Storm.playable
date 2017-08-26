@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 337831424, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
   m_Name: Storm
   m_EditorClassIdentifier: 
-  m_NextId: 9
+  m_NextId: 12
   m_Tracks:
   - {fileID: 114034453818928170}
   - {fileID: 114625630045295032}
@@ -699,6 +699,7 @@ MonoBehaviour:
   platoon:
     exposedName: c797df73e07ca4727a347611c2c5fd55
     defaultValue: {fileID: 0}
+  track: {fileID: 0}
 --- !u!114 &114177411146370420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1448,11 +1449,12 @@ MonoBehaviour:
     platoon: {fileID: 0}
     labelToJumpTo: 
     clipExecuted: 0
-  clipType: 2
+  clipType: 1
   labelToJumpTo: 
   platoon:
     exposedName: 3c48480aa940a4408a580e419f9a4374
     defaultValue: {fileID: 0}
+  track: {fileID: 0}
 --- !u!114 &114462934885347962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3106,13 +3108,13 @@ MonoBehaviour:
   m_Name: Time Machine Track
   m_EditorClassIdentifier: 
   m_Locked: 0
-  m_Muted: 1
+  m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 10.516666666666667
+  - m_Start: 9.816666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114453762961078170}
     m_UnderlyingAsset: {fileID: 0}
@@ -3169,8 +3171,8 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: TimeMachineClip
-  - m_Start: 31.25
+    m_DisplayName: Gaetano
+  - m_Start: 29.1
     m_ClipIn: 0
     m_Asset: {fileID: 114078708746385798}
     m_UnderlyingAsset: {fileID: 0}
@@ -3227,7 +3229,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: TimeMachineClip
+    m_DisplayName: Gaetano
 --- !u!114 &114844528715949210
 MonoBehaviour:
   m_ObjectHideFlags: 1

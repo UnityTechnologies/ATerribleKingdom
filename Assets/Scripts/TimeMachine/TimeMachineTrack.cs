@@ -8,6 +8,16 @@ public class TimeMachineTrack : TrackAsset
 {
     public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
     {
+		foreach (var c in GetClips())
+		{
+			TimeMachineClip clip = (TimeMachineClip)c.asset;
+			//clip.labelToJumpTo = c.start;
+			c.displayName = "Gaetano";
+		}
+
+
         return ScriptPlayable<TimeMachineMixerBehaviour>.Create (graph, inputCount);
     }
+
+
 }

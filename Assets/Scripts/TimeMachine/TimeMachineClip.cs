@@ -13,6 +13,8 @@ public class TimeMachineClip : PlayableAsset, ITimelineClipAsset
 	public string labelToJumpTo;
 	public ExposedReference<Platoon> platoon;
 
+	public TrackAsset track;
+
     public ClipCaps clipCaps
     {
         get { return ClipCaps.None; }
