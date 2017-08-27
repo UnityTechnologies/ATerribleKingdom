@@ -16,4 +16,4 @@ MonoBehaviour:
   attackPower: 1
   attackSpeed: 1
   engageDistance: 1
-  guardDistance: 30
+  guardDistance: 10

@@ -236,7 +236,7 @@ MonoBehaviour:
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
-    m_BlendOutDuration: -1
+    m_BlendOutDuration: 1.1833333333333336
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -257,19 +257,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -283,6 +271,39 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: StormVCam
+  - m_Start: 8.633333333333333
+    m_ClipIn: 0
+    m_Asset: {fileID: 114867431868474572}
+    m_UnderlyingAsset: {fileID: 114068416607602396}
+    m_Duration: 29.533333333333335
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 114034453818928170}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 1.1833333333333336
+    m_BlendOutDuration: 1.06666666666667
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Game Vcam
   - m_Start: 37.1
     m_ClipIn: 0
     m_Asset: {fileID: 114012971324181462}
@@ -292,23 +313,11 @@ MonoBehaviour:
     m_ParentTrack: {fileID: 114034453818928170}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: -1
+    m_BlendInDuration: 1.06666666666667
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -838,19 +847,7 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -954,7 +951,7 @@ MonoBehaviour:
   m_Name: LightClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 1, g: 0.9411765, b: 0.85490197, a: 1}
+    color: {r: 1, g: 0.9647059, b: 0.9098039, a: 1}
     intensity: 1
 --- !u!114 &114317898191539520
 MonoBehaviour:
@@ -1627,7 +1624,7 @@ MonoBehaviour:
   m_Name: LightClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 1, g: 0.9411765, b: 0.85490197, a: 1}
+    color: {r: 1, g: 0.9647059, b: 0.9098039, a: 1}
     intensity: 1
 --- !u!114 &114604666158350650
 MonoBehaviour:
@@ -1641,7 +1638,7 @@ MonoBehaviour:
   m_Name: LightClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 1, g: 0.9411765, b: 0.85490197, a: 1}
+    color: {r: 1, g: 0.9647059, b: 0.9098039, a: 1}
     intensity: 0.2
 --- !u!114 &114611036165182280
 MonoBehaviour:
@@ -3073,7 +3070,7 @@ MonoBehaviour:
   m_Name: Time Machine Track
   m_EditorClassIdentifier: 
   m_Locked: 0
-  m_Muted: 1
+  m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 11400000}
@@ -3547,6 +3544,20 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+--- !u!114 &114867431868474572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fb794a295e73545af71bcdb7375791, type: 3}
+  m_Name: CinemachineShot
+  m_EditorClassIdentifier: 
+  VirtualCamera:
+    exposedName: 5823a7ebf4ff84e558c329a3e8f913be
+    defaultValue: {fileID: 0}
 --- !u!114 &114921570674172246
 MonoBehaviour:
   m_ObjectHideFlags: 1

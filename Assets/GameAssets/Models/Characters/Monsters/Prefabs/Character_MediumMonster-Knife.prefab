@@ -1272,8 +1272,9 @@ GameObject:
   - component: {fileID: 4861371947641242}
   - component: {fileID: 95698961246758576}
   - component: {fileID: 195085748510851632}
+  - component: {fileID: 136258732285326194}
   - component: {fileID: 114237210816365960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character_MediumMonster-Knife
   m_TagString: Foreigners
   m_Icon: {fileID: 0}
@@ -5998,6 +5999,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   template: {fileID: 11400000, guid: c32d56443a9dc44038830a2dfd494848, type: 2}
+--- !u!136 &136258732285326194
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1407196370455110}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.8
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!137 &137035531527023050
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

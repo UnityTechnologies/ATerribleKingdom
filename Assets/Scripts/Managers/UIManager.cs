@@ -7,16 +7,20 @@ public class UIManager : Singleton<UIManager>
 {
 	public Image selectionRectangle;
 
-	public void SetSelectionRectangle(Vector2 topLeftCoords, Vector2 bottomRightCoords)
+	private void Awake()
 	{
-		//Vector2 rectCentre = new Vector2((topLeftCoords.x + bottomRightCoords.x) * .5f, (topLeftCoords.y + bottomRightCoords.y) * .5f);
-		Rect rectSize = Rect.MinMaxRect(topLeftCoords.x, topLeftCoords.y, bottomRightCoords.x, bottomRightCoords.y);
+		selectionRectangle.enabled = false;
+	}
 
+	public void ToggleSelectionRectangle(bool active)
+	{
+		selectionRectangle.enabled = active;
+	}
+
+	public void SetSelectionRectangle(Rect rectSize)
+	{
 		selectionRectangle.rectTransform.position = rectSize.center;
 		selectionRectangle.rectTransform.sizeDelta = new Vector2(rectSize.width, rectSize.height);
-
-		//Debug.Log("Mouse: " + Input.mousePosition);
-		//Debug.Log("Centre: " + rectSize.center);
 	}
 
 }

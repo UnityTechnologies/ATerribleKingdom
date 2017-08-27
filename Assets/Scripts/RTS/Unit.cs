@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
 using System.Linq;
 
 public class Unit : MonoBehaviour
@@ -15,7 +14,7 @@ public class Unit : MonoBehaviour
 	private Animator animator;
 	private SpriteRenderer selectionCircle;
 
-	private bool isSelected; //is the Unit currently selected by the Player
+	//private bool isSelected; //is the Unit currently selected by the Player
 	private Unit targetOfAttack;
 	private Unit[] hostiles;
 	private float lastGuardCheckTime, guardCheckInterval = 1f;
@@ -25,6 +24,10 @@ public class Unit : MonoBehaviour
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
 		selectionCircle = transform.Find("SelectionCircle").GetComponent<SpriteRenderer>();
+
+		//randomization
+		float rndmFactor = navMeshAgent.speed * .2f;
+		navMeshAgent.speed += Random.Range(-rndmFactor, rndmFactor);
 	}
 
 	private void Start()
@@ -297,7 +300,7 @@ public class Unit : MonoBehaviour
 
 	public void SetSelected(bool selected)
 	{
-		isSelected = selected;
+		//isSelected = selected; //currently unused
 
 		//Set transparency dependent on selection
 		Color newColor = selectionCircle.color;

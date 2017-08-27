@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Name: Colours
   m_EditorClassIdentifier: 
   m_Presets:
-  - m_Name: 
-    m_Color: {r: 1, g: 0.9411765, b: 0.85490197, a: 1}
+  - m_Name: Bright Sun
+    m_Color: {r: 1, g: 0.9642289, b: 0.9117647, a: 1}
+  - m_Name: Sun
+    m_Color: {r: 0.8161765, g: 0.7480536, b: 0.64814013, a: 1}
+  - m_Name: Char Selection
+    m_Color: {r: 0, g: 1, b: 0.54482746, a: 1}

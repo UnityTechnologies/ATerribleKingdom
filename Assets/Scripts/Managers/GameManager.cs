@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -57,5 +58,22 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		selectedPlatoon.Clear();
+	}
+
+	public void SentSelectedUnitsTo(Vector3 pos)
+	{
+		AICommand newCommand = new AICommand(AICommand.CommandType.GoToAndGuard, pos);
+		IssueCommand(newCommand);
+	}
+
+	public void AttackTarget(Unit tgtUnit)
+	{
+		AICommand newCommand = new AICommand(AICommand.CommandType.AttackTarget, tgtUnit);
+		IssueCommand(newCommand);
+	}
+
+	public Unit[] GetAllSelectableUnits()
+	{
+		return GameObject.FindGameObjectsWithTag("Locals").Select(x => x.GetComponent<Unit>()).ToArray();
 	}
 }

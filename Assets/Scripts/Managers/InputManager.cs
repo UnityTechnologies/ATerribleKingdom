@@ -4,118 +4,179 @@ using UnityEngine;
 
 public class InputManager : Singleton<InputManager>
 {
-	public LayerMask unitsLayerMask;
+	[Header("Camera")]
 	public bool mouseMovesCamera = true;
+	public Vector2 mouseDeadZone = new Vector2(.8f, .8f);
+	public float keyboardSpeed = 4f;
+	public float mouseSpeed = 2f;
+
+	[Space]
+
+	public LayerMask unitsLayerMask;
+	public LayerMask enemiesLayerMask;
 
 	private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-	private Vector3 initialSelectionWorldPos, currentSelectionWorldPos;
-	private Vector2 initialSelectionMousePos, currentSelectionMousePos;
-	private bool selectionInitiated = false;
+	//private Vector3 initialSelectionWorldPos, currentSelectionWorldPos; //world coordinates //currently unused
+	private Vector2 LMBDownMousePos, currentMousePos; //screen coordinates
+	private Rect selectionRect; //screen coordinates
+	private bool LMBClickedDown = false, boxSelectionInitiated = false;
 	private float timeOfClick;
 
-	private const float MOUSE_DEAD_ZONE = .4f;
-	private const float CLICK_TOLERANCE = .3f;
+	private const float CLICK_TOLERANCE = .5f; //the player has this time to release the mouse button for it to be registered as a click
 
 	private void Update()
 	{
-		//select
+		currentMousePos = Input.mousePosition;
+
+
+		//-------------- LEFT MOUSE BUTTON DOWN --------------
 		if(Input.GetMouseButtonDown(0))
 		{
-			selectionInitiated = GetMouseOnGroundPlane(out initialSelectionWorldPos);
-			initialSelectionMousePos = Input.mousePosition;
+			LMBDownMousePos = currentMousePos;
 			timeOfClick = Time.unscaledTime;
+			LMBClickedDown = true;
 		}
 
 
-		if(selectionInitiated)
+
+		//-------------- LEFT MOUSE BUTTON HELD DOWN --------------
+		if(LMBClickedDown
+			&& Vector2.Distance(LMBDownMousePos, currentMousePos) > .1f)
 		{
-			GetMouseOnGroundPlane(out currentSelectionWorldPos);
-			currentSelectionMousePos = Input.mousePosition;
-			//UIManager.Instance.SetSelectionRectangle(initialSelectionMousePos, currentSelectionMousePos);
+			UIManager.Instance.ToggleSelectionRectangle(true);
+			boxSelectionInitiated = true;
+			LMBClickedDown = false; //this will avoid repeating this block every frame
+		}
+
+		if(boxSelectionInitiated)
+		{
+			//draw the screen space selection rectangle
+			Vector2 rectPos = new Vector2((LMBDownMousePos.x + currentMousePos.x) * .5f, (LMBDownMousePos.y + currentMousePos.y) * .5f);
+			Vector2 rectSize = new Vector2(Mathf.Abs(LMBDownMousePos.x - currentMousePos.x), Mathf.Abs(LMBDownMousePos.y - currentMousePos.y));
+			selectionRect = new Rect(rectPos - (rectSize * .5f), rectSize);
+
+			UIManager.Instance.SetSelectionRectangle(selectionRect);
 		}
 
 
+		//-------------- LEFT MOUSE BUTTON UP --------------
 		if(Input.GetMouseButtonUp(0))
 		{
-			if(Time.unscaledTime < timeOfClick + CLICK_TOLERANCE)
+			GameManager.Instance.ClearSelection();
+
+			if(boxSelectionInitiated)
 			{
-				//consider the mouse release as a click
-				RaycastHit hit;
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				
-				if(Physics.Raycast(ray, out hit, Mathf.Infinity, unitsLayerMask))
+				//consider the mouse release as the end of a box selection
+				Unit[] allSelectables = GameManager.Instance.GetAllSelectableUnits();
+				for(int i = 0; i < allSelectables.Length; i++)
 				{
-					Unit newSelectedUnit = hit.collider.GetComponent<Unit>();
-					GameManager.Instance.AddToSelection(newSelectedUnit);
-					newSelectedUnit.SetSelected(true);
+					Vector2 screenPos = Camera.main.WorldToScreenPoint(allSelectables[i].transform.position);
+					if(selectionRect.Contains(screenPos))
+					{
+						GameManager.Instance.AddToSelection(allSelectables[i], false);
+					}
+					else
+					{
+						//GameManager.Instance.RemoveFromSelection(allSelectables[i]); //Not necessary anymore, selection is cleared above
+					}
 				}
-				else
+
+				//hide the box
+				UIManager.Instance.ToggleSelectionRectangle(false);
+			}
+			else
+			{
+				if(Time.unscaledTime < timeOfClick + CLICK_TOLERANCE)
 				{
-					GameManager.Instance.ClearSelection();
+					//consider the mouse release as a click
+					RaycastHit hit;
+					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+					
+					if(Physics.Raycast(ray, out hit, Mathf.Infinity, unitsLayerMask))
+					{
+						if(hit.collider.gameObject.CompareTag("Locals"))
+						{
+							Unit newSelectedUnit = hit.collider.GetComponent<Unit>();
+							GameManager.Instance.AddToSelection(newSelectedUnit);
+							newSelectedUnit.SetSelected(true);
+						}
+					}
+				}
+			}
+
+			LMBClickedDown = false;
+			boxSelectionInitiated = false;
+
+		}
+
+		//-------------- RIGHT MOUSE BUTTON UP --------------
+		if(Input.GetMouseButtonUp(1)
+			&& GameManager.Instance.GetSelectionLength() != 0)
+		{
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+			if(Physics.Raycast(ray, out hit, Mathf.Infinity, unitsLayerMask))
+			{
+				if(hit.collider.gameObject.CompareTag("Foreigners"))
+				{
+					Unit targetOfAttack = hit.collider.GetComponent<Unit>();
+					GameManager.Instance.AttackTarget(targetOfAttack);
 				}
 			}
 			else
 			{
-				//consider the mouse release as the end of a box selection
+				Vector3 commandPoint;
+				GetMouseOnGroundPlane(out commandPoint);
+				GameManager.Instance.SentSelectedUnitsTo(commandPoint);
 			}
 
-			selectionInitiated = false;
-
-		}
-
-		//order move
-		if(Input.GetMouseButtonUp(1)
-			&& GameManager.Instance.GetSelectionLength() != 0)
-		{
-			Vector3 commandPoint;
-			GetMouseOnGroundPlane(out commandPoint);
-			AICommand newCommand = new AICommand(AICommand.CommandType.GoToAndGuard, commandPoint);
-			GameManager.Instance.IssueCommand(newCommand);
 		}
 
 		//-------------- GAMEPLAY CAMERA MOVEMENT --------------
-		Vector2 amountToMove = new Vector2(0f, 0f);
-		bool needToMove = false;
-
-		if(mouseMovesCamera)
+		if(!boxSelectionInitiated)
 		{
-			Vector3 mousePosition = Input.mousePosition;
-			mousePosition.x -= Screen.width / 2f;
-			mousePosition.y -= Screen.height / 2f;
+			Vector2 amountToMove = new Vector2(0f, 0f);
+			bool needToMove = false;
 			
-			Vector2 deadZone = CameraManager.Instance.GetVCamDeadZone() * .5f;
-			
-			//horizontal
-			float horizontalDeadZone = Screen.width * deadZone.x; //MOUSE_DEAD_ZONE;
-			float absoluteXValue = Mathf.Abs(mousePosition.x);
-			if(absoluteXValue > horizontalDeadZone)
+			if(mouseMovesCamera)
 			{
-				//camera needs to move horizontally
-				amountToMove.x = (absoluteXValue - horizontalDeadZone) * Mathf.Sign(mousePosition.x) * .01f;
+				Vector3 mousePosition = Input.mousePosition;
+				mousePosition.x -= Screen.width / 2f;
+				mousePosition.y -= Screen.height / 2f;
+				
+				//horizontal
+				float horizontalDeadZone = Screen.width * mouseDeadZone.x;
+				float absoluteXValue = Mathf.Abs(mousePosition.x);
+				if(absoluteXValue > horizontalDeadZone)
+				{
+					//camera needs to move horizontally
+					amountToMove.x = (absoluteXValue - horizontalDeadZone) * Mathf.Sign(mousePosition.x) * .01f * mouseSpeed;
+					needToMove = true;
+				}
+				
+				//vertical
+				float verticalDeadZone = Screen.height * mouseDeadZone.y;
+				float absoluteYValue = Mathf.Abs(mousePosition.y);
+				if(absoluteYValue > verticalDeadZone)
+				{
+					//camera needs to move horizontally
+					amountToMove.y = (absoluteYValue - verticalDeadZone) * Mathf.Sign(mousePosition.y) * .01f * mouseSpeed;
+					needToMove = true;
+				}
+			}
+			
+			//Keyboard movements only happen if mouse is not causing the camera to move already
+			if(!needToMove)
+			{
+				amountToMove = new Vector2(Input.GetAxis("CameraHorizontal"), Input.GetAxis("CameraVertical")) * keyboardSpeed;
 				needToMove = true;
 			}
 			
-			//vertical
-			float verticalDeadZone = Screen.height * deadZone.y; //MOUSE_DEAD_ZONE;
-			float absoluteYValue = Mathf.Abs(mousePosition.y);
-			if(absoluteYValue > verticalDeadZone)
+			if(needToMove)
 			{
-				//camera needs to move horizontally
-				amountToMove.y = (absoluteYValue - verticalDeadZone) * Mathf.Sign(mousePosition.y) * .01f;
-				needToMove = true;
+				CameraManager.Instance.MoveGameplayCamera(amountToMove * .5f);
 			}
-		}
-
-		//Keyboard movements only happen if mouse is not causing the camera to move already
-		if(!needToMove)
-		{
-			amountToMove = new Vector2(Input.GetAxis("CameraHorizontal"), Input.GetAxis("CameraVertical"));
-			needToMove = true;
-		}
-
-		if(needToMove)
-		{
-			CameraManager.Instance.MoveGameplayCamera(amountToMove * .5f);
 		}
 	}
 
