@@ -12,6 +12,11 @@ public class GameManager : Singleton<GameManager>
 		Cursor.lockState = CursorLockMode.Confined;
 	}
 
+	public void IssueCommand(AICommand cmd)
+	{
+		selectedPlatoon.ExecuteCommand(cmd);
+	}
+
 	public int GetSelectionLength()
 	{
 		return selectedPlatoon.units.Count;

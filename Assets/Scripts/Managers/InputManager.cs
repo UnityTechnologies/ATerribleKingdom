@@ -6,15 +6,15 @@ public class InputManager : Singleton<InputManager>
 {
 	public LayerMask unitsLayerMask;
 	public bool mouseMovesCamera = true;
-	public Transform markerObject;
 
-	private const float MOUSE_DEAD_ZONE = .4f;
 	private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
 	private Vector3 initialSelectionWorldPos, currentSelectionWorldPos;
 	private Vector2 initialSelectionMousePos, currentSelectionMousePos;
 	private bool selectionInitiated = false;
 	private float timeOfClick;
-	private const float CLICK_TOLERANCE = .2f;
+
+	private const float MOUSE_DEAD_ZONE = .4f;
+	private const float CLICK_TOLERANCE = .3f;
 
 	private void Update()
 	{
@@ -67,7 +67,10 @@ public class InputManager : Singleton<InputManager>
 		if(Input.GetMouseButtonUp(1)
 			&& GameManager.Instance.GetSelectionLength() != 0)
 		{
-			//GameManager.Instance.IssueCommand
+			Vector3 commandPoint;
+			GetMouseOnGroundPlane(out commandPoint);
+			AICommand newCommand = new AICommand(AICommand.CommandType.GoToAndGuard, commandPoint);
+			GameManager.Instance.IssueCommand(newCommand);
 		}
 
 		//-------------- GAMEPLAY CAMERA MOVEMENT --------------

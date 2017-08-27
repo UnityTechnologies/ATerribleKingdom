@@ -17,9 +17,12 @@ public class Platoon : MonoBehaviour
 		tempPositions = GetFormationPositions(command.destination);
 		for(int i=0; i<units.Count; i++)
 		{
-			//change the position for the command for each unit
-			//so they move to a formation position rather than in the exact same place
-			command.destination = tempPositions[i];
+			if(units.Count > 1)
+			{
+				//change the position for the command for each unit
+				//so they move to a formation position rather than in the exact same place
+				command.destination = tempPositions[i];
+			}
 
 			units[i].ExecuteCommand(command);
 		}

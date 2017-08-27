@@ -261,6 +261,11 @@ public class Unit : MonoBehaviour
 		state = UnitState.Dead;
 		animator.SetTrigger("DoDeath");
 		navMeshAgent.enabled = false;
+
+		//Remove itself from the selection Platoon
+		GameManager.Instance.RemoveFromSelection(this);
+		SetSelected(false);
+		GetComponent<Collider>().enabled = false; //will make it unselectable on click
 	}
 
 	private Unit GetNearestHostileUnit()
