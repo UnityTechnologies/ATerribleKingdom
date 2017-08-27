@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.78580135, g: 0.75735295, b: 1, a: 0}
   m_AmbientEquatorColor: {r: 0.85294116, g: 0.63343424, b: 0.4578287, a: 1}
   m_AmbientGroundColor: {r: 0.30147058, g: 0.26924324, b: 0.2416198, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 1.5
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: ce0a7a8f7ad214afcaa83282f2171e99, type: 2}
@@ -57,23 +57,23 @@ LightmapSettings:
     serializedVersion: 9
     m_Resolution: 1
     m_BakeResolution: 20
-    m_TextureWidth: 2048
+    m_TextureWidth: 1024
     m_TextureHeight: 1024
     m_AO: 1
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
-    m_CompAOExponentDirect: 0
+    m_CompAOExponentDirect: 0.5
     m_Padding: 2
     m_LightmapParameters: {fileID: 15201, guid: 0000000000000000f000000000000000,
       type: 0}
-    m_LightmapsBakeMode: 0
+    m_LightmapsBakeMode: 1
     m_TextureCompression: 0
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
-    m_ReflectionCompression: 0
-    m_MixedBakeMode: 0
-    m_BakeBackend: 1
+    m_ReflectionCompression: 1
+    m_MixedBakeMode: 2
+    m_BakeBackend: 0
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
@@ -89,8 +89,9 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-  m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_LightingDataAsset: {fileID: 112000002, guid: a511a04adcd524a6fb5d8e035d643e99,
+    type: 2}
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1504,7 +1505,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967255
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &76390875
 Transform:
@@ -1517,7 +1518,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 37.372, y: 57.557003, z: -3.272}
 --- !u!108 &76390876
 Light:
@@ -1537,8 +1538,8 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.6
-    m_Bias: 0.14
+    m_Strength: 1
+    m_Bias: 0.05
     m_NormalBias: 0.01
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
@@ -1554,7 +1555,7 @@ Light:
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
-  m_ShadowAngle: 3.4
+  m_ShadowAngle: 0
 --- !u!1001 &78482163
 Prefab:
   m_ObjectHideFlags: 0
@@ -1987,8 +1988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Definition: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
-  m_AmplitudeGain: 1
-  m_FrequencyGain: 1
+  m_AmplitudeGain: 0.18
+  m_FrequencyGain: 0.36
 --- !u!114 &103748360
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -5781,7 +5782,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: fb626b004ae6b40439b893dee75771b8, type: 3}
       propertyPath: m_ScaleInLightmap
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: fb626b004ae6b40439b893dee75771b8, type: 3}
       propertyPath: m_PreserveUVs
@@ -9766,7 +9767,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1962178140701020, guid: 30bafdf76e47cfb49a5fe14f90290a02, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30bafdf76e47cfb49a5fe14f90290a02, type: 2}
@@ -11311,7 +11312,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1407196370455110, guid: 72c7b4f4854f4bb4f9de79c645ecbf83, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72c7b4f4854f4bb4f9de79c645ecbf83, type: 2}
@@ -16162,7 +16163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 947040809}
   m_Layer: 0
-  m_Name: '-----------------'
+  m_Name: '----------------- Gameplay'
   m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16738,7 +16739,7 @@ Transform:
   - {fileID: 1997674638}
   - {fileID: 1736454286}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1004750974
 MonoBehaviour:
@@ -17892,7 +17893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1097633974}
   m_Layer: 0
-  m_Name: '-----------------'
+  m_Name: '----------------- Environment'
   m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17909,7 +17910,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1098236653
 GameObject:
@@ -17970,7 +17971,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1105940390
 Prefab:
@@ -18500,7 +18501,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -32077,7 +32078,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 57
+    FieldOfView: 26
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000

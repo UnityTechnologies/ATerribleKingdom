@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4967901625981838}
   - component: {fileID: 33145139736613320}
   - component: {fileID: 23316856109915310}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Rock01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

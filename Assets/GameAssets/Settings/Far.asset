@@ -31,19 +31,19 @@ MonoBehaviour:
   antialiasing:
     m_Enabled: 1
     m_Settings:
-      method: 0
+      method: 1
       fxaaSettings:
         preset: 0
       taaSettings:
         jitterSpread: 1
-        sharpen: 0
+        sharpen: 0.58
         stationaryBlending: 0.95
         motionBlending: 0.616
   ambientOcclusion:
     m_Enabled: 0
     m_Settings:
-      intensity: 2
-      radius: 0.4
+      intensity: 0.3
+      radius: 1.17
       sampleCount: 3
       downsampling: 1
       forceForwardCompatibility: 0
@@ -71,9 +71,9 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 0
     m_Settings:
-      focusDistance: 0.13
-      aperture: 13.1
-      focalLength: 50
+      focusDistance: 0.1
+      aperture: 6.2
+      focalLength: 42
       useCameraFov: 0
       kernelSize: 3
   motionBlur:
@@ -100,14 +100,14 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.1
-        threshold: 0.5
+        intensity: 0.15
+        threshold: 0.4
         softKnee: 0.5
-        radius: 7
-        antiFlicker: 1
+        radius: 4
+        antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
-        intensity: 3
+        intensity: 0
   colorGrading:
     m_Enabled: 0
     m_Settings:
@@ -298,7 +298,7 @@ MonoBehaviour:
       mode: 0
       color: {r: 0, g: 0.5448277, b: 1, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.39
+      intensity: 0.31
       smoothness: 1
       roundness: 0.7
       mask: {fileID: 0}
