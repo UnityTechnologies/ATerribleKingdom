@@ -27,7 +27,7 @@ public class FramesPerSecond : MonoBehaviour {
         // Interval ended - update GUI text and start new interval
         if( timeleft <= 0.0f ){
             // display two fractional digits (f2 format)
-            textDisplay.text = (accum/frames).ToString("f2");
+			textDisplay.text = (accum/frames).ToString("###");
             timeleft = updateInterval;
             accum = 0.0f;
             frames = 0;

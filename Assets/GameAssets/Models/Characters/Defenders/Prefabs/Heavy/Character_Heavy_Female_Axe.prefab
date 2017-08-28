@@ -2109,7 +2109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  template: {fileID: 11400000, guid: c856e5f374a8f453580286138e3f44e9, type: 2}
+  template: {fileID: 11400000, guid: 7136f1e2ddf7c416a8a683e90a1d2a92, type: 2}
 --- !u!136 &136941148539070868
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2495,7 +2495,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1150588826859580}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.7
+  m_Radius: 0.6
   m_Speed: 2
   m_Acceleration: 14
   avoidancePriority: 50

@@ -25,20 +25,21 @@ public class Unit : MonoBehaviour
 		animator = GetComponent<Animator>();
 		selectionCircle = transform.Find("SelectionCircle").GetComponent<SpriteRenderer>();
 
-		//randomization
-		float rndmFactor = navMeshAgent.speed * .2f;
+		//Randomization of NavMeshAgent speed. More fun!
+		float rndmFactor = navMeshAgent.speed * .15f;
 		navMeshAgent.speed += Random.Range(-rndmFactor, rndmFactor);
 	}
 
 	private void Start()
 	{
-		template = Instantiate<UnitTemplate>(template);
+		template = Instantiate<UnitTemplate>(template); //we copy the template otherwise it's going to overwrite the original asset!
 
+		//Set some defaults, including the default state
 		SetSelected(false);
-		Stop();
+		Guard();
 	}
 	
-	void Update()
+	void LateUpdate()
 	{
 		switch(state)
 		{

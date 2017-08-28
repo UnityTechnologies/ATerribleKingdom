@@ -28,7 +28,6 @@ public class InputManager : Singleton<InputManager>
 	{
 		currentMousePos = Input.mousePosition;
 
-
 		//-------------- LEFT MOUSE BUTTON DOWN --------------
 		if(Input.GetMouseButtonDown(0))
 		{
@@ -51,8 +50,12 @@ public class InputManager : Singleton<InputManager>
 		if(boxSelectionInitiated)
 		{
 			//draw the screen space selection rectangle
-			Vector2 rectPos = new Vector2((LMBDownMousePos.x + currentMousePos.x) * .5f, (LMBDownMousePos.y + currentMousePos.y) * .5f);
-			Vector2 rectSize = new Vector2(Mathf.Abs(LMBDownMousePos.x - currentMousePos.x), Mathf.Abs(LMBDownMousePos.y - currentMousePos.y));
+			Vector2 rectPos = new Vector2(
+				(LMBDownMousePos.x + currentMousePos.x) * .5f,
+				(LMBDownMousePos.y + currentMousePos.y) * .5f);
+			Vector2 rectSize = new Vector2(
+				Mathf.Abs(LMBDownMousePos.x - currentMousePos.x),
+				Mathf.Abs(LMBDownMousePos.y - currentMousePos.y));
 			selectionRect = new Rect(rectPos - (rectSize * .5f), rectSize);
 
 			UIManager.Instance.SetSelectionRectangle(selectionRect);
@@ -137,9 +140,12 @@ public class InputManager : Singleton<InputManager>
 		if(!boxSelectionInitiated)
 		{
 			Vector2 amountToMove = new Vector2(0f, 0f);
-			bool needToMove = false;
-			
-			if(mouseMovesCamera)
+			bool mouseIsMovingCamera = false;
+			bool keyboardIsMovingCamera = false;
+
+			//This check doesn't allow the camera to move with the mouse if we're currently framing a platoon
+			if(mouseMovesCamera
+				&& !CameraManager.Instance.IsFramingPlatoon)
 			{
 				Vector3 mousePosition = Input.mousePosition;
 				mousePosition.x -= Screen.width / 2f;
@@ -152,7 +158,7 @@ public class InputManager : Singleton<InputManager>
 				{
 					//camera needs to move horizontally
 					amountToMove.x = (absoluteXValue - horizontalDeadZone) * Mathf.Sign(mousePosition.x) * .01f * mouseSpeed;
-					needToMove = true;
+					mouseIsMovingCamera = true;
 				}
 				
 				//vertical
@@ -162,21 +168,33 @@ public class InputManager : Singleton<InputManager>
 				{
 					//camera needs to move horizontally
 					amountToMove.y = (absoluteYValue - verticalDeadZone) * Mathf.Sign(mousePosition.y) * .01f * mouseSpeed;
-					needToMove = true;
+					mouseIsMovingCamera = true;
 				}
 			}
 			
 			//Keyboard movements only happen if mouse is not causing the camera to move already
-			if(!needToMove)
+			if(!mouseIsMovingCamera)
 			{
-				amountToMove = new Vector2(Input.GetAxis("CameraHorizontal"), Input.GetAxis("CameraVertical")) * keyboardSpeed;
-				needToMove = true;
+				float horKeyValue = Input.GetAxis("CameraHorizontal");
+				float vertKeyValue = Input.GetAxis("CameraVertical");
+				if(horKeyValue != 0f || vertKeyValue != 0f)
+				{
+					amountToMove = new Vector2(horKeyValue, vertKeyValue) * keyboardSpeed;
+					keyboardIsMovingCamera = true;
+				}
 			}
 			
-			if(needToMove)
+			if(mouseIsMovingCamera || keyboardIsMovingCamera)
 			{
+				CameraManager.Instance.SetPlatoonFramingMode(false); //will deactivate platoon following camera, only if it was active
 				CameraManager.Instance.MoveGameplayCamera(amountToMove * .5f);
 			}
+		}
+
+		//-------------- REQUEST GROUP TARGET CAMERA --------------
+		if(Input.GetKeyDown(KeyCode.G))
+		{
+			CameraManager.Instance.TogglePlatoonFramingMode();
 		}
 	}
 

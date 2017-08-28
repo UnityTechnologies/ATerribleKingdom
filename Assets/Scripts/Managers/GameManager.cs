@@ -11,6 +11,9 @@ public class GameManager : Singleton<GameManager>
 	{
 		selectedPlatoon = GetComponent<Platoon>();
 		Cursor.lockState = CursorLockMode.Confined;
+#if UNITY_EDITOR
+		Application.targetFrameRate = 30; //just to keep things "smooth" during presentations
+#endif
 	}
 
 	public void IssueCommand(AICommand cmd)
@@ -21,6 +24,11 @@ public class GameManager : Singleton<GameManager>
 	public int GetSelectionLength()
 	{
 		return selectedPlatoon.units.Count;
+	}
+
+	public Transform[] GetSelectionTransforms()
+	{
+		return selectedPlatoon.units.Select(x => x.transform).ToArray();
 	}
 
 	public void AddToSelection(Unit[] newSelectedUnits, bool clearPrevious = true)
@@ -58,6 +66,11 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		selectedPlatoon.Clear();
+
+		if(CameraManager.Instance.IsFramingPlatoon)
+		{
+			CameraManager.Instance.SetPlatoonFramingMode(false);
+		}
 	}
 
 	public void SentSelectedUnitsTo(Vector3 pos)
