@@ -2,8 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Video;
+using UnityEngine.Timeline;
 
-namespace UnityEngine.Timeline
+namespace DefaultPlayables
 {
 	[Serializable]
     public class VideoScriptPlayableAsset : PlayableAsset

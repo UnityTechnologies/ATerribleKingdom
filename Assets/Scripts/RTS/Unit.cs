@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
+using UnityEngine.Events;
 
 public class Unit : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Unit : MonoBehaviour
 	private Unit[] hostiles;
 	private float lastGuardCheckTime, guardCheckInterval = 1f;
 	private bool isReady = false;
+
+	public UnityAction<Unit> OnDie;
 
 	void Awake ()
 	{
@@ -120,6 +123,12 @@ public class Unit : MonoBehaviour
 
 	public void ExecuteCommand(AICommand c)
 	{
+		if(state == UnitState.Dead)
+		{
+			//already dead
+			return;
+		}
+
 		switch(c.commandType)
 		{
 			case AICommand.CommandType.GoToAndIdle:
@@ -289,6 +298,14 @@ public class Unit : MonoBehaviour
 		//Remove itself from the selection Platoon
 		GameManager.Instance.RemoveFromSelection(this);
 		SetSelected(false);
+		
+		//Fire an event so any Platoon containing this Unit will be notified
+		if(OnDie != null)
+		{
+			OnDie(this);
+		}
+
+		//To avoid the object participating in any Raycast or tag search
 		gameObject.tag = "Untagged";
 		gameObject.layer = 0;
 

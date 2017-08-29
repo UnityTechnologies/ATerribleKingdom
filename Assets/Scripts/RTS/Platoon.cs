@@ -11,6 +11,14 @@ public class Platoon : MonoBehaviour
 	private Vector3[] tempPositions; //an array to do position calculations, doesn't necessary represent the position of the units at the moment
 	private float formationOffset = 3f;
 
+	private void Start()
+	{
+		for(int i = 0; i < units.Count; i++)
+		{
+			units[i].OnDie += UnitDeadHandler;
+		}
+	}
+
 	//Executes a command on all Units
 	public void ExecuteCommand(AICommand command)
 	{
@@ -30,6 +38,7 @@ public class Platoon : MonoBehaviour
 
 	public void AddUnit(Unit unitToAdd)
 	{
+		unitToAdd.OnDie += UnitDeadHandler;
 		units.Add(unitToAdd);
 	}
 
@@ -38,7 +47,7 @@ public class Platoon : MonoBehaviour
 	{
 		for(int i=0; i<unitsToAdd.Length; i++)
 		{
-			units.Add(unitsToAdd[i]);
+			AddUnit(unitsToAdd[i]);
 		}
 
 		return units.Count;
@@ -52,6 +61,7 @@ public class Platoon : MonoBehaviour
 		if(isThere)
 		{
 			units.Remove(unitToRemove);
+			unitToRemove.OnDie -= UnitDeadHandler;
 		}
 
 		return isThere;
@@ -59,6 +69,10 @@ public class Platoon : MonoBehaviour
 
 	public void Clear()
 	{
+		for(int i = 0; i < units.Count; i++)
+		{
+			units[i].OnDie -= UnitDeadHandler;
+		}
 		units.Clear();
 	}
 
@@ -118,6 +132,12 @@ public class Platoon : MonoBehaviour
 		}
 
 		return allDead;
+	}
+
+	//Fired when a unit belonging to this Platoon dies
+	private void UnitDeadHandler(Unit whoDied)
+	{
+		RemoveUnit(whoDied); //will also remove the handler
 	}
 
 	private void OnDrawGizmosSelected()

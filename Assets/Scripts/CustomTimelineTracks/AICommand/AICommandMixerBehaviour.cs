@@ -8,7 +8,6 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 	private Platoon trackBinding;
 	private bool firstFrameHappened = false;
 	private Vector3[] defaultPositions, newPositions, finalPositions, previousInputFinalPositions;
-	private int lastInputPlayed = -1;
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData)
     {
@@ -45,14 +44,24 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			ScriptPlayable<AICommandBehaviour> inputPlayable = (ScriptPlayable<AICommandBehaviour>)playable.GetInput(i);
 			AICommandBehaviour input = inputPlayable.GetBehaviour();
 
-			//force the finalPosition to the attack target in case of an Attack action
-			if(input.actionType == AICommand.CommandType.AttackTarget
-				&& input.targetUnit != null)
+			//Some actionTypes have special needs
+			switch(input.actionType)
 			{
-				input.targetPosition = input.targetUnit.transform.position;
+				case AICommand.CommandType.Die:
+				case AICommand.CommandType.Stop:
+					//Do nothing if it's a Die or Stop action
+					continue; //Will skip to the next input clip in the for loop above
+
+				case AICommand.CommandType.AttackTarget:
+					//Force the finalPosition to the attack target in case of an Attack action
+					if(input.targetUnit != null)
+					{
+						input.targetPosition = input.targetUnit.transform.position;
+					}
+					break;
 			}
 
-			//create an array of final positions for the entire Platoon
+			//Create an array of final positions for the entire Platoon
 			finalPositions = trackBinding.GetFormationPositions(input.targetPosition);
 
 			if(inputWeight > 0f)
@@ -87,18 +96,17 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			//Make the Unit script execute the command
 			if(inputWeight > 0f)
 			{
-				if(lastInputPlayed != i
-				   && !input.commandExecuted)
+				if(!input.commandExecuted)
 				{
 					AICommand c = new AICommand(input.actionType, input.targetPosition, input.targetUnit);
 					trackBinding.ExecuteCommand(c);
-					input.commandExecuted = true;
+					input.commandExecuted = true; //this prevents the command to be executed every frame of this clip
 				}
 			}
 		}
 	}
 
-	public override void OnGraphStop (Playable playable)
+	public override void OnGraphStop(Playable playable)
 	{
 		if(!Application.isPlaying)
 		{

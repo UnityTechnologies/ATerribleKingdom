@@ -8,15 +8,56 @@ public class TimeMachineTrack : TrackAsset
 {
     public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
     {
+		var scriptPlayable = ScriptPlayable<TimeMachineMixerBehaviour>.Create(graph, inputCount);
+
+		TimeMachineMixerBehaviour b = scriptPlayable.GetBehaviour();
+		b.markerClips = new System.Collections.Generic.Dictionary<string, double>();
+
+
 		foreach (var c in GetClips())
 		{
 			TimeMachineClip clip = (TimeMachineClip)c.asset;
-			//clip.labelToJumpTo = c.start;
-			c.displayName = "Gaetano";
+			string clipName = c.displayName;
+
+			switch(clip.clipType)
+			{
+				case TimeMachineBehaviour.TimeMachineClipType.Pause:
+					clipName = "||";
+					break;
+
+				case TimeMachineBehaviour.TimeMachineClipType.Marker:
+					clipName = "● " + clip.markerLabel.ToString();
+
+					//Insert the marker clip into the Dictionary of markers
+					if(!b.markerClips.ContainsKey(clip.markerLabel)) //happens when you duplicate a clip and it has the same markerLabel
+					{
+						b.markerClips.Add(clip.markerLabel, (double)c.start);
+					}
+					break;
+
+				case TimeMachineBehaviour.TimeMachineClipType.JumpToMarker:
+					clipName = "↩︎  " + clip.labelToJumpTo.ToString();
+					break;
+
+				case TimeMachineBehaviour.TimeMachineClipType.JumpToTime:
+					clipName = "↩ " + clip.timeToJumpTo.ToString();
+					break;
+			}
+
+			c.displayName = clipName;
+
+
+			if(clip.clipType == TimeMachineBehaviour.TimeMachineClipType.Marker)
+			{
+				if(!b.markerClips.ContainsKey(clip.markerLabel)) //happens when you duplicate a clip and it has the same markerLabel
+				{
+					b.markerClips.Add(clip.markerLabel, (double)c.start);
+				}
+			}
+
 		}
 
-
-        return ScriptPlayable<TimeMachineMixerBehaviour>.Create (graph, inputCount);
+        return scriptPlayable;
     }
 
 

@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
-namespace UnityEngine.Timeline
+namespace DefaultPlayables
 {
     public sealed class VideoSchedulerPlayableBehaviour : PlayableBehaviour
     {

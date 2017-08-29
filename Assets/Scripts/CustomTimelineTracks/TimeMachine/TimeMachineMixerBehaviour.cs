@@ -1,28 +1,23 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 public class TimeMachineMixerBehaviour : PlayableBehaviour
 {
-	private float[] markerTimes;
-
-	public override void OnGraphStart(Playable playable)
-	{
-		base.OnGraphStart(playable);
-
-		int inputCount = playable.GetInputCount();
-		markerTimes = new float[inputCount];
-
-		for(int i = 0; i < inputCount; i++)
-		{
-			ScriptPlayable<TimeMachineBehaviour> inputPlayable = (ScriptPlayable<TimeMachineBehaviour>)playable.GetInput(i);
-			Debug.Log(PlayableExtensions.GetTime<ScriptPlayable<TimeMachineBehaviour>>(inputPlayable));
-		}
-	}
+	public Dictionary<string, double> markerClips;
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData)
     {
+		//ScriptPlayable<TimeMachineBehaviour> inputPlayable = (ScriptPlayable<TimeMachineBehaviour>)playable.GetInput(i);
+		//Debug.Log(PlayableExtensions.GetTime<ScriptPlayable<TimeMachineBehaviour>>(inputPlayable));
+
+		if(!Application.isPlaying)
+		{
+			return;
+		}
+
         int inputCount = playable.GetInputCount();
 
         for (int i = 0; i < inputCount; i++)
@@ -35,22 +30,30 @@ public class TimeMachineMixerBehaviour : PlayableBehaviour
 			{
 				switch(input.clipType)
 				{
-					case TimeMachineBehaviour.TimeMachineClipType.Rewind:
-						if(input.platoon != null)
+					case TimeMachineBehaviour.TimeMachineClipType.Pause:
+						Debug.Log("Pause");
+						(playable.GetGraph().GetResolver() as PlayableDirector).Pause();
+						break;
+
+					case TimeMachineBehaviour.TimeMachineClipType.JumpToTime:
+					case TimeMachineBehaviour.TimeMachineClipType.JumpToMarker:
+						if(input.ConditionMet())
 						{
-							bool allDead = input.platoon.CheckIfAllDead();
-							if(allDead)
+							//Rewind
+							if(input.clipType == TimeMachineBehaviour.TimeMachineClipType.JumpToTime)
 							{
-								//Rewind
-								Debug.Log((playable.GetGraph().GetResolver() as PlayableDirector).time);
-								(playable.GetGraph().GetResolver() as PlayableDirector).time = 2d;
+								//Jump to time
+								(playable.GetGraph().GetResolver() as PlayableDirector).time = (double)input.timeToJumpTo;
+							}
+							else
+							{
+								//Jump to marker
+								double t = markerClips[input.labelToJumpTo];
+								(playable.GetGraph().GetResolver() as PlayableDirector).time = t;
 							}
 						}
 						break;
-
-					case TimeMachineBehaviour.TimeMachineClipType.Pause:
-						playable.GetGraph().Stop();
-						break;
+						
 				}
 			}
         }

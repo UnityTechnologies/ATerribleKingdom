@@ -37,7 +37,7 @@ public class LightMixerBehaviour : PlayableBehaviour
         {
             float inputWeight = playable.GetInputWeight(i);
             ScriptPlayable<LightBehaviour> inputPlayable = (ScriptPlayable<LightBehaviour>)playable.GetInput(i);
-            LightBehaviour input = inputPlayable.GetBehaviour ();
+            LightBehaviour input = inputPlayable.GetBehaviour();
             
             blendedColor += input.color * inputWeight;
             blendedIntensity += input.intensity * inputWeight;
@@ -56,7 +56,7 @@ public class LightMixerBehaviour : PlayableBehaviour
         m_TrackBinding.intensity = blendedIntensity + m_DefaultIntensity * (1f - totalWeight);
     }
 
-    public override void OnGraphStop (Playable playable)
+	public override void OnGraphStop (Playable playable)
     {
         m_FirstFrameHappened = false;
 

@@ -11,17 +11,12 @@ public class CameraManager : Singleton<CameraManager>
 
 	private CinemachineFreeLook groupFreeLook;
 
-	private bool isFramingPlatoon;
+	private bool isFramingPlatoon = false;
 	public bool IsFramingPlatoon { get{return isFramingPlatoon;} } //from the outside it's read-only
-
-	private void Awake()
-	{
-		
-	}
 
 	private void Start()
 	{
-		//instantiate a copy of the FreeLook VCam pointing at the dummy,
+		//Instantiate a copy of the FreeLook VCam pointing at the dummy,
 		//and use it to point at the group
 		groupFreeLook = Instantiate<GameObject>(dummyFreeLook.gameObject).GetComponent<CinemachineFreeLook>();
 		groupFreeLook.transform.SetParent(this.transform, true);
@@ -88,10 +83,4 @@ public class CameraManager : Singleton<CameraManager>
 
 		UIManager.Instance.ToggleCameraLockedIcon(isFramingPlatoon);
 	}
-
-	/*public Vector2 GetVCamDeadZone()
-	{
-		CinemachineComposer composer = gameplayVCam.GetCinemachineComponent<CinemachineComposer>();
-		return new Vector2(composer.m_SoftZoneWidth, composer.m_SoftZoneHeight);
-	}*/
 }

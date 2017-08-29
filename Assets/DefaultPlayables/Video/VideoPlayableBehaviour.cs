@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Video;
 
-namespace UnityEngine.Timeline
+namespace DefaultPlayables
 {
 	public class VideoPlayableBehaviour : PlayableBehaviour
     {
