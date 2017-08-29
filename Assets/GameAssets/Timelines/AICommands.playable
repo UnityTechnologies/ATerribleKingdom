@@ -696,7 +696,7 @@ MonoBehaviour:
     targetPosition: {x: 0, y: 0, z: 0}
     commandExecuted: 0
   actionType: 4
-  targetPosition: {x: 7.5133204, y: 0, z: -9.310174}
+  targetPosition: {x: -7.1443295, y: 0, z: -8.65543}
   targetUnit:
     exposedName: 56a69e02f369b4d2c89951b23c44a58a
     defaultValue: {fileID: 0}

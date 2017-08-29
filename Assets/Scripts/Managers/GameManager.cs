@@ -11,9 +11,9 @@ public class GameManager : Singleton<GameManager>
 	{
 		selectedPlatoon = GetComponent<Platoon>();
 		Cursor.lockState = CursorLockMode.Confined;
-#if UNITY_EDITOR
+		#if UNITY_EDITOR
 		Application.targetFrameRate = 30; //just to keep things "smooth" during presentations
-#endif
+		#endif
 	}
 
 	public void IssueCommand(AICommand cmd)

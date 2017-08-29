@@ -24,6 +24,15 @@ public class InputManager : Singleton<InputManager>
 
 	private const float CLICK_TOLERANCE = .5f; //the player has this time to release the mouse button for it to be registered as a click
 
+	private void Awake()
+	{
+		#if !UNITY_EDITOR
+		//to restore the mouseMovesCamera parameter (which in the player has to be always true)
+		//in case someone forgot it on false in the Editor :)
+		mouseMovesCamera = true;
+		#endif
+	}
+
 	private void Update()
 	{
 		currentMousePos = Input.mousePosition;

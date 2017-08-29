@@ -6,7 +6,10 @@ using Cinemachine;
 public class CameraManager : Singleton<CameraManager>
 {
 	public Transform gameplayDummy;
+	public CinemachineFreeLook dummyFreeLook;
 	public CinemachineTargetGroup targetGroup;
+
+	private CinemachineFreeLook groupFreeLook;
 
 	private bool isFramingPlatoon;
 	public bool IsFramingPlatoon { get{return isFramingPlatoon;} } //from the outside it's read-only
@@ -14,6 +17,17 @@ public class CameraManager : Singleton<CameraManager>
 	private void Awake()
 	{
 		
+	}
+
+	private void Start()
+	{
+		//instantiate a copy of the FreeLook VCam pointing at the dummy,
+		//and use it to point at the group
+		groupFreeLook = Instantiate<GameObject>(dummyFreeLook.gameObject).GetComponent<CinemachineFreeLook>();
+		groupFreeLook.transform.SetParent(this.transform, true);
+		groupFreeLook.LookAt = targetGroup.transform;
+		groupFreeLook.Follow = targetGroup.transform;
+		groupFreeLook.Priority = 0;
 	}
 
 	public void MoveGameplayCamera(Vector2 amount)
@@ -36,37 +50,43 @@ public class CameraManager : Singleton<CameraManager>
 	public void TogglePlatoonFramingMode()
 	{
 		isFramingPlatoon = !isFramingPlatoon;
+
 		if(isFramingPlatoon)
 		{
 			if(GameManager.Instance.GetSelectionLength() > 0)
 			{
+				//set the list of targets in the TargetGroup to the selected Units
 				Transform[] allTargets = GameManager.Instance.GetSelectionTransforms();
-				targetGroup.m_Targets = new CinemachineTargetGroup.Target[allTargets.Length]; //reset the targets
+				targetGroup.m_Targets = new CinemachineTargetGroup.Target[allTargets.Length]; //reset the targets list
 				for(int i = 0; i < allTargets.Length; i++)
 				{
 					targetGroup.m_Targets[i].target = allTargets[i];
 					targetGroup.m_Targets[i].weight = 1f;
 					targetGroup.m_Targets[i].radius = 1f;
 				}
+
+				//take the current "zoom level" (y axis) from the dummy camera to the group one
+				groupFreeLook.m_YAxis = dummyFreeLook.m_YAxis;
+
+				//set camera priorities, the CMBrain will do the transition
+				dummyFreeLook.Priority = 0;
+				groupFreeLook.Priority = 100;
 			}
 		}
 		else
 		{
-			targetGroup.m_Targets = new CinemachineTargetGroup.Target[1]; //reset the targets to only the gameplay dummy
-			targetGroup.m_Targets[0].target = gameplayDummy;
-			targetGroup.m_Targets[0].weight = 1f;
-			targetGroup.m_Targets[0].radius = 1f;
-		}
-	}
+			targetGroup.m_Targets = new CinemachineTargetGroup.Target[0]; //reset the targets to nothing
+			gameplayDummy.localPosition = targetGroup.transform.localPosition; //bring the dummy to the target group to avoid any snap in position
 
-	private void Update()
-	{
-		if(isFramingPlatoon)
-		{
-			//If we're framing a group, keep the gameplayDummy position in sync with the targetGroup
-			//so when the camera stops following the group, there's no jump in position
-			gameplayDummy.localPosition = targetGroup.transform.localPosition;
+			//take the current "zoom level" (y axis) from the group camera to the dummy one
+			groupFreeLook.m_YAxis = dummyFreeLook.m_YAxis;
+
+			//set camera priorities, the CMBrain will do the transition
+			groupFreeLook.Priority = 0;
+			dummyFreeLook.Priority = 100;
 		}
+
+		UIManager.Instance.ToggleCameraLockedIcon(isFramingPlatoon);
 	}
 
 	/*public Vector2 GetVCamDeadZone()

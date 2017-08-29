@@ -6,15 +6,22 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
 	public Image selectionRectangle;
+	public Image cameraLockedIcon;
 
-	private void Awake()
+	private void Start()
 	{
 		selectionRectangle.enabled = false;
+		cameraLockedIcon.enabled = false;
 	}
 
 	public void ToggleSelectionRectangle(bool active)
 	{
 		selectionRectangle.enabled = active;
+	}
+
+	public void ToggleCameraLockedIcon(bool active)
+	{
+		cameraLockedIcon.enabled = active;
 	}
 
 	public void SetSelectionRectangle(Rect rectSize)

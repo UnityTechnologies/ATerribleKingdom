@@ -18,6 +18,7 @@ public class Unit : MonoBehaviour
 	private Unit targetOfAttack;
 	private Unit[] hostiles;
 	private float lastGuardCheckTime, guardCheckInterval = 1f;
+	private bool isReady = false;
 
 	void Awake ()
 	{
@@ -39,8 +40,16 @@ public class Unit : MonoBehaviour
 		Guard();
 	}
 	
-	void LateUpdate()
+	void Update()
 	{
+		//Little hack to give time to the NavMesh agent to set its destination.
+		//without this, the Unit would switch its state before the NavMeshAgent can kick off, leading to unpredictable results
+		if(!isReady)
+		{
+			isReady = true;
+			return;
+		}
+
 		switch(state)
 		{
 			case UnitState.MovingToSpotIdle:
@@ -59,7 +68,7 @@ public class Unit : MonoBehaviour
 
 			case UnitState.MovingToTarget:
 				//check if target has been killed by somebody else
-				if(targetOfAttack.state == UnitState.Dead)
+				if(IsDeadOrNull(targetOfAttack))
 				{
 					Guard();
 				}
@@ -91,9 +100,17 @@ public class Unit : MonoBehaviour
 				}
 				break;
 			case UnitState.Attacking:
-				//look towards the target
-				Vector3 desiredForward = (targetOfAttack.transform.position - transform.position).normalized;
-				transform.forward = Vector3.Lerp(transform.forward, desiredForward, Time.deltaTime * 10f);
+				//check if target has been killed by somebody else
+				if(IsDeadOrNull(targetOfAttack))
+				{
+					Guard();
+				}
+				else
+				{
+					//look towards the target
+					Vector3 desiredForward = (targetOfAttack.transform.position - transform.position).normalized;
+					transform.forward = Vector3.Lerp(transform.forward, desiredForward, Time.deltaTime * 10f);
+				}
 				break;
 		}
 
@@ -103,11 +120,6 @@ public class Unit : MonoBehaviour
 
 	public void ExecuteCommand(AICommand c)
 	{
-		if(state == UnitState.Dead)
-		{
-			return;
-		}
-
 		switch(c.commandType)
 		{
 			case AICommand.CommandType.GoToAndIdle:
@@ -137,6 +149,8 @@ public class Unit : MonoBehaviour
 	{
 		state = UnitState.MovingToSpotIdle;
 		targetOfAttack = null;
+		isReady = false;
+
 		navMeshAgent.isStopped = false;
 		navMeshAgent.SetDestination(location);
 	}
@@ -146,6 +160,8 @@ public class Unit : MonoBehaviour
 	{
 		state = UnitState.MovingToSpotGuard;
 		targetOfAttack = null;
+		isReady = false;
+
 		navMeshAgent.isStopped = false;
 		navMeshAgent.SetDestination(location);
 	}
@@ -155,6 +171,8 @@ public class Unit : MonoBehaviour
 	{
 		state = UnitState.Idle;
 		targetOfAttack = null;
+		isReady = false;
+
 		navMeshAgent.isStopped = true;
 		navMeshAgent.velocity = Vector3.zero;
 	}
@@ -164,6 +182,8 @@ public class Unit : MonoBehaviour
 	{
 		state = UnitState.Guarding;
 		targetOfAttack = null;
+		isReady = false;
+
 		navMeshAgent.isStopped = true;
 		navMeshAgent.velocity = Vector3.zero;
 	}
@@ -171,11 +191,12 @@ public class Unit : MonoBehaviour
 	//move towards a target to attack it
 	private void MoveToAttack(Unit target)
 	{
-		if(target != null
-			&& target.state != UnitState.Dead)
+		if(!IsDeadOrNull(target))
 		{
 			state = UnitState.MovingToTarget;
 			targetOfAttack = target;
+			isReady = false;
+
 			navMeshAgent.isStopped = false;
 			navMeshAgent.SetDestination(target.transform.position);
 		}
@@ -190,9 +211,10 @@ public class Unit : MonoBehaviour
 	private void StartAttacking()
 	{
 		//somebody might have killed the target while this Unit was approaching it
-		if(targetOfAttack.state != UnitState.Dead)
+		if(!IsDeadOrNull(targetOfAttack))
 		{
 			state = UnitState.Attacking;
+			isReady = false;
 			navMeshAgent.isStopped = true;
 			StartCoroutine(DealAttack());
 		}
@@ -213,8 +235,7 @@ public class Unit : MonoBehaviour
 			yield return new WaitForSeconds(1f / template.attackSpeed);
 
 			//check is performed after the wait, because somebody might have killed the target in the meantime
-			if(targetOfAttack == null
-				|| targetOfAttack.state == UnitState.Dead)
+			if(IsDeadOrNull(targetOfAttack))
 			{
 				animator.SetTrigger("InterruptAttack");
 				break;
@@ -262,14 +283,26 @@ public class Unit : MonoBehaviour
 	//called in SufferAttack, but can also be from a Timeline clip
 	private void Die()
 	{
-		state = UnitState.Dead;
+		state = UnitState.Dead; //still makes sense to set it, because somebody might be interacting with this script before it is destroyed
 		animator.SetTrigger("DoDeath");
-		navMeshAgent.enabled = false;
 
 		//Remove itself from the selection Platoon
 		GameManager.Instance.RemoveFromSelection(this);
 		SetSelected(false);
-		GetComponent<Collider>().enabled = false; //will make it unselectable on click
+		gameObject.tag = "Untagged";
+		gameObject.layer = 0;
+
+		//Remove unneeded Components
+		Destroy(selectionCircle);
+		Destroy(navMeshAgent);
+		Destroy(GetComponent<Collider>()); //will make it unselectable on click
+		Destroy(animator, 4f); //give it some time to complete the animation
+		Destroy(this);
+	}
+
+	private bool IsDeadOrNull(Unit u)
+	{
+		return (u == null || u.state == UnitState.Dead);
 	}
 
 	private Unit GetNearestHostileUnit()
@@ -280,7 +313,7 @@ public class Unit : MonoBehaviour
 		float nearestEnemyDistance = 1000f;
 		for(int i=0; i<hostiles.Count(); i++)
 		{
-			if(hostiles[i].state == UnitState.Dead)
+			if(IsDeadOrNull(hostiles[i]))
 			{
 				continue;
 			}
@@ -301,8 +334,6 @@ public class Unit : MonoBehaviour
 
 	public void SetSelected(bool selected)
 	{
-		//isSelected = selected; //currently unused
-
 		//Set transparency dependent on selection
 		Color newColor = selectionCircle.color;
 		newColor.a = (selected) ? 1f : .3f;

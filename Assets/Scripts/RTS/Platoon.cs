@@ -109,7 +109,8 @@ public class Platoon : MonoBehaviour
 
 		for(int i=0; i<units.Count; i++)
 		{
-			if(units[i].state != Unit.UnitState.Dead)
+			if(units[i] != null
+				&& units[i].state != Unit.UnitState.Dead)
 			{
 				allDead = false;
 				break;
