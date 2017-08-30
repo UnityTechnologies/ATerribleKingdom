@@ -6,18 +6,18 @@ using UnityEditor;
 [CustomEditor(typeof(AICommandClip))]
 public class AICommandInspector : Editor
 {
-	private SerializedProperty actionTypeP;
+	private SerializedProperty commandProp;
 	private int typeIndex;
 
 	private void OnEnable()
 	{
 		SceneView.onSceneGUIDelegate += OnSceneGUI;
-		actionTypeP = serializedObject.FindProperty("actionType");
+		commandProp = serializedObject.FindProperty("actionType");
 	}
 
 	public override void OnInspectorGUI()
 	{
-		EditorGUILayout.PropertyField(actionTypeP);
+		EditorGUILayout.PropertyField(commandProp);
 
 		typeIndex = serializedObject.FindProperty("actionType").enumValueIndex;
 		AICommand.CommandType commandType = (AICommand.CommandType)typeIndex;

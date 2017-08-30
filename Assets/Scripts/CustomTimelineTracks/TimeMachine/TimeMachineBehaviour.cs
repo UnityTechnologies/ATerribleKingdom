@@ -6,9 +6,9 @@ using UnityEngine.Timeline;
 [Serializable]
 public class TimeMachineBehaviour : PlayableBehaviour
 {
-	public TimeMachineClipType clipType;
-	public ConditionType condition;
-	public string labelToJumpTo, markerLabel;
+	public TimeMachineAction action;
+	public Condition condition;
+	public string markerToJumpTo, markerLabel;
 	public float timeToJumpTo;
     public Platoon platoon;
 
@@ -19,10 +19,10 @@ public class TimeMachineBehaviour : PlayableBehaviour
 	{
 		switch(condition)
 		{
-			case ConditionType.Always:
+			case Condition.Always:
 				return true;
 				
-			case ConditionType.PlatoonIsAlive:
+			case Condition.PlatoonIsAlive:
 				//The Timeline will jump to the label or time if a specific Platoon still has at least 1 unit alive
 				if(platoon != null)
 				{
@@ -33,13 +33,13 @@ public class TimeMachineBehaviour : PlayableBehaviour
 					return false;
 				}
 
-			case ConditionType.Never:
+			case Condition.Never:
 			default:
 				return false;
 		}
 	}
 
-	public enum TimeMachineClipType
+	public enum TimeMachineAction
 	{
 		Marker,
 		JumpToTime,
@@ -47,7 +47,7 @@ public class TimeMachineBehaviour : PlayableBehaviour
 		Pause,
 	}
 
-	public enum ConditionType
+	public enum Condition
 	{
 		Always,
 		Never,

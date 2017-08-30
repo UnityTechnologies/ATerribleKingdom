@@ -234,7 +234,7 @@ MonoBehaviour:
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114034453818928170}
     m_EaseInDuration: 0
-    m_EaseOutDuration: 2
+    m_EaseOutDuration: 0
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
@@ -290,7 +290,7 @@ MonoBehaviour:
     m_Duration: 8.31666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114034453818928170}
-    m_EaseInDuration: 2
+    m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
@@ -340,6 +340,33 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: StormVCam
+--- !u!114 &114047314028728464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf4b89c5481734dee987f04580f725cf, type: 3}
+  m_Name: TimeMachineClip
+  m_EditorClassIdentifier: 
+  template:
+    action: 0
+    condition: 0
+    markerToJumpTo: 
+    markerLabel: 
+    timeToJumpTo: 0
+    platoon: {fileID: 0}
+    clipExecuted: 0
+  action: 2
+  condition: 0
+  markerToJumpTo: Fwd
+  markerLabel: 
+  timeToJumpTo: 0
+  platoon:
+    exposedName: 1f5434ac57aea4b64954ce647985302f
+    defaultValue: {fileID: 0}
 --- !u!114 &114056993475025598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -816,7 +843,19 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -883,16 +922,16 @@ MonoBehaviour:
   m_Name: TimeMachineClip
   m_EditorClassIdentifier: 
   template:
-    clipType: 0
+    action: 0
     condition: 0
-    labelToJumpTo: 
+    markerToJumpTo: 
     markerLabel: 
     timeToJumpTo: 0
     platoon: {fileID: 0}
     clipExecuted: 0
-  clipType: 0
+  action: 0
   condition: 0
-  labelToJumpTo: 
+  markerToJumpTo: 
   markerLabel: AfterIntro
   timeToJumpTo: 0
   platoon:
@@ -1052,6 +1091,33 @@ MonoBehaviour:
   searchHierarchy: 0
   active: 1
   postPlayback: 2
+--- !u!114 &114355584072090974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf4b89c5481734dee987f04580f725cf, type: 3}
+  m_Name: TimeMachineClip
+  m_EditorClassIdentifier: 
+  template:
+    action: 0
+    condition: 0
+    markerToJumpTo: 
+    markerLabel: 
+    timeToJumpTo: 0
+    platoon: {fileID: 0}
+    clipExecuted: 0
+  action: 0
+  condition: 0
+  markerToJumpTo: Fwd
+  markerLabel: Fwd
+  timeToJumpTo: 0
+  platoon:
+    exposedName: 75b2ab41df38549e28c089f4cca922e4
+    defaultValue: {fileID: 0}
 --- !u!114 &114359556552657072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2088,33 +2154,6 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
---- !u!114 &114615613455457492
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf4b89c5481734dee987f04580f725cf, type: 3}
-  m_Name: TimeMachineClip
-  m_EditorClassIdentifier: 
-  template:
-    clipType: 0
-    condition: 0
-    labelToJumpTo: 
-    markerLabel: 
-    timeToJumpTo: 0
-    platoon: {fileID: 0}
-    clipExecuted: 0
-  clipType: 3
-  condition: 0
-  labelToJumpTo: 
-  markerLabel: 
-  timeToJumpTo: 0
-  platoon:
-    exposedName: 3e6609c08acc641a4bb1bcba6e77eec1
-    defaultValue: {fileID: 0}
 --- !u!114 &114625630045295032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2193,16 +2232,16 @@ MonoBehaviour:
   m_Name: TimeMachineClip
   m_EditorClassIdentifier: 
   template:
-    clipType: 0
+    action: 0
     condition: 0
-    labelToJumpTo: 
+    markerToJumpTo: 
     markerLabel: 
     timeToJumpTo: 0
     platoon: {fileID: 0}
     clipExecuted: 0
-  clipType: 2
+  action: 2
   condition: 2
-  labelToJumpTo: AfterIntro
+  markerToJumpTo: AfterIntro
   markerLabel: 
   timeToJumpTo: 0
   platoon:
@@ -3104,68 +3143,11 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 6.566666666666666
-    m_ClipIn: 0
-    m_Asset: {fileID: 114615613455457492}
-    m_UnderlyingAsset: {fileID: 114216567722098668}
-    m_Duration: 3.25
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114818737606313686}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: '||'
   - m_Start: 9.816666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114216567722098668}
     m_UnderlyingAsset: {fileID: 114216567722098668}
-    m_Duration: 5.966666666666667
+    m_Duration: 4.733333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114818737606313686}
     m_EaseInDuration: 0
@@ -3218,11 +3200,125 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: "\u25CF AfterIntro"
-  - m_Start: 16.55
+  - m_Start: 15.25
+    m_ClipIn: 0
+    m_Asset: {fileID: 114047314028728464}
+    m_UnderlyingAsset: {fileID: 114216567722098668}
+    m_Duration: 3.9833333333333334
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 114818737606313686}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: "\u21A9\uFE0E  Fwd"
+  - m_Start: 31.15
+    m_ClipIn: 0
+    m_Asset: {fileID: 114355584072090974}
+    m_UnderlyingAsset: {fileID: 114216567722098668}
+    m_Duration: 3.9833333333333334
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 114818737606313686}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: "\u25CF Fwd"
+  - m_Start: 37.1
     m_ClipIn: 0
     m_Asset: {fileID: 114654433427783384}
     m_UnderlyingAsset: {fileID: 114216567722098668}
-    m_Duration: 6.033333333333333
+    m_Duration: 5.35
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114818737606313686}
     m_EaseInDuration: 0

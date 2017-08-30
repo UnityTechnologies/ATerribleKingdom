@@ -28,19 +28,19 @@ public class TimeMachineMixerBehaviour : PlayableBehaviour
             
 			if(inputWeight > 0f)
 			{
-				switch(input.clipType)
+				switch(input.action)
 				{
-					case TimeMachineBehaviour.TimeMachineClipType.Pause:
+					case TimeMachineBehaviour.TimeMachineAction.Pause:
 						Debug.Log("Pause");
 						(playable.GetGraph().GetResolver() as PlayableDirector).Pause();
 						break;
 
-					case TimeMachineBehaviour.TimeMachineClipType.JumpToTime:
-					case TimeMachineBehaviour.TimeMachineClipType.JumpToMarker:
+					case TimeMachineBehaviour.TimeMachineAction.JumpToTime:
+					case TimeMachineBehaviour.TimeMachineAction.JumpToMarker:
 						if(input.ConditionMet())
 						{
 							//Rewind
-							if(input.clipType == TimeMachineBehaviour.TimeMachineClipType.JumpToTime)
+							if(input.action == TimeMachineBehaviour.TimeMachineAction.JumpToTime)
 							{
 								//Jump to time
 								(playable.GetGraph().GetResolver() as PlayableDirector).time = (double)input.timeToJumpTo;
@@ -48,7 +48,7 @@ public class TimeMachineMixerBehaviour : PlayableBehaviour
 							else
 							{
 								//Jump to marker
-								double t = markerClips[input.labelToJumpTo];
+								double t = markerClips[input.markerToJumpTo];
 								(playable.GetGraph().GetResolver() as PlayableDirector).time = t;
 							}
 						}

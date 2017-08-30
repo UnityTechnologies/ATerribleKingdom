@@ -6,7 +6,7 @@ using UnityEngine.Timeline;
 [Serializable]
 public class AICommandBehaviour : PlayableBehaviour
 {
-	public AICommand.CommandType actionType;
+	public AICommand.CommandType commandType;
 	public Unit targetUnit;
     public Vector3 targetPosition;
 

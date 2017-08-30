@@ -1626,7 +1626,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.9642289, b: 0.9117647, a: 1}
+  m_Color: {r: 1, g: 0.9647059, b: 0.9098039, a: 1}
   m_Intensity: 1
   m_Range: 1564.5952
   m_SpotAngle: 30
@@ -2184,7 +2184,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 113031650}
-  m_LocalRotation: {x: -0.035737593, y: 0.38324323, z: -0.014795674, w: -0.92283726}
+  m_LocalRotation: {x: -0.03153163, y: 0.3827381, z: -0.013071748, w: -0.9232261}
   m_LocalPosition: {x: 46.4, y: 12.7, z: -25.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -17656,6 +17656,7 @@ PlayableDirector:
   m_ExposedReferences:
     m_References:
     - bbf68e8bb2dfb41eea99523aaeb9f6ec: {fileID: 0}
+    - 75b2ab41df38549e28c089f4cca922e4: {fileID: 245032846}
     - 9c0efcea42fa94af796170ba0ae36e34: {fileID: 1913204498}
     - fcbf3311e06ee4f8987de8eb58dea33a: {fileID: 1874150794}
     - d1b0b3c2243ba480e93c3626123a2cb5: {fileID: 1024726712}
@@ -17678,6 +17679,7 @@ PlayableDirector:
     - 752acf7e470e646ef8a0017a58457717: {fileID: 1874150794}
     - 5930d33d7a9c649b3a5d92bcf455cfe6: {fileID: 1852946571}
     - 6269b5bc921984d49a7513cd8aac868e: {fileID: 1913204498}
+    - 74eb0b528def94709814d55982a43ae4: {fileID: 245032846}
     - bb90551176c214b0dab90b96028f130b: {fileID: 1913204498}
     - 17073fd41738e4ecaba2ea978cbdb6ea: {fileID: 1211518116}
     - ddde330a8f805400e86c6534dc45401b: {fileID: 245032846}
@@ -17700,6 +17702,7 @@ PlayableDirector:
     - 9a4bef0268f60474b822f3e92f383af6: {fileID: 1913204498}
     - 8e17e9e27af514d5495f6ee3627fbb47: {fileID: 1913204498}
     - 032ec4d765f684388855d097372d72f9: {fileID: 1852946571}
+    - 1f5434ac57aea4b64954ce647985302f: {fileID: 245032846}
     - 39ed09045d9724693b8e04ed6e8780f9: {fileID: 805594274}
     - 3d5bf2e5e61d54eb8b4b4b95930636d5: {fileID: 1211518116}
     - 3314c656c87ef409590a400cc1ac01a9: {fileID: 1024726712}

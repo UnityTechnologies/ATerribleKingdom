@@ -56,7 +56,7 @@ public class LightMixerBehaviour : PlayableBehaviour
         m_TrackBinding.intensity = blendedIntensity + m_DefaultIntensity * (1f - totalWeight);
     }
 
-	public override void OnGraphStop (Playable playable)
+	public override void OnPlayableDestroy(Playable playable)
     {
         m_FirstFrameHappened = false;
 

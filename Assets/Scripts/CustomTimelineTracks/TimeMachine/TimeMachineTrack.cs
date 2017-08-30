@@ -19,13 +19,13 @@ public class TimeMachineTrack : TrackAsset
 			TimeMachineClip clip = (TimeMachineClip)c.asset;
 			string clipName = c.displayName;
 
-			switch(clip.clipType)
+			switch(clip.action)
 			{
-				case TimeMachineBehaviour.TimeMachineClipType.Pause:
+				case TimeMachineBehaviour.TimeMachineAction.Pause:
 					clipName = "||";
 					break;
 
-				case TimeMachineBehaviour.TimeMachineClipType.Marker:
+				case TimeMachineBehaviour.TimeMachineAction.Marker:
 					clipName = "● " + clip.markerLabel.ToString();
 
 					//Insert the marker clip into the Dictionary of markers
@@ -35,11 +35,11 @@ public class TimeMachineTrack : TrackAsset
 					}
 					break;
 
-				case TimeMachineBehaviour.TimeMachineClipType.JumpToMarker:
-					clipName = "↩︎  " + clip.labelToJumpTo.ToString();
+				case TimeMachineBehaviour.TimeMachineAction.JumpToMarker:
+					clipName = "↩︎  " + clip.markerToJumpTo.ToString();
 					break;
 
-				case TimeMachineBehaviour.TimeMachineClipType.JumpToTime:
+				case TimeMachineBehaviour.TimeMachineAction.JumpToTime:
 					clipName = "↩ " + clip.timeToJumpTo.ToString();
 					break;
 			}
@@ -47,7 +47,7 @@ public class TimeMachineTrack : TrackAsset
 			c.displayName = clipName;
 
 
-			if(clip.clipType == TimeMachineBehaviour.TimeMachineClipType.Marker)
+			if(clip.action == TimeMachineBehaviour.TimeMachineAction.Marker)
 			{
 				if(!b.markerClips.ContainsKey(clip.markerLabel)) //happens when you duplicate a clip and it has the same markerLabel
 				{

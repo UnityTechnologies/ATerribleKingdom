@@ -13,7 +13,7 @@ public class AICommandTrack : TrackAsset
 		{
 			//Clips are renamed after the actionType of the clip itself
 			AICommandClip clip = (AICommandClip)c.asset;
-			c.displayName = clip.actionType.ToString();
+			c.displayName = clip.commandType.ToString();
 		}
 
         return ScriptPlayable<AICommandMixerBehaviour>.Create (graph, inputCount);

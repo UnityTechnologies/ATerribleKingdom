@@ -45,7 +45,7 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			AICommandBehaviour input = inputPlayable.GetBehaviour();
 
 			//Some actionTypes have special needs
-			switch(input.actionType)
+			switch(input.commandType)
 			{
 				case AICommand.CommandType.Die:
 				case AICommand.CommandType.Stop:
@@ -98,7 +98,7 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			{
 				if(!input.commandExecuted)
 				{
-					AICommand c = new AICommand(input.actionType, input.targetPosition, input.targetUnit);
+					AICommand c = new AICommand(input.commandType, input.targetPosition, input.targetUnit);
 					trackBinding.ExecuteCommand(c);
 					input.commandExecuted = true; //this prevents the command to be executed every frame of this clip
 				}

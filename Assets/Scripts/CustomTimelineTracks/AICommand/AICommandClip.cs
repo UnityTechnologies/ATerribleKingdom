@@ -9,7 +9,7 @@ public class AICommandClip : PlayableAsset, ITimelineClipAsset
 	[HideInInspector]
 	public AICommandBehaviour template = new AICommandBehaviour ();
 	
-	public AICommand.CommandType actionType;
+	public AICommand.CommandType commandType;
 	public Vector3 targetPosition; //for movement
 	public ExposedReference<Unit> targetUnit; //for attacks
 
@@ -22,7 +22,7 @@ public class AICommandClip : PlayableAsset, ITimelineClipAsset
     {
         var playable = ScriptPlayable<AICommandBehaviour>.Create(graph, template);
 		AICommandBehaviour clone = playable.GetBehaviour();
-		clone.actionType = actionType;
+		clone.commandType = commandType;
 		clone.targetPosition = targetPosition;
 		clone.targetUnit = targetUnit.Resolve(graph.GetResolver());
         return playable;

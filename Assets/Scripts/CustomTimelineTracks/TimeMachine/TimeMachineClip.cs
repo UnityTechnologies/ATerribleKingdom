@@ -9,9 +9,9 @@ public class TimeMachineClip : PlayableAsset, ITimelineClipAsset
 	[HideInInspector]
     public TimeMachineBehaviour template = new TimeMachineBehaviour ();
 
-	public TimeMachineBehaviour.TimeMachineClipType clipType;
-	public TimeMachineBehaviour.ConditionType condition;
-	public string labelToJumpTo = "", markerLabel = "";
+	public TimeMachineBehaviour.TimeMachineAction action;
+	public TimeMachineBehaviour.Condition condition;
+	public string markerToJumpTo = "", markerLabel = "";
 	public float timeToJumpTo = 0f;
 
 	public ExposedReference<Platoon> platoon;
@@ -26,8 +26,8 @@ public class TimeMachineClip : PlayableAsset, ITimelineClipAsset
         var playable = ScriptPlayable<TimeMachineBehaviour>.Create (graph, template);
         TimeMachineBehaviour clone = playable.GetBehaviour ();
         clone.platoon = platoon.Resolve (graph.GetResolver ());
-		clone.labelToJumpTo = labelToJumpTo;
-		clone.clipType = clipType;
+		clone.markerToJumpTo = markerToJumpTo;
+		clone.action = action;
 		clone.condition = condition;
 		clone.markerLabel = markerLabel;
 		clone.timeToJumpTo = timeToJumpTo;
