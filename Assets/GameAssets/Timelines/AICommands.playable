@@ -115,7 +115,7 @@ MonoBehaviour:
     targetPosition: {x: 0, y: 0, z: 0}
     commandExecuted: 0
   commandType: 1
-  targetPosition: {x: 11.716429, y: 0, z: -8.903933}
+  targetPosition: {x: 11.716429, y: -4.5549736, z: -8.903933}
   targetUnit:
     exposedName: 9ba21b4fd8798409daf5d4987b740f7f
     defaultValue: {fileID: 0}
@@ -168,19 +168,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

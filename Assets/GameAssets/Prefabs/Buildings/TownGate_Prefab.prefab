@@ -38,8 +38,7 @@ GameObject:
   - component: {fileID: 4538226745973824}
   - component: {fileID: 33460954792750908}
   - component: {fileID: 23787394362595038}
-  - component: {fileID: 64776584891244068}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: bailey_mdl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +70,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4785564598244644}
-  m_Layer: 10
+  - component: {fileID: 136372568701313020}
+  - component: {fileID: 136236562679956122}
+  - component: {fileID: 65274559353721174}
+  m_Layer: 0
   m_Name: TownGate_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,20 +850,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1036060706762302}
   m_Mesh: {fileID: 4300002, guid: bddc6adcb2e2d2e4290ec48a7e27a2d1, type: 3}
---- !u!64 &64776584891244068
-MeshCollider:
+--- !u!65 &65274559353721174
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1033057069583840}
+  m_GameObject: {fileID: 1101196635549080}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 7ffd4b55ce9292c47b0356fdef2311a7, type: 3}
+  m_Size: {x: 12.714817, y: 11.782904, z: 3.5795927}
+  m_Center: {x: 8.406106e-10, y: 5.391452, z: -0.08666605}
 --- !u!108 &108618299080013228
 Light:
   m_ObjectHideFlags: 1
@@ -934,6 +934,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!136 &136236562679956122
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101196635549080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.84
+  m_Height: 21.963017
+  m_Direction: 1
+  m_Center: {x: -5.69, y: 8.206877, z: -0.000000011050602}
+--- !u!136 &136372568701313020
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101196635549080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.34
+  m_Height: 19.601364
+  m_Direction: 1
+  m_Center: {x: 5.67, y: 7.0260506, z: -0.000000021080723}
 --- !u!198 &198447207536431136
 ParticleSystem:
   m_ObjectHideFlags: 1
