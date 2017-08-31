@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Playables;
 
 public class GameManager : Singleton<GameManager>
 {
+	public GameMode gameMode = GameMode.Gameplay;
+
 	private Platoon selectedPlatoon;
+	private PlayableDirector activeDirector;
 
 	private void Awake()
 	{
@@ -88,5 +92,25 @@ public class GameManager : Singleton<GameManager>
 	public Unit[] GetAllSelectableUnits()
 	{
 		return GameObject.FindGameObjectsWithTag("Locals").Select(x => x.GetComponent<Unit>()).ToArray();
+	}
+
+	public void PauseTimeline(PlayableDirector whichOne)
+	{
+		activeDirector = whichOne;
+		activeDirector.Pause();
+		gameMode = GameMode.DialogueMoment; //InputManager will be waiting for a spacebar to resume
+	}
+
+	public void TimelineResumed()
+	{
+		activeDirector.Resume();
+		gameMode = GameMode.Gameplay;
+	}
+
+	public enum GameMode
+	{
+		Gameplay,
+		Cutscene,
+		DialogueMoment, //waiting for input
 	}
 }

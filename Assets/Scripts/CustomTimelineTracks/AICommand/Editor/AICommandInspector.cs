@@ -12,14 +12,14 @@ public class AICommandInspector : Editor
 	private void OnEnable()
 	{
 		SceneView.onSceneGUIDelegate += OnSceneGUI;
-		commandProp = serializedObject.FindProperty("actionType");
+		commandProp = serializedObject.FindProperty("commandType");
 	}
 
 	public override void OnInspectorGUI()
 	{
 		EditorGUILayout.PropertyField(commandProp);
 
-		typeIndex = serializedObject.FindProperty("actionType").enumValueIndex;
+		typeIndex = serializedObject.FindProperty("commandType").enumValueIndex;
 		AICommand.CommandType commandType = (AICommand.CommandType)typeIndex;
 
 		//Draws only the appropriate information based on the Command Type

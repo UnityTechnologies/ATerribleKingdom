@@ -144,8 +144,11 @@ public class Platoon : MonoBehaviour
 	{
 		for(int i=0; i<units.Count; i++)
 		{
-			Gizmos.color = new Color(.8f, .8f, 1f, 1f);
-			Gizmos.DrawCube(units[i].transform.position, new Vector3(1f, .1f, 1f));
+			if(units[i] != null)
+			{
+				Gizmos.color = new Color(.8f, .8f, 1f, 1f);
+				Gizmos.DrawCube(units[i].transform.position, new Vector3(1f, .1f, 1f));
+			}
 		}
 	}
 }

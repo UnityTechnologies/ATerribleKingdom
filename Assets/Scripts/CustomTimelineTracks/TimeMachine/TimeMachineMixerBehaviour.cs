@@ -7,6 +7,12 @@ using UnityEngine.Timeline;
 public class TimeMachineMixerBehaviour : PlayableBehaviour
 {
 	public Dictionary<string, double> markerClips;
+	private PlayableDirector director;
+
+	public override void OnPlayableCreate(Playable playable)
+	{
+		director = (playable.GetGraph().GetResolver() as PlayableDirector);
+	}
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData)
     {
@@ -33,8 +39,8 @@ public class TimeMachineMixerBehaviour : PlayableBehaviour
 					switch(input.action)
 					{
 						case TimeMachineBehaviour.TimeMachineAction.Pause:
-							Debug.Log("Pause");
-							(playable.GetGraph().GetResolver() as PlayableDirector).Pause();
+							GameManager.Instance.PauseTimeline(director);
+							input.clipExecuted = true; //this prevents the command to be executed every frame of this clip
 							break;
 							
 						case TimeMachineBehaviour.TimeMachineAction.JumpToTime:
@@ -53,12 +59,12 @@ public class TimeMachineMixerBehaviour : PlayableBehaviour
 									double t = markerClips[input.markerToJumpTo];
 									(playable.GetGraph().GetResolver() as PlayableDirector).time = t;
 								}
+								input.clipExecuted = false; //we want the jump to happen again!
 							}
 							break;
 							
 					}
 
-					input.clipExecuted = true; //this prevents the command to be executed every frame of this clip
 				}
 			}
         }
