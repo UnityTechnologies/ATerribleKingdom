@@ -28,32 +28,37 @@ public class TimeMachineMixerBehaviour : PlayableBehaviour
             
 			if(inputWeight > 0f)
 			{
-				switch(input.action)
+				if(!input.clipExecuted)
 				{
-					case TimeMachineBehaviour.TimeMachineAction.Pause:
-						Debug.Log("Pause");
-						(playable.GetGraph().GetResolver() as PlayableDirector).Pause();
-						break;
+					switch(input.action)
+					{
+						case TimeMachineBehaviour.TimeMachineAction.Pause:
+							Debug.Log("Pause");
+							(playable.GetGraph().GetResolver() as PlayableDirector).Pause();
+							break;
+							
+						case TimeMachineBehaviour.TimeMachineAction.JumpToTime:
+						case TimeMachineBehaviour.TimeMachineAction.JumpToMarker:
+							if(input.ConditionMet())
+							{
+								//Rewind
+								if(input.action == TimeMachineBehaviour.TimeMachineAction.JumpToTime)
+								{
+									//Jump to time
+									(playable.GetGraph().GetResolver() as PlayableDirector).time = (double)input.timeToJumpTo;
+								}
+								else
+								{
+									//Jump to marker
+									double t = markerClips[input.markerToJumpTo];
+									(playable.GetGraph().GetResolver() as PlayableDirector).time = t;
+								}
+							}
+							break;
+							
+					}
 
-					case TimeMachineBehaviour.TimeMachineAction.JumpToTime:
-					case TimeMachineBehaviour.TimeMachineAction.JumpToMarker:
-						if(input.ConditionMet())
-						{
-							//Rewind
-							if(input.action == TimeMachineBehaviour.TimeMachineAction.JumpToTime)
-							{
-								//Jump to time
-								(playable.GetGraph().GetResolver() as PlayableDirector).time = (double)input.timeToJumpTo;
-							}
-							else
-							{
-								//Jump to marker
-								double t = markerClips[input.markerToJumpTo];
-								(playable.GetGraph().GetResolver() as PlayableDirector).time = t;
-							}
-						}
-						break;
-						
+					input.clipExecuted = true; //this prevents the command to be executed every frame of this clip
 				}
 			}
         }

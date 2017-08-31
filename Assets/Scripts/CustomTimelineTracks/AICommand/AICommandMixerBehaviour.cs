@@ -106,7 +106,7 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 		}
 	}
 
-	public override void OnGraphStop(Playable playable)
+	public override void OnPlayableDestroy(Playable playable)
 	{
 		if(!Application.isPlaying)
 		{

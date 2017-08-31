@@ -11,17 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 337831424, guid: 844f815391db42d49455cbf1a7bfc434, type: 3}
   m_Name: simpleRotationTimeline
   m_EditorClassIdentifier: 
-  m_Id: 0
   m_NextId: 0
   m_Tracks:
   - {fileID: 114169421529474538}
   m_FixedDuration: 0
   m_EditorSettings:
     fps: 60
-    timeAreaShownRange: {x: 0.088706195, y: 5.312917}
-  m_ExtrapolationMode: 1
-  m_UpdateMode: 0
-  m_ParameterName: 
   m_DurationMode: 0
 --- !u!74 &74932885275555510
 AnimationClip:
@@ -312,7 +307,6 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 1
-  m_IsEmpty: 0
   m_Events: []
 --- !u!114 &114169421529474538
 MonoBehaviour:
@@ -327,16 +321,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Locked: 0
   m_Muted: 0
-  m_Soloed: 0
-  m_Height: 0
-  m_ShowInlineCurves: 1
-  m_InlineAnimationCurveHeight: 100
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 74932885275555510}
-  m_Collapsed: 1
   m_Parent: {fileID: 11400000}
   m_Children: []
-  m_MediaType: 0
   m_Clips: []
   m_OpenClipPreExtrapolation: 1
   m_OpenClipPostExtrapolation: 1
@@ -347,3 +335,5 @@ MonoBehaviour:
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+  m_AvatarMask: {fileID: 0}
+  m_ApplyAvatarMask: 1
