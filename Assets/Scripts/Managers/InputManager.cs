@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class InputManager : Singleton<InputManager>
 {
-	public bool InputEnabled { get{return inputEnabled;} set{inputEnabled = value;} }
-	private bool inputEnabled = true;
-
 	[Header("Camera")]
 	public bool mouseMovesCamera = true;
 	public Vector2 mouseDeadZone = new Vector2(.8f, .8f);
