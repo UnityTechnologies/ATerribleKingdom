@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114754031457083028}
   m_Children: []
   m_Clips:
-  - m_Start: 0
+  - m_Start: 0.16666666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114223174496276568}
     m_UnderlyingAsset: {fileID: 114223174496276568}
@@ -139,13 +139,13 @@ MonoBehaviour:
     m_ClipIn: 0
     m_Asset: {fileID: 114361016620216008}
     m_UnderlyingAsset: {fileID: 114361016620216008}
-    m_Duration: 3.7
+    m_Duration: 7
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114175200758964070}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
-    m_BlendOutDuration: 1.4666666666666668
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -192,39 +192,6 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamKillShot
-  - m_Start: 2.2333333333333334
-    m_ClipIn: 0
-    m_Asset: {fileID: 114377902111720532}
-    m_UnderlyingAsset: {fileID: 114361016620216008}
-    m_Duration: 4.784435653686522
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114175200758964070}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 1.4666666666666668
-    m_BlendOutDuration: 0.01776898701985541
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: VCamKillShot (1)
   - m_Start: 7
     m_ClipIn: 0
     m_Asset: {fileID: 114796671774835148}
@@ -234,7 +201,7 @@ MonoBehaviour:
     m_ParentTrack: {fileID: 114175200758964070}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 0.01776898701985541
+    m_BlendInDuration: -1
     m_BlendOutDuration: 8.616666666666667
     m_MixInCurve:
       serializedVersion: 2
@@ -430,11 +397,11 @@ MonoBehaviour:
   m_Parent: {fileID: 114754031457083028}
   m_Children: []
   m_Clips:
-  - m_Start: 0
+  - m_Start: 0.16666666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114432867671913384}
     m_UnderlyingAsset: {fileID: 114432867671913384}
-    m_Duration: 5
+    m_Duration: 4.466666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114200128170230512}
     m_EaseInDuration: 0
@@ -624,7 +591,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114754031457083028}
   m_Children: []
   m_Clips:
-  - m_Start: 5.283333333333333
+  - m_Start: 6.75
     m_ClipIn: 0
     m_Asset: {fileID: 114431848112857544}
     m_UnderlyingAsset: {fileID: 114432867671913384}
@@ -751,20 +718,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VirtualCamera:
     exposedName: 6443d82234a984f9998f09a9a717e43a
-    defaultValue: {fileID: 0}
---- !u!114 &114377902111720532
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90fb794a295e73545af71bcdb7375791, type: 3}
-  m_Name: CinemachineShot
-  m_EditorClassIdentifier: 
-  VirtualCamera:
-    exposedName: 9f4cea73d66e34890ad49deea7fb7c96
     defaultValue: {fileID: 0}
 --- !u!114 &114392761102646432
 MonoBehaviour:
