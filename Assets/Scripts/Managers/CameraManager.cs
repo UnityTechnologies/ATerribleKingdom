@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
@@ -6,6 +6,7 @@ using Cinemachine;
 public class CameraManager : Singleton<CameraManager>
 {
 	public Transform gameplayDummy;
+	public CinemachineBrain cmBrain;
 	public CinemachineFreeLook dummyFreeLook;
 	public CinemachineTargetGroup targetGroup;
 
@@ -71,7 +72,6 @@ public class CameraManager : Singleton<CameraManager>
 		else
 		{
 			targetGroup.m_Targets = new CinemachineTargetGroup.Target[0]; //reset the targets to nothing
-			gameplayDummy.localPosition = targetGroup.transform.localPosition; //bring the dummy to the target group to avoid any snap in position
 
 			//take the current "zoom level" (y axis) from the group camera to the dummy one
 			groupFreeLook.m_YAxis = dummyFreeLook.m_YAxis;
@@ -79,8 +79,22 @@ public class CameraManager : Singleton<CameraManager>
 			//set camera priorities, the CMBrain will do the transition
 			groupFreeLook.Priority = 0;
 			dummyFreeLook.Priority = 100;
+
+			//Move the dummy around to avoid any snap in position when going from targetGroup to dummy
+			CinemachineBlend blend = cmBrain.ActiveBlend;
+			if(blend != null)
+			{
+				//Mid-way through the blend, we get the in-between position
+				gameplayDummy.localPosition = Vector3.Lerp(gameplayDummy.localPosition, targetGroup.transform.localPosition, blend.BlendWeight);
+			}
+			else
+			{
+				//No blending happening, so we bring the dummy exactly to the target group
+				gameplayDummy.localPosition = targetGroup.transform.localPosition;
+			}
 		}
 
+		//Visualise the small camera locked icon in the top-left corner
 		UIManager.Instance.ToggleCameraLockedIcon(isFramingPlatoon);
 	}
 }
