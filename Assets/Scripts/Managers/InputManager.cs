@@ -189,7 +189,7 @@ public class InputManager : Singleton<InputManager>
 			case GameManager.GameMode.DialogueMoment:
 				if(Input.GetKeyDown(KeyCode.Space))
 				{
-					GameManager.Instance.TimelineResumed();
+					GameManager.Instance.ResumeTimeline();
 				}
 				break;
 		}

@@ -94,6 +94,7 @@ public class GameManager : Singleton<GameManager>
 		return GameObject.FindGameObjectsWithTag("Locals").Select(x => x.GetComponent<Unit>()).ToArray();
 	}
 
+	//Called by the TimeMachine Clip (of type Pause)
 	public void PauseTimeline(PlayableDirector whichOne)
 	{
 		activeDirector = whichOne;
@@ -101,7 +102,8 @@ public class GameManager : Singleton<GameManager>
 		gameMode = GameMode.DialogueMoment; //InputManager will be waiting for a spacebar to resume
 	}
 
-	public void TimelineResumed()
+	//Called by the InputManager
+	public void ResumeTimeline()
 	{
 		activeDirector.Resume();
 		gameMode = GameMode.Gameplay;
