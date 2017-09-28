@@ -484,13 +484,13 @@ AnimationClip:
         time: 0.33333334
         value: -0.034244537
         inSlope: 0
-        outSlope: 1.5462706
+        outSlope: 1.3824421
         tangentMode: 69
       - serializedVersion: 2
-        time: 42.116665
-        value: 64.5741
-        inSlope: 1.5462706
-        outSlope: 0
+        time: 34.783333
+        value: 47.59089
+        inSlope: 1.3824421
+        outSlope: 2.3158925
         tangentMode: 69
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -520,7 +520,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 42.116665
+    m_StopTime: 34.783333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -543,13 +543,13 @@ AnimationClip:
         time: 0.33333334
         value: -0.034244537
         inSlope: 0
-        outSlope: 1.5462706
+        outSlope: 1.3824421
         tangentMode: 69
       - serializedVersion: 2
-        time: 42.116665
-        value: 64.5741
-        inSlope: 1.5462706
-        outSlope: 0
+        time: 34.783333
+        value: 47.59089
+        inSlope: 1.3824421
+        outSlope: 2.3158925
         tangentMode: 69
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -674,6 +674,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
+    m_Version: 1
   - m_Start: 7.55
     m_ClipIn: 0
     m_Asset: {fileID: 114266981891506010}
@@ -731,6 +732,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
+    m_Version: 1
   - m_Start: 8.550000000000011
     m_ClipIn: 0
     m_Asset: {fileID: 114350429960593974}
@@ -788,6 +790,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
+    m_Version: 1
   - m_Start: 10.083333333334334
     m_ClipIn: 0
     m_Asset: {fileID: 114329312784560364}
@@ -845,6 +848,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
+    m_Version: 1
   m_PostPlaybackState: 0
 --- !u!114 &114117194905767458
 MonoBehaviour:
@@ -895,19 +899,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -921,6 +913,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 7.35
     m_DisplayName: Medium_Attack_Sword
+    m_Version: 1
   - m_Start: 7.666666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 114167392643605826}
@@ -934,19 +927,7 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -978,6 +959,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: Infinity
     m_PreExtrapolationTime: 0
     m_DisplayName: Medium_Idle_Spear
+    m_Version: 1
   m_OpenClipPreExtrapolation: 0
   m_OpenClipPostExtrapolation: 0
   m_OpenClipOffsetPosition: {x: 0, y: 0, z: 0}
@@ -1422,6 +1404,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TMPTextSwitcherClip
+    m_Version: 1
   - m_Start: 7.55
     m_ClipIn: 0
     m_Asset: {fileID: 114757906294663880}
@@ -1479,6 +1462,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TMPTextSwitcherClip
+    m_Version: 1
   - m_Start: 8.550000000000011
     m_ClipIn: 0
     m_Asset: {fileID: 114369603547664336}
@@ -1536,6 +1520,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TMPTextSwitcherClip
+    m_Version: 1
   - m_Start: 10.083333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114300190601734876}
@@ -1593,6 +1578,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TMPTextSwitcherClip
+    m_Version: 1
 --- !u!114 &114725009504202352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1668,6 +1654,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamBottomTower
+    m_Version: 1
   - m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114601219621990288}
@@ -1713,6 +1700,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamTopTower
+    m_Version: 1
   - m_Start: 5.75
     m_ClipIn: 0
     m_Asset: {fileID: 114960327794750128}
@@ -1758,6 +1746,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamBoyFace
+    m_Version: 1
   - m_Start: 7.35
     m_ClipIn: 0
     m_Asset: {fileID: 114830439747161078}
@@ -1791,6 +1780,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamToLiz
+    m_Version: 1
   - m_Start: 9.883333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 114072654078209744}
@@ -1836,6 +1826,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamLizFace
+    m_Version: 1
   - m_Start: 11.15
     m_ClipIn: 0
     m_Asset: {fileID: 114995903146211214}
@@ -1881,6 +1872,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamMonsterFar
+    m_Version: 1
   - m_Start: 21.78333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 114386620163766368}
@@ -1926,11 +1918,12 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamFlyingMonster
+    m_Version: 1
   - m_Start: 31.099999999999998
     m_ClipIn: 0
     m_Asset: {fileID: 114730067741205174}
     m_UnderlyingAsset: {fileID: 114626209143682922}
-    m_Duration: 6.15
+    m_Duration: 3.683333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114725009504202352}
     m_EaseInDuration: 0
@@ -1983,6 +1976,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamMonsterFar
+    m_Version: 1
 --- !u!114 &114730067741205174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2086,7 +2080,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114547174171754760}
   m_Children: []
   m_Clips:
-  - m_Start: 7.033333333333333
+  - m_Start: 7.016666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 114154927210279832}
     m_UnderlyingAsset: {fileID: 114154927210279832}
@@ -2143,6 +2137,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: '||'
+    m_Version: 1
   - m_Start: 9.45
     m_ClipIn: 0
     m_Asset: {fileID: 114810525265005728}
@@ -2200,6 +2195,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: '||'
+    m_Version: 1
   - m_Start: 10.983333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 114365872070935966}
@@ -2257,6 +2253,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: '||'
+    m_Version: 1
 --- !u!114 &114942337469988522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2361,6 +2358,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TMPTextSwitcherClip
+    m_Version: 1
   - m_Start: 7.55
     m_ClipIn: 0
     m_Asset: {fileID: 114549686092160532}
@@ -2418,6 +2416,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TMPTextSwitcherClip
+    m_Version: 1
   - m_Start: 8.550000000000011
     m_ClipIn: 0
     m_Asset: {fileID: 114942337469988522}
@@ -2475,6 +2474,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TMPTextSwitcherClip
+    m_Version: 1
   - m_Start: 10.083333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114789275813951972}
@@ -2532,6 +2532,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TMPTextSwitcherClip
+    m_Version: 1
 --- !u!114 &114995903146211214
 MonoBehaviour:
   m_ObjectHideFlags: 1
