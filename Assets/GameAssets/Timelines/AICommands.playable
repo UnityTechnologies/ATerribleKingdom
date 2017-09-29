@@ -96,6 +96,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: GoToAndGuard
+    m_Version: 1
 --- !u!114 &114087010338933320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,6 +193,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamKillShot
+    m_Version: 1
   - m_Start: 7
     m_ClipIn: 0
     m_Asset: {fileID: 114796671774835148}
@@ -225,6 +227,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: DefendersShot
+    m_Version: 1
   - m_Start: 7.116666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114303760372525142}
@@ -270,6 +273,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: DefendersShot (1)
+    m_Version: 1
   - m_Start: 15.833333333333332
     m_ClipIn: 0
     m_Asset: {fileID: 114646581495946998}
@@ -315,6 +319,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: BattleShot
+    m_Version: 1
   - m_Start: 29.133333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 114763680036389680}
@@ -360,6 +365,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: FinalShot
+    m_Version: 1
 --- !u!114 &114181798768110796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,6 +460,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: AttackTarget
+    m_Version: 1
   - m_Start: 5.283333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 114400061796407552}
@@ -511,6 +518,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: GoToAndGuard
+    m_Version: 1
 --- !u!114 &114223174496276568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -648,6 +656,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: GoToAndGuard
+    m_Version: 1
   - m_Start: 14.483333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 114087010338933320}
@@ -705,6 +714,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: GoToAndGuard
+    m_Version: 1
 --- !u!114 &114361016620216008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -794,6 +804,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: "\u21A9 4"
+    m_Version: 1
 --- !u!114 &114400061796407552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -946,6 +957,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: GoToAndGuard
+    m_Version: 1
 --- !u!114 &114754031457083028
 MonoBehaviour:
   m_ObjectHideFlags: 1

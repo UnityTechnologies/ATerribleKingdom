@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : Singleton<UIManager>
 {
 	public Image selectionRectangle;
 	public Image cameraLockedIcon;
+
+	public TextMeshProUGUI charNameText, dialogueLineText;
+	public GameObject toggleSpacebarMessage, dialoguePanel;
 
 	private void Start()
 	{
@@ -30,4 +34,22 @@ public class UIManager : Singleton<UIManager>
 		selectionRectangle.rectTransform.sizeDelta = new Vector2(rectSize.width, rectSize.height);
 	}
 
+	public void SetDialogue(string charName, string lineOfDialogue, int sizeOfDialogue)
+	{
+		charNameText.SetText(charName);
+		dialogueLineText.SetText(lineOfDialogue);
+		dialogueLineText.fontSize = sizeOfDialogue;
+
+		ToggleDialoguePanel(true);
+	}
+
+	public void TogglePressSpacebarMessage(bool active)
+	{
+		toggleSpacebarMessage.SetActive(active);
+	}
+
+	public void ToggleDialoguePanel(bool active)
+	{
+		dialoguePanel.SetActive(active);
+	}
 }

@@ -563,6 +563,22 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 1
   m_Events: []
+--- !u!114 &114055151874216180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7405c6ab4a64d17876ab8ba7c4b112, type: 3}
+  m_Name: DialogueClip
+  m_EditorClassIdentifier: 
+  template:
+    characterName: Andy
+    dialogueLine: OI, ELIZABETH!
+    dialogueSize: 50
+    hasToPause: 0
 --- !u!114 &114056322482215040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -599,257 +615,6 @@ MonoBehaviour:
   VirtualCamera:
     exposedName: b403f94243e9f40a294ff73c2e3d29c8
     defaultValue: {fileID: 0}
---- !u!114 &114086096024974154
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 46519060, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
-  m_Name: Activation Track
-  m_EditorClassIdentifier: 
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
-  m_Parent: {fileID: 114547174171754760}
-  m_Children: []
-  m_Clips:
-  - m_Start: 6.116666666666666
-    m_ClipIn: 0
-    m_Asset: {fileID: 114374248369227674}
-    m_UnderlyingAsset: {fileID: 114374248369227674}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114086096024974154}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Active
-    m_Version: 1
-  - m_Start: 7.55
-    m_ClipIn: 0
-    m_Asset: {fileID: 114266981891506010}
-    m_UnderlyingAsset: {fileID: 114374248369227674}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114086096024974154}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Active
-    m_Version: 1
-  - m_Start: 8.550000000000011
-    m_ClipIn: 0
-    m_Asset: {fileID: 114350429960593974}
-    m_UnderlyingAsset: {fileID: 114374248369227674}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114086096024974154}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Active
-    m_Version: 1
-  - m_Start: 10.083333333334334
-    m_ClipIn: 0
-    m_Asset: {fileID: 114329312784560364}
-    m_UnderlyingAsset: {fileID: 114374248369227674}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114086096024974154}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: Active
-    m_Version: 1
-  m_PostPlaybackState: 0
 --- !u!114 &114117194905767458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -899,7 +664,19 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -927,7 +704,19 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -971,33 +760,6 @@ MonoBehaviour:
   m_ApplyOffsets: 0
   m_AvatarMask: {fileID: 0}
   m_ApplyAvatarMask: 0
---- !u!114 &114154927210279832
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf4b89c5481734dee987f04580f725cf, type: 3}
-  m_Name: TimeMachineClip
-  m_EditorClassIdentifier: 
-  template:
-    action: 0
-    condition: 0
-    markerToJumpTo: 
-    markerLabel: 
-    timeToJumpTo: 0
-    platoon: {fileID: 0}
-    clipExecuted: 0
-  action: 3
-  condition: 0
-  markerToJumpTo: 
-  markerLabel: 
-  timeToJumpTo: 0
-  platoon:
-    exposedName: 
-    defaultValue: {fileID: 0}
 --- !u!114 &114167392643605826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1015,7 +777,7 @@ MonoBehaviour:
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
---- !u!114 &114266981891506010
+--- !u!114 &114354204211035960
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1023,99 +785,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
-  m_Name: ActivationPlayableAsset
-  m_EditorClassIdentifier: 
---- !u!114 &114300190601734876
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d73a936c6134581865dde7aac74cb9, type: 3}
-  m_Name: TMPTextSwitcherClip
+  m_Script: {fileID: 11500000, guid: 2f7405c6ab4a64d17876ab8ba7c4b112, type: 3}
+  m_Name: DialogueClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 40
-    text: "No, not at all\u2026 not even, like, a rabbit or something."
---- !u!114 &114329312784560364
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
-  m_Name: ActivationPlayableAsset
-  m_EditorClassIdentifier: 
---- !u!114 &114350429960593974
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
-  m_Name: ActivationPlayableAsset
-  m_EditorClassIdentifier: 
---- !u!114 &114365872070935966
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf4b89c5481734dee987f04580f725cf, type: 3}
-  m_Name: TimeMachineClip
-  m_EditorClassIdentifier: 
-  template:
-    action: 0
-    condition: 0
-    markerToJumpTo: 
-    markerLabel: 
-    timeToJumpTo: 0
-    platoon: {fileID: 0}
-    clipExecuted: 0
-  action: 3
-  condition: 0
-  markerToJumpTo: 
-  markerLabel: 
-  timeToJumpTo: 0
-  platoon:
-    exposedName: 
-    defaultValue: {fileID: 0}
---- !u!114 &114369603547664336
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d73a936c6134581865dde7aac74cb9, type: 3}
-  m_Name: TMPTextSwitcherClip
-  m_EditorClassIdentifier: 
-  template:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 40
-    text: Have you spotted anything today?
---- !u!114 &114374248369227674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
-  m_Name: ActivationPlayableAsset
-  m_EditorClassIdentifier: 
+    characterName: Elizabeth
+    dialogueLine: "No, not at all\u2026 not even, like, a rabbit or something."
+    dialogueSize: 40
+    hasToPause: 1
 --- !u!114 &114386620163766368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1164,41 +841,8 @@ MonoBehaviour:
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children:
-  - {fileID: 114086096024974154}
-  - {fileID: 114992654399214818}
-  - {fileID: 114711349024950580}
-  - {fileID: 114900407067432146}
+  - {fileID: 114892139478910334}
   m_Clips: []
---- !u!114 &114549686092160532
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d73a936c6134581865dde7aac74cb9, type: 3}
-  m_Name: TMPTextSwitcherClip
-  m_EditorClassIdentifier: 
-  template:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 40
-    text: Andy
---- !u!114 &114553762930473760
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d73a936c6134581865dde7aac74cb9, type: 3}
-  m_Name: TMPTextSwitcherClip
-  m_EditorClassIdentifier: 
-  template:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 40
-    text: Andy
 --- !u!114 &114581501189739964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1256,21 +900,6 @@ MonoBehaviour:
   VirtualCamera:
     exposedName: da97e035cc33c4e92af2f23b22a7dcdd
     defaultValue: {fileID: 0}
---- !u!114 &114637085332927806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d73a936c6134581865dde7aac74cb9, type: 3}
-  m_Name: TMPTextSwitcherClip
-  m_EditorClassIdentifier: 
-  template:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 40
-    text: "This watch duty is boring. Nothing is happening in this valley, ever\u2026"
 --- !u!114 &114640068552639036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1329,256 +958,6 @@ MonoBehaviour:
   m_ApplyOffsets: 0
   m_AvatarMask: {fileID: 0}
   m_ApplyAvatarMask: 0
---- !u!114 &114711349024950580
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c07d8dafebed447f8a99d71104b3d98, type: 3}
-  m_Name: TMP Text Switcher Track (1)
-  m_EditorClassIdentifier: 
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
-  m_Parent: {fileID: 114547174171754760}
-  m_Children: []
-  m_Clips:
-  - m_Start: 6.116666666666666
-    m_ClipIn: 0
-    m_Asset: {fileID: 114637085332927806}
-    m_UnderlyingAsset: {fileID: 114553762930473760}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114711349024950580}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: TMPTextSwitcherClip
-    m_Version: 1
-  - m_Start: 7.55
-    m_ClipIn: 0
-    m_Asset: {fileID: 114757906294663880}
-    m_UnderlyingAsset: {fileID: 114553762930473760}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114711349024950580}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: TMPTextSwitcherClip
-    m_Version: 1
-  - m_Start: 8.550000000000011
-    m_ClipIn: 0
-    m_Asset: {fileID: 114369603547664336}
-    m_UnderlyingAsset: {fileID: 114553762930473760}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114711349024950580}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: TMPTextSwitcherClip
-    m_Version: 1
-  - m_Start: 10.083333333333334
-    m_ClipIn: 0
-    m_Asset: {fileID: 114300190601734876}
-    m_UnderlyingAsset: {fileID: 114553762930473760}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114711349024950580}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: TMPTextSwitcherClip
-    m_Version: 1
 --- !u!114 &114725009504202352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1597,6 +976,52 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
+  - m_Start: 0
+    m_ClipIn: 0
+    m_Asset: {fileID: 114601219621990288}
+    m_UnderlyingAsset: {fileID: 114626209143682922}
+    m_Duration: 5.75
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 114725009504202352}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 4.25
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: VCamTopTower
+    m_Version: 1
   - m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114626209143682922}
@@ -1654,52 +1079,6 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: VCamBottomTower
-    m_Version: 1
-  - m_Start: 0
-    m_ClipIn: 0
-    m_Asset: {fileID: 114601219621990288}
-    m_UnderlyingAsset: {fileID: 114626209143682922}
-    m_Duration: 5.75
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114725009504202352}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 4.25
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: VCamTopTower
     m_Version: 1
   - m_Start: 5.75
     m_ClipIn: 0
@@ -1991,7 +1370,7 @@ MonoBehaviour:
   VirtualCamera:
     exposedName: a08576639db2e4756ac52dd8cb4528ce
     defaultValue: {fileID: 0}
---- !u!114 &114757906294663880
+--- !u!114 &114776353250583504
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1999,55 +1378,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d73a936c6134581865dde7aac74cb9, type: 3}
-  m_Name: TMPTextSwitcherClip
+  m_Script: {fileID: 11500000, guid: 2f7405c6ab4a64d17876ab8ba7c4b112, type: 3}
+  m_Name: DialogueClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 50
-    text: OI, ELIZABETH!
---- !u!114 &114789275813951972
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d73a936c6134581865dde7aac74cb9, type: 3}
-  m_Name: TMPTextSwitcherClip
-  m_EditorClassIdentifier: 
-  template:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 40
-    text: Elizabeth
---- !u!114 &114810525265005728
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf4b89c5481734dee987f04580f725cf, type: 3}
-  m_Name: TimeMachineClip
-  m_EditorClassIdentifier: 
-  template:
-    action: 0
-    condition: 0
-    markerToJumpTo: 
-    markerLabel: 
-    timeToJumpTo: 0
-    platoon: {fileID: 0}
-    clipExecuted: 0
-  action: 3
-  condition: 0
-  markerToJumpTo: 
-  markerLabel: 
-  timeToJumpTo: 0
-  platoon:
-    exposedName: 
-    defaultValue: {fileID: 0}
+    characterName: Andy
+    dialogueLine: "This watch duty is boring. Nothing is happening in this valley,
+      ever\u2026"
+    dialogueSize: 40
+    hasToPause: 1
 --- !u!114 &114830439747161078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2062,7 +1401,7 @@ MonoBehaviour:
   VirtualCamera:
     exposedName: 1880245bdc689490cbc05281c3d4e7c9
     defaultValue: {fileID: 0}
---- !u!114 &114900407067432146
+--- !u!114 &114892139478910334
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2070,8 +1409,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 953ed7aca09b34401900d5e2a9d9b5ac, type: 3}
-  m_Name: Time Machine Track
+  m_Script: {fileID: 11500000, guid: 54d06a208f21642f9b3c9aaa3178f5d3, type: 3}
+  m_Name: Dialogue Track
   m_EditorClassIdentifier: 
   m_Locked: 0
   m_Muted: 0
@@ -2080,13 +1419,13 @@ MonoBehaviour:
   m_Parent: {fileID: 114547174171754760}
   m_Children: []
   m_Clips:
-  - m_Start: 7.016666666666667
+  - m_Start: 6.116666666666666
     m_ClipIn: 0
-    m_Asset: {fileID: 114154927210279832}
-    m_UnderlyingAsset: {fileID: 114154927210279832}
-    m_Duration: 0.31666666666666665
+    m_Asset: {fileID: 114776353250583504}
+    m_UnderlyingAsset: {fileID: 114776353250583504}
+    m_Duration: 1
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 114900407067432146}
+    m_ParentTrack: {fileID: 114892139478910334}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -2136,15 +1475,15 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: '||'
+    m_DisplayName: DialogueClip
     m_Version: 1
-  - m_Start: 9.45
+  - m_Start: 7.55
     m_ClipIn: 0
-    m_Asset: {fileID: 114810525265005728}
-    m_UnderlyingAsset: {fileID: 114154927210279832}
-    m_Duration: 0.31666666666666665
+    m_Asset: {fileID: 114055151874216180}
+    m_UnderlyingAsset: {fileID: 114055151874216180}
+    m_Duration: 1.0000000000000009
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 114900407067432146}
+    m_ParentTrack: {fileID: 114892139478910334}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -2194,15 +1533,15 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: '||'
+    m_DisplayName: DialogueClip
     m_Version: 1
-  - m_Start: 10.983333333333333
+  - m_Start: 8.55
     m_ClipIn: 0
-    m_Asset: {fileID: 114365872070935966}
-    m_UnderlyingAsset: {fileID: 114154927210279832}
-    m_Duration: 0.31666666666666665
+    m_Asset: {fileID: 114942639485949250}
+    m_UnderlyingAsset: {fileID: 114055151874216180}
+    m_Duration: 1.0000000000000009
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 114900407067432146}
+    m_ParentTrack: {fileID: 114892139478910334}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -2252,9 +1591,67 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: '||'
+    m_DisplayName: DialogueClip
     m_Version: 1
---- !u!114 &114942337469988522
+  - m_Start: 10.083333333333334
+    m_ClipIn: 0
+    m_Asset: {fileID: 114354204211035960}
+    m_UnderlyingAsset: {fileID: 114055151874216180}
+    m_Duration: 1.0000000000000009
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 114892139478910334}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: DialogueClip
+    m_Version: 1
+--- !u!114 &114942639485949250
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2262,13 +1659,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d73a936c6134581865dde7aac74cb9, type: 3}
-  m_Name: TMPTextSwitcherClip
+  m_Script: {fileID: 11500000, guid: 2f7405c6ab4a64d17876ab8ba7c4b112, type: 3}
+  m_Name: DialogueClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    fontSize: 40
-    text: Andy
+    characterName: Andy
+    dialogueLine: Have you spotted anything today?
+    dialogueSize: 40
+    hasToPause: 1
 --- !u!114 &114960327794750128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2283,256 +1681,6 @@ MonoBehaviour:
   VirtualCamera:
     exposedName: d3592c3533bdd43b79ce4f7b33910a49
     defaultValue: {fileID: 0}
---- !u!114 &114992654399214818
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c07d8dafebed447f8a99d71104b3d98, type: 3}
-  m_Name: TMP Text Switcher Track
-  m_EditorClassIdentifier: 
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
-  m_Parent: {fileID: 114547174171754760}
-  m_Children: []
-  m_Clips:
-  - m_Start: 6.116666666666666
-    m_ClipIn: 0
-    m_Asset: {fileID: 114553762930473760}
-    m_UnderlyingAsset: {fileID: 114553762930473760}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114992654399214818}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: TMPTextSwitcherClip
-    m_Version: 1
-  - m_Start: 7.55
-    m_ClipIn: 0
-    m_Asset: {fileID: 114549686092160532}
-    m_UnderlyingAsset: {fileID: 114553762930473760}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114992654399214818}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: TMPTextSwitcherClip
-    m_Version: 1
-  - m_Start: 8.550000000000011
-    m_ClipIn: 0
-    m_Asset: {fileID: 114942337469988522}
-    m_UnderlyingAsset: {fileID: 114553762930473760}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114992654399214818}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: TMPTextSwitcherClip
-    m_Version: 1
-  - m_Start: 10.083333333333334
-    m_ClipIn: 0
-    m_Asset: {fileID: 114789275813951972}
-    m_UnderlyingAsset: {fileID: 114553762930473760}
-    m_Duration: 1
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114992654399214818}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: TMPTextSwitcherClip
-    m_Version: 1
 --- !u!114 &114995903146211214
 MonoBehaviour:
   m_ObjectHideFlags: 1

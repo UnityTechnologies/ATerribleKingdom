@@ -100,11 +100,14 @@ public class GameManager : Singleton<GameManager>
 		activeDirector = whichOne;
 		activeDirector.Pause();
 		gameMode = GameMode.DialogueMoment; //InputManager will be waiting for a spacebar to resume
+		UIManager.Instance.TogglePressSpacebarMessage(true);
 	}
 
 	//Called by the InputManager
 	public void ResumeTimeline()
 	{
+		UIManager.Instance.TogglePressSpacebarMessage(false);
+		UIManager.Instance.ToggleDialoguePanel(false);
 		activeDirector.Resume();
 		gameMode = GameMode.Gameplay;
 	}
