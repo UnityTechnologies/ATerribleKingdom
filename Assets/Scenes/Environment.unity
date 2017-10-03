@@ -4797,7 +4797,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 177032042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 421, y: 196.5, z: 0}
+  m_LocalPosition: {x: 283, y: 298, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 579294806}
@@ -14740,7 +14740,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 579294805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 458.5, z: 0}
+  m_LocalPosition: {x: 144, y: 357, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 177032046}
@@ -25227,7 +25227,7 @@ PlayableDirector:
   - key: {fileID: 114177411146370420, guid: bf12ed90993eb473a93b31df811c1e01, type: 2}
     value: {fileID: 76390876}
   - key: {fileID: 114611036165182280, guid: bf12ed90993eb473a93b31df811c1e01, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1626760170}
   - key: {fileID: 114685336126772512, guid: bf12ed90993eb473a93b31df811c1e01, type: 2}
     value: {fileID: 1720150419}
   - key: {fileID: 114359556552657072, guid: bf12ed90993eb473a93b31df811c1e01, type: 2}
@@ -38532,7 +38532,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1620550498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1093.9465, y: 491, z: 0}
+  m_LocalPosition: {x: -449.8188, y: 491, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1907294633}
@@ -41317,7 +41317,7 @@ Prefab:
     - target: {fileID: 198744913105309538, guid: ef6d4b7d1f7b548cc8dae8440e944099,
         type: 2}
       propertyPath: randomSeed
-      value: 1721719117
+      value: -444711749
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef6d4b7d1f7b548cc8dae8440e944099, type: 2}
@@ -45382,7 +45382,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1850193103}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00048828125, y: 275.2, z: 0}
+  m_LocalPosition: {x: 0.00045776367, y: 275.2, z: 0}
   m_LocalScale: {x: 0.9999988, y: 0.9999988, z: 0.9999988}
   m_Children: []
   m_Father: {fileID: 569243393}
@@ -45487,12 +45487,12 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
-  m_inputSource: 2
+  m_isInputParsingRequired: 1
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -47441,8 +47441,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1907294629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 421, y: 196.5, z: 0}
-  m_LocalScale: {x: 0.3638889, y: 0.3638889, z: 0.3638889}
+  m_LocalPosition: {x: 283, y: 298, z: 0}
+  m_LocalScale: {x: 0.55185187, y: 0.55185187, z: 0.55185187}
   m_Children:
   - {fileID: 1620550501}
   - {fileID: 569243393}
@@ -48256,12 +48256,12 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
-  m_inputSource: 2
+  m_isInputParsingRequired: 1
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -49445,7 +49445,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2007258966}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -50, z: 0}
+  m_LocalPosition: {x: 0.000030517578, y: -50, z: 0}
   m_LocalScale: {x: 1.0000087, y: 1.0000087, z: 1.0000087}
   m_Children: []
   m_Father: {fileID: 569243393}
@@ -49550,11 +49550,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
