@@ -284,10 +284,10 @@ MonoBehaviour:
     m_ClipIn: 0
     m_Asset: {fileID: 114068416607602396}
     m_UnderlyingAsset: {fileID: 114068416607602396}
-    m_Duration: 9.816666666666666
+    m_Duration: 9.433333333333332
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114034453818928170}
-    m_EaseInDuration: 0
+    m_EaseInDuration: 2
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
@@ -311,19 +311,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -336,7 +324,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: StormVCam
+    m_DisplayName: IntroVCam
     m_Version: 1
   - m_Start: 23.483333333333334
     m_ClipIn: 0
@@ -394,7 +382,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: StormVCam
+    m_DisplayName: OutroVCam
     m_Version: 1
 --- !u!114 &114056993475025598
 MonoBehaviour:
@@ -2175,7 +2163,7 @@ MonoBehaviour:
     m_ClipIn: 0
     m_Asset: {fileID: 114216567722098668}
     m_UnderlyingAsset: {fileID: 114216567722098668}
-    m_Duration: 8.716666666666669
+    m_Duration: 4.166666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114818737606313686}
     m_EaseInDuration: 0
