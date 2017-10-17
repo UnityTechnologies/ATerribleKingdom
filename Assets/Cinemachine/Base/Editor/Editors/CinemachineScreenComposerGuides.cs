@@ -32,7 +32,7 @@ namespace Cinemachine.Editor
             }
         }
 
-        public void OnGUI_DrawGuides(bool isLive, Camera outputCamera, LensSettings lens)
+        public void OnGUI_DrawGuides(bool isLive, Camera outputCamera, LensSettings lens, bool showHardGuides)
         {
             Rect cameraRect = outputCamera.pixelRect;
             float screenWidth = cameraRect.width;
@@ -57,7 +57,7 @@ namespace Cinemachine.Editor
             hardBarsColour.a *= overlayOpacity;
             softBarsColour.a *= overlayOpacity;
 
-            Rect r = GetHardGuide();
+            Rect r = showHardGuides ? GetHardGuide() : new Rect(-2, -2, 4, 4);
             float hardEdgeLeft = r.xMin * screenWidth;
             float hardEdgeTop = r.yMin * screenHeight;
             float hardEdgeRight = r.xMax * screenWidth;

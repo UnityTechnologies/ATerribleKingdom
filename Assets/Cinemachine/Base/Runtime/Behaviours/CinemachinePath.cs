@@ -12,39 +12,22 @@ namespace Cinemachine
     [SaveDuringPlay]
     public class CinemachinePath : CinemachinePathBase
     {
-        /// <summary>Path samples per waypoint</summary>
-        [Tooltip("Path samples per waypoint.  This is used for calculating path distances.")]
-        [Range(1, 100)]
-        public int m_Resolution = 20;
-
-        /// <summary>This class holds the settings that control how the path
-        /// will appear in the editor scene view.  The path is not visible in the game view</summary>
-        [DocumentationSorting(18.1f, DocumentationSortingAttribute.Level.UserRef)]
-        [Serializable] public class Appearance
-        {
-            [Tooltip("The color of the path itself when it is active in the editor")]
-            public Color pathColor = Color.green;
-            [Tooltip("The color of the path itself when it is inactive in the editor")]
-            public Color inactivePathColor = Color.gray;
-            [Tooltip("The color of tangent controls on the waypoints")]
-            public Color handleColor = Color.yellow;
-            [Tooltip("The width of the railroad-tracks that are drawn to represent the path")]
-            [Range(0f, 10f)]
-            public float width = 0.2f;
-        }
-        /// <summary>The settings that control how the path
-        /// will appear in the editor scene view.</summary>
-        [Tooltip("The settings that control how the path will appear in the editor scene view.")]
-        public Appearance m_Appearance = new Appearance();
-
         /// <summary>A waypoint along the path</summary>
         [DocumentationSorting(18.2f, DocumentationSortingAttribute.Level.UserRef)]
-        [Serializable] public class Waypoint
+        [Serializable] public struct Waypoint
         {
+            /// <summary>Position in path-local space</summary>
             [Tooltip("Position in path-local space")]
             public Vector3 position;
+
+            /// <summary>Offset from the position, which defines the tangent of the curve at the waypoint.  
+            /// The length of the tangent encodes the strength of the bezier handle.  
+            /// The same handle is used symmetrically on both sides of the waypoint, to ensure smoothness.</summary>
             [Tooltip("Offset from the position, which defines the tangent of the curve at the waypoint.  The length of the tangent encodes the strength of the bezier handle.  The same handle is used symmetrically on both sides of the waypoint, to ensure smoothness.")]
             public Vector3 tangent;
+
+            /// <summary>Defines the roll of the path at this waypoint.  
+            /// The other orientation axes are inferred from the tangent and world up.</summary>
             [Tooltip("Defines the roll of the path at this waypoint.  The other orientation axes are inferred from the tangent and world up.")]
             public float roll;
         }
@@ -120,12 +103,9 @@ namespace Cinemachine
                     // interpolate
                     Waypoint wpA = m_Waypoints[indexA];
                     Waypoint wpB = m_Waypoints[indexB];
-                    float t = pos - indexA;
-                    float d = 1f - t;
-                    Vector3 ctrl1 = wpA.position + wpA.tangent;
-                    Vector3 ctrl2 = wpB.position - wpB.tangent;
-                    result = d * d * d * wpA.position + 3f * d * d * t * ctrl1
-                        + 3f * d * t * t * ctrl2 + t * t * t * wpB.position;
+                    result = SplineHelpers.Bezier3(pos - indexA,
+                        m_Waypoints[indexA].position, wpA.position + wpA.tangent,
+                        wpB.position - wpB.tangent, wpB.position);
                 }
             }
             return transform.TransformPoint(result);
@@ -150,12 +130,9 @@ namespace Cinemachine
                 {
                     Waypoint wpA = m_Waypoints[indexA];
                     Waypoint wpB = m_Waypoints[indexB];
-                    float t = pos - indexA;
-                    Vector3 ctrl1 = wpA.position + wpA.tangent;
-                    Vector3 ctrl2 = wpB.position - wpB.tangent;
-                    result = (-3f * wpA.position + 9f * ctrl1 - 9f * ctrl2 + 3f * wpB.position) * t * t
-                        +  (6f * wpA.position - 12f * ctrl1 + 6f * ctrl2) * t
-                        -  3f * wpA.position + 3f * ctrl1;
+                    result = SplineHelpers.BezierTangent3(pos - indexA,
+                        m_Waypoints[indexA].position, wpA.position + wpA.tangent,
+                        wpB.position - wpB.tangent, wpB.position);
                 }
             }
             return transform.TransformDirection(result);

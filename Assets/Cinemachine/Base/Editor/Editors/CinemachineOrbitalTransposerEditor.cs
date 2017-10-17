@@ -1,35 +1,34 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineOrbitalTransposer))]
-    internal class CinemachineOrbitalTransposerEditor : UnityEditor.Editor
+    internal class CinemachineOrbitalTransposerEditor : BaseEditor<CinemachineOrbitalTransposer>
     {
-        private CinemachineOrbitalTransposer Target { get { return target as CinemachineOrbitalTransposer; } }
-        private static string[] m_excludeFields = new string[] { "m_Script" };
-        private static string[] m_excludeFieldsSlaveMode;
+        protected override List<string> GetExcludedPropertiesInInspector()
+        {
+            List<string> excluded = base.GetExcludedPropertiesInInspector();
+            if (Target.m_HeadingIsSlave)
+            {
+                excluded.Add(FieldPath(x => x.m_FollowOffset));
+                excluded.Add(FieldPath(x => x.m_BindingMode));
+                excluded.Add(FieldPath(x => x.m_Heading));
+                excluded.Add(FieldPath(x => x.m_XAxis));
+                excluded.Add(FieldPath(x => x.m_RecenterToTargetHeading));
+            }
+            return excluded;
+        }
 
         public override void OnInspectorGUI()
         {
-            if (m_excludeFieldsSlaveMode == null)
-                m_excludeFieldsSlaveMode = new string[]
-                {
-                    "m_Script",
-                    SerializedPropertyHelper.PropertyName(() => Target.m_FollowOffset),
-                    SerializedPropertyHelper.PropertyName(() => Target.m_BindingMode),
-                    SerializedPropertyHelper.PropertyName(() => Target.m_Heading),
-                    SerializedPropertyHelper.PropertyName(() => Target.m_XAxis),
-                    SerializedPropertyHelper.PropertyName(() => Target.m_RecenterToTargetHeading)
-                };
-            if (Target.VirtualCamera.Follow == null)
+            BeginInspector();
+            if (Target.FollowTarget == null)
                 EditorGUILayout.HelpBox(
-                    "A Follow target is required.  Change Body to Hard Constraint if you don't want a Follow target.", 
-                    MessageType.Error);
-            serializedObject.Update();
-            DrawPropertiesExcluding(serializedObject,
-                Target.m_HeadingIsSlave ? m_excludeFieldsSlaveMode : m_excludeFields);
-            serializedObject.ApplyModifiedProperties();
+                    "Orbital Transposer requires a Follow target.", 
+                    MessageType.Warning);
+            DrawRemainingPropertiesInInspector();
         }
 
         [DrawGizmo(GizmoType.Active | GizmoType.Selected, typeof(CinemachineOrbitalTransposer))]
@@ -46,7 +45,7 @@ namespace Cinemachine.Editor
                 CinemachineBrain brain = CinemachineCore.Instance.FindPotentialTargetBrain(target.VirtualCamera);
                 if (brain != null)
                     up = brain.DefaultWorldUp;
-                Vector3 pos = target.VirtualCamera.Follow.position;
+                Vector3 pos = target.FollowTarget.position;
 
                 Quaternion orient = target.GetReferenceOrientation(up);
                 up = orient * Vector3.up;

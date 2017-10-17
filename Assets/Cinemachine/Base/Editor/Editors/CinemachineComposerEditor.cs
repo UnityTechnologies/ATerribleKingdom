@@ -5,9 +5,8 @@ using Cinemachine.Utility;
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineComposer))]
-    internal class CinemachineComposerEditor : UnityEditor.Editor
+    internal class CinemachineComposerEditor : BaseEditor<CinemachineComposer>
     {
-        private CinemachineComposer Target { get { return target as CinemachineComposer; } }
         CinemachineScreenComposerGuides mScreenGuideEditor;
 
         protected virtual void OnEnable()
@@ -30,22 +29,20 @@ namespace Cinemachine.Editor
             UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
         }
 
-        protected virtual string[] GetExcludedFields() { return new string[] { "m_Script" }; }
-
         public override void OnInspectorGUI()
         {
-            if (Target.VirtualCamera.LookAt == null)
-                EditorGUILayout.HelpBox("A LookAt target is required.  Change Aim to Hard Constraint if you don't want a LookAt target.", MessageType.Error);
-
-            serializedObject.Update();
+            BeginInspector();
+            if (Target.LookAtTarget == null)
+                EditorGUILayout.HelpBox(
+                    "A LookAt target is required.  Change Aim to Do Nothing if you don't want a LookAt target.", 
+                    MessageType.Warning);
 
             // First snapshot some settings
             Rect oldHard = Target.HardGuideRect;
             Rect oldSoft = Target.SoftGuideRect;
 
             // Draw the properties
-            DrawPropertiesExcluding(serializedObject, GetExcludedFields());
-            serializedObject.ApplyModifiedProperties();
+            DrawRemainingPropertiesInInspector();
             mScreenGuideEditor.SetNewBounds(oldHard, oldSoft, Target.HardGuideRect, Target.SoftGuideRect);
         }
 
@@ -62,27 +59,29 @@ namespace Cinemachine.Editor
             bool isLive = CinemachineCore.Instance.IsLive(Target.VirtualCamera);
 
             // Screen guides
-            mScreenGuideEditor.OnGUI_DrawGuides(isLive, brain.OutputCamera, Target.VirtualCamera.State.Lens);
+            mScreenGuideEditor.OnGUI_DrawGuides(isLive, brain.OutputCamera, Target.VcamState.Lens, true);
 
             // Draw an on-screen gizmo for the target
-            if (Target.VirtualCamera.LookAt != null && isLive)
+            if (Target.LookAtTarget != null && isLive)
             {
-                Vector2 targetScreenPosition = brain.OutputCamera.WorldToScreenPoint(
-                        Target.VirtualCamera.State.ReferenceLookAt);
-                targetScreenPosition.y = Screen.height - targetScreenPosition.y;
-
-                GUI.color = CinemachineSettings.ComposerSettings.TargetColour;
-                Rect r = new Rect(targetScreenPosition, Vector2.zero);
-                float size = (CinemachineSettings.ComposerSettings.TargetSize 
-                    + CinemachineScreenComposerGuides.kGuideBarWidthPx) / 2;
-                GUI.DrawTexture(r.Inflated(new Vector2(size, size)), Texture2D.whiteTexture);
-                size -= CinemachineScreenComposerGuides.kGuideBarWidthPx;
-                if (size > 0)
+                Vector3 targetScreenPosition = brain.OutputCamera.WorldToScreenPoint(Target.VcamState.ReferenceLookAt);
+                if (targetScreenPosition.z > 0)
                 {
-                    Vector4 overlayOpacityScalar 
-                        = new Vector4(1f, 1f, 1f, CinemachineSettings.ComposerSettings.OverlayOpacity);
-                    GUI.color = Color.black * overlayOpacityScalar;
+                    targetScreenPosition.y = Screen.height - targetScreenPosition.y;
+
+                    GUI.color = CinemachineSettings.ComposerSettings.TargetColour;
+                    Rect r = new Rect(targetScreenPosition, Vector2.zero);
+                    float size = (CinemachineSettings.ComposerSettings.TargetSize 
+                        + CinemachineScreenComposerGuides.kGuideBarWidthPx) / 2;
                     GUI.DrawTexture(r.Inflated(new Vector2(size, size)), Texture2D.whiteTexture);
+                    size -= CinemachineScreenComposerGuides.kGuideBarWidthPx;
+                    if (size > 0)
+                    {
+                        Vector4 overlayOpacityScalar 
+                            = new Vector4(1f, 1f, 1f, CinemachineSettings.ComposerSettings.OverlayOpacity);
+                        GUI.color = Color.black * overlayOpacityScalar;
+                        GUI.DrawTexture(r.Inflated(new Vector2(size, size)), Texture2D.whiteTexture);
+                    }
                 }
             }
         }

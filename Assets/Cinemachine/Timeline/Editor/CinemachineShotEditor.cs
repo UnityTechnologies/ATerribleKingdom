@@ -58,6 +58,11 @@ namespace Cinemachine.Timeline
                     foreach (UnityEditor.Editor e in m_editors)
                     {
                         EditorGUILayout.Separator();
+                        if (e.target.GetType() != typeof(Transform))
+                        {
+                            GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) } );
+                            EditorGUILayout.LabelField(e.target.GetType().Name, EditorStyles.boldLabel);
+                        }
                         e.OnInspectorGUI();
                     }
                 }
@@ -69,13 +74,17 @@ namespace Cinemachine.Timeline
         UnityEditor.Editor[] m_editors = null;
         void UpdateComponentEditors(CinemachineVirtualCameraBase obj)
         {
-            if (m_cachedReferenceObject != obj)
+            MonoBehaviour[] components = null;
+            if (obj != null)
+                components = obj.gameObject.GetComponents<MonoBehaviour>();
+            int numComponents = (components == null) ? 0 : components.Length;
+            int numEditors = (m_editors == null) ? 0 : m_editors.Length;
+            if (m_cachedReferenceObject != obj || (numComponents + 1) != numEditors)
             {
                 DestroyComponentEditors();
                 m_cachedReferenceObject = obj;
                 if (obj != null)
                 {
-                    MonoBehaviour[] components = obj.gameObject.GetComponents<MonoBehaviour>();
                     m_editors = new UnityEditor.Editor[components.Length + 1];
                     CreateCachedEditor(obj.gameObject.GetComponent<Transform>(), null, ref m_editors[0]);
                     for (int i = 0; i < components.Length; ++i)

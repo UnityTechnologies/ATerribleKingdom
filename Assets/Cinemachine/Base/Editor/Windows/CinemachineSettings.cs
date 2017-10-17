@@ -261,11 +261,6 @@ namespace Cinemachine.Editor
             //CinemachineCore.sShowHiddenObjects
             //    = EditorGUILayout.Toggle("Show Hidden Objects", CinemachineCore.sShowHiddenObjects);
 
-            SaveDuringPlay.SaveDuringPlay.Enabled 
-                = EditorGUILayout.Toggle(
-                    new GUIContent("Save camera tweaks in Play Mode"), 
-                    SaveDuringPlay.SaveDuringPlay.Enabled);
-
             ShowCoreSettings = EditorGUILayout.Foldout(ShowCoreSettings, "Runtime Settings");
             if (ShowCoreSettings)
             {

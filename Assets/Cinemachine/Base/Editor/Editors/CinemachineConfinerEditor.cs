@@ -1,33 +1,37 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Collections.Generic;
 
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineConfiner))]
-    public sealed class CinemachineConfinerEditor : UnityEditor.Editor
+    public sealed class CinemachineConfinerEditor : BaseEditor<CinemachineConfiner>
     {
-        private CinemachineConfiner Target { get { return target as CinemachineConfiner; } }
-        private static readonly string[] m_excludeFields = new string[] { "m_Script" };
+        protected override List<string> GetExcludedPropertiesInInspector()
+        {
+            List<string> excluded = base.GetExcludedPropertiesInInspector();
+            CinemachineBrain brain = CinemachineCore.Instance.FindPotentialTargetBrain(Target.VirtualCamera);
+            bool ortho = brain != null ? brain.OutputCamera.orthographic : false;
+            if (!ortho)
+                excluded.Add(FieldPath(x => x.m_ConfineScreenEdges));
+            return excluded;
+        }
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
-            EditorGUI.BeginChangeCheck();
-            DrawPropertiesExcluding(serializedObject, m_excludeFields);
-            if (EditorGUI.EndChangeCheck())
-                serializedObject.ApplyModifiedProperties();
-
+            BeginInspector();
             if (Target.m_BoundingVolume == null)
-                EditorGUILayout.HelpBox("A Bounding Volume is required.", MessageType.Error);
+                EditorGUILayout.HelpBox("A Bounding Volume is required.", MessageType.Warning);
             else if (Target.m_BoundingVolume.GetType() != typeof(BoxCollider)
                 && Target.m_BoundingVolume.GetType() != typeof(SphereCollider)
                 && Target.m_BoundingVolume.GetType() != typeof(CapsuleCollider))
             {
                 EditorGUILayout.HelpBox(
                     "Must be a BoxCollider, SphereCollider, or CapsuleCollider.", 
-                    MessageType.Error);
+                    MessageType.Warning);
             }
+            DrawRemainingPropertiesInInspector();
         }
 
         [DrawGizmo(GizmoType.Active | GizmoType.Selected | GizmoType.NonSelected, typeof(CinemachineConfiner))]

@@ -1,45 +1,40 @@
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineTrackedDolly))]
-    internal sealed class CinemachineTrackedDollyEditor : UnityEditor.Editor
+    internal sealed class CinemachineTrackedDollyEditor : BaseEditor<CinemachineTrackedDolly>
     {
-        private CinemachineTrackedDolly Target { get { return target as CinemachineTrackedDolly; } }
-
-        public override void OnInspectorGUI()
+        protected override List<string> GetExcludedPropertiesInInspector()
         {
-            string[] excludeFields;
+            List<string> excluded = base.GetExcludedPropertiesInInspector();
             switch (Target.m_CameraUp)
             {
                 default:
-                    excludeFields = new string[] { "m_Script" };
                     break;
                 case CinemachineTrackedDolly.CameraUpMode.PathNoRoll:
                 case CinemachineTrackedDolly.CameraUpMode.FollowTargetNoRoll:
-                    excludeFields = new string[]
-                    {
-                        "m_Script",
-                        SerializedPropertyHelper.PropertyName(() => Target.m_RollDamping)
-                    };
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
                     break;
-                case CinemachineTrackedDolly.CameraUpMode.World:
-                    excludeFields = new string[]
-                    {
-                        "m_Script",
-                        SerializedPropertyHelper.PropertyName(() => Target.m_PitchDamping),
-                        SerializedPropertyHelper.PropertyName(() => Target.m_YawDamping),
-                        SerializedPropertyHelper.PropertyName(() => Target.m_RollDamping)
-                    };
+                case CinemachineTrackedDolly.CameraUpMode.Default:
+                    excluded.Add(FieldPath(x => x.m_PitchDamping));
+                    excluded.Add(FieldPath(x => x.m_YawDamping));
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
                     break;
             }
-            serializedObject.Update();
+            return excluded;
+        }
+
+        public override void OnInspectorGUI()
+        {
+            BeginInspector();
             if (Target.m_Path == null)
-                EditorGUILayout.HelpBox("A Path is required", MessageType.Error);
-            if (Target.m_AutoDolly.m_Enabled && Target.VirtualCamera.Follow == null)
-                EditorGUILayout.HelpBox("AutoDolly requires a Follow Target", MessageType.Info);
-            DrawPropertiesExcluding(serializedObject, excludeFields);
-            serializedObject.ApplyModifiedProperties();
+                EditorGUILayout.HelpBox("A Path is required", MessageType.Warning);
+            if (Target.m_AutoDolly.m_Enabled && Target.FollowTarget == null)
+                EditorGUILayout.HelpBox("AutoDolly requires a Follow Target", MessageType.Warning);
+            DrawRemainingPropertiesInInspector();
         }
 
         [DrawGizmo(GizmoType.Active | GizmoType.InSelectionHierarchy, typeof(CinemachineTrackedDolly))]
@@ -47,9 +42,18 @@ namespace Cinemachine.Editor
         {
             if (target.IsValid)
             {
-                CinemachinePath path = target.m_Path as CinemachinePath;
+                CinemachinePathBase path = target.m_Path;
                 if (path != null)
-                    CinemachinePathEditor.DrawPathGizmos(path, selectionType);
+                {
+                    CinemachinePathEditor.DrawPathGizmo(path, path.m_Appearance.pathColor);
+                    Vector3 pos = path.EvaluatePositionAtUnit(target.m_PathPosition, target.m_PositionUnits);
+                    Color oldColor = Gizmos.color;
+                    Gizmos.color = CinemachineCore.Instance.IsLive(target.VirtualCamera)
+                        ? CinemachineSettings.CinemachineCoreSettings.ActiveGizmoColour
+                        : CinemachineSettings.CinemachineCoreSettings.InactiveGizmoColour;
+                    Gizmos.DrawLine(pos, target.transform.position);
+                    Gizmos.color = oldColor;
+                }
             }
         }
     }

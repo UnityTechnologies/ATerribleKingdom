@@ -41,7 +41,7 @@ namespace Cinemachine.Utility
         /// <returns>True if the square magnitude of the vector is within Epsilon of zero</returns>
         public static bool AlmostZero(this Vector3 v)
         {
-            return v.sqrMagnitude < Epsilon;
+            return v.sqrMagnitude < (Epsilon * Epsilon);
         }
 
         /// <summary>Get a signed angle between two vectors</summary>
@@ -57,8 +57,8 @@ namespace Cinemachine.Utility
             from.Normalize();
             to.Normalize();
             float dot = Vector3.Dot(Vector3.Cross(from, to), refNormal);
-            if (Mathf.Abs(dot) < Epsilon)
-                return 0;
+            if (Mathf.Abs(dot) < -Epsilon)
+                return Vector3.Dot(from, to) < 0 ? 180 : 0;
             float angle = Vector3.Angle(from, to);
             if (dot < 0)
                 return -angle;
@@ -136,25 +136,25 @@ namespace Cinemachine.Utility
         /// This formulation makes it easy to interpolate without introducing spurious roll.
         /// </summary>
         /// <param name="orient"></param>
-        /// <param name="lookAt">The target we want to look at</param>
+        /// <param name="lookAtDir">The worldspace target direction in which we want to look</param>
         /// <param name="worldUp">Which way is up</param>
         /// <returns>Vector2.y is rotation about worldUp, and Vector2.x is second rotation,
         /// about local right.</returns>
         public static Vector2 GetCameraRotationToTarget(
-            this Quaternion orient, Vector3 lookAt, Vector3 worldUp)
+            this Quaternion orient, Vector3 lookAtDir, Vector3 worldUp)
         {
-            if (lookAt.AlmostZero())
+            if (lookAtDir.AlmostZero())
                 return Vector2.zero;  // degenerate
 
             // Work in local space
             Quaternion toLocal = Quaternion.Inverse(orient);
             Vector3 up = toLocal * worldUp;
-            lookAt = toLocal * lookAt;
+            lookAtDir = toLocal * lookAtDir;
 
             // Align yaw based on world up
             float angleH = 0;
             {
-                Vector3 targetDirH = lookAt.ProjectOntoPlane(up);
+                Vector3 targetDirH = lookAtDir.ProjectOntoPlane(up);
                 if (!targetDirH.AlmostZero())
                 {
                     Vector3 currentDirH = Vector3.forward.ProjectOntoPlane(up);
@@ -173,7 +173,7 @@ namespace Cinemachine.Utility
 
             // Get local vertical angle
             float angleV = UnityVectorExtensions.SignedAngle(
-                    q * Vector3.forward, lookAt, q * Vector3.right);
+                    q * Vector3.forward, lookAtDir, q * Vector3.right);
 
             return new Vector2(angleV, angleH);
         }

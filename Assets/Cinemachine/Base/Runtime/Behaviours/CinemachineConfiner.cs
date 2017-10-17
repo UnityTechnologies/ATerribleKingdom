@@ -11,21 +11,22 @@ namespace Cinemachine
     /// </summary>
     [DocumentationSorting(22, DocumentationSortingAttribute.Level.UserRef)]
     [ExecuteInEditMode]
-    [AddComponentMenu("Cinemachine/CinemachineConfiner")]
+    [AddComponentMenu("")] // Hide in menu
     [SaveDuringPlay]
-    public class CinemachineConfiner : MonoBehaviour
+    public class CinemachineConfiner : CinemachineExtension
     {
         /// <summary>The volume within which the camera is to be contained.</summary>
         [Tooltip("The volume within which the camera is to be contained")]
         public Collider m_BoundingVolume;
 
+        /// <summary>If camera is orthographic, screen edges will be confined to the volume.</summary>
+        [Tooltip("If camera is orthographic, screen edges will be confined to the volume.  If not checked, then only the camera center will be confined")]
+        public bool m_ConfineScreenEdges = false;
+
         /// <summary>How gradually to return the camera to the bounding volume if it goes beyond the borders</summary>
         [Tooltip("How gradually to return the camera to the bounding volume if it goes beyond the borders.  Higher numbers are more gradual.")]
         [Range(0, 10)]
         public float m_Damping = 0;
-
-        /// <summary>Get the associated CinemachineVirtualCameraBase.</summary>
-        public CinemachineVirtualCameraBase VirtualCamera { get; private set; }
 
         /// <summary>See whether the virtual camera has been moved by the confiner</summary>
         /// <param name="vcam">The virtual camera in question.  This might be different from the
@@ -33,7 +34,7 @@ namespace Cinemachine
         /// <returns>True if the virtual camera has been repositioned</returns>
         public bool CameraWasDisplaced(CinemachineVirtualCameraBase vcam)
         {
-            return GetExtraState(vcam).confinerDisplacement > 0;
+            return GetExtraState<VcamExtraState>(vcam).confinerDisplacement > 0;
         }
         
         private void OnValidate()
@@ -41,56 +42,35 @@ namespace Cinemachine
             m_Damping = Mathf.Max(0, m_Damping);
         }
 
-        private void Start()
-        {
-            OnEnable();
-        }
+        const float ExtraCamMargin = 0.01f;
 
-        private void OnEnable()
+        class VcamExtraState
         {
-            VirtualCamera = GetComponent<CinemachineVirtualCameraBase>();
-            if (VirtualCamera == null)
-            {
-                Debug.LogError("CinemachineConfiner requires a Cinemachine Virtual Camera component");
-                enabled = false;
-            }
-            else
-            {
-                VirtualCamera.AddPostPipelineStageHook(PostPipelineStageCallback);
-                enabled = true;
-            }
-            mExtraState = null;
-        }
-
-        private void OnDestroy()
-        {
-            if (VirtualCamera != null)
-                VirtualCamera.RemovePostPipelineStageHook(PostPipelineStageCallback);
-        }
-
-        private void PostPipelineStageCallback(
+            public Vector3 m_previousDisplacement;
+            public float confinerDisplacement;
+        };
+        
+        /// <summary>Callback to to the camera confining</summary>
+        protected override void PostPipelineStageCallback(
             CinemachineVirtualCameraBase vcam,
             CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
         {
-            if (enabled && m_BoundingVolume != null)
+            if (m_BoundingVolume != null)
             {
                 // Move the body before the Aim is calculated
                 if (stage == CinemachineCore.Stage.Body)
                 {
-                    Vector3 camPos = state.CorrectedPosition;
-                    Vector3 closest = m_BoundingVolume.ClosestPoint(camPos);
-                    Vector3 dir = closest - camPos;
-                    float distance = dir.magnitude;
-                    if (distance > Epsilon)
-                        dir /= distance;
-                    Vector3 displacement = distance * dir;
+                    Vector3 displacement;
+                    if (m_ConfineScreenEdges && state.Lens.Orthographic)
+                        displacement = ConfineScreenEdges(vcam, ref state);
+                    else
+                        displacement = ConfinePoint(state.CorrectedPosition);
 
-                    VcamExtraState extra = GetExtraState(vcam);
-                    if (m_Damping > 0 && deltaTime > 0)
+                    VcamExtraState extra = GetExtraState<VcamExtraState>(vcam);
+                    if (m_Damping > 0 && deltaTime >= 0)
                     {
                         Vector3 delta = displacement - extra.m_previousDisplacement;
-                        if (Mathf.Abs(delta.magnitude) > Epsilon)
-                            delta *= deltaTime / Mathf.Max(m_Damping * kDampingScale, deltaTime);
+                        delta = Damper.Damp(delta, m_Damping, deltaTime);
                         displacement = extra.m_previousDisplacement + delta;
                     }
                     extra.m_previousDisplacement = displacement;
@@ -100,25 +80,39 @@ namespace Cinemachine
             }
         }
 
-        const float kDampingScale = 0.1f;
-        const float Epsilon = UnityVectorExtensions.Epsilon;
-        const float ExtraCamMargin = 0.01f;
-
-        class VcamExtraState
+        private Vector3 ConfinePoint(Vector3 camPos)
         {
-            public Vector3 m_previousDisplacement;
-            public float confinerDisplacement;
-        };
+            Vector3 closest = m_BoundingVolume.ClosestPoint(camPos);
+            return closest - camPos;
+        }
 
-        private Dictionary<ICinemachineCamera, VcamExtraState> mExtraState;
-        VcamExtraState GetExtraState(ICinemachineCamera vcam)
+        // Camera must be orthographic
+        private Vector3 ConfineScreenEdges(CinemachineVirtualCameraBase vcam, ref CameraState state)
         {
-            if (mExtraState == null)
-                mExtraState = new Dictionary<ICinemachineCamera, VcamExtraState>();
-            VcamExtraState extra = null;
-            if (!mExtraState.TryGetValue(vcam, out extra))
-                extra = mExtraState[vcam] = new VcamExtraState();
-            return extra;
+            Quaternion rot = Quaternion.Inverse(state.CorrectedOrientation);
+            float dy = state.Lens.OrthographicSize;
+            float dx = dy * state.Lens.Aspect;
+            Vector3 vx = (rot * Vector3.right) * dx;
+            Vector3 vy = (rot * Vector3.up) * dy;
+
+            Vector3 displacement = Vector3.zero;
+            Vector3 camPos = state.CorrectedPosition;
+            const int kMaxIter = 12;
+            for (int i = 0; i < kMaxIter; ++i)
+            {
+                Vector3 d = ConfinePoint((camPos - vy) - vx);
+                if (d.AlmostZero())
+                    d = ConfinePoint((camPos - vy) + vx);
+                if (d.AlmostZero())
+                    d = ConfinePoint((camPos + vy) - vx);
+                if (d.AlmostZero())
+                    d = ConfinePoint((camPos + vy) + vx);
+                if (d.AlmostZero())
+                    break;
+                displacement += d;
+                camPos += d;
+            }
+            return displacement;
         }
     }
 }

@@ -18,9 +18,9 @@ namespace Cinemachine
     /// </summary>
     [DocumentationSorting(15, DocumentationSortingAttribute.Level.UserRef)]
     [ExecuteInEditMode]
-    [AddComponentMenu("Cinemachine/CinemachineCollider")]
+    [AddComponentMenu("")] // Hide in menu
     [SaveDuringPlay]
-    public class CinemachineCollider : MonoBehaviour
+    public class CinemachineCollider : CinemachineExtension
     {
         /// <summary>The Unity layer mask against which the collider will raycast.</summary>
         [Header("Obstacle Detection")]
@@ -37,7 +37,8 @@ namespace Cinemachine
         /// </summary>
         [Space]
         [Tooltip("When enabled, will attempt to resolve situations where the line of sight to the target is blocked by an obstacle")]
-        public bool m_PreserveLineOfSight = true;
+        [FormerlySerializedAs("m_PreserveLineOfSight")]
+        public bool m_AvoidObstacles = true;
 
         /// <summary>
         /// The raycast distance to test for when checking if the line of sight to this camera's target is clear.
@@ -45,6 +46,14 @@ namespace Cinemachine
         [Tooltip("The maximum raycast distance when checking if the line of sight to this camera's target is clear.  If the setting is 0 or less, the current actual distance to target will be used.")]
         [FormerlySerializedAs("m_LineOfSightFeelerDistance")]
         public float m_DistanceLimit = 0f;
+
+        /// <summary>
+        /// Camera will try to maintain this distance from any obstacle.  
+        /// Increase this value if you are seeing inside obstacles due to a large 
+        /// FOV on the camera.
+        /// </summary>
+        [Tooltip("Camera will try to maintain this distance from any obstacle.  Try to keep this value small.  Increase it if you are seeing inside obstacles due to a large FOV on the camera.")]
+        public float m_CameraRadius = 0.1f;
 
         /// <summary>The way in which the Collider will attempt to preserve sight of the target.</summary>
         public enum ResolutionStrategy 
@@ -86,16 +95,13 @@ namespace Cinemachine
         [Tooltip("If greater than zero, a higher score will be given to shots when the target is closer to this distance.  Set this to zero to disable this feature.")]
         public float m_OptimalTargetDistance = 0;
 
-        /// <summary>Get the associated CinemachineVirtualCameraBase.</summary>
-        public CinemachineVirtualCameraBase VirtualCamera { get; private set; }
-
         /// <summary>See wheter an object is blocking the camera's view of the target</summary>
         /// <param name="vcam">The virtual camera in question.  This might be different from the
         /// virtual camera that owns the collider, in the event that the camera has children</param>
         /// <returns>True if something is blocking the view</returns>
         public bool IsTargetObscured(ICinemachineCamera vcam)
         {
-            return GetExtraState(vcam).targetObscured;
+            return GetExtraState<VcamExtraState>(vcam).targetObscured;
         }
 
         /// <summary>See whether the virtual camera has been moved nby the collider</summary>
@@ -105,117 +111,28 @@ namespace Cinemachine
         /// target obstruction</returns>
         public bool CameraWasDisplaced(CinemachineVirtualCameraBase vcam)
         {
-            return GetExtraState(vcam).colliderDisplacement > 0;
+            return GetExtraState<VcamExtraState>(vcam).colliderDisplacement > 0;
         }
 
         private void OnValidate()
         {
             m_DistanceLimit = Mathf.Max(0, m_DistanceLimit);
+            m_CameraRadius = Mathf.Max(0, m_CameraRadius);
             m_MinimumDistanceFromTarget = Mathf.Max(0.01f, m_MinimumDistanceFromTarget);
             m_OptimalTargetDistance = Mathf.Max(0, m_OptimalTargetDistance);
         }
 
-        private void Start()
+        /// <summary>Cleanup</summary>
+        protected override void OnDestroy()
         {
-            OnEnable();
+            base.OnDestroy();
+            CleanupCameraCollider();
         }
 
-        private void OnEnable()
-        {
-            VirtualCamera = GetComponent<CinemachineVirtualCameraBase>();
-            if (VirtualCamera == null)
-            {
-                Debug.LogError("CinemachineCollider requires a Cinemachine Virtual Camera component");
-                enabled = false;
-            }
-            else
-            {
-                VirtualCamera.AddPostPipelineStageHook(PostPipelineStageCallback);
-                enabled = true;
-            }
-            mExtraState = null;
-        }
+        /// This must be small but greater than 0 - reduces false results due to precision
+        const float PrecisionSlush = 0.001f;
 
-        private void OnDestroy()
-        {
-            if (VirtualCamera != null)
-                VirtualCamera.RemovePostPipelineStageHook(PostPipelineStageCallback);
-        }
-
-        private void PostPipelineStageCallback(
-            CinemachineVirtualCameraBase vcam,
-            CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
-        {
-            VcamExtraState extra = null;
-            if (stage == CinemachineCore.Stage.Body)
-            {
-                extra = GetExtraState(vcam);
-                extra.targetObscured = false;
-                extra.colliderDisplacement = 0;
-                extra.debugResolutionPath = null;
-            }
-            if (enabled)
-            {
-                // Move the body before the Aim is calculated
-                if (stage == CinemachineCore.Stage.Body)
-                {
-                    if (m_PreserveLineOfSight)
-                    {
-                        Vector3 displacement = PreserveLignOfSight(ref state, ref extra);
-                        if (m_Damping > 0 && deltaTime > 0)
-                        {
-                            Vector3 delta = displacement - extra.m_previousDisplacement;
-                            if (Mathf.Abs(delta.magnitude) > Epsilon)
-                                delta *= deltaTime / Mathf.Max(m_Damping * kDampingScale, deltaTime);
-                            displacement = extra.m_previousDisplacement + delta;
-                        }
-                        extra.m_previousDisplacement = displacement;
-                        state.PositionCorrection += displacement;
-                        extra.colliderDisplacement += displacement.magnitude;
-                    }
-                }
-                // Rate the shot after the aim was set
-                if (stage == CinemachineCore.Stage.Aim)
-                {
-                    extra = GetExtraState(vcam);
-                    extra.targetObscured = CheckForTargetObstructions(state);
-
-                    // GML these values are an initial arbitrary attempt at rating quality
-                    if (extra.targetObscured)
-                        state.ShotQuality *= 0.2f;
-                    if (extra.colliderDisplacement > 0)
-                        state.ShotQuality *= 0.8f;
-
-                    float nearnessBoost = 0;
-                    const float kMaxNearBoost = 0.2f;
-                    if (m_OptimalTargetDistance > 0 && state.HasLookAt)
-                    {
-                        float distance = Vector3.Magnitude(state.ReferenceLookAt - state.FinalPosition);
-                        if (distance <= m_OptimalTargetDistance)
-                        {
-                            float threshold = m_OptimalTargetDistance / 2;
-                            if (distance >= threshold)
-                                nearnessBoost = kMaxNearBoost * (distance - threshold)
-                                    / (m_OptimalTargetDistance - threshold);
-                        }
-                        else
-                        {
-                            distance -= m_OptimalTargetDistance;
-                            float threshold = m_OptimalTargetDistance * 3;
-                            if (distance < threshold)
-                                nearnessBoost = kMaxNearBoost * (1f - (distance / threshold));
-                        }
-                        state.ShotQuality *= (1f + nearnessBoost);
-                    }
-                }
-            }
-        }
-
-        /// This must be small but greater than 0
-        const float CameraRadius = 0.001f;
-        const float Epsilon = UnityVectorExtensions.Epsilon;
-        const float kDampingScale = 0.1f;
-
+        // Per-vcam extra state info
         class VcamExtraState
         {
             public Vector3 m_previousDisplacement;
@@ -233,35 +150,90 @@ namespace Cinemachine
             }
         };
 
-        private Dictionary<ICinemachineCamera, VcamExtraState> mExtraState;
-        VcamExtraState GetExtraState(ICinemachineCamera vcam)
-        {
-            if (mExtraState == null)
-                mExtraState = new Dictionary<ICinemachineCamera, VcamExtraState>();
-            VcamExtraState extra = null;
-            if (!mExtraState.TryGetValue(vcam, out extra))
-                extra = mExtraState[vcam] = new VcamExtraState();
-            return extra;
-        }
-
-        // For debugging
+        /// <summary>Inspector API for debugging collision resolution path</summary>
         public List<List<Vector3>> DebugPaths 
         {
             get
             { 
                 List<List<Vector3>> list = new List<List<Vector3>>();
-                if (mExtraState != null)
-                {
-                    foreach (var v in mExtraState)
-                        if (v.Value.debugResolutionPath != null)
-                            list.Add(v.Value.debugResolutionPath);
-                }
+                List<VcamExtraState> extraStates = GetAllExtraStates<VcamExtraState>();
+                foreach (var v in extraStates)
+                    if (v.debugResolutionPath != null)
+                        list.Add(v.debugResolutionPath);
                 return list;
+            }
+        }
+
+        /// <summary>Callcack to to the collision resolution and shot evaluation</summary>
+        protected override void PostPipelineStageCallback(
+            CinemachineVirtualCameraBase vcam,
+            CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
+        {
+            VcamExtraState extra = null;
+            if (stage == CinemachineCore.Stage.Body)
+            {
+                extra = GetExtraState<VcamExtraState>(vcam);
+                extra.targetObscured = false;
+                extra.colliderDisplacement = 0;
+                extra.debugResolutionPath = null;
+            }
+
+            // Move the body before the Aim is calculated
+            if (stage == CinemachineCore.Stage.Body)
+            {
+                if (m_AvoidObstacles)
+                {
+                    Vector3 displacement = PreserveLignOfSight(ref state, ref extra);
+                    if (m_Damping > 0 && deltaTime >= 0)
+                    {
+                        Vector3 delta = displacement - extra.m_previousDisplacement;
+                        delta = Damper.Damp(delta, m_Damping, deltaTime);
+                        displacement = extra.m_previousDisplacement + delta;
+                    }
+                    extra.m_previousDisplacement = displacement;
+                    state.PositionCorrection += displacement;
+                    extra.colliderDisplacement += displacement.magnitude;
+                }
+            }
+            // Rate the shot after the aim was set
+            if (stage == CinemachineCore.Stage.Aim)
+            {
+                extra = GetExtraState<VcamExtraState>(vcam);
+                extra.targetObscured = CheckForTargetObstructions(state);
+
+                // GML these values are an initial arbitrary attempt at rating quality
+                if (extra.targetObscured)
+                    state.ShotQuality *= 0.2f;
+                if (extra.colliderDisplacement > 0)
+                    state.ShotQuality *= 0.8f;
+
+                float nearnessBoost = 0;
+                const float kMaxNearBoost = 0.2f;
+                if (m_OptimalTargetDistance > 0 && state.HasLookAt)
+                {
+                    float distance = Vector3.Magnitude(state.ReferenceLookAt - state.FinalPosition);
+                    if (distance <= m_OptimalTargetDistance)
+                    {
+                        float threshold = m_OptimalTargetDistance / 2;
+                        if (distance >= threshold)
+                            nearnessBoost = kMaxNearBoost * (distance - threshold)
+                                / (m_OptimalTargetDistance - threshold);
+                    }
+                    else
+                    {
+                        distance -= m_OptimalTargetDistance;
+                        float threshold = m_OptimalTargetDistance * 3;
+                        if (distance < threshold)
+                            nearnessBoost = kMaxNearBoost * (1f - (distance / threshold));
+                    }
+                    state.ShotQuality *= (1f + nearnessBoost);
+                }
             }
         }
 
         private Vector3 PreserveLignOfSight(ref CameraState state, ref VcamExtraState extra)
         {
+            Vector3 displacement = Vector3.zero;
             if (state.HasLookAt)
             {
                 Vector3 cameraPos = state.CorrectedPosition;
@@ -279,14 +251,16 @@ namespace Cinemachine
 
                     // Make a ray that looks towards the camera, to get the most distant obstruction
                     Ray ray = new Ray(pos - rayLength * dir, dir);
-                    rayLength += CameraRadius;
+                    rayLength += PrecisionSlush;
                     if (rayLength > Epsilon)
                     {
                         RaycastHit hitInfo;
-                        if (Physics.Raycast(ray, out hitInfo, rayLength, m_CollideAgainst.value))
+                        if (Physics.Raycast(
+                            ray, out hitInfo, rayLength, m_CollideAgainst.value, 
+                            QueryTriggerInteraction.Ignore))
                         {
                             // Pull camera forward in front of obstacle
-                            float adjustment = Mathf.Max(0, hitInfo.distance - CameraRadius);
+                            float adjustment = Mathf.Max(0, hitInfo.distance - PrecisionSlush);
                             pos = ray.GetPoint(adjustment);
                             extra.AddPointToDebugPath(pos);
                             if (m_Strategy != ResolutionStrategy.PullCameraForward)
@@ -296,13 +270,16 @@ namespace Cinemachine
                                     new Plane(state.ReferenceUp, cameraPos),
                                     targetDistance, m_MaximumEffort, ref extra);
                             }
-                            Vector3 displacement = pos - cameraPos;
-                            return displacement;
                         }
                     }
                 }
+                if (m_CameraRadius > Epsilon)
+                    pos += RespectCameraRadius(pos, state.ReferenceLookAt);
+                else if (mCameraColliderGameObject != null)
+                    CleanupCameraCollider();
+                displacement = pos - cameraPos;
             }
-            return Vector3.zero;
+            return displacement;
         }
 
         private Vector3 PushCameraBack(
@@ -323,13 +300,13 @@ namespace Cinemachine
 
             // Check only as far as the obstacle bounds
             float clampedDistance = ClampRayToBounds(ray, distance, obstacle.collider.bounds);
-            distance = Mathf.Min(distance, clampedDistance + CameraRadius);
+            distance = Mathf.Min(distance, clampedDistance + PrecisionSlush);
 
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, distance, m_CollideAgainst.value))
             {
                 // We hit something.  Stop there and take a step along that wall.
-                float adjustment = hitInfo.distance - CameraRadius;
+                float adjustment = hitInfo.distance - PrecisionSlush;
                 pos = ray.GetPoint(adjustment);
                 extra.AddPointToDebugPath(pos);
                 if (iterations > 1)
@@ -343,14 +320,27 @@ namespace Cinemachine
 
             // Didn't hit anything.  Can we push back all the way now?
             pos = ray.GetPoint(distance);
-            extra.AddPointToDebugPath(pos);
 
+            // First check if we can still see the target.  If not, abort
             dir = pos - lookAtPos;
+            float d = dir.magnitude;
+            RaycastHit hitInfo2;
+            if (d < Epsilon || Physics.Raycast(
+                new Ray(lookAtPos, dir), out hitInfo2, d - PrecisionSlush, m_CollideAgainst.value, 
+                QueryTriggerInteraction.Ignore))
+            {
+                return currentPos;
+            }
+
+            // All clear
             ray = new Ray(pos, dir);
+            extra.AddPointToDebugPath(pos);
             distance = GetPushBackDistance(ray, startPlane, targetDistance, lookAtPos);
             if (distance > Epsilon)
             {
-                if (!Physics.Raycast(ray, out hitInfo, distance, m_CollideAgainst.value))
+                if (!Physics.Raycast(
+                    ray, out hitInfo, distance, m_CollideAgainst.value, 
+                    QueryTriggerInteraction.Ignore))
                 {
                     pos = ray.GetPoint(distance); // no obstacles - all good
                     extra.AddPointToDebugPath(pos);
@@ -358,7 +348,7 @@ namespace Cinemachine
                 else 
                 {
                     // We hit something.  Stop there and maybe take a step along that wall
-                    float adjustment = hitInfo.distance - CameraRadius;
+                    float adjustment = hitInfo.distance - PrecisionSlush;
                     pos = ray.GetPoint(adjustment);
                     extra.AddPointToDebugPath(pos);
                     if (iterations > 1)
@@ -377,7 +367,7 @@ namespace Cinemachine
             Vector3 normal2 = obstacle.normal;
 
             // Check for nearby obstacles.  Are we in a corner?
-            float nearbyDistance = CameraRadius * 5;
+            float nearbyDistance = PrecisionSlush * 5;
             int numFound = Physics.SphereCastNonAlloc(
                 pos, nearbyDistance, pushDir.normalized, m_CornerBuffer, 0, 
                 m_CollideAgainst.value, QueryTriggerInteraction.Ignore);
@@ -478,6 +468,51 @@ namespace Cinemachine
             return distance;
         }
 
+        private Collider[] mColliderBuffer = new Collider[5];
+        private SphereCollider mCameraCollider;
+        private GameObject mCameraColliderGameObject;
+        private Vector3 RespectCameraRadius(Vector3 cameraPos, Vector3 lookAtPos)
+        {
+            Vector3 result = Vector3.zero;
+            int numObstacles = Physics.OverlapSphereNonAlloc(
+                cameraPos, m_CameraRadius, mColliderBuffer, 
+                m_CollideAgainst, QueryTriggerInteraction.Ignore);
+            if (numObstacles > 0)
+            {
+                if (mCameraColliderGameObject == null)
+                {
+                    mCameraColliderGameObject = new GameObject("Cinemachine Collider Collider");
+                    mCameraColliderGameObject.hideFlags = HideFlags.HideAndDontSave;
+                    mCameraColliderGameObject.transform.position = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+                    mCameraColliderGameObject.SetActive(true);
+                    mCameraCollider = mCameraColliderGameObject.AddComponent<SphereCollider>();
+                }
+                mCameraCollider.radius = m_CameraRadius;
+                for (int i = 0; i < numObstacles; ++i)
+                {
+                    Collider c = mColliderBuffer[i];
+                    Vector3 dir;
+                    float distance;
+                    if (Physics.ComputePenetration(
+                        mCameraCollider, cameraPos, Quaternion.identity, 
+                        c, c.transform.position, c.transform.rotation,
+                        out dir, out distance))
+                    {
+                        result += dir * distance;   // naive, but maybe enough
+                    }
+                }
+            }
+            return result;
+        }
+
+        private void CleanupCameraCollider()
+        {
+            if (mCameraColliderGameObject != null)
+                DestroyImmediate(mCameraColliderGameObject);
+            mCameraColliderGameObject = null;
+            mCameraCollider = null;
+        }
+
         private bool CheckForTargetObstructions(CameraState state)
         {
             if (state.HasLookAt)
@@ -491,7 +526,8 @@ namespace Cinemachine
                 Ray ray = new Ray(pos, dir.normalized);
                 RaycastHit hitInfo;
                 if (Physics.Raycast(ray, out hitInfo,
-                        distance - m_MinimumDistanceFromTarget, m_CollideAgainst.value))
+                        distance - m_MinimumDistanceFromTarget, m_CollideAgainst.value,
+                        QueryTriggerInteraction.Ignore))
                 {
                     return true;
                 }

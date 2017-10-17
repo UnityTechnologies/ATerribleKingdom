@@ -26,8 +26,10 @@ namespace Cinemachine
         [Serializable]
         public struct NoiseParams
         {
+            /// <summary>The amplitude of the noise for this channel.  Larger numbers vibrate higher</summary>
             [Tooltip("The amplitude of the noise for this channel.  Larger numbers vibrate higher.")]
             public float Amplitude;
+            /// <summary>The frequency of noise for this channel.  Higher magnitudes vibrate faster</summary>
             [Tooltip("The frequency of noise for this channel.  Higher magnitudes vibrate faster.")]
             public float Frequency;
         }
@@ -39,10 +41,13 @@ namespace Cinemachine
         [Serializable]
         public struct TransformNoiseParams
         {
+            /// <summary>Noise definition for X-axis</summary>
             [Tooltip("Noise definition for X-axis")]
             public NoiseParams X;
+            /// <summary>Noise definition for Y-axis</summary>
             [Tooltip("Noise definition for Y-axis")]
             public NoiseParams Y;
+            /// <summary>Noise definition for Z-axis</summary>
             [Tooltip("Noise definition for Z-axis")]
             public NoiseParams Z;
         }

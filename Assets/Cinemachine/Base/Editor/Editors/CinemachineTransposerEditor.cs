@@ -1,55 +1,45 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineTransposer))]
-    internal sealed class CinemachineTransposerEditor : UnityEditor.Editor
+    internal sealed class CinemachineTransposerEditor : BaseEditor<CinemachineTransposer>
     {
-        private CinemachineTransposer Target { get { return target as CinemachineTransposer; } }
-
-        public override void OnInspectorGUI()
+        protected override List<string> GetExcludedPropertiesInInspector()
         {
-            string[] excludeFields;
+            List<string> excluded = base.GetExcludedPropertiesInInspector();
             switch (Target.m_BindingMode)
             {
                 default:
                 case CinemachineTransposer.BindingMode.LockToTarget:
-                    excludeFields = new string[] { "m_Script" };
                     break;
                 case CinemachineTransposer.BindingMode.LockToTargetNoRoll:
-                    excludeFields = new string[]
-                    {
-                        "m_Script",
-                        SerializedPropertyHelper.PropertyName(() => Target.m_RollDamping)
-                    };
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
                     break;
                 case CinemachineTransposer.BindingMode.LockToTargetWithWorldUp:
-                    excludeFields = new string[]
-                    {
-                        "m_Script",
-                        SerializedPropertyHelper.PropertyName(() => Target.m_PitchDamping),
-                        SerializedPropertyHelper.PropertyName(() => Target.m_RollDamping)
-                    };
+                    excluded.Add(FieldPath(x => x.m_PitchDamping));
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
                     break;
                 case CinemachineTransposer.BindingMode.LockToTargetOnAssign:
                 case CinemachineTransposer.BindingMode.WorldSpace:
-                    excludeFields = new string[]
-                    {
-                        "m_Script",
-                        SerializedPropertyHelper.PropertyName(() => Target.m_PitchDamping),
-                        SerializedPropertyHelper.PropertyName(() => Target.m_YawDamping),
-                        SerializedPropertyHelper.PropertyName(() => Target.m_RollDamping)
-                    };
+                    excluded.Add(FieldPath(x => x.m_PitchDamping));
+                    excluded.Add(FieldPath(x => x.m_YawDamping));
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
                     break;
             }
-            serializedObject.Update();
-            if (Target.VirtualCamera.Follow == null)
+            return excluded;
+        }
+
+        public override void OnInspectorGUI()
+        {
+            BeginInspector();
+            if (Target.FollowTarget == null)
                 EditorGUILayout.HelpBox(
-                    "A Follow Target is required.  Change Body to Hard Constraint if you don't want a Follow target.",
-                    MessageType.Error);
-            DrawPropertiesExcluding(serializedObject, excludeFields);
-            serializedObject.ApplyModifiedProperties();
+                    "Transposer requires a Follow Target.  Change Body to Do Nothing if you don't want a Follow target.",
+                    MessageType.Warning);
+            DrawRemainingPropertiesInInspector();
         }
 
         [DrawGizmo(GizmoType.Active | GizmoType.Selected, typeof(CinemachineTransposer))]
@@ -66,7 +56,7 @@ namespace Cinemachine.Editor
                 CinemachineBrain brain = CinemachineCore.Instance.FindPotentialTargetBrain(target.VirtualCamera);
                 if (brain != null)
                     up = brain.DefaultWorldUp;
-                Vector3 targetPos = target.VirtualCamera.Follow.position;
+                Vector3 targetPos = target.FollowTarget.position;
                 Vector3 desiredPos = target.GeTargetCameraPosition(up);
                 Gizmos.DrawLine(targetPos, desiredPos);
                 Gizmos.DrawWireSphere(desiredPos,

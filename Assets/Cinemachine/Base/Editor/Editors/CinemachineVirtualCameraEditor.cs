@@ -7,115 +7,10 @@ using System.Reflection;
 
 namespace Cinemachine.Editor
 {
-    /// <summary>
-    /// Base class for virtual camera editors.
-    /// Handles drawing the header and the basic properties.
-    /// </summary>
-    public class CinemachineVirtualCameraBaseEditor : UnityEditor.Editor
-    {
-        private CinemachineVirtualCameraBase Target { get { return target as CinemachineVirtualCameraBase; } }
-
-        protected virtual List<string> GetExcludedPropertiesInInspector()
-        {
-            return Target.m_ExcludedPropertiesInInspector == null
-                ? new List<string>() : new List<string>(Target.m_ExcludedPropertiesInInspector);
-        }
-
-        protected virtual void OnEnable()
-        {
-        }
-
-        protected virtual void OnDisable()
-        {
-            if (CinemachineBrain.SoloCamera == (ICinemachineCamera)Target)
-            {
-                CinemachineBrain.SoloCamera = null;
-                UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
-            }
-        }
-
-        public override void OnInspectorGUI()
-        {
-            if (!Target.m_HideHeaderInInspector)
-            {
-                // Is the camera navel-gazing?
-                CameraState state = Target.State;
-                if (state.HasLookAt && (state.ReferenceLookAt - state.CorrectedPosition).AlmostZero())
-                    EditorGUILayout.HelpBox(
-                        "The camera is positioned on the same point at which it is trying to look.", 
-                        MessageType.Warning);
-
-                // Active status and Solo button
-                Rect rect = EditorGUILayout.GetControlRect(true);
-                Rect rectLabel = new Rect(rect.x, rect.y, EditorGUIUtility.labelWidth, rect.height);
-                rect.width -= rectLabel.width;
-                rect.x += rectLabel.width;
-
-                Color color = GUI.color;
-                bool isSolo = (CinemachineBrain.SoloCamera == (ICinemachineCamera)Target);
-                if (isSolo)
-                    GUI.color = CinemachineBrain.GetSoloGUIColor();
-
-                bool isLive = CinemachineCore.Instance.IsLive(Target);
-                GUI.enabled = isLive;
-                GUI.Label(rectLabel, isLive ? "Status: Live"
-                    : (Target.isActiveAndEnabled ? "Status: Standby" : "Status: Disabled"));
-                GUI.enabled = true;
-                if (GUI.Button(rect, "Solo", "Button"))
-                {
-                    isSolo = !isSolo;
-                    CinemachineBrain.SoloCamera = isSolo ? Target : null;
-                    UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
-                }
-                GUI.color = color;
-                if (isSolo)
-                    UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
-                
-                CinemachineSettings.CinemachineCoreSettings.ShowInGameGuides 
-                    = EditorGUILayout.Toggle(
-                        new GUIContent(
-                            "Game Window Guides", 
-                            "Enable the display of overlays in the Game window.  You can adjust colours and opacity in Edit/Preferences/Cinemachine."), 
-                        CinemachineSettings.CinemachineCoreSettings.ShowInGameGuides);
-            }
-
-            List<string> excluded = GetExcludedPropertiesInInspector();
-            serializedObject.Update();
-            DrawPropertiesExcluding(serializedObject, excluded.ToArray());
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        [DrawGizmo(GizmoType.Active | GizmoType.InSelectionHierarchy | GizmoType.Pickable, typeof(CinemachineVirtualCameraBase))]
-        internal static void DrawVirtualCameraBaseGizmos(CinemachineVirtualCameraBase vcam, GizmoType selectionType)
-        {
-            // Don't draw gizmos on hidden stuff
-            if ((vcam.VirtualCameraGameObject.hideFlags & (HideFlags.HideInHierarchy | HideFlags.HideInInspector)) != 0)
-                return;
-
-            if (vcam.ParentCamera != null && (selectionType & GizmoType.Active) == 0)
-                return;
-
-            CameraState state = vcam.State;
-            Gizmos.DrawIcon(state.FinalPosition, "Cinemachine/cm_logo_lg.png", true);
-
-            CinemachineBrainEditor.DrawCameraFrustumGizmo(
-                CinemachineCore.Instance.FindPotentialTargetBrain(vcam),
-                state.Lens,
-                Matrix4x4.TRS(
-                    state.FinalPosition,
-                    UnityQuaternionExtensions.Normalized(state.FinalOrientation), Vector3.one),
-                CinemachineCore.Instance.IsLive(vcam)
-                    ? CinemachineSettings.CinemachineCoreSettings.ActiveGizmoColour
-                    : CinemachineSettings.CinemachineCoreSettings.InactiveGizmoColour);
-        }
-    }
-
-
     [CustomEditor(typeof(CinemachineVirtualCamera))]
-    internal sealed class CinemachineVirtualCameraEditor : CinemachineVirtualCameraBaseEditor
+    internal class CinemachineVirtualCameraEditor 
+        : CinemachineVirtualCameraBaseEditor<CinemachineVirtualCamera>
     {
-        private CinemachineVirtualCamera Target { get { return target as CinemachineVirtualCamera; } }
-
         // Static state and caches - Call UpdateStaticData() to refresh this
         struct StageData
         {
@@ -134,7 +29,7 @@ namespace Cinemachine.Editor
         // Instance data - call UpdateInstanceData() to refresh this
         int[] m_stageState = null;
         bool[] m_stageError = null;
-        ICinemachineComponent[] m_components;
+        CinemachineComponentBase[] m_components;
         UnityEditor.Editor[] m_componentEditors;
 
         protected override void OnEnable()
@@ -154,30 +49,46 @@ namespace Cinemachine.Editor
                         UnityEngine.Object.DestroyImmediate(e);
         }
 
+        Vector3 mPreviousPosition;
         private void OnSceneGUI()
         {
+            if (!Target.UserIsDragging)
+                mPreviousPosition = Target.transform.position;
             if (Selection.Contains(Target.gameObject) && Tools.current == Tool.Move
                 && Event.current.type == EventType.MouseDrag)
             {
                 // User might be dragging our position handle
-                Target.SuppressOrientationUpdate = true;
+                Target.UserIsDragging = true;
+                Vector3 delta = Target.transform.position - mPreviousPosition;
+                if (!delta.AlmostZero())
+                {
+                    Undo.RegisterFullObjectHierarchyUndo(Target.gameObject, "Camera drag");
+                    Target.OnPositionDragged(delta);
+                    mPreviousPosition = Target.transform.position;
+                }
             }
-            else if (GUIUtility.hotControl == 0 && Target.SuppressOrientationUpdate)
+            else if (GUIUtility.hotControl == 0 && Target.UserIsDragging)
             {
                 // We're not dragging anything now, but we were
                 UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
-                Target.SuppressOrientationUpdate = false;
+                Target.UserIsDragging = false;
             }
         }
 
         public override void OnInspectorGUI()
         {
-            // Ordinary properties
-            base.OnInspectorGUI();
+            BeginInspector();
+            DrawHeaderInInspector();
+            DrawPropertyInInspector(FindProperty(x => x.m_Priority));
+            DrawTargetsInInspector(FindProperty(x => x.m_Follow), FindProperty(x => x.m_LookAt));
+            DrawRemainingPropertiesInInspector();
+            DrawPipelineInInspector();
+            DrawExtensionsWidgetInInspector();
+        }
 
-            // Pipeline - call this first
+        protected void DrawPipelineInInspector()
+        {
             UpdateInstanceData();
-
             foreach (CinemachineCore.Stage stage in Enum.GetValues(typeof(CinemachineCore.Stage)))
             {
                 int index = (int)stage;
@@ -186,20 +97,24 @@ namespace Cinemachine.Editor
                 if (sStageData[index].PopupOptions.Length <= 1)
                     continue;
 
+                const float indentOffset = 6;
+
                 GUIStyle stageBoxStyle = GUI.skin.box;
-                stageBoxStyle.margin.left = 16;
                 EditorGUILayout.BeginVertical(stageBoxStyle);
-
                 Rect rect = EditorGUILayout.GetControlRect(true);
-                rect.height = EditorGUIUtility.singleLineHeight;
 
-                GUI.enabled = !StageIsLocked(stage);
+                // Don't use PrefixLabel() because it will link the enabled status of field and label
                 GUIContent label = new GUIContent(NicifyName(stage.ToString()));
                 if (m_stageError[index])
-                    label.image = EditorGUIUtility.IconContent("console.erroricon.sml").image;
-                int newSelection = EditorGUI.Popup(
-                    rect, label, m_stageState[index], sStageData[index].PopupOptions);
+                    label.image = EditorGUIUtility.IconContent("console.warnicon.sml").image;
+                float labelWidth = EditorGUIUtility.labelWidth - (indentOffset + EditorGUI.indentLevel * 15);
+                Rect r = rect; r.width = labelWidth;
+                EditorGUI.LabelField(r, label);
+                r = rect; r.width -= labelWidth; r.x += labelWidth;
+                GUI.enabled = !StageIsLocked(stage);
+                int newSelection = EditorGUI.Popup(r, m_stageState[index], sStageData[index].PopupOptions);
                 GUI.enabled = true;
+
                 Type type = sStageData[index].types[newSelection];
                 if (newSelection != m_stageState[index])
                 {
@@ -211,7 +126,6 @@ namespace Cinemachine.Editor
                 }
                 if (type != null)
                 {
-                    int indentOffset = 6;
                     Rect stageRect = new Rect(
                         rect.x - indentOffset, rect.y, rect.width + indentOffset, rect.height);
                     sStageData[index].IsExpanded = EditorGUI.Foldout(
@@ -250,7 +164,7 @@ namespace Cinemachine.Editor
             {
                 if (e != null)
                 {
-                    ICinemachineComponent c = e.target as ICinemachineComponent;
+                    CinemachineComponentBase c = e.target as CinemachineComponentBase;
                     if (c != null && c.Stage == stage)
                         return e;
                 }
@@ -267,7 +181,7 @@ namespace Cinemachine.Editor
             static CreatePipelineWithUndo()
             {
                 CinemachineVirtualCamera.CreatePipelineOverride =
-                    (CinemachineVirtualCamera vcam, string name, ICinemachineComponent[] copyFrom) =>
+                    (CinemachineVirtualCamera vcam, string name, CinemachineComponentBase[] copyFrom) =>
                     {
                         // Create a new pipeline
                         GameObject go =  new GameObject(name);
@@ -301,9 +215,9 @@ namespace Cinemachine.Editor
             // Get the existing components
             Transform owner = Target.GetComponentOwner();
 
-            ICinemachineComponent[] components = owner.GetComponents<ICinemachineComponent>();
+            CinemachineComponentBase[] components = owner.GetComponents<CinemachineComponentBase>();
             if (components == null)
-                components = new ICinemachineComponent[0];
+                components = new CinemachineComponentBase[0];
 
             // Find an appropriate insertion point
             int numComponents = components.Length;
@@ -317,7 +231,7 @@ namespace Cinemachine.Editor
             {
                 if (components[i].Stage == stage)
                 {
-                    Undo.DestroyObjectImmediate(components[i] as MonoBehaviour);
+                    Undo.DestroyObjectImmediate(components[i]);
                     components[i] = null;
                     --numComponents;
                     if (i < insertPoint)
@@ -340,19 +254,19 @@ namespace Cinemachine.Editor
         {
             if (sStageData != null)
                 return;
-            sStageData = new StageData[System.Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
+            sStageData = new StageData[Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
 
-            var stageTypes = new List<Type>[System.Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
+            var stageTypes = new List<Type>[Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
             for (int i = 0; i < stageTypes.Length; ++i)
             {
                 sStageData[i].Name = ((CinemachineCore.Stage)i).ToString();
                 stageTypes[i] = new List<Type>();
             }
+
             // Get all ICinemachineComponents
             var allTypes
-                = Cinemachine.Utility.ReflectionHelpers.GetTypesInAllLoadedAssemblies(
-                        (Type t) => Array.Exists(t.GetInterfaces(),
-                            (i) => i == typeof(ICinemachineComponent)));
+                = ReflectionHelpers.GetTypesInAllLoadedAssemblies(
+                        (Type t) => t.IsSubclassOf(typeof(CinemachineComponentBase)));
 
             // Create a temp game object so we can instance behaviours
             GameObject go = new GameObject("Cinemachine Temp Object");
@@ -360,7 +274,7 @@ namespace Cinemachine.Editor
             foreach (Type t in allTypes)
             {
                 MonoBehaviour b = go.AddComponent(t) as MonoBehaviour;
-                ICinemachineComponent c = b != null ? (ICinemachineComponent)b : null;
+                CinemachineComponentBase c = b != null ? (CinemachineComponentBase)b : null;
                 if (c != null)
                 {
                     CinemachineCore.Stage stage = c.Stage;
@@ -382,7 +296,7 @@ namespace Cinemachine.Editor
                         bool useSimple
                             = (i == (int)CinemachineCore.Stage.Aim)
                                 || (i == (int)CinemachineCore.Stage.Body);
-                        names[n] = new GUIContent((useSimple) ? "Hard constraint" : "none");
+                        names[n] = new GUIContent((useSimple) ? "Do nothing" : "none");
                     }
                     else
                         names[n] = new GUIContent(NicifyName(sStageData[i].types[n].Name));
@@ -410,10 +324,10 @@ namespace Cinemachine.Editor
         // Expansion state is cached statically to preserve foldout state.
         void UpdateComponentEditors()
         {
-            ICinemachineComponent[] components = Target.GetComponentPipeline();
+            CinemachineComponentBase[] components = Target.GetComponentPipeline();
             int numComponents = components != null ? components.Length : 0;
             if (m_components == null || m_components.Length != numComponents)
-                m_components = new ICinemachineComponent[numComponents];
+                m_components = new CinemachineComponentBase[numComponents];
             bool dirty = (numComponents == 0);
             for (int i = 0; i < numComponents; ++i)
             {
@@ -442,10 +356,10 @@ namespace Cinemachine.Editor
             }
         }
 
-        void UpdateStageState(ICinemachineComponent[] components)
+        void UpdateStageState(CinemachineComponentBase[] components)
         {
-            m_stageState = new int[System.Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
-            m_stageError = new bool[System.Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
+            m_stageState = new int[Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
+            m_stageError = new bool[Enum.GetValues(typeof(CinemachineCore.Stage)).Length];
             foreach (var c in components)
             {
                 CinemachineCore.Stage stage = c.Stage;
@@ -482,7 +396,7 @@ namespace Cinemachine.Editor
                             var attributes = method.GetCustomAttributes(typeof(DrawGizmo), true) as DrawGizmo[];
                             foreach (var a in attributes)
                             {
-                                if (typeof(ICinemachineComponent).IsAssignableFrom(a.drawnType))
+                                if (typeof(CinemachineComponentBase).IsAssignableFrom(a.drawnType))
                                 {
                                     m_GizmoDrawers.Add(a.drawnType, method);
                                     added = true;

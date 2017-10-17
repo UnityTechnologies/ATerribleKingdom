@@ -6,10 +6,73 @@ using System.Collections.Generic;
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineFramingTransposer))]
-    internal class CinemachineFramingTransposerEditor : UnityEditor.Editor
+    internal class CinemachineFramingTransposerEditor : BaseEditor<CinemachineFramingTransposer>
     {
-        private CinemachineFramingTransposer Target { get { return target as CinemachineFramingTransposer; } }
         CinemachineScreenComposerGuides mScreenGuideEditor;
+
+        protected override List<string> GetExcludedPropertiesInInspector()
+        {
+            List<string> excluded = base.GetExcludedPropertiesInInspector();
+            if (Target.m_UnlimitedSoftZone)
+            {
+                excluded.Add(FieldPath(x => x.m_SoftZoneWidth));
+                excluded.Add(FieldPath(x => x.m_SoftZoneHeight));
+                excluded.Add(FieldPath(x => x.m_BiasX));
+                excluded.Add(FieldPath(x => x.m_BiasY));
+            }
+            CinemachineTargetGroup group = Target.TargetGroup;
+            if (group == null || Target.m_GroupFramingMode == CinemachineFramingTransposer.FramingMode.None)
+            {
+                excluded.Add(FieldPath(x => x.m_GroupFramingSize));
+                excluded.Add(FieldPath(x => x.m_AdjustmentMode));
+                excluded.Add(FieldPath(x => x.m_MaxDollyIn));
+                excluded.Add(FieldPath(x => x.m_MaxDollyOut));
+                excluded.Add(FieldPath(x => x.m_MinimumDistance));
+                excluded.Add(FieldPath(x => x.m_MaximumDistance));
+                excluded.Add(FieldPath(x => x.m_MinimumFOV));
+                excluded.Add(FieldPath(x => x.m_MaximumFOV));
+                excluded.Add(FieldPath(x => x.m_MinimumOrthoSize));
+                excluded.Add(FieldPath(x => x.m_MaximumOrthoSize));
+                if (group == null)
+                    excluded.Add(FieldPath(x => x.m_GroupFramingMode));
+            }
+            else 
+            {
+                CinemachineBrain brain = CinemachineCore.Instance.FindPotentialTargetBrain(Target.VirtualCamera);
+                bool ortho = brain != null ? brain.OutputCamera.orthographic : false;
+                if (ortho)
+                {
+                    excluded.Add(FieldPath(x => x.m_AdjustmentMode));
+                    excluded.Add(FieldPath(x => x.m_MaxDollyIn));
+                    excluded.Add(FieldPath(x => x.m_MaxDollyOut));
+                    excluded.Add(FieldPath(x => x.m_MinimumDistance));
+                    excluded.Add(FieldPath(x => x.m_MaximumDistance));
+                    excluded.Add(FieldPath(x => x.m_MinimumFOV));
+                    excluded.Add(FieldPath(x => x.m_MaximumFOV));
+                }
+                else 
+                {
+                    excluded.Add(FieldPath(x => x.m_MinimumOrthoSize));
+                    excluded.Add(FieldPath(x => x.m_MaximumOrthoSize));
+                    switch (Target.m_AdjustmentMode)
+                    {
+                    case CinemachineFramingTransposer.AdjustmentMode.DollyOnly:
+                        excluded.Add(FieldPath(x => x.m_MinimumFOV));
+                        excluded.Add(FieldPath(x => x.m_MaximumFOV));
+                        break;
+                    case CinemachineFramingTransposer.AdjustmentMode.ZoomOnly:
+                        excluded.Add(FieldPath(x => x.m_MaxDollyIn));
+                        excluded.Add(FieldPath(x => x.m_MaxDollyOut));
+                        excluded.Add(FieldPath(x => x.m_MinimumDistance));
+                        excluded.Add(FieldPath(x => x.m_MaximumDistance));
+                        break;
+                    default:
+                        break;
+                    }
+                }
+            }
+            return excluded;
+        }
 
         protected virtual void OnEnable()
         {
@@ -31,76 +94,24 @@ namespace Cinemachine.Editor
             UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
         }
 
-        protected virtual string[] GetExcludedFields()
-        {
-            List<string> excluded = new List<string> { "m_Script" };
-            CinemachineTargetGroup group = Target.TargetGroup;
-            if (group == null)
-            {
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_GroupFramingSize));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_FramingMode));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_FrameDamping));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_AdjustmentMode));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaxDollyIn));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaxDollyOut));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MinimumDistance));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaximumDistance));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MinimumFOV));
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaximumFOV));
-            }
-            else 
-            {
-                CinemachineBrain brain = CinemachineCore.Instance.FindPotentialTargetBrain(Target.VirtualCamera);
-                bool ortho = brain != null ? brain.OutputCamera.orthographic : false;
-                if (ortho)
-                {
-                    excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_AdjustmentMode));
-                    excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaxDollyIn));
-                    excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaxDollyOut));
-                    excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MinimumDistance));
-                    excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaximumDistance));
-                    excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MinimumFOV));
-                    excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaximumFOV));
-                }
-                else switch (Target.m_AdjustmentMode)
-                {
-                    case CinemachineFramingTransposer.AdjustmentMode.DollyOnly:
-                        excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MinimumFOV));
-                        excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaximumFOV));
-                        break;
-                    case CinemachineFramingTransposer.AdjustmentMode.ZoomOnly:
-                        excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaxDollyIn));
-                        excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaxDollyOut));
-                        excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MinimumDistance));
-                        excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_MaximumDistance));
-                        break;
-                    default:
-                        break;
-                }
-            }
-            return excluded.ToArray();
-        }
-        
         public override void OnInspectorGUI()
         {
-            if (Target.VirtualCamera.Follow == null)
+            BeginInspector();
+            if (Target.FollowTarget == null)
                 EditorGUILayout.HelpBox(
-                    "A Follow target is required.  Change Body to Hard Constraint if you don't want a Follow target.", 
-                    MessageType.Error);
-            if (Target.VirtualCamera.LookAt != null)
+                    "Framing Transposer requires a Follow target.  Change Body to Do Nothing if you don't want a Follow target.", 
+                    MessageType.Warning);
+            if (Target.LookAtTarget != null)
                 EditorGUILayout.HelpBox(
                     "The LookAt target must be null.  The Follow target will be used in place of the LookAt target.",
-                    MessageType.Error);
-
-            serializedObject.Update();
+                    MessageType.Warning);
 
             // First snapshot some settings
             Rect oldHard = Target.HardGuideRect;
             Rect oldSoft = Target.SoftGuideRect;
 
             // Draw the properties
-            DrawPropertiesExcluding(serializedObject, GetExcludedFields());
-            serializedObject.ApplyModifiedProperties();
+            DrawRemainingPropertiesInInspector();
             mScreenGuideEditor.SetNewBounds(oldHard, oldSoft, Target.HardGuideRect, Target.SoftGuideRect);
         }
 
@@ -117,27 +128,29 @@ namespace Cinemachine.Editor
             bool isLive = CinemachineCore.Instance.IsLive(Target.VirtualCamera);
 
             // Screen guides
-            mScreenGuideEditor.OnGUI_DrawGuides(isLive, brain.OutputCamera, Target.VirtualCamera.State.Lens);
+            mScreenGuideEditor.OnGUI_DrawGuides(isLive, brain.OutputCamera, Target.VcamState.Lens, !Target.m_UnlimitedSoftZone);
 
             // Draw an on-screen gizmo for the target
-            if (Target.VirtualCamera.Follow != null && isLive)
+            if (Target.FollowTarget != null && isLive)
             {
-                Vector2 targetScreenPosition = brain.OutputCamera.WorldToScreenPoint(
-                        Target.VirtualCamera.Follow.position);
-                targetScreenPosition.y = Screen.height - targetScreenPosition.y;
-
-                GUI.color = CinemachineSettings.ComposerSettings.TargetColour;
-                Rect r = new Rect(targetScreenPosition, Vector2.zero);
-                float size = (CinemachineSettings.ComposerSettings.TargetSize 
-                    + CinemachineScreenComposerGuides.kGuideBarWidthPx) / 2;
-                GUI.DrawTexture(r.Inflated(new Vector2(size, size)), Texture2D.whiteTexture);
-                size -= CinemachineScreenComposerGuides.kGuideBarWidthPx;
-                if (size > 0)
+                Vector3 targetScreenPosition = brain.OutputCamera.WorldToScreenPoint(Target.FollowTarget.position);
+                if (targetScreenPosition.z > 0)
                 {
-                    Vector4 overlayOpacityScalar 
-                        = new Vector4(1f, 1f, 1f, CinemachineSettings.ComposerSettings.OverlayOpacity);
-                    GUI.color = Color.black * overlayOpacityScalar;
+                    targetScreenPosition.y = Screen.height - targetScreenPosition.y;
+
+                    GUI.color = CinemachineSettings.ComposerSettings.TargetColour;
+                    Rect r = new Rect(targetScreenPosition, Vector2.zero);
+                    float size = (CinemachineSettings.ComposerSettings.TargetSize 
+                        + CinemachineScreenComposerGuides.kGuideBarWidthPx) / 2;
                     GUI.DrawTexture(r.Inflated(new Vector2(size, size)), Texture2D.whiteTexture);
+                    size -= CinemachineScreenComposerGuides.kGuideBarWidthPx;
+                    if (size > 0)
+                    {
+                        Vector4 overlayOpacityScalar 
+                            = new Vector4(1f, 1f, 1f, CinemachineSettings.ComposerSettings.OverlayOpacity);
+                        GUI.color = Color.black * overlayOpacityScalar;
+                        GUI.DrawTexture(r.Inflated(new Vector2(size, size)), Texture2D.whiteTexture);
+                    }
                 }
             }
         }

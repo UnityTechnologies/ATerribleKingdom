@@ -28,7 +28,7 @@ namespace Cinemachine.Editor
 
         private void OnEnable()
         {
-            string path = "Assets/Cinemachine/ReleaseNotes.txt";
+            string path = ScriptableObjectUtility.CinemachineInstallPath + "/ReleaseNotes.txt";
             try
             {
                 StreamReader reader = new StreamReader(path); 
@@ -108,7 +108,8 @@ namespace Cinemachine.Editor
 
                 if (GUILayout.Button("<b>Documentation</b>\nRead it", mButtonStyle))
                 {
-                    Application.OpenURL("file://" + Application.dataPath + "/Cinemachine/CINEMACHINE_install.pdf");
+                    Application.OpenURL("file://" + ScriptableObjectUtility.CinemachineInstallPath 
+                        + "/CINEMACHINE_install.pdf");
                 }
             }
 

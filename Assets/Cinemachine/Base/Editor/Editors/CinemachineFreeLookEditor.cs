@@ -7,16 +7,15 @@ using Cinemachine.Utility;
 namespace Cinemachine
 {
     [CustomEditor(typeof(CinemachineFreeLook))]
-    internal sealed class CinemachineFreeLookEditor : CinemachineVirtualCameraBaseEditor
+    internal sealed class CinemachineFreeLookEditor 
+        : CinemachineVirtualCameraBaseEditor<CinemachineFreeLook>
     {
-        private CinemachineFreeLook Target { get { return (CinemachineFreeLook)target; } }
-
         protected override List<string> GetExcludedPropertiesInInspector()
         {
             List<string> excluded = base.GetExcludedPropertiesInInspector();
-            excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_Orbits));
-            if (!Target.m_UseCommonLensSetting)
-                excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_Lens));
+            excluded.Add(FieldPath(x => x.m_Orbits));
+            if (!Target.m_CommonLens)
+                excluded.Add(FieldPath(x => x.m_Lens));
             return excluded;
         }
 
@@ -34,11 +33,15 @@ namespace Cinemachine
         public override void OnInspectorGUI()
         {
             // Ordinary properties
-            base.OnInspectorGUI();
+            BeginInspector();
+            DrawHeaderInInspector();
+            DrawPropertyInInspector(FindProperty(x => x.m_Priority));
+            DrawTargetsInInspector(FindProperty(x => x.m_Follow), FindProperty(x => x.m_LookAt));
+            DrawRemainingPropertiesInInspector();
 
             // Orbits
             EditorGUI.BeginChangeCheck();
-            SerializedProperty orbits = serializedObject.FindProperty(() => Target.m_Orbits);
+            SerializedProperty orbits = FindProperty(x => x.m_Orbits);
             for (int i = 0; i < CinemachineFreeLook.RigNames.Length; ++i)
             {
                 float hSpace = 3;
@@ -49,7 +52,7 @@ namespace Cinemachine
                 rect.width = rect.width / 2 - hSpace;
 
                 float oldWidth = EditorGUIUtility.labelWidth;
-                EditorGUIUtility.labelWidth = rect.width / 3; 
+                EditorGUIUtility.labelWidth = rect.width / 2; 
                 SerializedProperty heightProp = orbit.FindPropertyRelative(() => Target.m_Orbits[i].m_Height);
                 EditorGUI.PropertyField(rect, heightProp, new GUIContent("Height"));
                 rect.x += rect.width + hSpace;
@@ -74,6 +77,9 @@ namespace Cinemachine
                 --EditorGUI.indentLevel;
                 EditorGUILayout.EndVertical();
             }
+
+            // Extensions
+            DrawExtensionsWidgetInInspector();
         }
 
         string[] RigNames;
@@ -139,7 +145,7 @@ namespace Cinemachine
         private static void DrawFreeLookGizmos(CinemachineFreeLook vcam, GizmoType selectionType)
         {
             // Standard frustum and logo
-            CinemachineVirtualCameraBaseEditor.DrawVirtualCameraBaseGizmos(vcam, selectionType);
+            CinemachineBrainEditor.DrawVirtualCameraBaseGizmos(vcam, selectionType);
 
             Color originalGizmoColour = Gizmos.color;
             bool isActiveVirtualCam = CinemachineCore.Instance.IsLive(vcam);

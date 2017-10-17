@@ -18,7 +18,7 @@ namespace Cinemachine
     [AddComponentMenu("")] // Don't display in add component menu
     [RequireComponent(typeof(CinemachinePipeline))]
     [SaveDuringPlay]
-    public class CinemachineComposer : MonoBehaviour, ICinemachineComponent
+    public class CinemachineComposer : CinemachineComponentBase
     {
         /// <summary>Used by the Inspector Editor to display on-screen guides.</summary>
         [NoSaveDuringPlay, HideInInspector]
@@ -29,6 +29,16 @@ namespace Cinemachine
         /// when the desired area is not in the tracked object's center</summary>
         [Tooltip("Target offset from the target object's center in target-local space. Use this to fine-tune the tracking target position when the desired area is not the tracked object's center.")]
         public Vector3 m_TrackedObjectOffset = Vector3.zero;
+
+        /// <summary>This setting will instruct the composer to adjust its target offset based
+        /// on the motion of the target.  The composer will look at a point where it estimates
+        /// the target will be this many seconds into the future.  Note that this setting is sensitive
+        /// to noisy animation, and can amplify the noise, resulting in undesirable camera jitter.
+        /// If the camera jitters unacceptably when the target is in motion, turn down this setting, 
+        /// or animate the target more smoothly.</summary>
+        [Tooltip("This setting will instruct the composer to adjust its target offset based on the motion of the target.  The composer will look at a point where it estimates the target will be this many seconds into the future.  Note that this setting is sensitive to noisy animation, and can amplify the noise, resulting in undesirable camera jitter.  If the camera jitters unacceptably when the target is in motion, turn down this setting, or animate the target more smoothly.")]
+        [Range(0f, 1f)]
+        public float m_LookaheadTime = 0;
 
         /// <summary>How aggressively the camera tries to follow the target in the screen-horizontal direction.
         /// Small numbers are more responsive, rapidly orienting the camera to keep the target in
@@ -91,28 +101,26 @@ namespace Cinemachine
         public float m_BiasY = 0f;
 
         /// <summary>True if component is enabled and has a LookAt defined</summary>
-        public virtual bool IsValid { get { return enabled && VirtualCamera.LookAt != null; } }
-
-        /// <summary>Get the Cinemachine Virtual Camera affected by this component</summary>
-        public ICinemachineCamera VirtualCamera
-        { get { return gameObject.transform.parent.gameObject.GetComponent<ICinemachineCamera>(); } }
+        public override bool IsValid { get { return enabled && LookAtTarget != null; } }
 
         /// <summary>Get the Cinemachine Pipeline stage that this component implements.
         /// Always returns the Aim stage</summary>
-        public CinemachineCore.Stage Stage { get { return CinemachineCore.Stage.Aim; } }
-
-        /// <summary>Scale for damping, to make a nice UI</summary>
-        protected const float kDampingScale = 0.1f;
+        public override CinemachineCore.Stage Stage { get { return CinemachineCore.Stage.Aim; } }
 
         /// <summary>Apply the target offsets to the target location.</summary>
         /// <param name="lookAt">The unoffset LookAt point</param>
         /// <returns>The LookAt point with the offset applied</returns>
         protected virtual Vector3 GetTrackedPoint(Vector3 lookAt)
         {
-            Vector3 offset = Vector3.zero;
-            if (VirtualCamera.LookAt != null)
-                offset = VirtualCamera.LookAt.transform.rotation * m_TrackedObjectOffset;
-            return lookAt + offset;
+            Vector3 pos = lookAt;
+            if (LookAtTarget != null)
+                pos += LookAtTarget.transform.rotation * m_TrackedObjectOffset;
+
+            m_Predictor.AddPosition(pos);
+            if (m_LookaheadTime > 0)
+                pos = m_Predictor.PredictPosition(m_LookaheadTime);
+
+            return pos;
         }
         
 #if UNITY_EDITOR
@@ -120,26 +128,35 @@ namespace Cinemachine
 #endif
 
         /// <summary>State information for damping</summary>
+        Vector3 m_CameraPosPrevFrame = Vector3.zero;
+        Vector3 m_LookAtPrevFrame = Vector3.zero;
+        Vector2 m_ScreenOffsetPrevFrame = Vector2.zero;
         Quaternion m_CameraOrientationPrevFrame = Quaternion.identity;
+        PositionPredictor m_Predictor = new PositionPredictor();
 
         /// <summary>Applies the composer rules and orients the camera accordingly</summary>
         /// <param name="curState">The current camera state</param>
         /// <param name="deltaTime">Used for calculating damping.  If less than
-        /// or equal to zero, then target will snap to the center of the dead zone.</param>
-        public virtual void MutateCameraState(ref CameraState curState, float deltaTime)
+        /// zero, then target will snap to the center of the dead zone.</param>
+        public override void MutateCameraState(ref CameraState curState, float deltaTime)
         {
             // Initialize the state for previous frame if appropriate
-            if (deltaTime <= 0)
-                m_CameraOrientationPrevFrame = curState.RawOrientation;
+            if (deltaTime < 0)
+                m_Predictor.Reset();
                 
             if (!IsValid || !curState.HasLookAt)
                 return;
 
             curState.ReferenceLookAt = GetTrackedPoint(curState.ReferenceLookAt);
             float targetDistance = (curState.ReferenceLookAt - curState.CorrectedPosition).magnitude;
-            if (targetDistance < UnityVectorExtensions.Epsilon)
+            if (targetDistance < Epsilon)
+            {
+                if (deltaTime >= 0)
+                    curState.RawOrientation = m_CameraOrientationPrevFrame;
                 return;  // navel-gazing, get outa here
+            }
 
+            //UnityEngine.Profiling.Profiler.BeginSample("CinemachineComposer.MutateCameraState");
             float fov, fovH;
             if (curState.Lens.Orthographic)
             {
@@ -155,31 +172,42 @@ namespace Cinemachine
                 fovH = (float)(Mathf.Rad2Deg * radHFOV);
             }
 
+            Quaternion rigOrientation = curState.RawOrientation;
             Rect softGuideFOV = ScreenToFOV(SoftGuideRect, fov, fovH, curState.Lens.Aspect);
-            if (deltaTime <= 0)
+            if (deltaTime < 0 || (m_HorizontalDamping < Epsilon && m_VerticalDamping < Epsilon))
             {
                 // No damping, just snap to central bounds, skipping the soft zone
                 Rect rect = new Rect(softGuideFOV.center, Vector2.zero); // Force to center
-                curState.RawOrientation = RotateToScreenBounds(
-                        ref curState, rect, curState.RawOrientation, fov, fovH, 0);
+                RotateToScreenBounds(ref curState, rect, ref rigOrientation, fov, fovH, -1);
             }
             else
             {
                 // Start with previous frame's orientation (but with current up)
-                Quaternion rigOrientation = Quaternion.LookRotation(
+                Vector3 dir = m_LookAtPrevFrame - (m_CameraPosPrevFrame + curState.PositionDampingBypass);
+                if (dir.AlmostZero())  
+                    rigOrientation = Quaternion.LookRotation(
                         m_CameraOrientationPrevFrame * Vector3.forward, curState.ReferenceUp);
+                else 
+                {
+                    rigOrientation = Quaternion.LookRotation(dir, curState.ReferenceUp);
+                    rigOrientation = rigOrientation.ApplyCameraRotation(
+                        -m_ScreenOffsetPrevFrame, curState.ReferenceUp);
+                }
 
-                // First force the previous rotation into the hard bounds, no damping
+                // First force the previous rotation into the hard bounds, no damping, 
+                // then Now move it through the soft zone, with damping
                 Rect hardGuideFOV = ScreenToFOV(HardGuideRect, fov, fovH, curState.Lens.Aspect);
-                curState.RawOrientation = RotateToScreenBounds(
-                        ref curState, hardGuideFOV, rigOrientation, fov, fovH, 0);
-
-                // Now move it through the soft zone, with damping
-                curState.RawOrientation = RotateToScreenBounds(
-                        ref curState, softGuideFOV, curState.RawOrientation, fov, fovH, deltaTime);
+                if (!RotateToScreenBounds(ref curState, hardGuideFOV, ref rigOrientation, fov, fovH, -1))
+                    RotateToScreenBounds(ref curState, softGuideFOV, ref rigOrientation, fov, fovH, deltaTime);
             }
-            curState.RawOrientation = m_CameraOrientationPrevFrame 
-                = UnityQuaternionExtensions.Normalized(curState.RawOrientation);
+            m_CameraPosPrevFrame = curState.CorrectedPosition;
+            m_LookAtPrevFrame = curState.ReferenceLookAt;
+            m_CameraOrientationPrevFrame = UnityQuaternionExtensions.Normalized(rigOrientation);
+            m_ScreenOffsetPrevFrame = m_CameraOrientationPrevFrame.GetCameraRotationToTarget(
+                m_LookAtPrevFrame - curState.CorrectedPosition, curState.ReferenceUp);
+
+            curState.RawOrientation = m_CameraOrientationPrevFrame;
+            //UnityEngine.Profiling.Profiler.EndSample();
         }
 
         /// <summary>Internal API for the inspector editor</summary>
@@ -226,8 +254,8 @@ namespace Cinemachine
                 Vector2 bias = center - new Vector2(m_ScreenX, m_ScreenY);
                 float biasWidth = Mathf.Max(0, m_SoftZoneWidth - m_DeadZoneWidth);
                 float biasHeight = Mathf.Max(0, m_SoftZoneHeight - m_DeadZoneHeight);
-                m_BiasX = biasWidth < UnityVectorExtensions.Epsilon ? 0 : Mathf.Clamp(bias.x / biasWidth, -0.5f, 0.5f);
-                m_BiasY = biasHeight < UnityVectorExtensions.Epsilon ? 0 : Mathf.Clamp(bias.y / biasHeight, -0.5f, 0.5f);
+                m_BiasX = biasWidth < Epsilon ? 0 : Mathf.Clamp(bias.x / biasWidth, -0.5f, 0.5f);
+                m_BiasY = biasHeight < Epsilon ? 0 : Mathf.Clamp(bias.y / biasHeight, -0.5f, 0.5f);
             }
         }
         
@@ -263,9 +291,9 @@ namespace Cinemachine
         /// state.ReferenceUp.  If this condition is violated
         /// then you will see crazy spinning.  That's the symptom.
         /// </summary>
-        private Quaternion RotateToScreenBounds(
+        private bool RotateToScreenBounds(
             ref CameraState state, Rect screenRect,
-            Quaternion rigOrientation, float fov, float fovH, float deltaTime)
+            ref Quaternion rigOrientation, float fov, float fovH, float deltaTime)
         {
             Vector3 targetDir = state.ReferenceLookAt - state.CorrectedPosition;
             Vector2 rotToRect = rigOrientation.GetCameraRotationToTarget(targetDir, state.ReferenceUp);
@@ -291,16 +319,22 @@ namespace Cinemachine
                 rotToRect.y = 0;
 
             // Apply damping
-            if (deltaTime > 0)
+            if (deltaTime >= 0)
             {
-                if (Mathf.Abs(rotToRect.x) > UnityVectorExtensions.Epsilon)
-                    rotToRect.x *= deltaTime / Mathf.Max(m_VerticalDamping * kDampingScale, deltaTime);
-                if (Mathf.Abs(rotToRect.y) > UnityVectorExtensions.Epsilon)
-                    rotToRect.y *= deltaTime / Mathf.Max(m_HorizontalDamping * kDampingScale, deltaTime);
+                rotToRect.x = Damper.Damp(rotToRect.x, m_VerticalDamping, deltaTime);
+                rotToRect.y = Damper.Damp(rotToRect.y, m_HorizontalDamping, deltaTime);
             }
 
             // Rotate
-            return rigOrientation.ApplyCameraRotation(rotToRect, state.ReferenceUp);
+            rigOrientation = rigOrientation.ApplyCameraRotation(rotToRect, state.ReferenceUp);
+#if false
+            // GML this gives false positives when the camera is moving.
+            // The way to address this would be to grow the hard rect by the amount 
+            // that it would be damped
+            return Mathf.Abs(rotToRect.x) > Epsilon || Mathf.Abs(rotToRect.y) > Epsilon;
+#else
+            return false; 
+#endif
         }
 
         /// <summary>

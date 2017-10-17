@@ -10,15 +10,15 @@ namespace Cinemachine
     public class CinemachineBlend
     {
         /// <summary>First camera in the blend</summary>
-        public ICinemachineCamera CamA { get; private set; }
+        public ICinemachineCamera CamA { get; set; }
 
         /// <summary>Second camera in the blend</summary>
-        public ICinemachineCamera CamB { get; private set; }
+        public ICinemachineCamera CamB { get; set; }
 
         /// <summary>The curve that describes the way the blend transitions over time
         /// from the first camera to the second.  X-axis is time in seconds over which
         /// the blend takes place and Y axis is blend weight (0..1)</summary>
-        public AnimationCurve BlendCurve { get; private set; }
+        public AnimationCurve BlendCurve { get; set; }
 
         /// <summary>The current time relative to the start of the blend</summary>
         public float TimeInBlend { get; set; }
@@ -27,25 +27,19 @@ namespace Cinemachine
         /// BlendCurve at the current time relative to the start of the blend.
         /// 0 means camA, 1 means camB.</summary>
         public float BlendWeight
-        { get { return BlendCurve != null ? BlendCurve.Evaluate(TimeInBlend) : 0; } }
+        { 
+            get { return BlendCurve != null ? BlendCurve.Evaluate(TimeInBlend) : 0; } 
+        }
 
-        /// <summary>Validity test for the blend.  True if both cameras are defined,
-        /// and there is a nontrivial blend curve.</summary>
+        /// <summary>Validity test for the blend.  True if both cameras are defined.</summary>
         public bool IsValid
         {
-            get
-            {
-                return (CamA != null || CamB != null)
-                    && BlendCurve != null && BlendCurve.keys.Length > 1;
-            }
+            get { return (CamA != null || CamB != null); }
         }
 
         /// <summary>Duration in seconds of the blend.
         /// This is given read from the BlendCurve.</summary>
-        public float Duration
-        {
-            get { return IsValid ? BlendCurve.keys[BlendCurve.keys.Length - 1].time : 0; }
-        }
+        public float Duration { get; set; }
 
         /// <summary>True if the time relative to the start of the blend is greater
         /// than or equal to the blend duration</summary>
@@ -85,7 +79,7 @@ namespace Cinemachine
         /// <param name="curve">Blend curve</param>
         /// <param name="t">Current time in blend, relative to the start of the blend</param>
         public CinemachineBlend(
-            ICinemachineCamera a, ICinemachineCamera b, AnimationCurve curve, float t)
+            ICinemachineCamera a, ICinemachineCamera b, AnimationCurve curve, float duration, float t)
         {
             if (a == null || b == null)
                 throw new ArgumentException("Blend cameras cannot be null");
@@ -93,6 +87,7 @@ namespace Cinemachine
             CamB = b;
             BlendCurve = curve;
             TimeInBlend = t;
+            Duration = duration;
         }
 
         /// <summary>Make sure the source cameras get updated.</summary>

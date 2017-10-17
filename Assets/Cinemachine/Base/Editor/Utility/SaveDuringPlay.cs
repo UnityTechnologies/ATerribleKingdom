@@ -385,7 +385,7 @@ namespace SaveDuringPlay
         public static string kEnabledKey = "SaveDuringPlay_Enabled";
         public static bool Enabled
         {
-            get { return EditorPrefs.GetBool(kEnabledKey, true); }
+            get { return EditorPrefs.GetBool(kEnabledKey, false); }
             set
             {
                 if (value != Enabled)
@@ -503,11 +503,7 @@ namespace SaveDuringPlay
                 GameObject go = saver.FindSavedGameObject();
                 if (go != null)
                 {
-                    // Doesn't work unless I use the obsolete API.
-                    // It still doesn't seem to play well with Undo.
-                    // GML: How to fix this?  I'm out of ideas...
-                    #pragma warning disable 0618
-                    Undo.RegisterUndo(go, "SaveDuringPlay");
+                    Undo.RegisterFullObjectHierarchyUndo(go, "SaveDuringPlay");
                     if (saver.PutFieldValues(go))
                     {
                         //Debug.Log("SaveDuringPlay: updated settings of " + saver.ObjetFullPath);

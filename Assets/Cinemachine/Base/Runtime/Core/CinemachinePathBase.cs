@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine.Utility;
+using System;
 
 namespace Cinemachine
 {
@@ -7,6 +8,29 @@ namespace Cinemachine
     /// suitable for a camera dolly track.</summary>
     public abstract class CinemachinePathBase : MonoBehaviour
     {
+        /// <summary>Path samples per waypoint</summary>
+        [Tooltip("Path samples per waypoint.  This is used for calculating path distances.")]
+        [Range(1, 100)]
+        public int m_Resolution = 20;
+
+        /// <summary>This class holds the settings that control how the path
+        /// will appear in the editor scene view.  The path is not visible in the game view</summary>
+        [DocumentationSorting(18.1f, DocumentationSortingAttribute.Level.UserRef)]
+        [Serializable] public class Appearance
+        {
+            [Tooltip("The color of the path itself when it is active in the editor")]
+            public Color pathColor = Color.green;
+            [Tooltip("The color of the path itself when it is inactive in the editor")]
+            public Color inactivePathColor = Color.gray;
+            [Tooltip("The width of the railroad-tracks that are drawn to represent the path")]
+            [Range(0f, 10f)]
+            public float width = 0.2f;
+        }
+        /// <summary>The settings that control how the path
+        /// will appear in the editor scene view.</summary>
+        [Tooltip("The settings that control how the path will appear in the editor scene view.")]
+        public Appearance m_Appearance = new Appearance();
+
         /// <summary>The minimum value for the path position</summary>
         public abstract float MinPos { get; }
 
@@ -69,9 +93,14 @@ namespace Cinemachine
             float end = MaxPos;
             if (searchRadius >= 0)
             {
-                float r = Mathf.Min(searchRadius, (end - start) / 2f);
+                int r = Mathf.FloorToInt(Mathf.Min(searchRadius, (end - start) / 2f));
                 start = startSegment - r;
                 end = startSegment + r + 1;
+                if (!Looped)
+                {
+                    start = Mathf.Max(start, MinPos);
+                    end = Mathf.Max(end, MaxPos);
+                }
             }
             stepsPerSegment = Mathf.RoundToInt(Mathf.Clamp(stepsPerSegment, 1f, 100f));
             float stepSize = 1f / stepsPerSegment;
@@ -175,8 +204,9 @@ namespace Cinemachine
         /// times between points</summary>
         public abstract int DistanceCacheSampleStepsPerSegment { get; }
 
-        /// <summary>Call this if the path changes in such a way as to affect distances</summary>
-        public void InvalidateDistanceCache() 
+        /// <summary>Call this if the path changes in such a way as to affect distances
+        /// or other cached path elements</summary>
+        public virtual void InvalidateDistanceCache() 
         { 
             m_DistanceToPos = null; 
             m_PosToDistance = null; 
@@ -191,7 +221,7 @@ namespace Cinemachine
         /// <returns>Whether the cache is valid for this sampling rate</returns>
         public bool DistanceCacheIsValid()
         {
-            return (MaxPos == MinPos )
+            return (MaxPos == MinPos)
                 || (m_DistanceToPos != null && m_PosToDistance != null
                     && m_CachedSampleSteps == DistanceCacheSampleStepsPerSegment 
                     && m_CachedSampleSteps > 0);
@@ -238,13 +268,13 @@ namespace Cinemachine
         /// <returns>The length of the path in distance units, when sampled at this rate</returns>
         public float GetPathPositionFromDistance(float distance)
         {
-            if (DistanceCacheSampleStepsPerSegment < 1 || m_PathLength < UnityVectorExtensions.Epsilon)
+            if (DistanceCacheSampleStepsPerSegment < 1 || PathLength < UnityVectorExtensions.Epsilon)
                 return MinPos;
             distance = NormalizePathDistance(distance);
             float d = distance / m_cachedDistanceStepSize;
             int i = Mathf.FloorToInt(d);
             if (i >= m_DistanceToPos.Length-1)
-                return m_PathLength;
+                return MaxPos;
             float t = d - (float)i;
             return MinPos + Mathf.Lerp(m_DistanceToPos[i], m_DistanceToPos[i+1], t);
         }
@@ -255,13 +285,13 @@ namespace Cinemachine
         /// <returns>The length of the path in distance units, when sampled at this rate</returns>
         public float GetPathDistanceFromPosition(float pos)
         {
-            if (DistanceCacheSampleStepsPerSegment < 1 || m_PathLength < UnityVectorExtensions.Epsilon)
+            if (DistanceCacheSampleStepsPerSegment < 1 || PathLength < UnityVectorExtensions.Epsilon)
                 return 0;
             pos = NormalizePos(pos);
             float d = pos / m_cachedPosStepSize;
             int i = Mathf.FloorToInt(d);
             if (i >= m_PosToDistance.Length-1)
-                return MaxPos;
+                return m_PathLength;
             float t = d - (float)i;
             return Mathf.Lerp(m_PosToDistance[i], m_PosToDistance[i+1], t);
         }

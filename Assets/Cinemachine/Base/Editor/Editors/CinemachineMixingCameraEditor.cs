@@ -6,23 +6,24 @@ using System.Collections.Generic;
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineMixingCamera))]
-    internal sealed class CinemachineMixingCameraEditor : CinemachineVirtualCameraBaseEditor
+    internal sealed class CinemachineMixingCameraEditor 
+        : CinemachineVirtualCameraBaseEditor<CinemachineMixingCamera>
     {
-        private CinemachineMixingCamera Target { get { return target as CinemachineMixingCamera; } }
-
         protected override List<string> GetExcludedPropertiesInInspector()
         {
-            List<string> excluded = new List<string>();
-            excluded.AddRange(Target.m_ExcludedPropertiesInInspector);
+            List<string> excluded = base.GetExcludedPropertiesInInspector();
             for (int i = 0; i < CinemachineMixingCamera.MaxCameras; ++i)
-                excluded.Add("m_Weight" + i);
+                excluded.Add(WeightPropertyName(i));
             return excluded;
         }
 
+        static string WeightPropertyName(int i) { return "m_Weight" + i; }
+
         public override void OnInspectorGUI()
         {
-            // Ordinary properties
-            base.OnInspectorGUI();
+            BeginInspector();
+            DrawHeaderInInspector();
+            DrawRemainingPropertiesInInspector();
 
             float totalWeight = 0;
             CinemachineVirtualCameraBase[] children = Target.ChildCameras;
@@ -39,7 +40,7 @@ namespace Cinemachine.Editor
                 EditorGUILayout.LabelField("Child Camera Weights", EditorStyles.boldLabel);
                 for (int i = 0; i < numCameras; ++i)
                 {
-                    SerializedProperty prop = serializedObject.FindProperty("m_Weight" + i);
+                    SerializedProperty prop = serializedObject.FindProperty(WeightPropertyName(i));
                     if (prop != null)
                         EditorGUILayout.PropertyField(prop, new GUIContent(children[i].Name));
                 }
@@ -59,6 +60,9 @@ namespace Cinemachine.Editor
                 EditorGUILayout.LabelField("Mix Result", EditorStyles.boldLabel);
                 DrawProportionIndicator(children, numCameras, totalWeight);
             }
+
+            // Extensions
+            DrawExtensionsWidgetInInspector();
         }
 
         void DrawProportionIndicator(

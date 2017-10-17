@@ -20,7 +20,8 @@ namespace Cinemachine.Timeline
             {
                 CinemachineShot shot = (CinemachineShot)c.asset;
                 CinemachineVirtualCameraBase vcam = shot.VirtualCamera.Resolve(graph.GetResolver());
-                c.displayName = vcam == null ? "CinemachineShot" : vcam.Name;
+                if (vcam != null)
+                    c.displayName = vcam.Name;
             }
 
             var mixer = ScriptPlayable<CinemachineMixer>.Create(graph);

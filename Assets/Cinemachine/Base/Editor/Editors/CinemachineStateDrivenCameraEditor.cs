@@ -6,19 +6,16 @@ using UnityEditor.Animations;
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineStateDrivenCamera))]
-    internal sealed class CinemachineStateDrivenCameraEditor : CinemachineVirtualCameraBaseEditor
+    internal sealed class CinemachineStateDrivenCameraEditor 
+        : CinemachineVirtualCameraBaseEditor<CinemachineStateDrivenCamera>
     {
-        private CinemachineStateDrivenCamera Target { get { return target as CinemachineStateDrivenCamera; } }
         EmbeddeAssetEditor<CinemachineBlenderSettings> m_BlendsEditor;
 
         protected override List<string> GetExcludedPropertiesInInspector()
         {
-            List<string> excluded = new List<string>();
-            excluded.AddRange(Target.m_ExcludedPropertiesInInspector);
-            excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_LayerIndex));
-            excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_DefaultBlend));
-            excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_ChildCameras));
-            excluded.Add(SerializedPropertyHelper.PropertyName(() => Target.m_Instructions));
+            List<string> excluded = base.GetExcludedPropertiesInInspector();
+            excluded.Add(FieldPath(x => x.m_CustomBlends));
+            excluded.Add(FieldPath(x => x.m_Instructions));
             return excluded;
         }
 
@@ -32,7 +29,7 @@ namespace Cinemachine.Editor
         {
             base.OnEnable();
             m_BlendsEditor = new EmbeddeAssetEditor<CinemachineBlenderSettings>(
-                    SerializedPropertyHelper.PropertyName(() => Target.m_CustomBlends), this);
+                    FieldPath(x => x.m_CustomBlends), this);
             m_BlendsEditor.OnChanged = (CinemachineBlenderSettings b) =>
                 {
                     UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
@@ -56,35 +53,39 @@ namespace Cinemachine.Editor
 
         public override void OnInspectorGUI()
         {
+            BeginInspector();
             if (mInstructionList == null)
                 SetupInstructionList();
             if (mChildList == null)
                 SetupChildList();
 
             if (Target.m_AnimatedTarget == null)
-                EditorGUILayout.HelpBox("An Animated Target is required", MessageType.Error);
+                EditorGUILayout.HelpBox("An Animated Target is required", MessageType.Warning);
 
             // Ordinary properties
-            base.OnInspectorGUI();
+            DrawHeaderInInspector();
+            DrawPropertyInInspector(FindProperty(x => x.m_Priority));
+            DrawTargetsInInspector(FindProperty(x => x.m_Follow), FindProperty(x => x.m_LookAt));
+            DrawPropertyInInspector(FindProperty(x => x.m_AnimatedTarget));
 
             // Layer index
             EditorGUI.BeginChangeCheck();
             UpdateTargetStates();
             UpdateCameraCandidates();
-            SerializedProperty layerProp = serializedObject.FindProperty(() => Target.m_LayerIndex);
+            SerializedProperty layerProp = FindAndExcludeProperty(x => x.m_LayerIndex);
             int currentLayer = layerProp.intValue;
             int layerSelection = EditorGUILayout.Popup("Layer", currentLayer, mLayerNames);
             if (currentLayer != layerSelection)
                 layerProp.intValue = layerSelection;
-            EditorGUILayout.PropertyField(serializedObject.FindProperty(() => Target.m_DefaultBlend));
             if (EditorGUI.EndChangeCheck())
             {
                 serializedObject.ApplyModifiedProperties();
                 Target.ValidateInstructions();
             }
 
+            DrawRemainingPropertiesInInspector();
+
             // Blends
-            EditorGUILayout.Separator();
             m_BlendsEditor.DrawEditorCombo(
                 "Create New Blender Asset",
                 Target.gameObject.name + " Blends", "asset", string.Empty,
@@ -103,6 +104,9 @@ namespace Cinemachine.Editor
                 serializedObject.ApplyModifiedProperties();
                 Target.ValidateInstructions();
             }
+
+            // Extensions
+            DrawExtensionsWidgetInInspector();
         }
 
         private string[] mLayerNames;

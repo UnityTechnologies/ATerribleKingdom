@@ -48,7 +48,7 @@ namespace Cinemachine
         /// </summary>
         ICinemachineCamera ParentCamera { get; }
 
-        /// <summary>Check whether the vcam a live child of this camera.</summary>
+        /// <summary>Check whether the vcam is a live child of this camera.</summary>
         /// <param name="vcam">The Virtual Camera to check</param>
         /// <returns>True if the vcam is currently actively influencing the state of this vcam</returns>
         bool IsLiveChild(ICinemachineCamera vcam);
@@ -61,7 +61,7 @@ namespace Cinemachine
         /// has protection against multiple calls per frame.
         /// </summary>
         /// <param name="worldUp">Default world Up, set by the CinemachineBrain</param>
-        /// <param name="deltaTime">Delta time for time-based effects (ignore if less than or equal to 0)</param>
+        /// <param name="deltaTime">Delta time for time-based effects (ignore if less than 0)</param>
         void UpdateCameraState(Vector3 worldUp, float deltaTime);
 
         /// <summary>

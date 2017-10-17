@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 
 namespace Cinemachine.Utility
 {
@@ -23,9 +25,9 @@ namespace Cinemachine.Utility
             {
                 Type type = src.GetType();
                 FieldInfo[] fields = type.GetFields(bindingAttr);
-                foreach (FieldInfo field in fields)
-                    if (!field.IsStatic)
-                        field.SetValue(dst, field.GetValue(src));
+                for (int i = 0; i < fields.Length; ++i)
+                    if (!fields[i].IsStatic)
+                        fields[i].SetValue(dst, fields[i].GetValue(src));
             }
         }
 
@@ -100,6 +102,14 @@ namespace Cinemachine.Utility
 
             return foundTypes;
         }
+
+        public static bool TypeIsDefined(string fullname)
+        {
+            return (from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                from type in assembly.GetTypes()
+                where type.FullName == fullname
+                select type).Count() > 0;
+        }
 #endif
 
         /// <summary>Cheater extension to access internal field of an object</summary>
@@ -141,6 +151,36 @@ namespace Cinemachine.Utility
             obj = info.GetValue(obj);
 
             return GetParentObject(string.Join(".", fields, 1, fields.Length - 1), obj);
+        }
+
+        /// <summary>Returns a string path from an expression - mostly used to retrieve serialized properties
+        /// without hardcoding the field path. Safer, and allows for proper refactoring.</summary>
+        public static string GetFieldPath<TType, TValue>(Expression<Func<TType, TValue>> expr)
+        {
+            MemberExpression me;
+            switch (expr.Body.NodeType)
+            {
+                case ExpressionType.MemberAccess:
+                    me = expr.Body as MemberExpression;
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+
+            var members = new List<string>();
+            while (me != null)
+            {
+                members.Add(me.Member.Name);
+                me = me.Expression as MemberExpression;
+            }
+
+            var sb = new StringBuilder();
+            for (int i = members.Count - 1; i >= 0; i--)
+            {
+                sb.Append(members[i]);
+                if (i > 0) sb.Append('.');
+            }
+            return sb.ToString();
         }
     }
 }

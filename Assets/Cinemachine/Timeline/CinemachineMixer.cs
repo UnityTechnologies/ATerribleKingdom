@@ -8,8 +8,9 @@ namespace Cinemachine.Timeline
         // The brain that this track controls
         private CinemachineBrain mBrain;
         private int mBrainOverrideId = -1;
+        private bool mPlaying;
 
-        public override void OnPlayableDestroy(Playable playable)
+        public override void OnGraphStop(Playable playable)
         {
             if (mBrain != null)
                 mBrain.ReleaseCameraOverride(mBrainOverrideId); // clean up
@@ -39,30 +40,46 @@ namespace Cinemachine.Timeline
             float camWeight = 1f;
             for (int i = 0; i < playable.GetInputCount(); ++i)
             {
-                CinemachineShotPlayable cam
+                CinemachineShotPlayable shot
                     = ((ScriptPlayable<CinemachineShotPlayable>)playable.GetInput(i)).GetBehaviour();
                 float weight = playable.GetInputWeight(i);
-                if (cam != null && cam.VirtualCamera != null
+                if (shot != null && shot.VirtualCamera != null
                     && playable.GetPlayState() == PlayState.Playing
                     && weight > 0.0001f)
                 {
                     if (activeInputs == 1)
                         camB = camA;
                     camWeight = weight;
-                    camA = cam.VirtualCamera;
+                    camA = shot.VirtualCamera;
                     ++activeInputs;
                     if (activeInputs == 2)
                         break;
                 }
             }
 
-            // Override the Cinemachine brain with our results.
-            // This is a simulation, so we need a fixed delta time.
-            float deltaTime = Time.fixedDeltaTime;
-            if (info.evaluationType != FrameData.EvaluationType.Playback)
-                deltaTime = 0;
+            float deltaTime = info.deltaTime;
+            if (!mPlaying)
+            {
+                if (mBrainOverrideId < 0)
+                    mLastOverrideFrame = -1;
+                float time = Time.realtimeSinceStartup;
+                if (mLastOverrideFrame < 0 || time - mLastOverrideFrame > Time.maximumDeltaTime)
+                    deltaTime = -1;
+                else
+                    deltaTime = Time.deltaTime;
+                mLastOverrideFrame = time;
+            }
+
+            // Override the Cinemachine brain with our results
             mBrainOverrideId = mBrain.SetCameraOverride(
                     mBrainOverrideId, camB, camA, camWeight, deltaTime);
+
+        }
+        float mLastOverrideFrame;
+
+        public override void PrepareFrame(Playable playable, FrameData info)
+        {
+            mPlaying = info.evaluationType == FrameData.EvaluationType.Playback;
         }
     }
 }

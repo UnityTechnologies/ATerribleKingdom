@@ -35,34 +35,6 @@ namespace Cinemachine
     }
 
     /// <summary>
-    /// Specify a minimum value on an int, float, or vector
-    /// </summary>
-    public sealed class MinAttribute : PropertyAttribute
-    {
-        /// <summary>The minimum value to enforce</summary>
-        public readonly float min;
-        public MinAttribute(float min)
-        {
-            this.min = min;
-        }
-    }
-
-    /// <summary>
-    /// Get the inspector to invoke Get/Set property accessors for a field
-    /// </summary>
-    public sealed class GetSetAttribute : PropertyAttribute
-    {
-        /// <summary>The name of the property to access instead of the field</summary>
-        public readonly string name;
-        /// <summary>True if the inspector has changed the field</summary>
-        public bool dirty;
-        public GetSetAttribute(string name)
-        {
-            this.name = name;
-        }
-    }
-
-    /// <summary>
     /// Atrtribute to control the automatic generation of documentation.
     /// </summary>
     [DocumentationSorting(0f, DocumentationSortingAttribute.Level.Undoc)]
@@ -83,6 +55,7 @@ namespace Cinemachine
         /// <summary>Refinement level of the documentation.  The more refined, the more is excluded.</summary>
         public Level Category { get; private set; }
 
+        /// <summary>Contructor with specific values</summary>
         public DocumentationSortingAttribute(float sortOrder, Level category)
         {
             SortOrder = sortOrder;

@@ -5,12 +5,16 @@ using System.Collections.Generic;
 namespace Cinemachine.Editor
 {
     [CustomEditor(typeof(CinemachineTargetGroup))]
-    internal sealed class CinemachineTargetGroupEditor : UnityEditor.Editor
+    internal sealed class CinemachineTargetGroupEditor : BaseEditor<CinemachineTargetGroup>
     {
-        private CinemachineTargetGroup Target { get { return target as CinemachineTargetGroup; } }
-        private static readonly string[] m_excludeFields = new string[] { "m_Script", "m_Targets" };
-
         private UnityEditorInternal.ReorderableList mTargetList;
+
+        protected override List<string> GetExcludedPropertiesInInspector()
+        {
+            List<string> excluded = base.GetExcludedPropertiesInInspector();
+            excluded.Add(FieldPath(x => x.m_Targets));
+            return excluded;
+        }
 
         void OnEnable()
         {
@@ -19,9 +23,8 @@ namespace Cinemachine.Editor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
-            DrawPropertiesExcluding(serializedObject, m_excludeFields);
-            serializedObject.ApplyModifiedProperties();
+            BeginInspector();
+            DrawRemainingPropertiesInInspector();
 
             if (mTargetList == null)
                 SetupTargetList();
@@ -37,8 +40,8 @@ namespace Cinemachine.Editor
             float floatFieldWidth = EditorGUIUtility.singleLineHeight * 3f;
             float hBigSpace = EditorGUIUtility.singleLineHeight * 2 / 3;
 
-            mTargetList = new UnityEditorInternal.ReorderableList(serializedObject,
-                    serializedObject.FindProperty(() => Target.m_Targets),
+            mTargetList = new UnityEditorInternal.ReorderableList(
+                    serializedObject, FindProperty(x => x.m_Targets),
                     true, true, true, true);
 
             // Needed for accessing field names as strings
