@@ -22,6 +22,8 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 			firstFrameHappened = true;
 		}
 
+		//different behaviour depending if Unity is in Play mode or not,
+		//because NavMeshAgent is not available in Edit mode
 		if(Application.isPlaying)
 		{
 			ProcessPlayModeFrame(playable);
@@ -32,6 +34,8 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 		}
     }
 
+	//Happens every frame in Edit mode.
+	//Uses transform.position of the units to approximate what they would do in Play mode with the NavMeshAgent
 	private void ProcessEditModeFrame(Playable playable)
 	{
 		previousInputFinalPositions = defaultPositions;
@@ -83,6 +87,8 @@ public class AICommandMixerBehaviour : PlayableBehaviour
 		}
 	}
 
+	//Happens in Play mode
+	//Uses the NavMeshAgent to control the units, delegating their movement and animations to the AI
 	private void ProcessPlayModeFrame(Playable playable)
 	{
 		int inputCount = playable.GetInputCount();
