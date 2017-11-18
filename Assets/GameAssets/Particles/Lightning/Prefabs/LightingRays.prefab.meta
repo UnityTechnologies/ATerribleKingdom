@@ -1,8 +1,11 @@
 fileFormatVersion: 2
 guid: 73eb3fbbde97a440181afe4bb9a2b3b5
+labels:
+- Demo
 timeCreated: 1490895319
 licenseType: Pro
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 100100000
   userData: 
   assetBundleName: 

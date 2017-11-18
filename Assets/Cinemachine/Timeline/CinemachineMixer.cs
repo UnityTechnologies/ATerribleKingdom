@@ -10,7 +10,7 @@ namespace Cinemachine.Timeline
         private int mBrainOverrideId = -1;
         private bool mPlaying;
 
-        public override void OnGraphStop(Playable playable)
+        public override void OnPlayableDestroy(Playable playable)
         {
             if (mBrain != null)
                 mBrain.ReleaseCameraOverride(mBrainOverrideId); // clean up
