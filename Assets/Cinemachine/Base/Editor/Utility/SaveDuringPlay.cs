@@ -24,17 +24,13 @@ namespace SaveDuringPlay
         /// <summary>
         /// Will find the named object, active or inactive, from the full path.
         /// </summary>
-        public static GameObject FindObjectFromFullName(string fullName)
+        public static GameObject FindObjectFromFullName(string fullName, GameObject[] roots)
         {
-            if (fullName == null || fullName.Length == 0)
+            if (fullName == null || fullName.Length == 0 || roots == null)
                 return null;
 
             string[] path = fullName.Split('/');
             if (path.Length < 2)   // skip leading '/'
-                return null;
-
-            GameObject[] roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
-            if (roots == null)
                 return null;
 
             Transform root = null;
@@ -48,8 +44,9 @@ namespace SaveDuringPlay
             for (int i = 2; i < path.Length; ++i)   // skip root
             {
                 bool found = false;
-                foreach (Transform child in root)
+                for (int c = 0; c < root.childCount; ++c)
                 {
+                    Transform child = root.GetChild(c);
                     if (child.name == path[i])
                     {
                         found = true;
@@ -62,6 +59,13 @@ namespace SaveDuringPlay
             }
             return root.gameObject;
         }
+
+        /// <summary>Finds all the root objects in a scene, active or not</summary>
+        public static GameObject[] FindAllRootObjectsInScene() 
+        {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+        }
+
 
         /// <summary>
         /// This finds all the behaviours in scene, active or inactive, excluding prefabs
@@ -259,7 +263,10 @@ namespace SaveDuringPlay
             scanner.ScanFields(go);
         }
 
-        public GameObject FindSavedGameObject() { return GameObject.Find(mObjectFullPath); }
+        public GameObject FindSavedGameObject(GameObject[] roots) 
+        { 
+            return ObjectTreeUtil.FindObjectFromFullName(mObjectFullPath, roots);
+        }
         public string ObjetFullPath { get { return mObjectFullPath; } }
 
         /// <summary>
@@ -269,7 +276,7 @@ namespace SaveDuringPlay
         /// value in the game object, Set the GameObject's value using the value
         /// recorded in the dictionary.
         /// </summary>
-        public bool PutFieldValues(GameObject go)
+        public bool PutFieldValues(GameObject go, GameObject[] roots)
         {
             GameObjectFieldScanner scanner = new GameObjectFieldScanner();
             scanner.FilterField = FilterField;
@@ -281,7 +288,7 @@ namespace SaveDuringPlay
                         && StringFromLeafObject(value) != savedValue)
                     {
                         //Debug.Log(mObjectFullPath + "." + fullName + " = " + mValues[fullName]);
-                        value = LeafObjectFromString(type, mValues[fullName].Trim());
+                        value = LeafObjectFromString(type, mValues[fullName].Trim(), roots);
                         return true; // changed
                     }
                     return false;
@@ -311,7 +318,7 @@ namespace SaveDuringPlay
         /// because the reflection system breaks them down into their primitive components.
         /// You can add more support here, as needed.
         /// </summary>
-        static object LeafObjectFromString(Type type, string value)
+        static object LeafObjectFromString(Type type, string value, GameObject[] roots)
         {
             if (type == typeof(Single))
                 return float.Parse(value);
@@ -328,7 +335,7 @@ namespace SaveDuringPlay
             if (type.IsSubclassOf(typeof(Component)))
             {
                 // Try to find the named game object
-                GameObject go = ObjectTreeUtil.FindObjectFromFullName(value);
+                GameObject go = ObjectTreeUtil.FindObjectFromFullName(value, roots);
                 return (go != null) ? go.GetComponent(type) : null;
             }
             if (type.IsSubclassOf(typeof(GameObject)))
@@ -466,7 +473,7 @@ namespace SaveDuringPlay
                 {
                     if (attr.GetType().Name.Contains("SaveDuringPlay"))
                     {
-                        //Debug.Log("Found " + b.gameObject.name + " for hot-save");
+                        //Debug.Log("Found " + ObjectTreeUtil.GetFullName(b.gameObject) + " for hot-save"); 
                         objects.Add(b.transform);
                         break;
                     }
@@ -498,19 +505,24 @@ namespace SaveDuringPlay
         static void RestoreAllInterestingStates()
         {
             //Debug.Log("Updating state for all interesting objects");
+            bool dirty = false;
+            GameObject[] roots = ObjectTreeUtil.FindAllRootObjectsInScene();
             foreach (ObjectStateSaver saver in sSavedStates)
             {
-                GameObject go = saver.FindSavedGameObject();
+                GameObject go = saver.FindSavedGameObject(roots);
                 if (go != null)
                 {
                     Undo.RegisterFullObjectHierarchyUndo(go, "SaveDuringPlay");
-                    if (saver.PutFieldValues(go))
+                    if (saver.PutFieldValues(go, roots))
                     {
                         //Debug.Log("SaveDuringPlay: updated settings of " + saver.ObjetFullPath);
                         EditorUtility.SetDirty(go);
+                        dirty = true;
                     }
                 }
             }
+            if (dirty)
+                UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
             sSavedStates = null;
         }
     }

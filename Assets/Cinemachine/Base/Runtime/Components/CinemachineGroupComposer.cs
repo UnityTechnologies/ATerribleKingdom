@@ -141,14 +141,8 @@ namespace Cinemachine
                 return;
             }
 
-            // The following line shouldn't be necessary.  You can try enabling it as a 
-            // last resort if you're getting inexplicable jitter.  That can sometimes come 
-            // about because the group's target members are not animated in a consistent way.
-            //group.LateUpdate(); // Make sure the group's position is fully updated. 
-
-            curState.ReferenceLookAt = group.transform.position;
-            Vector3 lookAtPosition = GetTrackedPoint(curState.ReferenceLookAt);
-            Vector3 currentOffset = lookAtPosition - curState.RawPosition;
+            curState.ReferenceLookAt = GetLookAtPointAndSetTrackedPoint(group.transform.position);
+            Vector3 currentOffset = TrackedPoint - curState.RawPosition;
             float currentDistance = currentOffset.magnitude;
             if (currentDistance < Epsilon)
                 return;  // navel-gazing, get outa here
@@ -198,7 +192,7 @@ namespace Cinemachine
             // Apply zoom
             if (curState.Lens.Orthographic || m_AdjustmentMode != AdjustmentMode.DollyOnly)
             {
-                float nearBoundsDistance = (lookAtPosition - curState.CorrectedPosition).magnitude
+                float nearBoundsDistance = (TrackedPoint - curState.CorrectedPosition).magnitude
                     - m_LastBounds.extents.z;
                 float currentFOV = 179;
                 if (nearBoundsDistance > Epsilon)

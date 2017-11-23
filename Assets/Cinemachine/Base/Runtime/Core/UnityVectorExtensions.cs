@@ -25,6 +25,22 @@ namespace Cinemachine.Utility
         }
 
         /// <summary>
+        /// Get the closest point on a line segment.
+        /// </summary>
+        /// <param name="p">A point in space</param>
+        /// <param name="s0">Start of line segment</param>
+        /// <param name="s1">End of line segment</param>
+        /// <returns>The interpolation parameter representing the point on the segment, with 0==s0, and 1==s1</returns>
+        public static float ClosestPointOnSegment(this Vector2 p, Vector2 s0, Vector2 s1)
+        {
+            Vector2 s = s1 - s0;
+            float len2 = Vector2.SqrMagnitude(s);
+            if (len2 < Epsilon)
+                return 0; // degenrate segment
+            return Mathf.Clamp01(Vector2.Dot(p - s0, s) / len2);
+        }
+
+        /// <summary>
         /// Returns a non-normalized projection of the supplied vector onto a plane
         /// as described by its normal
         /// </summary>

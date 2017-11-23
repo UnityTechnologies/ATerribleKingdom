@@ -56,6 +56,11 @@ namespace Cinemachine
         /// <summary>Returns true if this object is enabled and set up to produce results.</summary>
         public abstract bool IsValid { get; }
 
+        /// <summary>Override this to do such things as offset the RefereceLookAt.
+        /// Base class implementation does nothing.</summary>
+        /// <param name="curState">Input state that must be mutated</param>
+        public virtual void PrePipelineMutateCameraState(ref CameraState state) {}
+
         /// <summary>What part of the pipeline this fits into</summary>
         public abstract CinemachineCore.Stage Stage { get; }
 
@@ -67,8 +72,6 @@ namespace Cinemachine
         /// <summary>API for the editor, to process a position drag from the user.
         /// Base class implementation does nothing.</summary>
         /// <param name="delta">The amount dragged this frame</param>
-        public virtual void OnPositionDragged(Vector3 delta)
-        {
-        }
+        public virtual void OnPositionDragged(Vector3 delta) {}
     }
 }

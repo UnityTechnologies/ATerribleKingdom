@@ -315,8 +315,8 @@ namespace Cinemachine
                 {
                     if (components[i].Stage == stage)
                     {
-                        DestroyObject(components[i] as MonoBehaviour);
-                        components[i] = null;
+                        components[i].enabled = false;
+                        DestroyImmediate(components[i]);
                     }
                 }
             }
@@ -334,7 +334,8 @@ namespace Cinemachine
                 {
                     if (c is T)
                     {
-                        DestroyObject(c);
+                        c.enabled = false;
+                        DestroyImmediate(c);
                         InvalidateComponentPipeline();
                     }
                 }
@@ -349,8 +350,8 @@ namespace Cinemachine
         {
             CinemachineComponentBase[] components = GetComponentPipeline();
             if (components != null)
-                foreach (var c in components)
-                    c.OnPositionDragged(delta);
+                for (int i = 0; i < components.Length; ++i)
+                    components[i].OnPositionDragged(delta);
         }
 
         CameraState m_State = CameraState.Default; // Current state this frame
@@ -416,6 +417,9 @@ namespace Cinemachine
             if (m_ComponentPipeline != null)
             {
                 for (int i = 0; i < m_ComponentPipeline.Length; ++i)
+                    m_ComponentPipeline[i].PrePipelineMutateCameraState(ref state);
+
+                for (int i = 0; i < m_ComponentPipeline.Length; ++i)
                 {
                     curStage = AdvancePipelineStage(
                         ref state, deltaTime, curStage, (int)m_ComponentPipeline[i].Stage);
@@ -433,8 +437,7 @@ namespace Cinemachine
         {
             while ((int)curStage < maxStage)
             {
-                if (OnPostPipelineStage != null)
-                    OnPostPipelineStage(this, curStage, ref state, deltaTime);
+                InvokePostPipelineStageCallback(this, curStage, ref state, deltaTime);
                 ++curStage;
             }
             return curStage;
@@ -454,5 +457,8 @@ namespace Cinemachine
 
             return state;
         }
+
+        // This is a hack for FreeLook rigs - to be removed
+        internal void SetStateRawPosition(Vector3 pos) { m_State.RawPosition = pos; }
     }
 }

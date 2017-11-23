@@ -39,7 +39,7 @@ namespace Cinemachine
 
         private void OnEnable()
         {
-            m_HorizontalAxis.SetThresholds(-180f, 180f, false);
+            m_HorizontalAxis.SetThresholds(-180f, 180f, true);
             m_VerticalAxis.SetThresholds(-90, 90, false);
         }
         
@@ -61,7 +61,7 @@ namespace Cinemachine
             }
             Quaternion rot = Quaternion.Euler(m_VerticalAxis.Value, m_HorizontalAxis.Value, 0);
             rot = rot * Quaternion.FromToRotation(Vector3.up, curState.ReferenceUp);
-            curState.RawOrientation = rot;
+            curState.OrientationCorrection = curState.OrientationCorrection * rot;
 
             //UnityEngine.Profiling.Profiler.EndSample();
         }

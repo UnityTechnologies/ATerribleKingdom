@@ -50,8 +50,8 @@ namespace Cinemachine
         {
             get
             {
-                string fromName = (CamA != null) ? CamA.Name : "(none)";
-                string toName = (CamB != null) ? CamB.Name : "(none)";
+                string fromName = (CamA != null) ? "[" + CamA.Name + "]": "(none)";
+                string toName = (CamB != null) ? "[" + CamB.Name + "]" : "(none)";
                 int percent = (int)(BlendWeight * 100f);
                 return string.Format("{0} {1}% from {2}", toName, percent, fromName);
             }
@@ -96,7 +96,7 @@ namespace Cinemachine
         public void UpdateCameraState(Vector3 worldUp, float deltaTime)
         {
             // Make sure both cameras have been updated (they are not necessarily
-            // enabled, and only enabled top-level cameras get updated automatically
+            // enabled, and only enabled cameras get updated automatically
             // every frame)
             CinemachineCore.Instance.UpdateVirtualCamera(CamA, worldUp, deltaTime);
             CinemachineCore.Instance.UpdateVirtualCamera(CamB, worldUp, deltaTime);
@@ -137,7 +137,7 @@ namespace Cinemachine
         public Style m_Style;
 
         /// <summary>The duration (in seconds) of the blend</summary>
-        [Tooltip("Duration (in seconds) of the blend")]
+        [Tooltip("Duration of the blend, in seconds")]
         public float m_Time;
 
         /// <summary>Constructor</summary>

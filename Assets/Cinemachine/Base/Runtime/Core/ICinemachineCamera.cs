@@ -8,10 +8,15 @@ namespace Cinemachine
     public interface ICinemachineCamera
     {
         /// <summary>
-        /// Gets the name of this virtual camera. For used when deciding how to blend
+        /// Gets the name of this virtual camera. For use when deciding how to blend
         /// to or from this camera
         /// </summary>
         string Name { get; }
+
+        /// <summary>
+        /// Gets a brief debug description of this virtual camera, for use when displayiong debug info
+        /// </summary>
+        string Description { get; }
 
         /// <summary>
         /// Gets the priority of this <c>ICinemachineCamera</c>. The virtual camera
@@ -54,6 +59,16 @@ namespace Cinemachine
         bool IsLiveChild(ICinemachineCamera vcam);
 
         /// <summary>
+        /// This is called prior to the updating of the vcam's child cameras, 
+        /// in order to allow the parent to prepare its children.
+        /// If the children are updating on FixedUpdate, then this will not necessarily be called
+        /// prior to every FixedUpdate, but it might be called on LateUpdate instead.
+        /// </summary>
+        /// <param name="worldUp">Default world Up, set by the CinemachineBrain</param>
+        /// <param name="deltaTime">Delta time for time-based effects (ignore if less than 0)</param>
+        void PreUpdateChildCameras(Vector3 worldUp, float deltaTime);
+
+        /// <summary>
         /// Updates this Cinemachine Camera. For an active camera this should be
         /// called once and only once each frame.  To guarantee this, you should never
         /// call this method directly.  Always use
@@ -69,6 +84,8 @@ namespace Cinemachine
         /// currently active camera.  Both may be active simultaneously for a while, if blending.
         /// </summary>
         /// <param name="fromCam">The camera being deactivated.  May be null.</param>
-        void OnTransitionFromCamera(ICinemachineCamera fromCam);
+        /// <param name="worldUp">Default world Up, set by the CinemachineBrain</param>
+        /// <param name="deltaTime">Delta time for time-based effects (ignore if less than 0)</param>
+        void OnTransitionFromCamera(ICinemachineCamera fromCam, Vector3 worldUp, float deltaTime);
     }
 }

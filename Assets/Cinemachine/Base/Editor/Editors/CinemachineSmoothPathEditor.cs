@@ -76,17 +76,30 @@ namespace Cinemachine.Editor
                 SceneView.lastActiveSceneView.Repaint();
             }
 
-            float floatFieldWidth = EditorGUIUtility.singleLineHeight * 3f;
+            float floatFieldWidth = EditorGUIUtility.singleLineHeight * 2f;
             GUIContent rollLabel = new GUIContent("Roll");
             Vector2 labelDimension = GUI.skin.label.CalcSize(rollLabel);
             float rollWidth = labelDimension.x + floatFieldWidth;
-            r.x += r.width + hSpace; r.width = rect.width - (r.width + hSpace + rollWidth);
+            r.x += r.width + hSpace; r.width = rect.width - (r.width + hSpace + rollWidth) - (r.height + hSpace);
             EditorGUI.PropertyField(r, element.FindPropertyRelative(() => def.position), GUIContent.none);
+
             r.x += r.width + hSpace; r.width = rollWidth;
             float oldWidth = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = labelDimension.x;
             EditorGUI.PropertyField(r, element.FindPropertyRelative(() => def.roll), rollLabel);
             EditorGUIUtility.labelWidth = oldWidth;
+
+            r.x += r.width + hSpace; r.height += 1; r.width = r.height; 
+            GUIContent setButtonContent = EditorGUIUtility.IconContent("d_RectTransform Icon");
+            setButtonContent.tooltip = "Set to scene-view camera position";
+            if (GUI.Button(r, setButtonContent, GUI.skin.label))
+            {
+                Undo.RecordObject(Target, "Set waypoint");
+                CinemachineSmoothPath.Waypoint wp = Target.m_Waypoints[index];
+                Vector3 pos = SceneView.lastActiveSceneView.camera.transform.position;
+                wp.position = Target.transform.InverseTransformPoint(pos);
+                Target.m_Waypoints[index] = wp;
+            }
         }
 
         void InsertWaypointAtIndex(int indexA)

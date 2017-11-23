@@ -129,22 +129,25 @@ namespace Cinemachine
             if (m_MaxSpeed > Epsilon)
             {
                 float targetSpeed = input * m_MaxSpeed;
-                if (Mathf.Abs(mCurrentSpeed) > Epsilon
-                    && (Mathf.Sign(targetSpeed) != Mathf.Sign(mCurrentSpeed)
-                        || Mathf.Abs(targetSpeed) < Mathf.Abs(mCurrentSpeed)))
+                if (Mathf.Abs(targetSpeed) < Epsilon
+                    || (Mathf.Sign(mCurrentSpeed) == Mathf.Sign(targetSpeed)
+                        && Mathf.Abs(targetSpeed) <  Mathf.Abs(mCurrentSpeed)))
                 {
                     // Need to decelerate
-                    float a = m_MaxSpeed / Mathf.Max(Epsilon, m_DecelTime);
+                    float a = Mathf.Abs(targetSpeed - mCurrentSpeed) / Mathf.Max(Epsilon, m_DecelTime);
                     float delta = Mathf.Min(a * deltaTime, Mathf.Abs(mCurrentSpeed));
                     mCurrentSpeed -= Mathf.Sign(mCurrentSpeed) * delta;
                 }
                 else 
                 {
                     // Accelerate to the target speed
-                    float a = m_MaxSpeed / Mathf.Max(Epsilon, m_AccelTime);
+                    float a = Mathf.Abs(targetSpeed - mCurrentSpeed) / Mathf.Max(Epsilon, m_AccelTime);
                     mCurrentSpeed += Mathf.Sign(targetSpeed) * a * deltaTime;
-                    if (Mathf.Abs(mCurrentSpeed) > Mathf.Abs(targetSpeed))
+                    if (Mathf.Sign(mCurrentSpeed) == Mathf.Sign(targetSpeed) 
+                        && Mathf.Abs(mCurrentSpeed) > Mathf.Abs(targetSpeed))
+                    {
                         mCurrentSpeed = targetSpeed;
+                    }
                 }
             }
 

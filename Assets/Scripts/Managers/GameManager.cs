@@ -115,7 +115,7 @@ public class GameManager : Singleton<GameManager>
 	public enum GameMode
 	{
 		Gameplay,
-		Cutscene,
+		//Cutscene,
 		DialogueMoment, //waiting for input
 	}
 }

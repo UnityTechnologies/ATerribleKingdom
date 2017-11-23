@@ -63,10 +63,9 @@ namespace Cinemachine.Timeline
                 if (mBrainOverrideId < 0)
                     mLastOverrideFrame = -1;
                 float time = Time.realtimeSinceStartup;
-                if (mLastOverrideFrame < 0 || time - mLastOverrideFrame > Time.maximumDeltaTime)
+                deltaTime = Time.unscaledDeltaTime;
+                if (!Application.isPlaying && (mLastOverrideFrame < 0 || time - mLastOverrideFrame > Time.maximumDeltaTime))
                     deltaTime = -1;
-                else
-                    deltaTime = Time.deltaTime;
                 mLastOverrideFrame = time;
             }
 

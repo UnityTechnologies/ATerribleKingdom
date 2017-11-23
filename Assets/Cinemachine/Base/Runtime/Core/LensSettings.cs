@@ -44,7 +44,7 @@ namespace Cinemachine
         /// <summary>
         /// The dutch (tilt) to be applied to the camera. In degrees
         /// </summary>
-        [Range(-179f, 180f)]
+        [Range(-180f, 180f)]
         [Tooltip("Camera Z roll, or tilt, in degrees.")]
         public float Dutch;
 
@@ -66,15 +66,19 @@ namespace Cinemachine
         /// </summary>
         /// <param name="fromCamera">The Camera from which the FoV, near 
         /// and far clip planes will be copied.</param>
-	    public LensSettings(Camera fromCamera) : this()
+	    public static LensSettings FromCamera(Camera fromCamera)
         {
-            FieldOfView = fromCamera.fieldOfView;
-            OrthographicSize = fromCamera.orthographicSize;
-            NearClipPlane = fromCamera.nearClipPlane;
-            FarClipPlane = fromCamera.farClipPlane;
-            Dutch = 0;
-            Orthographic = fromCamera.orthographic;
-            Aspect = fromCamera.aspect;
+            LensSettings lens = Default;
+            if (fromCamera != null)
+            {
+                lens.FieldOfView = fromCamera.fieldOfView;
+                lens.OrthographicSize = fromCamera.orthographicSize;
+                lens.NearClipPlane = fromCamera.nearClipPlane;
+                lens.FarClipPlane = fromCamera.farClipPlane;
+                lens.Orthographic = fromCamera.orthographic;
+                lens.Aspect = fromCamera.aspect;
+            }
+            return lens;
         }
 
         /// <summary>

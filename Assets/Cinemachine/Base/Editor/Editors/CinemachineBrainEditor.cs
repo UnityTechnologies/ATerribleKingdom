@@ -75,8 +75,8 @@ namespace Cinemachine.Editor
             if (brain.OutputCamera != null && brain.m_ShowCameraFrustum)
             {
                 DrawCameraFrustumGizmo(
-                    brain, new LensSettings(brain.OutputCamera), 
-                    brain.OutputCamera.transform.localToWorldMatrix, 
+                    brain, LensSettings.FromCamera(brain.OutputCamera), 
+                    brain.transform.localToWorldMatrix, 
                     Color.white); // GML why is this color hardcoded?
             }
         }

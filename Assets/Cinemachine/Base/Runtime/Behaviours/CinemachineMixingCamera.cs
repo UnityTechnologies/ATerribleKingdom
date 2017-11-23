@@ -215,7 +215,6 @@ namespace Cinemachine
                 {
                     int index = list.Count;
                     list.Add(k);
-                    k.AddPostPipelineStageHook(OnPostPipelineStage);
                     if (index < MaxCameras)
                         m_indexMap.Add(k, index);
                 }
@@ -240,7 +239,6 @@ namespace Cinemachine
                 CinemachineVirtualCameraBase vcam = children[i];
                 if (vcam.isActiveAndEnabled)
                 {
-                    CinemachineCore.Instance.UpdateVirtualCamera(vcam, worldUp, deltaTime);
                     float weight = Mathf.Max(0, GetWeight(i));
                     if (weight > UnityVectorExtensions.Epsilon)
                     {

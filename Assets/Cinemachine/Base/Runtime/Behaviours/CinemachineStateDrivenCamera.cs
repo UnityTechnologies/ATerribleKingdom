@@ -108,6 +108,19 @@ namespace Cinemachine
         /// <summary>Internal API for the Inspector editor</summary>
         [HideInInspector][SerializeField] public ParentHash[] m_ParentHash = null;
 
+        /// <summary>Gets a brief debug description of this virtual camera, for use when displayiong debug info</summary>
+        public override string Description 
+        { 
+            get 
+            { 
+                // Show the active camera and blend
+                ICinemachineCamera vcam = LiveChild;
+                if (mActiveBlend == null) 
+                    return (vcam != null) ? "[" + vcam.Name + "]" : "(none)";
+                return mActiveBlend.Description;
+            }
+        }
+        
         /// <summary>Get the current "best" child virtual camera, that would be chosen
         /// if the State Driven Camera were active.</summary>
         public ICinemachineCamera LiveChild { set; get; }
@@ -174,11 +187,12 @@ namespace Cinemachine
                     CinemachineVirtualCameraBase vcam  = m_ChildCameras[i];
                     if (vcam != null)
                     {
-                        vcam.gameObject.SetActive(m_EnableAllChildCameras || vcam == best);
-                        if (vcam.VirtualCameraGameObject.activeInHierarchy)
+                        bool enableChild = m_EnableAllChildCameras || vcam == best;
+                        if (enableChild != vcam.VirtualCameraGameObject.activeInHierarchy)
                         {
-                            vcam.AddPostPipelineStageHook(OnPostPipelineStage);
-                            CinemachineCore.Instance.UpdateVirtualCamera(vcam, worldUp, deltaTime);
+                            vcam.gameObject.SetActive(enableChild);
+                            if (enableChild)
+                                CinemachineCore.Instance.UpdateVirtualCamera(vcam, worldUp, deltaTime);
                         }
                     }
                 }
@@ -198,7 +212,7 @@ namespace Cinemachine
                         curve, duration, mActiveBlend, deltaTime);
 
                 // Notify incoming camera of transition
-                LiveChild.OnTransitionFromCamera(previousCam);
+                LiveChild.OnTransitionFromCamera(previousCam, worldUp, deltaTime);
 
                 // Generate Camera Activation event if live
                 CinemachineCore.Instance.GenerateCameraActivationEvent(LiveChild);
@@ -224,12 +238,6 @@ namespace Cinemachine
             }
             else if (LiveChild != null)
                 m_State =  LiveChild.State;
-
-            // Push the raw position back to the game object's transform, so it
-            // moves along with the camera.  Leave the orientation alone, because it
-            // screws up camera dragging when there is a LookAt behaviour.
-            if (Follow != null)
-                transform.position = State.RawPosition;
 
             PreviousStateIsValid = true;
             //UnityEngine.Profiling.Profiler.EndSample();
@@ -258,13 +266,7 @@ namespace Cinemachine
                 CinemachineGameWindowDebug.ReleaseScreenPos(this);
             else
             {
-                // Show the active camera and blend
-                ICinemachineCamera vcam = LiveChild;
-                string text = "CM " + gameObject.name + ": ";
-                if (mActiveBlend == null)
-                    text += (vcam != null) ? vcam.Name : "(none)";
-                else
-                    text += mActiveBlend.Description;
+                string text = Name + ": " + Description;
                 Rect r = CinemachineGameWindowDebug.GetScreenPos(this, text, GUI.skin.box);
                 GUI.Label(r, text, GUI.skin.box);
             }
@@ -334,6 +336,7 @@ namespace Cinemachine
             mActiveBlend = null;
         }
 
+        List<AnimatorClipInfo>  m_clipInfoList = new List<AnimatorClipInfo>();
         private CinemachineVirtualCameraBase ChooseCurrentCamera(float deltaTime)
         {
             //UnityEngine.Profiling.Profiler.BeginSample("CinemachineStateDrivenCamera.ChooseCurrentCamera");
@@ -353,24 +356,28 @@ namespace Cinemachine
                 return defaultCam;
             }
 
-
             // Get the current state
-            AnimatorStateInfo info = m_AnimatedTarget.GetCurrentAnimatorStateInfo(m_LayerIndex);
-            int hash = info.fullPathHash;
-
-            // Is there an animation clip substate?
-            AnimatorClipInfo[] clips = m_AnimatedTarget.GetCurrentAnimatorClipInfo(m_LayerIndex);
-            if (clips.Length > 1)
+            int hash;
+            if (m_AnimatedTarget.IsInTransition(m_LayerIndex))
             {
-                // Find the strongest-weighted one
-                int bestClip = -1;
-                for (int i = 0; i < clips.Length; ++i)
-                    if (bestClip < 0 || clips[i].weight > clips[bestClip].weight)
-                        bestClip = i;
-
-                // Use its hash
-                if (bestClip >= 0 && clips[bestClip].weight > 0)
-                    hash = Animator.StringToHash(CreateFakeHashName(hash, clips[bestClip].clip.name));
+                // Force "current" state to be the state we're transitionaing to
+                AnimatorStateInfo info = m_AnimatedTarget.GetNextAnimatorStateInfo(m_LayerIndex);
+                hash = info.fullPathHash;
+                if (m_AnimatedTarget.GetNextAnimatorClipInfoCount(m_LayerIndex) > 1)
+                {
+                    m_AnimatedTarget.GetNextAnimatorClipInfo(m_LayerIndex, m_clipInfoList);
+                    hash = GetClipHash(info.fullPathHash, m_clipInfoList);
+                }
+            }
+            else 
+            {
+                AnimatorStateInfo info = m_AnimatedTarget.GetCurrentAnimatorStateInfo(m_LayerIndex);
+                hash = info.fullPathHash;
+                if (m_AnimatedTarget.GetCurrentAnimatorClipInfoCount(m_LayerIndex) > 1)
+                {
+                    m_AnimatedTarget.GetCurrentAnimatorClipInfo(m_LayerIndex, m_clipInfoList);
+                    hash = GetClipHash(info.fullPathHash, m_clipInfoList);
+                }
             }
 
             // If we don't have an instruction for this state, find a suitable default
@@ -450,6 +457,24 @@ namespace Cinemachine
             return mActiveInstruction.m_VirtualCamera;
         }
 
+        int GetClipHash(int hash, List<AnimatorClipInfo> clips)
+        {
+            // Is there an animation clip substate?
+            if (clips.Count > 1)
+            {
+                // Find the strongest-weighted one
+                int bestClip = -1;
+                for (int i = 0; i < clips.Count; ++i)
+                    if (bestClip < 0 || clips[i].weight > clips[bestClip].weight)
+                        bestClip = i;
+
+                // Use its hash
+                if (bestClip >= 0 && clips[bestClip].weight > 0)
+                    hash = Animator.StringToHash(CreateFakeHashName(hash, clips[bestClip].clip.name));
+            }
+            return hash;
+        }
+            
         private AnimationCurve LookupBlendCurve(
             ICinemachineCamera fromKey, ICinemachineCamera toKey, out float duration)
         {

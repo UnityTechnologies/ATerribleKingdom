@@ -130,11 +130,6 @@ namespace Cinemachine.Editor
                     "The camera is positioned on the same point at which it is trying to look.", 
                     MessageType.Warning);
 
-            bool hasInconsistentAnimation, hadInconsistentAnimation;
-            CinemachineCore.UpdateFilter updateMode;
-            CinemachineCore.Instance.GetVcamUpdateStatus(
-                Target, out updateMode, out hasInconsistentAnimation, out hadInconsistentAnimation);
-
             // Active status and Solo button
             Rect rect = EditorGUILayout.GetControlRect(true);
             Rect rectLabel = new Rect(rect.x, rect.y, EditorGUIUtility.labelWidth, rect.height);
@@ -152,12 +147,17 @@ namespace Cinemachine.Editor
                 : (Target.isActiveAndEnabled ? "Status: Standby" : "Status: Disabled"));
             GUI.enabled = true;
 
-            GUIContent updateText = new GUIContent(
-                updateMode == CinemachineCore.UpdateFilter.Fixed ? " Fixed Update" : " Late Update");
-            var textDimensions = GUI.skin.label.CalcSize(updateText);
-            float labelWidth = textDimensions.x;
-            if (Application.isPlaying)
-                rect.width -= labelWidth;
+            float labelWidth = 0;
+            GUIContent updateText = GUIContent.none;
+            CinemachineCore.UpdateFilter updateMode = CinemachineCore.Instance.GetVcamUpdateStatus(Target);
+            if (updateMode != CinemachineCore.UpdateFilter.Any && Application.isPlaying)
+            {
+                updateText = new GUIContent(
+                    updateMode == CinemachineCore.UpdateFilter.Fixed ? " Fixed Update" : " Late Update");
+                var textDimensions = GUI.skin.label.CalcSize(updateText);
+                labelWidth = textDimensions.x;
+            }
+            rect.width -= labelWidth;
             if (GUI.Button(rect, "Solo", "Button"))
             {
                 isSolo = !isSolo;
@@ -168,7 +168,7 @@ namespace Cinemachine.Editor
             if (isSolo)
                 UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
 
-            if (Application.isPlaying)
+            if (labelWidth > 0)
             {
                 GUI.enabled = false;
                 rect.x += rect.width; rect.width = labelWidth;

@@ -179,25 +179,27 @@ namespace Cinemachine.PostFX
                 }
             }
 
-            if (volumeOwner == null)
+            if (minVolumes > 0)
             {
-                volumeOwner = new GameObject(sVolumeOwnerName);
-                volumeOwner.hideFlags = HideFlags.HideAndDontSave;
-                volumeOwner.transform.parent = t;
-            }
-            // Update the volume's layer so it will be seen
-            int mask = ppLayer.volumeLayer.value;
-            for (int i = 0; i < 32; ++i)
-            {
-                if ((mask & (1 << i)) != 0)
+                if (volumeOwner == null)
                 {
-                    volumeOwner.layer = i;
-                    break;
+                    volumeOwner = new GameObject(sVolumeOwnerName);
+                    volumeOwner.hideFlags = HideFlags.HideAndDontSave;
+                    volumeOwner.transform.parent = t;
                 }
+                // Update the volume's layer so it will be seen
+                int mask = ppLayer.volumeLayer.value;
+                for (int i = 0; i < 32; ++i)
+                {
+                    if ((mask & (1 << i)) != 0)
+                    {
+                        volumeOwner.layer = i;
+                        break;
+                    }
+                }
+                while (sVolumes.Count < minVolumes)
+                    sVolumes.Add(volumeOwner.gameObject.AddComponent<PostProcessVolume>());
             }
-            while (sVolumes.Count < minVolumes)
-                sVolumes.Add(volumeOwner.gameObject.AddComponent<PostProcessVolume>());
-
             //UnityEngine.Profiling.Profiler.EndSample();
             return sVolumes;
         }

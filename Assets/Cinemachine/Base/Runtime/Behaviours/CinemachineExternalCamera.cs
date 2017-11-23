@@ -46,7 +46,7 @@ namespace Cinemachine
             m_State.RawOrientation = transform.rotation;
             m_State.ReferenceUp = m_State.RawOrientation * Vector3.up;
             if (m_Camera != null)
-                m_State.Lens = new LensSettings(m_Camera);
+                m_State.Lens = LensSettings.FromCamera(m_Camera);
 
             if (m_LookAt != null)
             {

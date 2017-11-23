@@ -16,6 +16,11 @@ namespace Cinemachine
             excluded.Add(FieldPath(x => x.m_Orbits));
             if (!Target.m_CommonLens)
                 excluded.Add(FieldPath(x => x.m_Lens));
+            if (Target.m_BindingMode == CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp)
+            {
+                excluded.Add(FieldPath(x => x.m_Heading));
+                excluded.Add(FieldPath(x => x.m_RecenterToTargetHeading));
+            }
             return excluded;
         }
 
@@ -156,25 +161,23 @@ namespace Cinemachine
             if (vcam.Follow != null)
             {
                 Vector3 pos = vcam.Follow.position;
-                var TopRig = vcam.GetRig(0).GetCinemachineComponent<CinemachineOrbitalTransposer>();
-                var MiddleRig = vcam.GetRig(1).GetCinemachineComponent<CinemachineOrbitalTransposer>();
-                var BottomRig = vcam.GetRig(2).GetCinemachineComponent<CinemachineOrbitalTransposer>();
                 Vector3 up = Vector3.up;
                 CinemachineBrain brain = CinemachineCore.Instance.FindPotentialTargetBrain(vcam);
                 if (brain != null)
                     up = brain.DefaultWorldUp;
 
-                Quaternion orient = TopRig.GetReferenceOrientation(up);
+                var MiddleRig = vcam.GetRig(1).GetCinemachineComponent<CinemachineOrbitalTransposer>();
+                Quaternion orient = MiddleRig.GetReferenceOrientation(up);
                 up = orient * Vector3.up;
                 float rotation = vcam.m_XAxis.Value + vcam.m_Heading.m_HeadingBias;
                 orient = Quaternion.AngleAxis(rotation, up) * orient;
 
                 CinemachineOrbitalTransposerEditor.DrawCircleAtPointWithRadius(
-                    pos + up * TopRig.m_FollowOffset.y, orient, TopRig.m_FollowOffset.z);
+                    pos + up * vcam.m_Orbits[0].m_Height, orient, vcam.m_Orbits[0].m_Radius);
                 CinemachineOrbitalTransposerEditor.DrawCircleAtPointWithRadius(
-                    pos + up * MiddleRig.m_FollowOffset.y, orient, MiddleRig.m_FollowOffset.z);
+                    pos + up * vcam.m_Orbits[1].m_Height, orient, vcam.m_Orbits[1].m_Radius);
                 CinemachineOrbitalTransposerEditor.DrawCircleAtPointWithRadius(
-                    pos + up * BottomRig.m_FollowOffset.y, orient, BottomRig.m_FollowOffset.z);
+                    pos + up * vcam.m_Orbits[2].m_Height, orient, vcam.m_Orbits[2].m_Radius);
 
                 DrawCameraPath(pos, orient, vcam);
             }

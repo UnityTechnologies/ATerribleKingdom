@@ -38,6 +38,22 @@ namespace Cinemachine
         [NoSaveDuringPlay, HideInInspector]
         public Action OnGUICallback = null;
 
+        /// <summary>This setting will instruct the composer to adjust its target offset based
+        /// on the motion of the target.  The composer will look at a point where it estimates
+        /// the target will be this many seconds into the future.  Note that this setting is sensitive
+        /// to noisy animation, and can amplify the noise, resulting in undesirable camera jitter.
+        /// If the camera jitters unacceptably when the target is in motion, turn down this setting, 
+        /// or animate the target more smoothly.</summary>
+        [Tooltip("This setting will instruct the composer to adjust its target offset based on the motion of the target.  The composer will look at a point where it estimates the target will be this many seconds into the future.  Note that this setting is sensitive to noisy animation, and can amplify the noise, resulting in undesirable camera jitter.  If the camera jitters unacceptably when the target is in motion, turn down this setting, or animate the target more smoothly.")]
+        [Range(0f, 1f)]
+        public float m_LookaheadTime = 0;
+
+        /// <summary>Controls the smoothness of the lookahead algorithm.  Larger values smooth out 
+        /// jittery predictions and also increase prediction lag</summary>
+        [Tooltip("Controls the smoothness of the lookahead algorithm.  Larger values smooth out jittery predictions and also increase prediction lag")]
+        [Range(3, 30)]
+        public float m_LookaheadSmoothing = 10;
+
         /// <summary>How aggressively the camera tries to maintain the offset in the X-axis.
         /// Small numbers are more responsive, rapidly translating the camera to keep the target's
         /// x-axis offset.  Larger numbers give a more heavy slowly responding camera.
@@ -95,7 +111,7 @@ namespace Cinemachine
 
         [Space]
         /// <summary>If checked, then then soft zone will be unlimited in size</summary>
-        [Tooltip("checked, then then soft zone will be unlimited in size.")]
+        [Tooltip("If checked, then then soft zone will be unlimited in size.")]
         public bool m_UnlimitedSoftZone = false;
 
         /// <summary>When target is within this region, camera will gradually move to re-align
@@ -274,27 +290,38 @@ namespace Cinemachine
 
         /// <summary>State information for damping</summary>
         Vector3 m_PreviousCameraPosition = Vector3.zero;
-        
+        PositionPredictor m_Predictor = new PositionPredictor();
+
+        /// <summary>Internal API for inspector</summary>
+        public Vector3 TrackedPoint { get; private set; }
+
         /// <summary>Positions the virtual camera according to the transposer rules.</summary>
         /// <param name="curState">The current camera state</param>
         /// <param name="deltaTime">Used for damping.  If less than 0, no damping is done.</param>
         public override void MutateCameraState(ref CameraState curState, float deltaTime)
         {
             if (deltaTime < 0)
+            {
+                m_Predictor.Reset();
                 m_PreviousCameraPosition = curState.RawPosition 
                     + (curState.RawOrientation * Vector3.back) * m_CameraDistance;
+            }
             if (!IsValid)
                 return;
 
             //UnityEngine.Profiling.Profiler.BeginSample("CinemachineFramingTransposer.MutateCameraState");
             Vector3 camPosWorld = m_PreviousCameraPosition;
             curState.ReferenceLookAt = FollowTarget.position;
+            m_Predictor.Smoothing = m_LookaheadSmoothing;
+            m_Predictor.AddPosition(curState.ReferenceLookAt);
+            TrackedPoint = (m_LookaheadTime > 0) 
+                ? m_Predictor.PredictPosition(m_LookaheadTime) : curState.ReferenceLookAt;
 
             // Work in camera-local space
             Quaternion localToWorld = curState.RawOrientation;
             Quaternion worldToLocal = Quaternion.Inverse(localToWorld);
             Vector3 cameraPos = worldToLocal * camPosWorld;
-            Vector3 targetPos = (worldToLocal * curState.ReferenceLookAt) - cameraPos;
+            Vector3 targetPos = (worldToLocal * TrackedPoint) - cameraPos;
 
             // Move along camera z
             Vector3 cameraOffset = Vector3.zero;

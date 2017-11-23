@@ -160,7 +160,7 @@ namespace Cinemachine
         [SerializeField] [HideInInspector] [FormerlySerializedAs("m_Radius")] private float m_LegacyRadius = float.MaxValue;
         [SerializeField] [HideInInspector] [FormerlySerializedAs("m_HeightOffset")] private float m_LegacyHeightOffset = float.MaxValue;
         [SerializeField] [HideInInspector] [FormerlySerializedAs("m_HeadingBias")] private float m_LegacyHeadingBias = float.MaxValue;
-        private void OnValidate()
+        protected override void OnValidate()
         {
             // Upgrade after a legacy deserialize
             if (m_LegacyRadius != float.MaxValue 
@@ -180,6 +180,8 @@ namespace Cinemachine
             }
             m_XAxis.Validate();
             m_RecenterToTargetHeading.Validate();
+
+            base.OnValidate();
         }
 
         /// <summary>
@@ -205,8 +207,7 @@ namespace Cinemachine
                     mHeadingRecenteringVelocity = 0;
                 }
             }
-            float targetHeading = GetTargetHeading(
-                m_XAxis.Value, GetReferenceOrientation(up), deltaTime);
+            float targetHeading = GetTargetHeading(m_XAxis.Value, GetReferenceOrientation(up), deltaTime);
             if (deltaTime < 0)
             {
                 mHeadingRecenteringVelocity = 0;
@@ -216,7 +217,8 @@ namespace Cinemachine
             else
             {
                 // Recentering
-                if (m_RecenterToTargetHeading.m_enabled
+                if (m_BindingMode != BindingMode.SimpleFollowWithWorldUp
+                    && m_RecenterToTargetHeading.m_enabled
                     && (Time.time > (mLastHeadingAxisInputTime + m_RecenterToTargetHeading.m_RecenterWaitTime)))
                 {
                     // Scale value determined heuristically, to account for accel/decel
@@ -247,17 +249,6 @@ namespace Cinemachine
                     }
                 }
             }
-        }
-
-        /// <summary>Internal API for FreeLook, so that it can interpolate radius</summary>
-        internal bool UseOffsetOverride { get; set; }
-
-        /// <summary>Internal API for FreeLook, so that it can interpolate radius</summary>
-        internal Vector3 OffsetOverride { get; set; }
-
-        Vector3 EffectiveOffset 
-        { 
-            get { return UseOffsetOverride ? OffsetOverride : m_FollowOffset; } 
         }
 
         void OnVlaidate()
@@ -304,27 +295,32 @@ namespace Cinemachine
             {
                 mLastTargetPosition = FollowTarget.position;
 
+                // Calculate the heading
+                float heading = m_XAxis.Value;
+                if (m_BindingMode == BindingMode.SimpleFollowWithWorldUp)
+                    m_XAxis.Value = 0;
+                else
+                    heading += m_Heading.m_HeadingBias;
+                Quaternion headingRot = Quaternion.AngleAxis(heading, curState.ReferenceUp);
+
                 // Track the target, with damping
+                Vector3 offset = EffectiveOffset;
                 Vector3 pos;
                 Quaternion orient;
-                TrackTarget(deltaTime, curState.ReferenceUp, out pos, out orient);
+                TrackTarget(deltaTime, curState.ReferenceUp, headingRot * offset, out pos, out orient);
 
                 // Place the camera
                 curState.ReferenceUp = orient * Vector3.up;
-
-                float heading = m_XAxis.Value + m_Heading.m_HeadingBias;
-                Vector3 offset = EffectiveOffset;
-                Quaternion headingRot = Quaternion.AngleAxis(heading, curState.ReferenceUp);
                 if (deltaTime >= 0)
                 {
-                    Vector3 bypass = (headingRot * offset) - (mHeadingPrevFrame * mOffsetPrevFrame);
+                    Vector3 bypass = (headingRot * offset) - mHeadingPrevFrame * mOffsetPrevFrame;
                     bypass = orient * bypass;
                     curState.PositionDampingBypass = bypass;
                 }
                 orient = orient * headingRot;
                 curState.RawPosition = pos + orient * offset;
 
-                mHeadingPrevFrame = headingRot;
+                mHeadingPrevFrame = (m_BindingMode == BindingMode.SimpleFollowWithWorldUp) ? Quaternion.identity : headingRot;
                 mOffsetPrevFrame = offset;
             }
             //UnityEngine.Profiling.Profiler.EndSample();
@@ -339,6 +335,7 @@ namespace Cinemachine
             Vector3 localOffset = Quaternion.Inverse(targetOrientation) * delta;
             localOffset.x = 0;
             m_FollowOffset += localOffset;
+            m_FollowOffset = EffectiveOffset;
         }
         
         static string GetFullName(GameObject current)
@@ -354,6 +351,8 @@ namespace Cinemachine
         private float GetTargetHeading(
             float currentHeading, Quaternion targetOrientation, float deltaTime)
         {
+            if (m_BindingMode == BindingMode.SimpleFollowWithWorldUp)
+                return 0;
             if (FollowTarget == null)
                 return currentHeading;
 

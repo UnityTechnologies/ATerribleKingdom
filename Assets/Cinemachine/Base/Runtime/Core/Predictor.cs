@@ -7,9 +7,26 @@ namespace Cinemachine.Utility
     internal class PositionPredictor
     {
         Vector3 m_Position;
-        const float kSmoothing = 10;
-        GaussianWindow1D_Vector3 m_Velocity = new GaussianWindow1D_Vector3(kSmoothing);
-        GaussianWindow1D_Vector3 m_Accel = new GaussianWindow1D_Vector3(kSmoothing);
+
+        const float kSmoothingDefault = 10;
+        float mSmoothing = kSmoothingDefault;
+        public float Smoothing 
+        {
+            get { return mSmoothing; }
+            set 
+            {
+                if (value != mSmoothing)
+                {
+                    mSmoothing = value;
+                    int maxRadius = Mathf.Max(10, Mathf.FloorToInt(value * 1.5f));
+                    m_Velocity = new GaussianWindow1D_Vector3(mSmoothing, maxRadius);
+                    m_Accel = new GaussianWindow1D_Vector3(mSmoothing, maxRadius);
+                }
+            }
+        }
+
+        GaussianWindow1D_Vector3 m_Velocity = new GaussianWindow1D_Vector3(kSmoothingDefault);
+        GaussianWindow1D_Vector3 m_Accel = new GaussianWindow1D_Vector3(kSmoothingDefault);
 
         public bool IsEmpty { get { return m_Velocity.IsEmpty(); } }
 

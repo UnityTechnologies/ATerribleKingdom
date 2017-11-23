@@ -28,6 +28,12 @@ namespace Cinemachine.Editor
                     excluded.Add(FieldPath(x => x.m_YawDamping));
                     excluded.Add(FieldPath(x => x.m_RollDamping));
                     break;
+                case CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp:
+                    excluded.Add(FieldPath(x => x.m_XDamping));
+                    excluded.Add(FieldPath(x => x.m_PitchDamping));
+                    excluded.Add(FieldPath(x => x.m_YawDamping));
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
+                    break;
             }
             return excluded;
         }
@@ -59,8 +65,8 @@ namespace Cinemachine.Editor
                 Vector3 targetPos = target.FollowTarget.position;
                 Vector3 desiredPos = target.GeTargetCameraPosition(up);
                 Gizmos.DrawLine(targetPos, desiredPos);
-                Gizmos.DrawWireSphere(desiredPos,
-                    HandleUtility.GetHandleSize(desiredPos) / 20);
+                Gizmos.DrawWireSphere(desiredPos, HandleUtility.GetHandleSize(desiredPos) / 20);
+                Gizmos.color = originalGizmoColour;
             }
         }
     }

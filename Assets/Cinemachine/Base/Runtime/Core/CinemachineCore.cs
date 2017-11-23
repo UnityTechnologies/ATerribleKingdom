@@ -107,24 +107,86 @@ namespace Cinemachine
         }
 
         /// <summary>Called when a Cinemachine Virtual Camera is enabled.</summary>
-        internal void AddActiveCamera(ICinemachineCamera cam)
+        internal void AddActiveCamera(ICinemachineCamera vcam)
         {
             // Bring it to the top of the list
-            RemoveActiveCamera(cam);
+            RemoveActiveCamera(vcam);
 
             // Keep list sorted by priority
             int insertIndex;
             for (insertIndex = 0; insertIndex < mActiveCameras.Count; ++insertIndex)
-                if (cam.Priority >= mActiveCameras[insertIndex].Priority)
+                if (vcam.Priority >= mActiveCameras[insertIndex].Priority)
                     break;
 
-            mActiveCameras.Insert(insertIndex, cam);
+            mActiveCameras.Insert(insertIndex, vcam);
         }
 
         /// <summary>Called when a Cinemachine Virtual Camera is disabled.</summary>
-        internal void RemoveActiveCamera(ICinemachineCamera cam)
+        internal void RemoveActiveCamera(ICinemachineCamera vcam)
         {
-            mActiveCameras.Remove(cam);
+            mActiveCameras.Remove(vcam);
+        }
+
+        // Registry of all vcams that are parented (i.e. slaves of) to other vcams
+        private List<List<ICinemachineCamera>> mChildCameras = new List<List<ICinemachineCamera>>();
+
+        /// <summary>Called when a child vcam is enabled.</summary>
+        internal void AddChildCamera(ICinemachineCamera vcam)
+        {
+            RemoveChildCamera(vcam);
+
+            int parentLevel = 0;
+            for (ICinemachineCamera p = vcam; p != null; p = p.ParentCamera)
+                ++parentLevel;
+            while (mChildCameras.Count < parentLevel)
+                mChildCameras.Add(new List<ICinemachineCamera>());
+            mChildCameras[parentLevel-1].Add(vcam);
+        }
+
+        /// <summary>Called when a child vcam is disabled.</summary>
+        internal void RemoveChildCamera(ICinemachineCamera vcam)
+        {
+            for (int i = 0; i < mChildCameras.Count; ++i)
+                mChildCameras[i].Remove(vcam);
+        }
+
+        /// <summary>Update all the active vcams in the scene, in the correct dependency order.</summary>
+        internal void UpdateAllActiveVirtualCameras(Vector3 worldUp, float deltaTime)
+        {
+            //UnityEngine.Profiling.Profiler.BeginSample("CinemachineCore.UpdateAllActiveVirtualCameras");
+            int numCameras;
+
+            // Pre-update child unless smart/fixed
+            //UnityEngine.Profiling.Profiler.BeginSample("CinemachineCore.UpdateAllActiveVirtualCameras.PreUpdate");
+            if (CurrentUpdateFilter == UpdateFilter.Any || CurrentUpdateFilter == UpdateFilter.Late)
+            {
+                numCameras = VirtualCameraCount;
+                for (int i = 0; i < numCameras; ++i)
+                    GetVirtualCamera(i).PreUpdateChildCameras(worldUp, deltaTime);
+                for (int i = 0; i < mChildCameras.Count-1; ++i)
+                {
+                    numCameras = mChildCameras[i].Count;
+                    for (int j = 0; j < numCameras; ++j)
+                        mChildCameras[i][j].PreUpdateChildCameras(worldUp, deltaTime);
+                }
+            }
+            //UnityEngine.Profiling.Profiler.EndSample();
+
+            // Update the leaf-most cameras first
+            //UnityEngine.Profiling.Profiler.BeginSample("CinemachineCore.UpdateAllActiveVirtualCameras.leaf-most");
+            for (int i = mChildCameras.Count-1; i >= 0; --i)
+            {
+                numCameras = mChildCameras[i].Count;
+                for (int j = 0; j < numCameras; ++j)
+                    UpdateVirtualCamera(mChildCameras[i][j], worldUp, deltaTime);
+            }
+            //UnityEngine.Profiling.Profiler.EndSample();
+
+            // Then all the top-level cameras
+            numCameras = VirtualCameraCount;
+            for (int i = 0; i < numCameras; ++i)
+                UpdateVirtualCamera(GetVirtualCamera(i), worldUp, deltaTime);
+            //UnityEngine.Profiling.Profiler.EndSample();
         }
 
         /// <summary>
@@ -163,7 +225,7 @@ namespace Cinemachine
             // how the target has been moving recently in order to figure out whether to
             // update now
             bool updateNow = !isSmartUpdate;
-            if (!updateNow)
+            if (isSmartUpdate)
             {
                 Matrix4x4 targetPos;
                 if (!GetTargetPosition(vcam, out targetPos))
@@ -175,13 +237,10 @@ namespace Cinemachine
 
             if (updateNow)
             {
-                if (isSmartUpdate)
-                    status.preferredUpdate = CurrentUpdateFilter;
-                if (deltaTime < 0)
-                    status.hasInconsistentAnimation = status.hadInconsistentAnimation = false;
+                status.preferredUpdate = CurrentUpdateFilter;
                 while (status.lastUpdateSubframe < subframes)
                 {
-//Debug.Log(vcam.Name + ": frame " + Time.frameCount + "." + status.lastUpdateSubframe + ", " + CurrentUpdateFilter);
+//Debug.Log(vcam.Name + ": frame " + Time.frameCount + "." + status.lastUpdateSubframe + ", " + CurrentUpdateFilter + ", deltaTime = " + deltaTime);
                     vcam.UpdateCameraState(worldUp, deltaTime);
                     ++status.lastUpdateSubframe;
                 }
@@ -195,7 +254,7 @@ namespace Cinemachine
 
         struct UpdateStatus
         {
-            const int kWindowSize = 100;
+            const int kWindowSize = 30;
 
             public int lastUpdateFrame;
             public int lastUpdateSubframe;
@@ -205,8 +264,6 @@ namespace Cinemachine
             public int numWindowFixedUpdateMoves;
             public int numWindows;
             public UpdateFilter preferredUpdate;
-            public bool hasInconsistentAnimation;
-            public bool hadInconsistentAnimation;
 
             public Matrix4x4 targetPos;
 
@@ -219,8 +276,6 @@ namespace Cinemachine
                 numWindowFixedUpdateMoves = 0;
                 numWindows = 0;
                 preferredUpdate = UpdateFilter.Late;
-                hasInconsistentAnimation = false;
-                hadInconsistentAnimation = false;
                 targetPos = Matrix4x4.zero;
             }
 
@@ -236,28 +291,21 @@ namespace Cinemachine
                     targetPos = pos;
                 }
                 //Debug.Log("Fixed=" + numWindowFixedUpdateMoves + ", Late=" + numWindowLateUpdateMoves);
-                if (numWindowLateUpdateMoves + numWindowFixedUpdateMoves > 0)
-                {
-                    UpdateFilter choice = preferredUpdate;
-                    bool inconsistent = numWindowLateUpdateMoves > 0 && numWindowFixedUpdateMoves > 0;
-                    if (inconsistent || numWindowLateUpdateMoves >= numWindowFixedUpdateMoves)
-                        choice = UpdateFilter.Late;
-                    else
-                        choice = UpdateFilter.Fixed;
-                    if (numWindows == 0)
-                        preferredUpdate = choice;
+                UpdateFilter choice = preferredUpdate;
+                bool inconsistent = numWindowLateUpdateMoves > 0 && numWindowFixedUpdateMoves > 0;
+                if (inconsistent || numWindowLateUpdateMoves >= numWindowFixedUpdateMoves)
+                    choice = UpdateFilter.Late;
+                else
+                    choice = UpdateFilter.Fixed;
+                if (numWindows == 0)
+                    preferredUpdate = choice;
  
-                    if (windowStart + kWindowSize <= currentFrame)
-                    {
-                        if (numWindows > 0) // ignore junk in first few frames
-                            hasInconsistentAnimation = inconsistent;
-                        if (hasInconsistentAnimation)
-                            hadInconsistentAnimation = true;
-                        preferredUpdate = choice;
-                        ++numWindows;
-                        windowStart = currentFrame;
-                        numWindowLateUpdateMoves = numWindowFixedUpdateMoves = 0;
-                    }
+                if (windowStart + kWindowSize <= currentFrame)
+                {
+                    preferredUpdate = choice;
+                    ++numWindows;
+                    windowStart = currentFrame;
+                    numWindowLateUpdateMoves = numWindowFixedUpdateMoves = 0;
                 }
                 return preferredUpdate;
             }
@@ -286,24 +334,18 @@ namespace Cinemachine
                 targetPos = vcamTarget.Follow.localToWorldMatrix;
                 return true;
             }
-            return false; // no target
+            // If no target, use the vcam itself
+            targetPos = vcam.VirtualCameraGameObject.transform.localToWorldMatrix;
+            return true;
         }
 
         /// <summary>Internal use only</summary>
-        public bool GetVcamUpdateStatus(
-            ICinemachineCamera vcam, out UpdateFilter updateMode, 
-            out bool hasInconsistentAnimation, out bool hadInconsistentAnimation)
+        public UpdateFilter GetVcamUpdateStatus(ICinemachineCamera vcam)
         {
-            hasInconsistentAnimation = hadInconsistentAnimation = false;
-            updateMode = UpdateFilter.Late;
             UpdateStatus status;
             if (mUpdateStatus == null || !mUpdateStatus.TryGetValue(vcam, out status))
-                return false;
-            
-            hasInconsistentAnimation = status.hasInconsistentAnimation;
-            hadInconsistentAnimation = status.hadInconsistentAnimation;
-            updateMode = status.preferredUpdate;
-            return true;
+                return UpdateFilter.Any;
+            return status.preferredUpdate;
         }
 
         /// <summary>
@@ -363,6 +405,7 @@ namespace Cinemachine
         /// Cinemachine Virtual Camera.  The first CinemachineBrain
         /// in which this Cinemachine Virtual Camera is live will be used.
         /// If none, then the first active CinemachineBrain will be used.
+        /// Brains with OutputCamera == null will not be returned.
         /// Final result may be null.
         /// </summary>
         /// <param name="vcam">Virtual camera whose potential brain we need.</param>

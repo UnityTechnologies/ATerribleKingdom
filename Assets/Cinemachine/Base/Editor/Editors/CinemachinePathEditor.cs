@@ -106,8 +106,7 @@ namespace Cinemachine.Editor
 
             Vector2 numberDimension = GUI.skin.button.CalcSize(new GUIContent("999"));
             Vector2 labelDimension = GUI.skin.label.CalcSize(new GUIContent("Position"));
-            Vector3 addButtonDimension = GUI.skin.button.CalcSize(new GUIContent("+"));
-            addButtonDimension.y = labelDimension.y;
+            Vector2 addButtonDimension = new Vector2(labelDimension.y + 5, labelDimension.y + 1);
             float vSpace = 2;
             float hSpace = 3;
 
@@ -115,7 +114,6 @@ namespace Cinemachine.Editor
             rect.y += vSpace / 2;
 
             Rect r = new Rect(rect.position, numberDimension);
-            r.y += numberDimension.y - r.height / 2;
             Color color = GUI.color;
             // GUI.color = Target.m_Appearance.pathColor;
             if (GUI.Button(r, new GUIContent(index.ToString(), "Go to the waypoint in the scene view")))
@@ -135,14 +133,17 @@ namespace Cinemachine.Editor
             EditorGUI.PropertyField(r, element.FindPropertyRelative(() => def.position), GUIContent.none);
             r.x += r.width + hSpace;
             r.size = addButtonDimension;
-            if (GUI.Button(r, new GUIContent("-", "Remove this waypoint")))
+            GUIContent buttonContent = EditorGUIUtility.IconContent("d_RectTransform Icon");
+            buttonContent.tooltip = "Set to scene-view camera position";
+            GUIStyle style = new GUIStyle(GUI.skin.label);
+            style.alignment = TextAnchor.MiddleCenter;
+            if (GUI.Button(r, buttonContent, style))
             {
-                Undo.RecordObject(Target, "Delete waypoint");
-                var list = new List<CinemachinePath.Waypoint>(Target.m_Waypoints);
-                list.RemoveAt(index);
-                Target.m_Waypoints = list.ToArray();
-                if (index == Target.m_Waypoints.Length)
-                    mWaypointList.index = index - 1;
+                Undo.RecordObject(Target, "Set waypoint");
+                CinemachinePath.Waypoint wp = Target.m_Waypoints[index];
+                Vector3 pos = SceneView.lastActiveSceneView.camera.transform.position;
+                wp.position = Target.transform.InverseTransformPoint(pos);
+                Target.m_Waypoints[index] = wp;
             }
 
             r = new Rect(rect.position, labelDimension);
@@ -154,10 +155,16 @@ namespace Cinemachine.Editor
             EditorGUI.PropertyField(r, element.FindPropertyRelative(() => def.tangent), GUIContent.none);
             r.x += r.width + hSpace;
             r.size = addButtonDimension;
-            if (GUI.Button(r, new GUIContent("+", "Add a new waypoint after this one")))
+            buttonContent = EditorGUIUtility.IconContent("ol minus@2x");
+            buttonContent.tooltip = "Remove this waypoint";
+            if (GUI.Button(r, buttonContent, style))
             {
-                mWaypointList.index = index;
-                InsertWaypointAtIndex(index);
+                Undo.RecordObject(Target, "Delete waypoint");
+                var list = new List<CinemachinePath.Waypoint>(Target.m_Waypoints);
+                list.RemoveAt(index);
+                Target.m_Waypoints = list.ToArray();
+                if (index == Target.m_Waypoints.Length)
+                    mWaypointList.index = index - 1;
             }
 
             r = new Rect(rect.position, labelDimension);
@@ -172,6 +179,16 @@ namespace Cinemachine.Editor
             r.width /= 3;
             EditorGUI.MultiPropertyField(r, new GUIContent[] { new GUIContent(" ") },
                 element.FindPropertyRelative(() => def.roll));
+
+            r.x = rect.x + rect.width - addButtonDimension.x;
+            r.size = addButtonDimension;
+            buttonContent = EditorGUIUtility.IconContent("ol plus@2x");
+            buttonContent.tooltip = "Add a new waypoint after this one";
+            if (GUI.Button(r, buttonContent, style))
+            {
+                mWaypointList.index = index;
+                InsertWaypointAtIndex(index);
+            }
         }
 
         void InsertWaypointAtIndex(int indexA)

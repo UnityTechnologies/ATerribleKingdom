@@ -18,6 +18,33 @@ namespace Cinemachine.Editor
                 excluded.Add(FieldPath(x => x.m_XAxis));
                 excluded.Add(FieldPath(x => x.m_RecenterToTargetHeading));
             }
+            switch (Target.m_BindingMode)
+            {
+                default:
+                case CinemachineTransposer.BindingMode.LockToTarget:
+                    break;
+                case CinemachineTransposer.BindingMode.LockToTargetNoRoll:
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
+                    break;
+                case CinemachineTransposer.BindingMode.LockToTargetWithWorldUp:
+                    excluded.Add(FieldPath(x => x.m_PitchDamping));
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
+                    break;
+                case CinemachineTransposer.BindingMode.LockToTargetOnAssign:
+                case CinemachineTransposer.BindingMode.WorldSpace:
+                    excluded.Add(FieldPath(x => x.m_PitchDamping));
+                    excluded.Add(FieldPath(x => x.m_YawDamping));
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
+                    break;
+                case CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp:
+                    excluded.Add(FieldPath(x => x.m_XDamping));
+                    excluded.Add(FieldPath(x => x.m_PitchDamping));
+                    excluded.Add(FieldPath(x => x.m_YawDamping));
+                    excluded.Add(FieldPath(x => x.m_RollDamping));
+                    excluded.Add(FieldPath(x => x.m_Heading));
+                    excluded.Add(FieldPath(x => x.m_RecenterToTargetHeading));
+                    break;
+            }
             return excluded;
         }
 
