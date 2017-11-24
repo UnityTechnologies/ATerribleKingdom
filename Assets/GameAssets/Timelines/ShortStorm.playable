@@ -1624,7 +1624,7 @@ MonoBehaviour:
       type: 2}
     m_UnderlyingAsset: {fileID: 114547405210864292, guid: 527be7f6cd00941cf8edd82c8ca542f3,
       type: 2}
-    m_Duration: 34.783333333332
+    m_Duration: 34.8
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114544135198728540}
     m_EaseInDuration: 0
@@ -2590,7 +2590,7 @@ MonoBehaviour:
     m_ClipIn: 0
     m_Asset: {fileID: 114524745552696322}
     m_UnderlyingAsset: {fileID: 114524745552696322}
-    m_Duration: 34.783333333331
+    m_Duration: 34.8
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114755118725030242}
     m_EaseInDuration: 0
@@ -3106,11 +3106,11 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
     m_Version: 1
-  - m_Start: 31.800000000000004
+  - m_Start: 31.8
     m_ClipIn: 0
     m_Asset: {fileID: 114318044704020930}
     m_UnderlyingAsset: {fileID: 114134571617245092}
-    m_Duration: 2.9833333333309966
+    m_Duration: 2.9999999999999964
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114904049107708114}
     m_EaseInDuration: 0
