@@ -25,8 +25,8 @@ Use the scene Environment. Once in play, an object on the root (DemoHelper) will
 
 **Video**
 
-You can watch the talk associated with this project here:
-![Bridging Gameplay and Storytelling in a RTS game (Unite Austin)](https://www.youtube.com/watch?v=nn3SnfNNEmk)
+You can watch the talk associated with this project here:<br/>
+[Bridging Gameplay and Storytelling in a RTS game (Unite Austin)](https://www.youtube.com/watch?v=nn3SnfNNEmk)
 
 **Software Requirements**
 
