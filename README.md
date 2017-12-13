@@ -10,10 +10,6 @@ The whole demo is about Timeline, but a simple RTS game has been built to provid
 
 ## Documentation
 
-**Objective**
-
-This project is intended to demonstrate a practical application of the Machine Learning Agents in a real game.
-
 **Usage instructions**
 
 Use the scene Environment. Once in play, an object on the root (DemoHelper) will listen to key presses, to launch the 3 Timelines or gameplay:
