@@ -31,6 +31,7 @@ public class UIManager : Singleton<UIManager>
 	public void SetSelectionRectangle(Rect rectSize)
 	{
 		selectionRectangle.rectTransform.position = rectSize.center;
+		selectionRectangle.rectTransform.ForceUpdateRectTransforms();
 		selectionRectangle.rectTransform.sizeDelta = new Vector2(rectSize.width, rectSize.height);
 	}
 
