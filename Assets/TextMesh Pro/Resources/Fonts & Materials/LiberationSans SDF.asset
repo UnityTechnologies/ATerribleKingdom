@@ -7,12 +7,12 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: LiberationSans SDF Material
-  m_Shader: {fileID: 4800000, guid: cafd18099dfc0114896e0a8b277b81b6, type: 3}
-  m_ShaderKeywords: UNDERLAY_ON
-  m_LightmapFlags: 5
+  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -26,6 +26,22 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _FaceTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -34,7 +50,19 @@ Material:
         m_Texture: {fileID: 2846298}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -47,11 +75,18 @@ Material:
     - _BevelWidth: 0
     - _BumpFace: 0
     - _BumpOutline: 0
+    - _BumpScale: 1
     - _ColorMask: 15
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
     - _Diffuse: 0.5
+    - _DstBlend: 0
     - _FaceDilate: 0
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
     - _GlowInner: 0.05
     - _GlowOffset: 0
     - _GlowOuter: 0.05
@@ -60,19 +95,26 @@ Material:
     - _LightAngle: 3.1416
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
     - _OutlineWidth: 0
+    - _Parallax: 0.02
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 0.73125
-    - _ScaleRatioC: 0.2719412
+    - _ScaleRatioC: 0.73125
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
     - _SpecularPower: 2
+    - _SrcBlend: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -80,16 +122,20 @@ Material:
     - _StencilWriteMask: 255
     - _TextureHeight: 1024
     - _TextureWidth: 1024
-    - _UnderlayDilate: 0.689
+    - _UVSec: 0
+    - _UnderlayDilate: 0
     - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: -1
-    - _UnderlaySoftness: 1
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
     - _WeightBold: 0.75
     - _WeightNormal: 0
+    - _ZWrite: 1
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
@@ -98,7 +144,7 @@ Material:
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.497}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!28 &2846298
 Texture2D:
   m_ObjectHideFlags: 1
@@ -108,6 +154,8 @@ Texture2D:
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
   serializedVersion: 2
   m_Width: 1024
   m_Height: 1024
@@ -142,7 +190,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -667331979, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
+  m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: LiberationSans SDF
   m_EditorClassIdentifier: 
   hashCode: 231247347
@@ -1031,10 +1079,10 @@ MonoBehaviour:
   - id: 160
     x: 10
     y: 1033
-    width: 0
-    height: 0
+    width: 23.90625
+    height: 96.0625
     xOffset: 0
-    yOffset: 0
+    yOffset: 77.84375
     xAdvance: 23.90625
     scale: 1
   - id: 161
@@ -2425,336 +2473,1390 @@ MonoBehaviour:
     scale: 1
   m_kerningInfo:
     kerningPairs:
-    - AscII_Left: 32
-      AscII_Right: 65
-      XadvanceOffset: -4.745117
-    - AscII_Left: 32
-      AscII_Right: 89
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 32
-      AscII_Right: 84
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 87
-      AscII_Right: 97
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 87
-      AscII_Right: 65
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 87
-      AscII_Right: 101
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 87
-      AscII_Right: 121
-      XadvanceOffset: -0.7558594
-    - AscII_Left: 87
-      AscII_Right: 111
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 87
-      AscII_Right: 114
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 87
-      AscII_Right: 44
-      XadvanceOffset: -4.745117
-    - AscII_Left: 87
-      AscII_Right: 59
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 87
-      AscII_Right: 117
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 87
-      AscII_Right: 58
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 87
-      AscII_Right: 45
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 87
-      AscII_Right: 46
-      XadvanceOffset: -4.745117
-    - AscII_Left: 119
-      AscII_Right: 44
-      XadvanceOffset: -4.745117
-    - AscII_Left: 119
-      AscII_Right: 46
-      XadvanceOffset: -4.745117
-    - AscII_Left: 65
-      AscII_Right: 32
-      XadvanceOffset: -4.745117
-    - AscII_Left: 65
-      AscII_Right: 87
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 65
-      AscII_Right: 119
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 65
-      AscII_Right: 86
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 65
-      AscII_Right: 89
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 65
-      AscII_Right: 84
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 65
-      AscII_Right: 121
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 65
-      AscII_Right: 118
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 65
-      AscII_Right: 8217
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 86
-      AscII_Right: 97
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 86
-      AscII_Right: 65
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 86
-      AscII_Right: 101
-      XadvanceOffset: -4.745117
-    - AscII_Left: 86
-      AscII_Right: 121
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 86
-      AscII_Right: 105
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 86
-      AscII_Right: 111
-      XadvanceOffset: -4.745117
-    - AscII_Left: 86
-      AscII_Right: 114
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 86
-      AscII_Right: 44
-      XadvanceOffset: -7.8945312
-    - AscII_Left: 86
-      AscII_Right: 59
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 86
-      AscII_Right: 117
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 86
-      AscII_Right: 58
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 86
-      AscII_Right: 45
-      XadvanceOffset: -4.745117
-    - AscII_Left: 86
-      AscII_Right: 46
-      XadvanceOffset: -7.8945312
-    - AscII_Left: 89
-      AscII_Right: 32
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 89
-      AscII_Right: 97
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 89
-      AscII_Right: 65
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 89
-      AscII_Right: 101
-      XadvanceOffset: -7.8945312
-    - AscII_Left: 89
-      AscII_Right: 112
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 89
-      AscII_Right: 113
-      XadvanceOffset: -7.8945312
-    - AscII_Left: 89
-      AscII_Right: 118
-      XadvanceOffset: -4.745117
-    - AscII_Left: 89
-      AscII_Right: 105
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 89
-      AscII_Right: 111
-      XadvanceOffset: -7.8945312
-    - AscII_Left: 89
-      AscII_Right: 44
-      XadvanceOffset: -11.0859375
-    - AscII_Left: 89
-      AscII_Right: 59
-      XadvanceOffset: -5.584961
-    - AscII_Left: 89
-      AscII_Right: 117
-      XadvanceOffset: -4.745117
-    - AscII_Left: 89
-      AscII_Right: 58
-      XadvanceOffset: -4.745117
-    - AscII_Left: 89
-      AscII_Right: 45
-      XadvanceOffset: -7.8945312
-    - AscII_Left: 89
-      AscII_Right: 46
-      XadvanceOffset: -11.0859375
-    - AscII_Left: 82
-      AscII_Right: 87
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 82
-      AscII_Right: 86
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 82
-      AscII_Right: 89
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 82
-      AscII_Right: 84
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 84
-      AscII_Right: 32
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 84
-      AscII_Right: 97
-      XadvanceOffset: -9.532227
-    - AscII_Left: 84
-      AscII_Right: 99
-      XadvanceOffset: -9.532227
-    - AscII_Left: 84
-      AscII_Right: 79
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 84
-      AscII_Right: 119
-      XadvanceOffset: -4.745117
-    - AscII_Left: 84
-      AscII_Right: 65
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 84
-      AscII_Right: 101
-      XadvanceOffset: -9.532227
-    - AscII_Left: 84
-      AscII_Right: 121
-      XadvanceOffset: -4.745117
-    - AscII_Left: 84
-      AscII_Right: 105
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 84
-      AscII_Right: 111
-      XadvanceOffset: -9.532227
-    - AscII_Left: 84
-      AscII_Right: 114
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 84
-      AscII_Right: 115
-      XadvanceOffset: -9.532227
-    - AscII_Left: 84
-      AscII_Right: 44
-      XadvanceOffset: -9.532227
-    - AscII_Left: 84
-      AscII_Right: 59
-      XadvanceOffset: -9.532227
-    - AscII_Left: 84
-      AscII_Right: 117
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 84
-      AscII_Right: 58
-      XadvanceOffset: -9.532227
-    - AscII_Left: 84
-      AscII_Right: 45
-      XadvanceOffset: -4.745117
-    - AscII_Left: 84
-      AscII_Right: 46
-      XadvanceOffset: -9.532227
-    - AscII_Left: 80
-      AscII_Right: 32
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 80
-      AscII_Right: 65
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 80
-      AscII_Right: 44
-      XadvanceOffset: -11.0859375
-    - AscII_Left: 80
-      AscII_Right: 46
-      XadvanceOffset: -11.0859375
-    - AscII_Left: 49
-      AscII_Right: 49
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 121
-      AscII_Right: 44
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 121
-      AscII_Right: 46
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 70
-      AscII_Right: 65
-      XadvanceOffset: -4.745117
-    - AscII_Left: 70
-      AscII_Right: 44
-      XadvanceOffset: -9.532227
-    - AscII_Left: 70
-      AscII_Right: 46
-      XadvanceOffset: -9.532227
-    - AscII_Left: 118
-      AscII_Right: 44
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 118
-      AscII_Right: 46
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 102
-      AscII_Right: 102
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 102
-      AscII_Right: 8217
-      XadvanceOffset: 1.5537109
-    - AscII_Left: 76
-      AscII_Right: 32
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 76
-      AscII_Right: 87
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 76
-      AscII_Right: 86
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 76
-      AscII_Right: 89
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 76
-      AscII_Right: 84
-      XadvanceOffset: -6.3828125
-    - AscII_Left: 76
-      AscII_Right: 121
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 76
-      AscII_Right: 8217
-      XadvanceOffset: -4.745117
-    - AscII_Left: 114
-      AscII_Right: 44
-      XadvanceOffset: -4.745117
-    - AscII_Left: 114
-      AscII_Right: 46
-      XadvanceOffset: -4.745117
-    - AscII_Left: 114
-      AscII_Right: 8217
-      XadvanceOffset: 3.1914062
-    - AscII_Left: 8216
-      AscII_Right: 8216
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 8217
-      AscII_Right: 32
-      XadvanceOffset: -3.1914062
-    - AscII_Left: 8217
-      AscII_Right: 115
-      XadvanceOffset: -1.5537109
-    - AscII_Left: 8217
-      AscII_Right: 8217
-      XadvanceOffset: -1.5537109
+    - m_FirstGlyph: 32
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 65
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 32
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 89
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 32
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 84
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 97
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 65
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 101
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -0.7558594
+        yAdvance: 0
+      m_SecondGlyph: 121
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -0.7558594
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 111
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 114
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 59
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 117
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 58
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 45
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 87
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 119
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 119
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 32
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 87
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 119
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 86
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 89
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 84
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 121
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 118
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 65
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 8217
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 97
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 65
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 101
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 121
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 105
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 111
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 114
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -7.8945312
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -7.8945312
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 59
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 117
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 58
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 45
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 86
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -7.8945312
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -7.8945312
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 32
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 97
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 65
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -7.8945312
+        yAdvance: 0
+      m_SecondGlyph: 101
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -7.8945312
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 112
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -7.8945312
+        yAdvance: 0
+      m_SecondGlyph: 113
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -7.8945312
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 118
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 105
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -7.8945312
+        yAdvance: 0
+      m_SecondGlyph: 111
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -7.8945312
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -11.0859375
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -11.0859375
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -5.584961
+        yAdvance: 0
+      m_SecondGlyph: 59
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -5.584961
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 117
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 58
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -7.8945312
+        yAdvance: 0
+      m_SecondGlyph: 45
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -7.8945312
+    - m_FirstGlyph: 89
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -11.0859375
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -11.0859375
+    - m_FirstGlyph: 82
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 87
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 82
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 86
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 82
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 89
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 82
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 84
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 32
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 97
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 99
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 79
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 119
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 65
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 101
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 121
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 105
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 111
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 114
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 115
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 59
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 117
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 58
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 45
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 84
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 80
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 32
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 80
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 65
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 80
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -11.0859375
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -11.0859375
+    - m_FirstGlyph: 80
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -11.0859375
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -11.0859375
+    - m_FirstGlyph: 49
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 49
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 121
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 121
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 70
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 65
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 70
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 70
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -9.532227
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -9.532227
+    - m_FirstGlyph: 118
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 118
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 102
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 102
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 102
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 8217
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: 1.5537109
+    - m_FirstGlyph: 76
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 32
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 76
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 87
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 76
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 86
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 76
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 89
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 76
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -6.3828125
+        yAdvance: 0
+      m_SecondGlyph: 84
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -6.3828125
+    - m_FirstGlyph: 76
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 121
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 76
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 8217
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 114
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 44
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 114
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -4.745117
+        yAdvance: 0
+      m_SecondGlyph: 46
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -4.745117
+    - m_FirstGlyph: 114
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 8217
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: 3.1914062
+    - m_FirstGlyph: 8216
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 8216
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 8217
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -3.1914062
+        yAdvance: 0
+      m_SecondGlyph: 32
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -3.1914062
+    - m_FirstGlyph: 8217
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 115
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
+    - m_FirstGlyph: 8217
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: -1.5537109
+        yAdvance: 0
+      m_SecondGlyph: 8217
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: -1.5537109
   m_kerningPair:
-    AscII_Left: 0
-    AscII_Right: 0
-    XadvanceOffset: 0
+    m_FirstGlyph: 0
+    m_FirstGlyphAdjustments:
+      xPlacement: 0
+      yPlacement: 0
+      xAdvance: 0
+      yAdvance: 0
+    m_SecondGlyph: 0
+    m_SecondGlyphAdjustments:
+      xPlacement: 0
+      yPlacement: 0
+      xAdvance: 0
+      yAdvance: 0
+    xOffset: 0
   fallbackFontAssets: []
-  fontCreationSettings:
-    fontSourcePath: 
-    fontSizingMode: 0
-    fontSize: 0
-    fontPadding: 0
-    fontPackingMode: 0
-    fontAtlasWidth: 0
-    fontAtlasHeight: 0
-    fontCharacterSet: 0
+  m_CreationSettings:
+    sourceFontFileName: 
+    sourceFontFileGUID: e3265ab4bf004d28a9537516768c1c75
+    pointSizeSamplingMode: 1
+    pointSize: 86
+    padding: 9
+    packingMode: 4
+    atlasWidth: 1024
+    atlasHeight: 1024
+    characterSetSelectionMode: 1
+    characterSequence: 32 - 126, 160 - 255, 8192 - 8303, 8364, 8482, 9633
+    referencedFontAssetGUID: 
+    referencedTextAssetGUID: 
     fontStyle: 0
-    fontStlyeModifier: 0
-    fontRenderMode: 0
-    fontKerning: 0
+    fontStyleModifier: 2
+    renderMode: 7
+    includeFontFeatures: 0
   fontWeights:
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}

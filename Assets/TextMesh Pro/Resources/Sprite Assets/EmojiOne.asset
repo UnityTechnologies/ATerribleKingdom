@@ -7,49 +7,32 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: TextMeshPro/Sprite
-  m_Shader: {fileID: 4800000, guid: 3a1c68c8292caf046bd21158886c5e40, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
+  m_ShaderKeywords: UNITY_UI_CLIP_RECT
   m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 2800000, guid: 6ec706981a919c3489f0b061a40054e2, type: 3}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - first:
-        name: _ColorMask
-      second: 15
-    - first:
-        name: _Stencil
-      second: 0
-    - first:
-        name: _StencilComp
-      second: 8
-    - first:
-        name: _StencilOp
-      second: 0
-    - first:
-        name: _StencilReadMask
-      second: 255
-    - first:
-        name: _StencilWriteMask
-      second: 255
-    - first:
-        name: _UseUIAlphaClip
-      second: 0
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
     m_Colors:
-    - first:
-        name: _ClipRect
-      second: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,13 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2019389346, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
+  m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
   m_Name: EmojiOne
   m_EditorClassIdentifier: 
   hashCode: -1836805472
   material: {fileID: 2103686}
   materialHashCode: 0
-  spriteSheet: {fileID: 2800000, guid: 6ec706981a919c3489f0b061a40054e2, type: 3}
+  spriteSheet: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
   spriteInfoList:
   - id: 0
     x: 0
@@ -75,8 +58,8 @@ MonoBehaviour:
     yOffset: 115.6
     xAdvance: 128
     scale: 1
-    name: 1f60a
-    hashCode: 57188336
+    name: Smiling face with smiling eyes
+    hashCode: -1318250903
     unicode: 128522
     pivot: {x: 0.5, y: 0.5}
     sprite: {fileID: 0}
@@ -131,8 +114,8 @@ MonoBehaviour:
     yOffset: 115.6
     xAdvance: 128
     scale: 1
-    name: 1f600
-    hashCode: 57188257
+    name: Grinning face
+    hashCode: -95541379
     unicode: 128512
     pivot: {x: 0.5, y: 0.5}
     sprite: {fileID: 0}
@@ -159,8 +142,8 @@ MonoBehaviour:
     yOffset: 115.6
     xAdvance: 128
     scale: 1
-    name: 1f602
-    hashCode: 57188259
+    name: Face with tears of joy
+    hashCode: 239522663
     unicode: 128514
     pivot: {x: 0.5, y: 0.5}
     sprite: {fileID: 0}
@@ -298,13 +281,16 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: TextMeshPro/Sprite
-  m_Shader: {fileID: 4800000, guid: 3a1c68c8292caf046bd21158886c5e40, type: 3}
+  m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TexEnvs: []
     m_Floats: []
     m_Colors: []

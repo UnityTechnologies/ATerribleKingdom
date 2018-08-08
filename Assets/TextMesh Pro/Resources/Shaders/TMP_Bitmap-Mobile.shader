@@ -49,6 +49,10 @@ SubShader {
 		#pragma fragment frag
 		#pragma fragmentoption ARB_precision_hint_fastest
 
+		#pragma multi_compile __ UNITY_UI_CLIP_RECT
+		#pragma multi_compile __ UNITY_UI_ALPHACLIP
+
+
 		#include "UnityCG.cginc"
 
 		struct appdata_t {
@@ -75,53 +79,46 @@ SubShader {
 		uniform float		_MaskSoftnessX;
 		uniform float		_MaskSoftnessY;
 
-		#if UNITY_VERSION < 530
-			bool _UseClipRect;
-		#endif
-
 		v2f vert (appdata_t v)
 		{
-			v2f o;
+			v2f OUT;
 			float4 vert = v.vertex;
 			vert.x += _VertexOffsetX;
 			vert.y += _VertexOffsetY;
 
 			vert.xy += (vert.w * 0.5) / _ScreenParams.xy;
 
-			o.vertex = UnityPixelSnap(UnityObjectToClipPos(vert));
-			o.color = v.color;
-			o.color *= _Color;
-			o.color.rgb *= _DiffusePower;
-			o.texcoord0 = v.texcoord0;
+			OUT.vertex = UnityPixelSnap(UnityObjectToClipPos(vert));
+			OUT.color = v.color;
+			OUT.color *= _Color;
+			OUT.color.rgb *= _DiffusePower;
+			OUT.texcoord0 = v.texcoord0;
 
-			float2 pixelSize = o.vertex.w;
+			float2 pixelSize = OUT.vertex.w;
 			//pixelSize /= abs(float2(_ScreenParams.x * UNITY_MATRIX_P[0][0], _ScreenParams.y * UNITY_MATRIX_P[1][1]));
 
 			// Clamp _ClipRect to 16bit.
 			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
-			o.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
+			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 
-			return o;
+			return OUT;
 		}
 
-		fixed4 frag (v2f i) : COLOR
+		fixed4 frag (v2f IN) : COLOR
 		{
-			fixed4 c = fixed4(i.color.rgb, i.color.a * tex2D(_MainTex, i.texcoord0).a);
+			fixed4 color = fixed4(IN.color.rgb, IN.color.a * tex2D(_MainTex, IN.texcoord0).a);
 
-			#if UNITY_VERSION < 530
-				if (_UseClipRect)
-				{
-					// Alternative implementation to UnityGet2DClipping with support for softness.
-					half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(i.mask.xy)) * i.mask.zw);
-					c *= m.x * m.y;
-				}
-			#else
-				// Alternative implementation to UnityGet2DClipping with support for softness.
-				half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(i.mask.xy)) * i.mask.zw);
-				c *= m.x * m.y;
+			// Alternative implementation to UnityGet2DClipping with support for softness.
+			#if UNITY_UI_CLIP_RECT
+				half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(IN.mask.xy)) * IN.mask.zw);
+				color *= m.x * m.y;
 			#endif
-
-			return c;
+			
+			#if UNITY_UI_ALPHACLIP
+				clip(color.a - 0.001);
+			#endif
+			
+			return color;
 		}
 		ENDCG
 	}

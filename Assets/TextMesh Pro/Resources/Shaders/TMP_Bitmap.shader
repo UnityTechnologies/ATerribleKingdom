@@ -48,12 +48,11 @@ SubShader{
 		#pragma vertex vert
 		#pragma fragment frag
 
+		#pragma multi_compile __ UNITY_UI_CLIP_RECT
+		#pragma multi_compile __ UNITY_UI_ALPHACLIP
+
+
 		#include "UnityCG.cginc"
-
-
-	#if UNITY_VERSION < 530
-		bool _UseClipRect;
-	#endif
 
 		struct appdata_t {
 			float4 vertex		: POSITION;
@@ -63,7 +62,7 @@ SubShader{
 		};
 
 		struct v2f {
-			float4	vertex		: POSITION;
+			float4	vertex		: SV_POSITION;
 			fixed4	color		: COLOR;
 			float2	texcoord0	: TEXCOORD0;
 			float2	texcoord1	: TEXCOORD1;
@@ -90,9 +89,9 @@ SubShader{
 			return output * 0.001953125;
 		}
 
-		v2f vert (appdata_t i)
+		v2f vert (appdata_t v)
 		{
-			float4 vert = i.vertex;
+			float4 vert = v.vertex;
 			vert.x += _VertexOffsetX;
 			vert.y += _VertexOffsetY;
 
@@ -100,45 +99,40 @@ SubShader{
 
 			float4 vPosition = UnityPixelSnap(UnityObjectToClipPos(vert));
 
-			fixed4 faceColor = i.color;
+			fixed4 faceColor = v.color;
 			faceColor *= _FaceColor;
 
-			v2f o;
-			o.vertex = vPosition;
-			o.color = faceColor;
-			o.texcoord0 = i.texcoord0;
-			o.texcoord1 = TRANSFORM_TEX(UnpackUV(i.texcoord1), _FaceTex);
+			v2f OUT;
+			OUT.vertex = vPosition;
+			OUT.color = faceColor;
+			OUT.texcoord0 = v.texcoord0;
+			OUT.texcoord1 = TRANSFORM_TEX(UnpackUV(v.texcoord1), _FaceTex);
 			float2 pixelSize = vPosition.w;
 			pixelSize /= abs(float2(_ScreenParams.x * UNITY_MATRIX_P[0][0], _ScreenParams.y * UNITY_MATRIX_P[1][1]));
 
 			// Clamp _ClipRect to 16bit.
 			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
-			o.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
+			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 			
-			return o;
+			return OUT;
 		}
 
-		fixed4 frag (v2f i) : COLOR
+		fixed4 frag (v2f IN) : SV_Target
 		{
-			//fixed4 c = tex2D(_MainTex, i.texcoord0) * tex2D(_FaceTex, i.texcoord1) * i.color;
-			
-			fixed4 c = tex2D(_MainTex, i.texcoord0);
-			c = fixed4 (tex2D(_FaceTex, i.texcoord1).rgb * i.color.rgb, i.color.a * c.a);
+			fixed4 color = tex2D(_MainTex, IN.texcoord0);
+			color = fixed4 (tex2D(_FaceTex, IN.texcoord1).rgb * IN.color.rgb, IN.color.a * color.a);
 
-			#if UNITY_VERSION < 530
-				if (_UseClipRect)
-				{
-					// Alternative implementation to UnityGet2DClipping with support for softness.
-					half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(i.mask.xy)) * i.mask.zw);
-					c *= m.x * m.y;
-				}
-			#else
-				// Alternative implementation to UnityGet2DClipping with support for softness.
-				half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(i.mask.xy)) * i.mask.zw);
-				c *= m.x * m.y;
+			// Alternative implementation to UnityGet2DClipping with support for softness.
+			#if UNITY_UI_CLIP_RECT
+				half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(IN.mask.xy)) * IN.mask.zw);
+				color *= m.x * m.y;
 			#endif
 
-			return c;
+			#if UNITY_UI_ALPHACLIP
+				clip(color.a - 0.001);
+			#endif
+
+			return color;
 		}
 		ENDCG
 	}

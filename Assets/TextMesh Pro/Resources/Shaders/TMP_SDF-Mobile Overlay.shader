@@ -84,6 +84,9 @@ SubShader {
 		#pragma shader_feature __ OUTLINE_ON
 		#pragma shader_feature __ UNDERLAY_ON UNDERLAY_INNER
 
+		#pragma multi_compile __ UNITY_UI_CLIP_RECT
+		#pragma multi_compile __ UNITY_UI_ALPHACLIP
+
 		#include "UnityCG.cginc"
 		#include "UnityUI.cginc"
 		#include "TMPro_Properties.cginc"
@@ -202,21 +205,18 @@ SubShader {
 			c += float4(_UnderlayColor.rgb * _UnderlayColor.a, _UnderlayColor.a) * (1 - saturate(d - input.underlayParam.y)) * sd * (1 - c.a);
 		#endif
 
-		#if UNITY_VERSION < 530
-			// Unity 5.2 2D Rect Mask Support
-			if (_UseClipRect)
-			{
-				half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(input.mask.xy)) * input.mask.zw);
-				c *= m.x * m.y;
-			}
-		#else
-			// Alternative implementation to UnityGet2DClipping with support for softness.
+		// Alternative implementation to UnityGet2DClipping with support for softness.
+		#if UNITY_UI_CLIP_RECT
 			half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(input.mask.xy)) * input.mask.zw);
 			c *= m.x * m.y;
 		#endif
 
 		#if (UNDERLAY_ON | UNDERLAY_INNER)
 			c *= input.texcoord1.z;
+		#endif
+
+    #if UNITY_UI_ALPHACLIP
+			clip(c.a - 0.001);
 		#endif
 
 			return c;

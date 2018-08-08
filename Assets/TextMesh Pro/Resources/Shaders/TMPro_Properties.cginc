@@ -71,10 +71,6 @@ uniform float4		_ClipRect;	// bottom left(x,y) : top right(z,w)
 //uniform fixed4		_MaskEdgeColor;
 //uniform bool		_MaskInverse;
 
-#if UNITY_VERSION < 530
-uniform bool _UseClipRect;
-#endif
-
 uniform float		_MaskSoftnessX;
 uniform float		_MaskSoftnessY;
 
