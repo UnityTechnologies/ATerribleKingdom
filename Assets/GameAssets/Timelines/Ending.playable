@@ -3,51 +3,49 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 337831424, guid: 844f815391db42d49455cbf1a7bfc434, type: 3}
-  m_Name: Pallisade_Normal
+  m_Script: {fileID: 337831424, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Name: Ending
   m_EditorClassIdentifier: 
-  m_Id: 0
-  m_NextId: 1
+  m_NextId: 0
   m_Tracks:
-  - {fileID: 114097839610837462}
+  - {fileID: 114150777561089896}
   m_FixedDuration: 0
   m_EditorSettings:
-    fps: 60
-  m_UpdateMode: 0
-  m_ParameterName: 
+    m_Framerate: 60
   m_DurationMode: 0
---- !u!114 &114024618279628190
+  m_Version: 0
+--- !u!114 &114066039946425712
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 844f815391db42d49455cbf1a7bfc434, type: 3}
-  m_Name: ActivationPlayableAsset
+  m_Script: {fileID: 11500000, guid: 90fb794a295e73545af71bcdb7375791, type: 3}
+  m_Name: CinemachineShot
   m_EditorClassIdentifier: 
---- !u!114 &114097839610837462
+  VirtualCamera:
+    exposedName: ed3c322d80a1847339d790b20bfa0ccd
+    defaultValue: {fileID: 0}
+--- !u!114 &114150777561089896
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 46519060, guid: 844f815391db42d49455cbf1a7bfc434, type: 3}
-  m_Name: Activation Track
+  m_Script: {fileID: 11500000, guid: 05acc715f855ced458d76ee6f8ac6c61, type: 3}
+  m_Name: Cinemachine Track
   m_EditorClassIdentifier: 
   m_Locked: 0
   m_Muted: 0
-  m_Soloed: 0
-  m_Height: 0
-  m_InlineAnimationCurveHeight: 100
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 11400000}
@@ -55,55 +53,59 @@ MonoBehaviour:
   m_Clips:
   - m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 114024618279628190}
-    m_UnderlyingAsset: {fileID: 114024618279628190}
-    m_Duration: 5
-    m_ParentID: 0
+    m_Asset: {fileID: 114066039946425712}
+    m_Duration: 7.8
     m_TimeScale: 1
-    m_BlendCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ParentTrack: {fileID: 114097839610837462}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_ParentTrack: {fileID: 114150777561089896}
+    m_EaseInDuration: 2.19
+    m_EaseOutDuration: 1.62
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
         time: 1
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -111,11 +113,11 @@ MonoBehaviour:
     m_BlendOutCurveMode: 0
     m_ExposedParameterNames: []
     m_AnimationCurves: {fileID: 0}
-    m_ID: -363327
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Active
-  m_PostPlaybackState: 0
+    m_DisplayName: Top View
+    m_Version: 1
+  m_Version: 1

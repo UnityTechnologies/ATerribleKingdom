@@ -20,6 +20,7 @@ public class CameraManager : Singleton<CameraManager>
 		//Instantiate a copy of the FreeLook VCam pointing at the dummy,
 		//and use it to point at the group
 		groupFreeLook = Instantiate<GameObject>(dummyFreeLook.gameObject).GetComponent<CinemachineFreeLook>();
+		groupFreeLook.name = "FreeLook TargetGroup";
 		groupFreeLook.transform.SetParent(this.transform, true);
 		groupFreeLook.LookAt = targetGroup.transform;
 		groupFreeLook.Follow = targetGroup.transform;
@@ -84,7 +85,7 @@ public class CameraManager : Singleton<CameraManager>
 			CinemachineBlend blend = cmBrain.ActiveBlend;
 			if(blend != null)
 			{
-				//Mid-way through the blend, we get the in-between position
+				//a blend is in progress, we get the in-between position
 				gameplayDummy.localPosition = Vector3.Lerp(gameplayDummy.localPosition, targetGroup.transform.localPosition, blend.BlendWeight);
 			}
 			else
