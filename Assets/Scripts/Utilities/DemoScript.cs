@@ -6,7 +6,6 @@ public class DemoScript : MonoBehaviour
 {
 	public GameObject testUnits, testMonsters;
 	public GameObject flashbackTimeline, stormTimeline, aicommandTimeline;
-	public GameObject normalCamera, flashbackCamera;
 	public GameObject dialoguePanel;
 
 
@@ -22,9 +21,6 @@ public class DemoScript : MonoBehaviour
 			stormTimeline.SetActive(false);
 			aicommandTimeline.SetActive(false);
 
-			normalCamera.SetActive(true);
-			flashbackCamera.SetActive(false);
-
 			dialoguePanel.SetActive(false);
 		}
 
@@ -37,9 +33,6 @@ public class DemoScript : MonoBehaviour
 			flashbackTimeline.SetActive(true);
 			stormTimeline.SetActive(false);
 			aicommandTimeline.SetActive(false);
-
-			normalCamera.SetActive(false);
-			flashbackCamera.SetActive(true);
 
 			//dialoguePanel.SetActive(false);
 		}
@@ -54,9 +47,6 @@ public class DemoScript : MonoBehaviour
 			stormTimeline.SetActive(true);
 			aicommandTimeline.SetActive(false);
 
-			normalCamera.SetActive(true);
-			flashbackCamera.SetActive(false);
-
 			dialoguePanel.SetActive(false);
 		}
 
@@ -69,9 +59,6 @@ public class DemoScript : MonoBehaviour
 			flashbackTimeline.SetActive(false);
 			stormTimeline.SetActive(false);
 			aicommandTimeline.SetActive(true);
-
-			normalCamera.SetActive(true);
-			flashbackCamera.SetActive(false);
 
 			dialoguePanel.SetActive(false);
 		}

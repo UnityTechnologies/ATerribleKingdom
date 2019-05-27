@@ -98,7 +98,7 @@ public class GameManager : Singleton<GameManager>
 	public void PauseTimeline(PlayableDirector whichOne)
 	{
 		activeDirector = whichOne;
-		activeDirector.Pause();
+		activeDirector.playableGraph.GetRootPlayable(0).SetSpeed(0d);
 		gameMode = GameMode.DialogueMoment; //InputManager will be waiting for a spacebar to resume
 		UIManager.Instance.TogglePressSpacebarMessage(true);
 	}
@@ -108,7 +108,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		UIManager.Instance.TogglePressSpacebarMessage(false);
 		UIManager.Instance.ToggleDialoguePanel(false);
-		activeDirector.Resume();
+		activeDirector.playableGraph.GetRootPlayable(0).SetSpeed(1d);
 		gameMode = GameMode.Gameplay;
 	}
 
