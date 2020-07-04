@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 337831424, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
   m_Name: ShortStorm
   m_EditorClassIdentifier: 
-  m_NextId: 12
+  m_Version: 0
   m_Tracks:
   - {fileID: 114034453818928170}
   - {fileID: 114544135198728540}
@@ -26,7 +26,7 @@ MonoBehaviour:
   m_EditorSettings:
     m_Framerate: 60
   m_DurationMode: 0
-  m_Version: 0
+  m_MarkerTrack: {fileID: 0}
 --- !u!74 &74765413553365930
 AnimationClip:
   m_ObjectHideFlags: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -327,14 +327,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05acc715f855ced458d76ee6f8ac6c61, type: 3}
   m_Name: Cinemachine Track
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0
+  - m_Version: 1
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114296948741561896}
     m_Duration: 1.4166666666666667
@@ -411,8 +414,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: FreeLook
-    m_Version: 1
-  - m_Start: 1.4166666666666667
+  - m_Version: 1
+    m_Start: 1.4166666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 114068416607602396}
     m_Duration: 2.1333333333333337
@@ -480,8 +483,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: IntroVCam
-    m_Version: 1
-  - m_Start: 3.045907465616862
+  - m_Version: 1
+    m_Start: 3.045907465616862
     m_ClipIn: 0
     m_Asset: {fileID: 114091454755264910}
     m_Duration: 2.066666666666667
@@ -558,8 +561,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: IntroVCam2
-    m_Version: 1
-  - m_Start: 4.766666666666667
+  - m_Version: 1
+    m_Start: 4.766666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 114340996461093742}
     m_Duration: 1.4833333333333334
@@ -645,8 +648,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: IntroVCam2 (1)
-    m_Version: 1
-  - m_Start: 5.966666666666667
+  - m_Version: 1
+    m_Start: 5.966666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 114579280552302900}
     m_Duration: 2.6166666666666676
@@ -723,8 +726,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: FreeLook
-    m_Version: 1
-  - m_Start: 23.483333333333334
+  - m_Version: 1
+    m_Start: 23.483333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114012971324181462}
     m_Duration: 8.31666666666667
@@ -792,8 +795,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: OutroVCam
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114056993475025598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -803,17 +806,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1095772578, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
   m_Name: Lightning (1)
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114637698480625436}
   m_Children: []
   m_Clips:
-  - m_Start: 9.816666666666666
+  - m_Version: 1
+    m_Start: 9.816666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114550365336360650}
     m_Duration: 2
@@ -881,8 +887,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 16.365806579589844
+  - m_Version: 1
+    m_Start: 16.365806579589844
     m_ClipIn: 0
     m_Asset: {fileID: 114954207453626874}
     m_Duration: 2
@@ -950,8 +956,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114068416607602396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1021,7 +1027,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
   m_Name: ActivationPlayableAsset
   m_EditorClassIdentifier: 
 --- !u!114 &114163212544713780
@@ -1051,14 +1057,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058e7c09319074f5b956e0776497a51e, type: 3}
   m_Name: Light Track
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114625630045295032}
   m_Children: []
   m_Clips:
-  - m_Start: 0
+  - m_Version: 1
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114589414272082410}
     m_Duration: 9.816666666666666
@@ -1126,8 +1135,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
-    m_Version: 1
-  - m_Start: 3.433333333333333
+  - m_Version: 1
+    m_Start: 3.433333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 114604666158350650}
     m_Duration: 25.316666666666666
@@ -1195,8 +1204,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
-    m_Version: 1
-  - m_Start: 23.483333333333334
+  - m_Version: 1
+    m_Start: 23.483333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114309986658918788}
     m_Duration: 8.266666666666673
@@ -1208,7 +1217,25 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1246,8 +1273,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114216567722098668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1330,7 +1357,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -1354,7 +1381,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
   m_Name: ActivationPlayableAsset
   m_EditorClassIdentifier: 
 --- !u!114 &114323469114673532
@@ -1366,19 +1393,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1544527758, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: d0fc6f5187a81dc47999eefade6f0935, type: 3}
   m_Name: Rain
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children:
   - {fileID: 114685336126772512}
   - {fileID: 114359556552657072}
   m_Clips: []
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114340996461093742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1403,17 +1433,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 46519060, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 21bf7f712d84d26478ebe6a299f21738, type: 3}
   m_Name: Activation Track
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114323469114673532}
   m_Children: []
   m_Clips:
-  - m_Start: 0.7166666666666667
+  - m_Version: 1
+    m_Start: 0.7166666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 114921570674172246}
     m_Duration: 31.083333333333332
@@ -1481,8 +1514,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
   m_PostPlaybackState: 0
 --- !u!114 &114385420193841428
 MonoBehaviour:
@@ -1493,7 +1526,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -1532,17 +1565,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1095772578, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
   m_Name: Lightning (2)
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114637698480625436}
   m_Children: []
   m_Clips:
-  - m_Start: 3.3666666666666667
+  - m_Version: 1
+    m_Start: 3.3666666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 114995460600841870}
     m_Duration: 2
@@ -1610,8 +1646,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 12.650000000000002
+  - m_Version: 1
+    m_Start: 12.650000000000002
     m_ClipIn: 0
     m_Asset: {fileID: 114489432551638952}
     m_Duration: 2
@@ -1679,8 +1715,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 23.450000000000003
+  - m_Version: 1
+    m_Start: 23.450000000000003
     m_ClipIn: 0
     m_Asset: {fileID: 114930455719776274}
     m_Duration: 2
@@ -1748,8 +1784,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114437744134725718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1759,7 +1795,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -1783,7 +1819,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -1807,7 +1843,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -1831,7 +1867,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -1854,17 +1890,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1095772578, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
   m_Name: Soundtrack
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0
+  - m_Version: 1
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114200657957701802, guid: 527be7f6cd00941cf8edd82c8ca542f3,
       type: 2}
@@ -1933,8 +1972,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Soundtrack
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114550365336360650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1944,7 +1983,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -2016,14 +2055,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058e7c09319074f5b956e0776497a51e, type: 3}
   m_Name: Light Track (1)
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114625630045295032}
   m_Children: []
   m_Clips:
-  - m_Start: 3.3333333333333335
+  - m_Version: 1
+    m_Start: 3.3333333333333335
     m_ClipIn: 0
     m_Asset: {fileID: 114421195159034306}
     m_Duration: 0.6
@@ -2091,8 +2133,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
-    m_Version: 1
-  - m_Start: 5.133333333333334
+  - m_Version: 1
+    m_Start: 5.133333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114085068661753330}
     m_Duration: 0.6
@@ -2160,8 +2202,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
-    m_Version: 1
-  - m_Start: 8.85
+  - m_Version: 1
+    m_Start: 8.85
     m_ClipIn: 0
     m_Asset: {fileID: 114266289027372664}
     m_Duration: 0.6
@@ -2229,8 +2271,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
-    m_Version: 1
-  - m_Start: 24.85
+  - m_Version: 1
+    m_Start: 24.85
     m_ClipIn: 0
     m_Asset: {fileID: 114866919569270906}
     m_Duration: 0.6
@@ -2298,8 +2340,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
-    m_Version: 1
-  - m_Start: 27.25
+  - m_Version: 1
+    m_Start: 27.25
     m_ClipIn: 0
     m_Asset: {fileID: 114073409294657822}
     m_Duration: 0.6
@@ -2367,8 +2409,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: LightClip
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114625630045295032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2378,19 +2420,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1544527758, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: d0fc6f5187a81dc47999eefade6f0935, type: 3}
   m_Name: Lights
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children:
   - {fileID: 114177411146370420}
   - {fileID: 114611036165182280}
   m_Clips: []
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114627745054360690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2400,7 +2445,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -2424,13 +2469,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1544527758, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: d0fc6f5187a81dc47999eefade6f0935, type: 3}
   m_Name: Lightning
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children:
   - {fileID: 114668232549374828}
@@ -2439,7 +2486,8 @@ MonoBehaviour:
   - {fileID: 114860882385382232}
   - {fileID: 114708810740825532}
   m_Clips: []
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114654433427783384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2477,17 +2525,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1095772578, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
   m_Name: Lightning
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114637698480625436}
   m_Children: []
   m_Clips:
-  - m_Start: 4.25
+  - m_Version: 1
+    m_Start: 4.25
     m_ClipIn: 0
     m_Asset: {fileID: 114385420193841428}
     m_Duration: 2
@@ -2555,8 +2606,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 6.25
+  - m_Version: 1
+    m_Start: 6.25
     m_ClipIn: 0
     m_Asset: {fileID: 114317898191539520}
     m_Duration: 2
@@ -2624,8 +2675,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 11.183333333333334
+  - m_Version: 1
+    m_Start: 11.183333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114030296486929190}
     m_Duration: 2
@@ -2693,8 +2744,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 15.133333333333338
+  - m_Version: 1
+    m_Start: 15.133333333333338
     m_ClipIn: 0
     m_Asset: {fileID: 114957246225241764}
     m_Duration: 2
@@ -2762,8 +2813,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114685336126772512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2773,30 +2824,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1467732076, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: d21dcc2386d650c4597f3633c75a1f98, type: 3}
   m_Name: Animation Track
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 74765413553365930}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114323469114673532}
   m_Children: []
   m_Clips: []
-  m_Version: 2
-  m_OpenClipPreExtrapolation: 1
-  m_OpenClipPostExtrapolation: 1
-  m_OpenClipOffsetPosition: {x: 0, y: 0, z: 0}
-  m_OpenClipOffsetEulerAngles: {x: -0, y: 0, z: 0}
-  m_OpenClipTimeOffset: 0
-  m_OpenClipRemoveOffset: 0
+  m_Markers:
+    m_Objects: []
+  m_InfiniteClipPreExtrapolation: 1
+  m_InfiniteClipPostExtrapolation: 1
+  m_InfiniteClipOffsetPosition: {x: 0, y: 0, z: 0}
+  m_InfiniteClipOffsetEulerAngles: {x: -0, y: 0, z: 0}
+  m_InfiniteClipTimeOffset: 0
+  m_InfiniteClipRemoveOffset: 0
   m_InfiniteClipApplyFootIK: 1
+  mInfiniteClipLoop: 0
   m_MatchTargetFields: 63
   m_Position: {x: 0, y: 0, z: 0}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_AvatarMask: {fileID: 0}
   m_ApplyAvatarMask: 1
   m_TrackOffset: 2
+  m_InfiniteClip: {fileID: 74765413553365930}
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
@@ -2809,17 +2865,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1095772578, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
   m_Name: Lightning (4)
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114637698480625436}
   m_Children: []
   m_Clips:
-  - m_Start: 11.183333333333334
+  - m_Version: 1
+    m_Start: 11.183333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114867160452247526}
     m_Duration: 2
@@ -2887,8 +2946,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 19.233333333333334
+  - m_Version: 1
+    m_Start: 19.233333333333334
     m_ClipIn: 0
     m_Asset: {fileID: 114437744134725718}
     m_Duration: 2
@@ -2956,8 +3015,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114717863532263950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2967,7 +3026,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
   m_Name: ActivationPlayableAsset
   m_EditorClassIdentifier: 
 --- !u!114 &114755118725030242
@@ -2979,17 +3038,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1095772578, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
   m_Name: Control Track
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0
+  - m_Version: 1
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114524745552696322}
     m_Duration: 34.8
@@ -3057,8 +3119,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: ControlPlayableAsset
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114780828330683744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3068,7 +3130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -3095,14 +3157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953ed7aca09b34401900d5e2a9d9b5ac, type: 3}
   m_Name: Time Machine Track
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 10.516666666666666
+  - m_Version: 1
+    m_Start: 10.516666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114216567722098668}
     m_Duration: 4.166666666666667
@@ -3170,8 +3235,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: "\u25CF AfterIntro"
-    m_Version: 1
-  - m_Start: 22.716666666666665
+  - m_Version: 1
+    m_Start: 22.716666666666665
     m_ClipIn: 0
     m_Asset: {fileID: 114654433427783384}
     m_Duration: 8.666666666665996
@@ -3239,8 +3304,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: "\u21A9\uFE0E  AfterIntro"
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114860882385382232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3250,17 +3315,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1095772578, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
   m_Name: Lightning (3)
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 114637698480625436}
   m_Children: []
   m_Clips:
-  - m_Start: 7.816666666666666
+  - m_Version: 1
+    m_Start: 7.816666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 114478022042475616}
     m_Duration: 2
@@ -3328,8 +3396,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 14.066666666666668
+  - m_Version: 1
+    m_Start: 14.066666666666668
     m_ClipIn: 0
     m_Asset: {fileID: 114627745054360690}
     m_Duration: 2
@@ -3397,8 +3465,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  - m_Start: 25.25
+  - m_Version: 1
+    m_Start: 25.25
     m_ClipIn: 0
     m_Asset: {fileID: 114780828330683744}
     m_Duration: 2
@@ -3466,8 +3534,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Thunder
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
 --- !u!114 &114866919569270906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3492,7 +3560,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -3516,17 +3584,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 46519060, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 21bf7f712d84d26478ebe6a299f21738, type: 3}
   m_Name: Activation Track
   m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
   m_Locked: 0
   m_Muted: 0
   m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 0}
+  m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 6.25
+  - m_Version: 1
+    m_Start: 6.25
     m_ClipIn: 0
     m_Asset: {fileID: 114134571617245092}
     m_Duration: 17.233333333333334
@@ -3594,8 +3665,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
-    m_Version: 1
-  - m_Start: 31.8
+  - m_Version: 1
+    m_Start: 31.8
     m_ClipIn: 0
     m_Asset: {fileID: 114318044704020930}
     m_Duration: 2.9999999999999964
@@ -3663,8 +3734,8 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Active
-    m_Version: 1
-  m_Version: 2
+  m_Markers:
+    m_Objects: []
   m_PostPlaybackState: 0
 --- !u!114 &114921570674172246
 MonoBehaviour:
@@ -3675,7 +3746,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 442072544, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
   m_Name: ActivationPlayableAsset
   m_EditorClassIdentifier: 
 --- !u!114 &114930455719776274
@@ -3687,7 +3758,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -3711,7 +3782,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -3735,7 +3806,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
@@ -3759,7 +3830,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: 
   sourceGameObject:
