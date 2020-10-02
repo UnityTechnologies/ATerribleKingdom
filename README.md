@@ -4,7 +4,7 @@
 
 ## Description
 
-This project remixes the A Mighty Kingdom assets into a classic RTS game, to provide 3 examples of Scripting the Timeline in creative ways. The project goes together with the presentation Scripting for Timeline.
+This project remixes the A Mighty Kingdom assets into a classic RTS game, to provide 3 examples of Scripting the Timeline in a creative ways. The project goes together with the presentation Scripting for Timeline.
 
 The whole demo is about Timeline, but a simple RTS game has been built to provide context to the Timelines. A semi-complex Cinemachine solution is also in the scene, made of two different FreeLook rigs, using GroupTarget and a dummy object to allow moving the camera with keys. The demo also uses Post-Processing Stack v1 and Navigation.
 
