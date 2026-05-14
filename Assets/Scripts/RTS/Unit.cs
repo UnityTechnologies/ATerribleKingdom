@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
 
 	public UnityAction<Unit> OnDie;
 
-	void Awake ()
+	void Awake()
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
@@ -42,28 +42,28 @@ public class Unit : MonoBehaviour
 		SetSelected(false);
 		Guard();
 	}
-	
+
 	void Update()
 	{
 		//Little hack to give time to the NavMesh agent to set its destination.
 		//without this, the Unit would switch its state before the NavMeshAgent can kick off, leading to unpredictable results
-		if(!isReady)
+		if (!isReady)
 		{
 			isReady = true;
 			return;
 		}
 
-		switch(state)
+		switch (state)
 		{
 			case UnitState.MovingToSpotIdle:
-				if(navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance + .1f)
+				if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance + .1f)
 				{
 					Stop();
 				}
 				break;
 
 			case UnitState.MovingToSpotGuard:
-				if(navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance + .1f)
+				if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance + .1f)
 				{
 					Guard();
 				}
@@ -71,14 +71,14 @@ public class Unit : MonoBehaviour
 
 			case UnitState.MovingToTarget:
 				//check if target has been killed by somebody else
-				if(IsDeadOrNull(targetOfAttack))
+				if (IsDeadOrNull(targetOfAttack))
 				{
 					Guard();
 				}
 				else
 				{
 					//Check for distance from target
-					if(navMeshAgent.remainingDistance < template.engageDistance)
+					if (navMeshAgent.remainingDistance < template.engageDistance)
 					{
 						navMeshAgent.velocity = Vector3.zero;
 						StartAttacking();
@@ -92,11 +92,11 @@ public class Unit : MonoBehaviour
 				break;
 
 			case UnitState.Guarding:
-				if(Time.time > lastGuardCheckTime + guardCheckInterval)
+				if (Time.time > lastGuardCheckTime + guardCheckInterval)
 				{
 					lastGuardCheckTime = Time.time;
 					Unit t = GetNearestHostileUnit();
-					if(t != null)
+					if (t != null)
 					{
 						MoveToAttack(t);
 					}
@@ -104,7 +104,7 @@ public class Unit : MonoBehaviour
 				break;
 			case UnitState.Attacking:
 				//check if target has been killed by somebody else
-				if(IsDeadOrNull(targetOfAttack))
+				if (IsDeadOrNull(targetOfAttack))
 				{
 					Guard();
 				}
@@ -123,13 +123,13 @@ public class Unit : MonoBehaviour
 
 	public void ExecuteCommand(AICommand c)
 	{
-		if(state == UnitState.Dead)
+		if (state == UnitState.Dead)
 		{
 			//already dead
 			return;
 		}
 
-		switch(c.commandType)
+		switch (c.commandType)
 		{
 			case AICommand.CommandType.GoToAndIdle:
 				GoToAndIdle(c.destination);
@@ -146,13 +146,13 @@ public class Unit : MonoBehaviour
 			case AICommand.CommandType.AttackTarget:
 				MoveToAttack(c.target);
 				break;
-			
+
 			case AICommand.CommandType.Die:
 				Die();
 				break;
 		}
 	}
-		
+
 	//move to a position and be idle
 	private void GoToAndIdle(Vector3 location)
 	{
@@ -200,7 +200,7 @@ public class Unit : MonoBehaviour
 	//move towards a target to attack it
 	private void MoveToAttack(Unit target)
 	{
-		if(!IsDeadOrNull(target))
+		if (!IsDeadOrNull(target))
 		{
 			state = UnitState.MovingToTarget;
 			targetOfAttack = target;
@@ -220,7 +220,7 @@ public class Unit : MonoBehaviour
 	private void StartAttacking()
 	{
 		//somebody might have killed the target while this Unit was approaching it
-		if(!IsDeadOrNull(targetOfAttack))
+		if (!IsDeadOrNull(targetOfAttack))
 		{
 			state = UnitState.Attacking;
 			isReady = false;
@@ -236,7 +236,7 @@ public class Unit : MonoBehaviour
 	//the single blows
 	private IEnumerator DealAttack()
 	{
-		while(targetOfAttack != null)
+		while (targetOfAttack != null)
 		{
 			animator.SetTrigger("DoAttack");
 			targetOfAttack.SufferAttack(template.attackPower);
@@ -244,20 +244,20 @@ public class Unit : MonoBehaviour
 			yield return new WaitForSeconds(1f / template.attackSpeed);
 
 			//check is performed after the wait, because somebody might have killed the target in the meantime
-			if(IsDeadOrNull(targetOfAttack))
+			if (IsDeadOrNull(targetOfAttack))
 			{
 				animator.SetTrigger("InterruptAttack");
 				break;
 
 			}
 
-			if(state == UnitState.Dead)
+			if (state == UnitState.Dead)
 			{
 				yield break;
 			}
 
 			//Check if the target moved away for some reason
-			if(Vector3.Distance(targetOfAttack.transform.position, transform.position) > template.engageDistance)
+			if (Vector3.Distance(targetOfAttack.transform.position, transform.position) > template.engageDistance)
 			{
 				MoveToAttack(targetOfAttack);
 			}
@@ -265,7 +265,7 @@ public class Unit : MonoBehaviour
 
 
 		//only move into Guard if the attack was interrupted (dead target, etc.)
-		if(state == UnitState.Attacking)
+		if (state == UnitState.Attacking)
 		{
 			Guard();
 		}
@@ -274,7 +274,7 @@ public class Unit : MonoBehaviour
 	//called by an attacker
 	private void SufferAttack(int damage)
 	{
-		if(state == UnitState.Dead)
+		if (state == UnitState.Dead)
 		{
 			//already dead
 			return;
@@ -282,7 +282,7 @@ public class Unit : MonoBehaviour
 
 		template.health -= damage;
 
-		if(template.health <= 0)
+		if (template.health <= 0)
 		{
 			template.health = 0;
 			Die();
@@ -298,9 +298,9 @@ public class Unit : MonoBehaviour
 		//Remove itself from the selection Platoon
 		GameManager.Instance.RemoveFromSelection(this);
 		SetSelected(false);
-		
+
 		//Fire an event so any Platoon containing this Unit will be notified
-		if(OnDie != null)
+		if (OnDie != null)
 		{
 			OnDie(this);
 		}
@@ -328,17 +328,17 @@ public class Unit : MonoBehaviour
 
 		Unit nearestEnemy = null;
 		float nearestEnemyDistance = 1000f;
-		for(int i=0; i<hostiles.Count(); i++)
+		for (int i = 0; i < hostiles.Count(); i++)
 		{
-			if(IsDeadOrNull(hostiles[i]))
+			if (IsDeadOrNull(hostiles[i]))
 			{
 				continue;
 			}
 
 			float distanceFromHostile = Vector3.Distance(hostiles[i].transform.position, transform.position);
-			if(distanceFromHostile <= template.guardDistance)
+			if (distanceFromHostile <= template.guardDistance)
 			{
-				if(distanceFromHostile < nearestEnemyDistance)
+				if (distanceFromHostile < nearestEnemyDistance)
 				{
 					nearestEnemy = hostiles[i];
 					nearestEnemyDistance = distanceFromHostile;
@@ -370,7 +370,7 @@ public class Unit : MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		if(navMeshAgent != null
+		if (navMeshAgent != null
 			&& navMeshAgent.isOnNavMesh
 			&& navMeshAgent.hasPath)
 		{

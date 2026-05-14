@@ -1,4 +1,4 @@
-﻿//GetPrefabType and InstantiatePrefab are obsolete,
+//GetPrefabType and InstantiatePrefab are obsolete,
 //but I don't have time to fix them right now
 #pragma warning disable CS0618
 
@@ -44,7 +44,7 @@ public class ReplaceSelection : ScriptableWizard
 			return;
 
 		Transform[] transforms = Selection.GetTransforms(
-			SelectionMode.TopLevel | SelectionMode.OnlyUserModifiable);
+			SelectionMode.TopLevel | SelectionMode.Editable);
 
 
 		foreach (Transform t in transforms)
@@ -71,8 +71,8 @@ public class ReplaceSelection : ScriptableWizard
 			Transform newTransform = newGO.transform;
 			newTransform.parent = t.parent;
 			newTransform.localPosition = t.localPosition;
-			if(keepScaling) { newTransform.localScale = t.localScale; }
-			if(keepRotation) { newTransform.localRotation = t.localRotation; }
+			if (keepScaling) { newTransform.localScale = t.localScale; }
+			if (keepRotation) { newTransform.localRotation = t.localRotation; }
 		}
 
 		if (!keep)
